@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
@@ -20,7 +20,13 @@ export class RegisterPage {
   user: object = {};
   option: string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http, public platform: Platform) {
+    var APIUrl = '/user';
+    if (this.platform.is('core') == true){
+      APIUrl = '/user';
+    }else{
+      APIUrl = 'http://54.162.160.91/api/user';
+    }
     this.option = "view";
     this.storage.get('token').then((val) => {
       let headers = new Headers();
@@ -28,7 +34,7 @@ export class RegisterPage {
       headers.append('x-access-token', val);
       // console.log(val);
 
-      this.http.get('/user/authed', {headers: headers})
+      this.http.get(APIUrl+'/authed', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.user = data.user[0];

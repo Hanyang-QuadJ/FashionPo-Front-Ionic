@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { HomePage } from '../home/home';
 import 'rxjs/add/operator/toPromise';
@@ -23,19 +23,24 @@ export class LoginPage {
     email: '',
     password: ''
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, public platform: Platform) {
 
   }
 
   userLogin() {
-
+    var APIUrl = '/auth';
+    if (this.platform.is('core') == true){
+      APIUrl = '/auth';
+    }else{
+      APIUrl = 'http://54.162.160.91/api/auth';
+    }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let body = {
       email : this.login.email,
       password : this.login.password
     };
-    this.http.post('/auth/login', JSON.stringify(body), {headers: headers})
+    this.http.post(APIUrl + "/login", JSON.stringify(body), {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.storage.set('token', data.token);
