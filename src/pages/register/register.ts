@@ -22,9 +22,9 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http, public platform: Platform) {
     var APIUrl = '/user';
-    if (this.platform.is('ios') == true){
-      APIUrl = 'http://54.162.160.91/api/user';
-    }
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://54.162.160.91/api/user';
+    // }
     this.option = "view";
     this.storage.get('token').then((val) => {
       let headers = new Headers();

@@ -36,28 +36,27 @@ export class HomePage {
       this.http.get(APIUrl, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
-          // for(var i=0;i<data.posts.length;i++) {
-          //   this.ranks[i] = data.posts[i];
-          // }
-          console.log(data.posts[0].picURL);
           this.picURL = data.posts[0].picURL;
         });
     });
   }
-  // ionViewWillEnter() {
-  //   this.storage.get('token').then((val) => {
-  //     let headers = new Headers();
-  //     headers.append('Content-Type', 'text/plain');
-  //     headers.append('x-access-token', val);
-  //     // console.log(val);
-  //
-  //     this.http.get('/rank', {headers: headers})
-  //       .map(res => res.json())
-  //       .subscribe(data => {
-  //         for(var i=0;i<data.posts.length;i++) {
-  //           this.ranks[i] = data.posts[i];
-  //         }
-  //       });
-  //   });
-  // }
+  ionViewWillEnter() {
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/rank';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.picURL = data.posts[0].picURL;
+        });
+    });
+  }
 }
