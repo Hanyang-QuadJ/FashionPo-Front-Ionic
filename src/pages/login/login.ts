@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
-import { HomePage } from '../home/home';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
@@ -29,10 +28,9 @@ export class LoginPage {
 
   userLogin() {
     var APIUrl = '/auth';
-    if (this.platform.is('core') == true){
-      APIUrl = '/auth';
-    }else{
+    if (this.platform.is('ios') == true){
       APIUrl = 'http://54.162.160.91/api/auth';
+      // console.log('yes');
     }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
