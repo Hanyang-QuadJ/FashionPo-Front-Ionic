@@ -19,6 +19,7 @@ import 'rxjs/add/operator/map';
 export class HomePage {
 
   ranks: Array<object> = [];
+  picURL: string = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage : Storage, private http: Http) {
 
@@ -34,6 +35,7 @@ export class HomePage {
           for(var i=0;i<data.posts.length;i++) {
             this.ranks[i] = data.posts[i];
           }
+          this.picURL = data.posts[0].picURL;
         });
     });
   }
