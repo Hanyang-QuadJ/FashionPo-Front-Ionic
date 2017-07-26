@@ -14,6 +14,10 @@
     {
       "path": "/rank",
       "proxyUrl": "http://54.162.160.91/api/rank"
+    },
+    {
+      "path": "/user",
+      "proxyUrl": "http://54.162.160.91/api/user"
     }
   ]
 }
