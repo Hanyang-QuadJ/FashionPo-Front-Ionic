@@ -1,0 +1,21 @@
+{
+  "name": "Ionic-Practice",
+  "app_id": "",
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/post",
+      "proxyUrl": "http://54.162.160.91/api/post"
+    },
+    {
+      "path": "/auth",
+      "proxyUrl": "http://54.162.160.91/api/auth"
+    },
+    {
+      "path": "/rank",
+      "proxyUrl": "http://54.162.160.91/api/rank"
+    }
+  ]
+}
+
+
