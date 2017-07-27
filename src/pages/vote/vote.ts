@@ -29,12 +29,14 @@ export class VotePage {
     posts: Array<any>;
     stackConfig: StackConfig;
     cachedPost: Array<object> = [];
+    tabBarElement: any;
 
-    constructor(private http: Http, private storage: Storage, public navCtrl: NavController, public navParams: NavParams) {
+    constructor(private http: Http, private storage: Storage, public navCtrl: NavController,public platform: Platform, public navParams: NavParams) {
+        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
         this.storage.get('token').then((val) => {
             var APIUrl = '/post/random';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/rank';
+            //   APIUrl = 'http://54.162.160.91/api/post/random';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -76,8 +78,11 @@ export class VotePage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CommentPage');
-    }
 
+    }
+    ionViewWillEnter() {
+      this.tabBarElement.style.display = 'none';
+    }
     Rank() {
         this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'right'});
 
