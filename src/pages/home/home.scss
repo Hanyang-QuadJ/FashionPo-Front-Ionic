@@ -31,28 +31,64 @@ page-home {
 
   }
   .box{
-    display: -webkit-flex;
+
     display: flex;
   },
   .numbering {
-    -webkit-flex: initial;
-    flex: initial;
-    width: 50px;
-    min-width: 40px;
-    margin-top: 10px;
-    margin-bottom:10px;
-    background-color: red;
+    display: flex;
+    flex:0.5;
+
+
+    //margin-top: 20px;
+    //margin-bottom: 20px;
+  }
+  .numberingArea{
+    background-color: #fff0f0;
+    display:flex;
+    flex:1;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 50%;
+    margin-bottom: 50%;
+  }
+  .rankNumber{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex:1;
+    padding-right: 8%;
+    font-size: 22px;
+    font-weight: 600;
+    color:#FF5733;
   }
   .image {
-    -webkit-flex: none;
-    flex: none;
-    width: 80px;
+
+    flex: 1;
+
     background-color: blue;
   }
   .name {
-    -webkit-flex: 1;
-    flex: 1;
-    background-color: yellow;
+    display:flex;
+    flex: 2;
+    justify-content: space-between;
+    align-items: center;
+
+
+  }
+  .nameArea{
+    display: flex;
+    justify-content: flex-start;
+    flex:1;
+    padding-left: 5%;
+
+
+  }
+  .buttonArea{
+    display: flex;
+    flex:1;
+    justify-content: flex-end;
+    padding-right: 5%;
+
   }
 
 

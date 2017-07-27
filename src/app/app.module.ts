@@ -21,6 +21,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {SwingModule} from 'angular2-swing';
 
 @NgModule({
+
     declarations: [
         MyApp,
         CommentPage,
@@ -32,7 +33,7 @@ import {SwingModule} from 'angular2-swing';
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp),
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true,}),
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
@@ -52,6 +53,7 @@ import {SwingModule} from 'angular2-swing';
         SplashScreen,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
+
 })
 export class AppModule {
 }

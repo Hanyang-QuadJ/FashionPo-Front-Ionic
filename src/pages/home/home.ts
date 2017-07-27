@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
+import { CommentPage } from '../comment/comment'
 /**
  * Generated class for the HomePage page.
  *
@@ -36,6 +37,9 @@ export class HomePage {
       this.http.get(APIUrl, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
+          for(var i=1;i<data.posts.length;i++) {
+            this.ranks[i-1] = data.posts[i];
+          }
           this.picURL = data.posts[0].picURL;
         });
     });
@@ -55,8 +59,15 @@ export class HomePage {
       this.http.get(APIUrl, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
+          for(var i=1;i<data.posts.length;i++) {
+            this.ranks[i-1] = data.posts[i];
+          }
           this.picURL = data.posts[0].picURL;
         });
     });
   }
+  Vote(){
+    this.navCtrl.push(CommentPage);
+  }
+
 }
