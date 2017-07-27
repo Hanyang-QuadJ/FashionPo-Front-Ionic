@@ -3,7 +3,7 @@ import { NavController, NavParams, Platform } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-import {TabsPage} from "../tabs/tabs";
+// import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the RegisterPage page.
  *
@@ -19,7 +19,9 @@ import {TabsPage} from "../tabs/tabs";
 export class RegisterPage {
   user: object = {};
   option: string = "";
-
+  myposts: string = "";
+  followings: string = "";
+  followeds: string = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http, public platform: Platform) {
     var APIUrl = '/user';
     // if (this.platform.is('ios') == true){
@@ -36,6 +38,9 @@ export class RegisterPage {
         .map(res => res.json())
         .subscribe(data => {
           this.user = data.user[0];
+          this.myposts = data.user[0].my_posts.length;
+          this.followings = data.user[0].following.length;
+          this.followeds = data.user[0].followed.length;
         });
     });
   }

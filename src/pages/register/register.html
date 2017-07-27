@@ -14,13 +14,13 @@
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="option">
       <ion-segment-button value="view">
-        Views
+        {{myposts}} My Fits
       </ion-segment-button>
       <ion-segment-button value="following">
-        Followings
+        {{followings}} Followings
       </ion-segment-button>
       <ion-segment-button value="follower">
-        Followers
+        {{followeds}} Followers
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -38,56 +38,20 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'following'">
-      <ion-item>
+      <ion-item *ngFor="let following of user.following">
         <ion-thumbnail item-start>
           <img src="https://s3.amazonaws.com/fashionpoimagebucket/3.jpg">
         </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://s3.amazonaws.com/fashionpoimagebucket/3.jpg">
-        </ion-thumbnail>
-        <h2>Milo</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="https://s3.amazonaws.com/fashionpoimagebucket/3.jpg">
-        </ion-thumbnail>
-        <h2>Bandit</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-kitten-2.jpg">
-        </ion-thumbnail>
-        <h2>Nala</h2>
+        <h2>{{following.name}}</h2>
       </ion-item>
     </ion-list>
 
     <ion-list *ngSwitchCase="'follower'">
-      <ion-item>
+      <ion-item *ngFor="let followed of user.followed">
         <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-duckling-1.jpg">
+          <img src="https://s3.amazonaws.com/fashionpoimagebucket/4.jpg">
         </ion-thumbnail>
-        <h2>Daffy</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-duckling-2.jpg">
-        </ion-thumbnail>
-        <h2>Huey</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-duckling-3.jpg">
-        </ion-thumbnail>
-        <h2>Dewey</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/img/thumbnail-duckling-4.jpg">
-        </ion-thumbnail>
-        <h2>Louie</h2>
+        <h2>{{followed.name}}</h2>
       </ion-item>
     </ion-list>
   </div>
