@@ -17,3 +17,15 @@
 .text-center{
   text-align: center;
 }
+.custom-modal-page {
+  height: 90px;
+  position: absolute;
+  top: calc(100% - 90px);
+  ion-content {
+    background-color: #333;
+    color: #eee;
+  }
+}
+
+
+
