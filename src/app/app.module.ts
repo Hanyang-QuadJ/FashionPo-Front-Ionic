@@ -11,6 +11,7 @@ import {VotePage} from '../pages/vote/vote';
 import {LoginPage} from '../pages/login/login';
 import {PlaygroundPage} from '../pages/playground/playground';
 import {RegisterPage} from '../pages/register/register';
+import {MyrankPage} from '../pages/myrank/myrank'
 
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
@@ -29,7 +30,8 @@ import {SwingModule} from 'angular2-swing';
         PlaygroundPage,
         RegisterPage,
         HomePage,
-        TabsPage
+        TabsPage,
+        MyrankPage,
     ],
     imports: [
         BrowserModule,
@@ -46,7 +48,8 @@ import {SwingModule} from 'angular2-swing';
         PlaygroundPage,
         RegisterPage,
         HomePage,
-        TabsPage
+        TabsPage,
+        MyrankPage,
     ],
     providers: [
         StatusBar,

@@ -1,11 +1,75 @@
 page-myrank {
-  .custom-modal-page {
+  position: absolute;
+  top: calc(100% - 90px);
+
+  ion-card{
     height: 90px;
-    position: absolute;
-    top: calc(100% - 90px);
-    ion-content {
-      background-color: #333;
-      color: #eee;
-    }
+
+
   }
+
+  .box{
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+  },
+  .numbering {
+    display: flex;
+    flex:0.5;
+
+
+    //margin-top: 20px;
+    //margin-bottom: 20px;
+  }
+  .numberingArea{
+    background-color: #6a6a6a;
+    display:flex;
+    flex:1;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 50%;
+    margin-bottom: 50%;
+  }
+  .rankNumber{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex:1;
+    padding-right: 8%;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffc305;
+  }
+  .image {
+
+    flex: 1;
+
+    background-color: blue;
+  }
+  .name {
+    display:flex;
+    flex: 2;
+    justify-content: space-between;
+    align-items: center;
+
+
+  }
+  .nameArea{
+    display: flex;
+    justify-content: flex-start;
+    flex:1;
+    padding-left: 5%;
+
+
+  }
+  .buttonArea{
+    display: flex;
+    flex:1;
+    justify-content: flex-end;
+    padding-right: 5%;
+
+  }
+  .myname{
+    color:#ffffff
+  }
+
 }
