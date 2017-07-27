@@ -72,7 +72,7 @@ export class HomePage {
     });
   }
   Vote(){
-    this.navCtrl.push(VotePage,  {}, {animate: true, direction: 'back'});
+    this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'left'});
   }
 
   presentToast() {

@@ -15,6 +15,7 @@ import {
     SwingStackComponent,
     SwingCardComponent
 } from 'angular2-swing';
+import {HomePage} from "../home/home";
 
 @Component({
     selector: 'page-vote',
@@ -78,7 +79,7 @@ export class VotePage {
     }
 
     Rank() {
-        this.navCtrl.pop({animate: true, direction: 'forward'});
+        this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'right'});
 
     }
 
