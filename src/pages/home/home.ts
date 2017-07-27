@@ -67,7 +67,7 @@ export class HomePage {
     });
   }
   Vote(){
-    this.navCtrl.push(CommentPage);
+    this.navCtrl.push(CommentPage,  {}, {animate: true, direction: 'back'});
   }
 
 }

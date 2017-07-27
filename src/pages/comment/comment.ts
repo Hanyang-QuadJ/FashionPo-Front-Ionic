@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs'
+
 
 /**
  * Generated class for the CommentPage page.
@@ -22,7 +22,7 @@ export class CommentPage {
     console.log('ionViewDidLoad CommentPage');
   }
   Rank(){
-    this.navCtrl.pop();
+    this.navCtrl.pop({animate: true, direction: 'forward'});
 
   }
 
