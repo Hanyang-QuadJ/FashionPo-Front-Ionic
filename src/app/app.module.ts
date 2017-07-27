@@ -31,8 +31,9 @@ import {TabsPage} from "../pages/tabs/tabs";
     TabsPage
   ],
   imports: [
+
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{tabsHideOnSubPages: true,}),
     IonicStorageModule.forRoot(),
     HttpModule
   ],

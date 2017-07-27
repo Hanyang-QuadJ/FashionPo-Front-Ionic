@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
+import { CommentPage } from '../comment/comment'
 /**
  * Generated class for the HomePage page.
  *
@@ -65,4 +66,8 @@ export class HomePage {
         });
     });
   }
+  Vote(){
+    this.navCtrl.push(CommentPage);
+  }
+
 }
