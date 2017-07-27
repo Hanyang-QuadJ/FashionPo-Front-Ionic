@@ -1,15 +1,12 @@
 page-myrank {
-  position: absolute;
-  top: calc(100% - 90px);
-
-  ion-card{
-    height: 90px;
+  .card
 
 
-  }
 
   .box{
-    background-color: rgba(0,0,0,0.7);
+
+
+
     display: flex;
   },
   .numbering {
@@ -21,7 +18,7 @@ page-myrank {
     //margin-bottom: 20px;
   }
   .numberingArea{
-    background-color: #6a6a6a;
+    background-color: #ff5733;
     display:flex;
     flex:1;
     justify-content: flex-end;
@@ -42,7 +39,6 @@ page-myrank {
   .image {
 
     flex: 1;
-
     background-color: blue;
   }
   .name {
@@ -69,7 +65,18 @@ page-myrank {
 
   }
   .myname{
-    color:#ffffff
+    color: #ff5733;
+    font-weight: 600
+  }
+  .card-ios {
+
+    margin:5px;
+    border-radius: 5px;
+    width: calc(100% - 11px);
+    font-size: 1.4rem;
+    background-color: #ffc305;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   }
 
 }

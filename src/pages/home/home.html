@@ -11,10 +11,11 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>FaPo</ion-title>
+    <ion-title  *ngIf="!toggled">FaPo</ion-title>
+    <ion-searchbar *ngIf="toggled" animated="true" (click)="test()"></ion-searchbar>
     <ion-buttons end>
-      <button (click)="presentCustomModal()" ion-button icon-only color="primary">
-        <ion-icon name="md-list"></ion-icon>
+      <button (click)="toggleSearch()" ion-button icon-only color="primary">
+        <ion-icon name="ios-search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -39,6 +40,7 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  <ion-card>asdf</ion-card>
   <ion-card *ngFor="let rank of ranks; let i = index">
       <div class="box">
         <div class="numbering">

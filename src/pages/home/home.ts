@@ -26,8 +26,12 @@ export class HomePage {
 
   private toastInstance: Toast;
   private modalInstance: Modal;
+  public toggled: boolean;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage : Storage, private http: Http,
               public platform: Platform, private toastCtrl: ToastController, public modalCtrl: ModalController, ) {
+    this.toggled = false;
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
       // if (this.platform.is('ios') == true){
@@ -121,6 +125,13 @@ export class HomePage {
 
     this.modalInstance.present();
   }
+  toggleSearch() {
+    this.toggled = this.toggled ? false : true;
+  }
+  test(){
+    console.log('1!!!!!!!!111')
+  }
+
 
 
 }
