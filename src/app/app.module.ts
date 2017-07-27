@@ -7,7 +7,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {MyApp} from './app.component';
 
 import {HomePage} from '../pages/home/home';
-import {CommentPage} from '../pages/comment/comment';
+import {VotePage} from '../pages/vote/vote';
 import {LoginPage} from '../pages/login/login';
 import {PlaygroundPage} from '../pages/playground/playground';
 import {RegisterPage} from '../pages/register/register';
@@ -24,7 +24,7 @@ import {SwingModule} from 'angular2-swing';
 
     declarations: [
         MyApp,
-        CommentPage,
+        VotePage,
         LoginPage,
         PlaygroundPage,
         RegisterPage,
@@ -41,7 +41,7 @@ import {SwingModule} from 'angular2-swing';
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        CommentPage,
+        VotePage,
         LoginPage,
         PlaygroundPage,
         RegisterPage,

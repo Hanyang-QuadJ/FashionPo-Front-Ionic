@@ -1,6 +1,8 @@
 import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Http } from '@angular/http';
+
+import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {Http, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
 import {
@@ -13,18 +15,40 @@ import {
   SwingCardComponent} from 'angular2-swing';
 
 @Component({
+  selector: 'page-playground',
   templateUrl: 'playground.html'
 })
 
 export class PlaygroundPage {
   @ViewChild('myswing1') swingStack: SwingStackComponent;
-  @ViewChildren('mycards1') swingCards: QueryList<SwingCardComponent>;
+  @ViewChildren('myposts1') swingposts: QueryList<SwingCardComponent>;
 
-  cards: Array<any>;
+  posts: Array<any>;
   stackConfig: StackConfig;
-  recentCard: string = '';
+  cachedPost: Array<object> = [];
 
-  constructor(private http: Http) {
+  constructor(private http: Http,private storage : Storage) {
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/post/random';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+
+      this.http.get(APIUrl, {headers: headers})
+          .map(res => res.json())
+          .subscribe(data => {
+            this.cachedPost = data.message;
+            console.log(this.cachedPost);
+            this.posts = [];
+            this.addNewposts();
+          });
+    });
+
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
         return Math.min(Math.abs(offsetX) / (element.offsetWidth/2), 1);
@@ -44,57 +68,43 @@ export class PlaygroundPage {
       event.target.style.background = '#ffffff';
     });
 
-    this.cards = [{email: ''}];
-    this.addNewCards(1);
+
+
+  }
+
+  blur(event){
+    if(event.target.style['-webkit-filter'] === `blur(10px)`){
+      event.target.style['-webkit-filter'] = `blur(0px)`;
+      event.target.style['filter'] = `blur(0px)`;
+    }
+    else{
+      event.target.style['-webkit-filter'] = `blur(10px)`;
+      event.target.style['filter'] = `blur(10px)`;
+    }
+
   }
 
   onItemMove(element, x, y, r) {
-    var color = '';
-    var abs = Math.abs(x);
-    let min = Math.trunc(Math.min(16*16 - abs, 16*16));
-    let hexCode = this.decimalToHex(min, 2);
-
-    if (x < 0) {
-      color = '#FF' + hexCode + hexCode;
-    } else {
-      color = '#' + hexCode + 'FF' + hexCode;
-    }
-
-    element.style.background = color;
     element.style['transform'] = `translate3d(0, 0, 0) translate(${x}px, ${y}px) rotate(${r}deg)`;
   }
 
 // Connected through HTML
   voteUp(like: boolean) {
-    let removedCard = this.cards.pop();
-    this.addNewCards(1);
+    let removedCard = this.posts.pop();
+    this.addNewposts();
     if (like) {
-      this.recentCard = 'You liked: ' + removedCard.email;
+
     } else {
-      this.recentCard = 'You disliked: ' + removedCard.email;
+
     }
   }
 
-// Add new cards to our array
-  addNewCards(count: number) {
-    this.http.get('https://randomuser.me/api/?results=' + count)
-        .map(data => data.json().results)
-        .subscribe(result => {
-          for (let val of result) {
-            this.cards.push(val);
-          }
-        })
+// Add new posts to our array
+  addNewposts() {
+    this.posts.push(this.cachedPost.pop());
+    console.log(this.cachedPost);
+
   }
 
-// http://stackoverflow.com/questions/57803/how-to-convert-decimal-to-hex-in-javascript
-  decimalToHex(d, padding) {
-    var hex = Number(d).toString(16);
-    padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
 
-    while (hex.length < padding) {
-      hex = "0" + hex;
-    }
-
-    return hex;
-  }
 }
