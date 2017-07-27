@@ -76,7 +76,7 @@ export class HomePage {
     });
   }
   Vote(){
-    this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'left'});
+    this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'back'});
   }
 
   presentToast() {

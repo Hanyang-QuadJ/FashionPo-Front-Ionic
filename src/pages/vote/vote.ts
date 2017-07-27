@@ -87,7 +87,7 @@ export class VotePage {
       this.tabBarElement.style.display = 'flex';
     }
     Rank() {
-        this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'right'});
+        this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'forward'});
 
     }
 
