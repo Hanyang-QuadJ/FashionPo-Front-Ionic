@@ -83,6 +83,9 @@ export class VotePage {
     ionViewWillEnter() {
       this.tabBarElement.style.display = 'none';
     }
+    ionViewWillLeave() {
+      this.tabBarElement.style.display = 'flex';
+    }
     Rank() {
         this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'right'});
 
