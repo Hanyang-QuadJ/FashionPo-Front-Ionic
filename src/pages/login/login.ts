@@ -63,7 +63,6 @@ export class LoginPage {
                 },
                 err => {
                     this.showToast("middle");
-
                 });
     }
 
