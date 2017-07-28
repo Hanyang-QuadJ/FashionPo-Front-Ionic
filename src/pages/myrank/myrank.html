@@ -17,7 +17,7 @@
     <!--</ion-grid>-->
 <!--</ion-content>-->
 
-<ion-card (click)="presentMyPicModal()">
+<ion-card>
   <div class="box">
     <div class="numbering">
       <div class="numberingArea">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="name">
-      <div class="nameArea">
+      <div (click)="presentMyPicModal()" class="nameArea">
         <p class="myname">{{username}}</p>
       </div>
       <div class="buttonArea">
