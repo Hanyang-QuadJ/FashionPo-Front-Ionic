@@ -17,11 +17,15 @@
       <button (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
       </button>
+      <button (click)="presentCustomModal()" ion-button icon-only color="primary">
+        <ion-icon name="md-list"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div *ngIf="!toggled">
   <ion-card>
     <ion-card-header>
       <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{ picURL }}">
@@ -73,4 +77,5 @@
     <!--</ion-item>-->
 
   <!--</ion-list>-->
+  </div>
 </ion-content>
