@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
@@ -19,7 +19,8 @@ import {
   templateUrl: 'playground.html'
 })
 
-export class PlaygroundPage {
+export class PlaygroundPage implements OnInit{
+
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('myposts1') swingposts: QueryList<SwingCardComponent>;
 
@@ -27,7 +28,12 @@ export class PlaygroundPage {
   stackConfig: StackConfig;
   cachedPost: Array<object> = [];
 
-  constructor(private http: Http,private storage : Storage) {
+  constructor(private http: Http,
+              private storage : Storage)
+  {
+
+  }
+  ngOnInit(): void {
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/random';
       // if (this.platform.is('ios') == true){
@@ -40,13 +46,13 @@ export class PlaygroundPage {
 
 
       this.http.get(APIUrl, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            this.cachedPost = data.message;
-            console.log(this.cachedPost);
-            this.posts = [];
-            this.addNewposts();
-          });
+        .map(res => res.json())
+        .subscribe(data => {
+          this.cachedPost = data.message;
+          console.log(this.cachedPost);
+          this.posts = [];
+          this.addNewposts();
+        });
     });
 
     this.stackConfig = {
@@ -61,7 +67,6 @@ export class PlaygroundPage {
       }
     };
   }
-
   ngAfterViewInit() {
     // Either subscribe in controller or set in HTML
     this.swingStack.throwin.subscribe((event: DragEvent) => {

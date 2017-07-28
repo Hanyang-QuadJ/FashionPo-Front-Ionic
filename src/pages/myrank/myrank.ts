@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams, ViewController,Platform, ModalController, Modal } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
@@ -16,15 +16,22 @@ import { ThisWeekPicPage } from '../this-week-pic/this-week-pic'
   templateUrl: 'myrank.html',
 })
 
-export class MyrankPage {
+export class MyrankPage implements OnInit{
 
   mypost: string = "";
   username: string= "";
   private modalInstance: Modal;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              private storage : Storage, private http: Http,
-  public platform: Platform, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public viewCtrl: ViewController,
+              private storage : Storage,
+              private http: Http,
+              public platform: Platform,
+              public modalCtrl: ModalController) {
+
+  }
+  ngOnInit(): void {
     var APIUrl = '/user';
     // if (this.platform.is('ios') == true){
     //   APIUrl = 'http://54.162.160.91/api/user';
@@ -44,7 +51,6 @@ export class MyrankPage {
         });
     });
   }
-
   presentMyPicModal() {
     if(this.modalInstance) {
       return;

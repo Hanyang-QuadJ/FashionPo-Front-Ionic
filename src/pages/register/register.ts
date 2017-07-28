@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -16,14 +16,23 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'register.html',
 })
 
-export class RegisterPage {
+export class RegisterPage implements OnInit{
+
   user: object = {};
   mypostlist: Array<object> = [];
   option: string = "";
   myposts: string = "";
   followings: string = "";
   followeds: string = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http, public platform: Platform) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private storage: Storage,
+    private http: Http,
+    public platform: Platform) {
+
+  }
+  ngOnInit(): void {
     var APIUrl_1 = '/user';
     var APIUrl_2 = '/post';
     // if (this.platform.is('ios') == true){

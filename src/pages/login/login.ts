@@ -25,7 +25,12 @@ export class LoginPage {
         password: ''
     };
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private storage: Storage, public platform: Platform,public toastCtrl: ToastController) {
+    constructor(public navCtrl: NavController,
+                public navParams: NavParams,
+                private http: Http,
+                private storage: Storage,
+                public platform: Platform,
+                public toastCtrl: ToastController) {
 
     }
 
