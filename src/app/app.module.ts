@@ -18,6 +18,7 @@ import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {IonicStorageModule} from '@ionic/storage';
 import {TabsPage} from "../pages/tabs/tabs";
+import {ThisWeekPicPage} from  '../pages/this-week-pic/this-week-pic'
 
 import {SwingModule} from 'angular2-swing';
 
@@ -32,6 +33,7 @@ import {SwingModule} from 'angular2-swing';
         HomePage,
         TabsPage,
         MyrankPage,
+        ThisWeekPicPage,
     ],
     imports: [
         BrowserModule,
@@ -50,6 +52,7 @@ import {SwingModule} from 'angular2-swing';
         HomePage,
         TabsPage,
         MyrankPage,
+        ThisWeekPicPage,
     ],
     providers: [
         StatusBar,

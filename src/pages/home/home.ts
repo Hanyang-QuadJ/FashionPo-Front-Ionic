@@ -30,7 +30,7 @@ export class HomePage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage : Storage, private http: Http,
-              public platform: Platform, private toastCtrl: ToastController, public modalCtrl: ModalController, ) {
+              public platform: Platform, private toastCtrl: ToastController, public modalCtrl: ModalController, public viewCtrl: ViewController ) {
     this.toggled = false;
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
@@ -127,12 +127,29 @@ export class HomePage {
 
     this.modalInstance.present();
   }
+
+
   toggleSearch() {
     this.toggled = this.toggled ? false : true;
   }
   test(){
     console.log('1!!!!!!!!111')
   }
+
+  ionViewWillLeave(){
+    this.dismiss()
+
+  }
+
+  public dismiss(){
+    if(this.modalInstance == null){
+      return
+    }
+    this.modalInstance.dismiss();
+
+  }
+
+
 
 
 
