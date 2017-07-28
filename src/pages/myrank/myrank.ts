@@ -44,6 +44,7 @@ export class MyrankPage {
 
 
 
+
   public dismiss() {
     this.viewCtrl.dismiss();
   }

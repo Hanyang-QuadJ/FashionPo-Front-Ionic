@@ -52,6 +52,7 @@ export class HomePage {
           this.picURL = data.posts[0].picURL;
         });
     });
+    this.presentCustomModal()
   }
   ionViewWillEnter() {
     this.storage.get('token').then((val) => {
@@ -74,6 +75,7 @@ export class HomePage {
           this.picURL = data.posts[0].picURL;
         });
     });
+    this.presentCustomModal();
   }
   Vote(){
     this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'back'});
