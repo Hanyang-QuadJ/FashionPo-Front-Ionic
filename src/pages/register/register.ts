@@ -18,12 +18,14 @@ import { Storage } from '@ionic/storage';
 
 export class RegisterPage {
   user: object = {};
+  mypostlist: Array<object> = [];
   option: string = "";
   myposts: string = "";
   followings: string = "";
   followeds: string = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private http: Http, public platform: Platform) {
-    var APIUrl = '/user';
+    var APIUrl_1 = '/user';
+    var APIUrl_2 = '/post';
     // if (this.platform.is('ios') == true){
     //   APIUrl = 'http://54.162.160.91/api/user';
     // }
@@ -34,17 +36,54 @@ export class RegisterPage {
       headers.append('x-access-token', val);
       // console.log(val);
 
-      this.http.get(APIUrl+'/authed', {headers: headers})
+      this.http.get(APIUrl_1+'/authed', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.user = data.user[0];
-          this.myposts = data.user[0].my_posts.length;
           this.followings = data.user[0].following.length;
           this.followeds = data.user[0].followed.length;
+        });
+
+      this.http.get(APIUrl_2+'/myposts', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.mypostlist = data.posts;
+          this.myposts = data.posts.length;
+        });
+    });
+  }
+  ionViewWillEnter() {
+    var APIUrl_1 = '/user';
+    var APIUrl_2 = '/post';
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://54.162.160.91/api/user';
+    // }
+    this.option = "view";
+    this.storage.get('token').then((val) => {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+      // console.log(val);
+
+      this.http.get(APIUrl_1+'/authed', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.user = data.user[0];
+          this.followings = data.user[0].following.length;
+          this.followeds = data.user[0].followed.length;
+        });
+
+      this.http.get(APIUrl_2+'/myposts', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.mypostlist = data.posts;
+          this.myposts = data.posts.length;
         });
     });
   }
 }
+
+
 
 
 
