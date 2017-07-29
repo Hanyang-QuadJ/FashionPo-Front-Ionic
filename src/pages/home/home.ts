@@ -27,11 +27,13 @@ export class HomePage {
   private toastInstance: Toast;
   private modalInstance: Modal;
   public toggled: boolean;
+  public searchToggled: boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private storage : Storage, private http: Http,
               public platform: Platform, private toastCtrl: ToastController, public modalCtrl: ModalController, public viewCtrl: ViewController ) {
     this.toggled = false;
+    this.searchToggled = false;
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
       // if (this.platform.is('ios') == true){
@@ -131,6 +133,17 @@ export class HomePage {
 
   toggleSearch() {
     this.toggled = this.toggled ? false : true;
+  }
+
+  toggleSearch2() {
+    this.toggled = this.toggled ? false : true;
+    this.searchToggled = false;
+  }
+
+  searchActive (){
+    this.searchToggled = this.searchToggled ? false : true;
+    console.log(this.searchToggled)
+
   }
   test(){
     console.log('1!!!!!!!!111')
