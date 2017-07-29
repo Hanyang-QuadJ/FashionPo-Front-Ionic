@@ -1,3 +1,4 @@
+
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
 import { NavController, NavParams, Platform } from 'ionic-angular';
@@ -19,17 +20,18 @@ import {
   templateUrl: 'playground.html'
 })
 
-
 export class PlaygroundPage implements OnInit{
 
   @ViewChild('myswing1') swingStack: SwingStackComponent;
   @ViewChildren('myposts1') swingposts: QueryList<SwingCardComponent>;
 
+  posts: Array<any>;
+  stackConfig: StackConfig;
+  cachedPost: Array<object> = [];
 
-
-
-  constructor(private http: Http,private storage : Storage) {
-
+  constructor(private http: Http,
+              private storage : Storage)
+  {
 
   }
   ngOnInit(): void {
@@ -107,8 +109,8 @@ export class PlaygroundPage implements OnInit{
   addNewposts() {
     this.posts.push(this.cachedPost.pop());
     console.log(this.cachedPost);
-  }
 
+  }
 
 
 }
