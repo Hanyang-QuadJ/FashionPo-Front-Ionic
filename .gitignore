@@ -36,3 +36,4 @@ src/pages/home/home.ts
 package.json
 src/app/app.module.ts
 src/pages/home/home.html
+src/pages/playground/playground.ts
