@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams,ViewController } from 'ionic-angular';
 
 /**
@@ -12,11 +12,15 @@ import { NavController, NavParams,ViewController } from 'ionic-angular';
   selector: 'page-this-week-pic',
   templateUrl: 'this-week-pic.html',
 })
-export class ThisWeekPicPage {
+export class ThisWeekPicPage implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public viewCtrl: ViewController) {
   }
-
+  ngOnInit(): void {
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ThisWeekPicPage');
   }

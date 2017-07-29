@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
@@ -19,7 +19,7 @@ import { ToastController, ModalController, ViewController,Toast,Modal } from 'io
   templateUrl: 'home.html',
 })
 
-export class HomePage {
+export class HomePage implements OnInit{
 
   ranks: Array<object> = [];
   picURL: string = "";
@@ -30,8 +30,18 @@ export class HomePage {
   public searchToggled: boolean;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage : Storage, private http: Http,
-              public platform: Platform, private toastCtrl: ToastController, public modalCtrl: ModalController, public viewCtrl: ViewController ) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private storage : Storage,
+    private http: Http,
+    public platform: Platform,
+    private toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    public viewCtrl: ViewController ) {
+
+  }
+  ngOnInit(): void {
     this.toggled = false;
     this.searchToggled = false;
     this.storage.get('token').then((val) => {
@@ -54,7 +64,7 @@ export class HomePage {
           this.picURL = data.posts[0].picURL;
         });
     });
-    this.presentCustomModal()
+    this.presentCustomModal();
   }
   ionViewWillEnter() {
     this.storage.get('token').then((val) => {

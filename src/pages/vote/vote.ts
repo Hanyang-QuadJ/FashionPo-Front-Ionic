@@ -1,5 +1,5 @@
 
-import {Component, ViewChild, ViewChildren, QueryList} from '@angular/core';
+import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
 import {NavController, NavParams, Platform} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
@@ -22,8 +22,9 @@ import {HomePage} from "../home/home";
     templateUrl: 'vote.html'
 })
 
-export class VotePage {
-    @ViewChild('myswing1') swingStack: SwingStackComponent;
+export class VotePage implements OnInit{
+
+  @ViewChild('myswing1') swingStack: SwingStackComponent;
     @ViewChildren('myposts1') swingposts: QueryList<SwingCardComponent>;
 
     posts: Array<any>;
@@ -31,42 +32,48 @@ export class VotePage {
     cachedPost: Array<object> = [];
     tabBarElement: any;
 
-    constructor(private http: Http, private storage: Storage, public navCtrl: NavController,public platform: Platform, public navParams: NavParams) {
-        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
-        this.storage.get('token').then((val) => {
-            var APIUrl = '/post/random';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/post/random';
-            //   // console.log('yes');
-            // }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
+    constructor(private http: Http,
+                private storage: Storage,
+                public navCtrl: NavController,
+                public platform: Platform,
+                public navParams: NavParams) {
 
-
-            this.http.get(APIUrl, {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.cachedPost = data.message;
-                    console.log(this.cachedPost);
-                    this.posts = [];
-                    this.addNewposts();
-                });
-        });
-
-        this.stackConfig = {
-            throwOutConfidence: (offsetX, offsetY, element) => {
-                return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
-            },
-            transform: (element, x, y, r) => {
-                this.onItemMove(element, x, y, r);
-            },
-            throwOutDistance: (d) => {
-                return 800;
-            }
-        };
     }
+  ngOnInit(): void {
+    this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/post/random';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/post/random';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
 
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.cachedPost = data.message;
+          console.log(this.cachedPost);
+          this.posts = [];
+          this.addNewposts();
+        });
+    });
+
+    this.stackConfig = {
+      throwOutConfidence: (offsetX, offsetY, element) => {
+        return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
+      },
+      transform: (element, x, y, r) => {
+        this.onItemMove(element, x, y, r);
+      },
+      throwOutDistance: (d) => {
+        return 800;
+      }
+    };
+  }
     ngAfterViewInit() {
         // Either subscribe in controller or set in HTML
         this.swingStack.throwin.subscribe((event: DragEvent) => {
