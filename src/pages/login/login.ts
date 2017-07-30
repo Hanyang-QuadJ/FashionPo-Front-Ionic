@@ -34,7 +34,14 @@ export class LoginPage {
 
     }
 
-
+  ngOnInit(): void {
+    this.storage.get('token').then((val) => {
+      const token = val;
+      if (token != null && token != '') {
+        this.navCtrl.push(TabsPage);
+      }
+    });
+  }
 
     showToast(position: string) {
         let toast = this.toastCtrl.create({
