@@ -6,6 +6,8 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import { VotePage } from '../vote/vote'
 import { MyrankPage } from '../myrank/myrank';
+import { SearchUserPage } from '../search-user/search-user'
+import { SearchTagsPage } from '../search-tags/search-tags'
 import { ToastController, ModalController, ViewController,Toast,Modal } from 'ionic-angular'
 /**
  * Generated class for the HomePage page.
@@ -17,7 +19,11 @@ import { ToastController, ModalController, ViewController,Toast,Modal } from 'io
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
+
+
 })
+
+
 
 export class HomePage implements OnInit{
 
@@ -28,6 +34,8 @@ export class HomePage implements OnInit{
   private modalInstance: Modal;
   public toggled: boolean;
   public searchToggled: boolean;
+  tab1 = SearchUserPage;
+  tab2 = SearchTagsPage;
 
 
   constructor(
