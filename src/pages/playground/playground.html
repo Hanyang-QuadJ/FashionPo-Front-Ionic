@@ -4,22 +4,16 @@
       Image Upload
     </ion-title>
   </ion-navbar>
+  <div padding>
+    <button ion-button icon-left (click)="presentActionSheet()" block>
+      <ion-icon name="camera"></ion-icon>Select Image
+    </button>
+  </div>
 </ion-header>
 
-<ion-content padding>
-  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+<ion-content>
+  <ion-item *ngIf="!pictureTaken" style="display: none;">
+    <img src="{{placeholderImage}}" />
+  </ion-item>
+  <img id="camera-image" />
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons>
-      <button ion-button icon-left (click)="presentActionSheet()">
-        <ion-icon name="camera"></ion-icon>Select Image
-      </button>
-      <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Upload
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
