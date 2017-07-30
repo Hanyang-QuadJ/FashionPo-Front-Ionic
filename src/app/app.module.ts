@@ -4,6 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
+import { PhotoLibrary } from '@ionic-native/photo-library';
 
 // import { NativeStorage } from '@ionic-native/native-storage';
 import {MyApp} from './app.component';
@@ -23,6 +24,11 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {ThisWeekPicPage} from  '../pages/this-week-pic/this-week-pic'
 
 import {SwingModule} from 'angular2-swing';
+
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+// import { Camera } from '@ionic-native/camera';
 
 @NgModule({
 
@@ -60,6 +66,11 @@ import {SwingModule} from 'angular2-swing';
         StatusBar,
         SplashScreen,
         Camera,
+        PhotoLibrary,
+        File,
+        Transfer,
+        FilePath,
+
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 
