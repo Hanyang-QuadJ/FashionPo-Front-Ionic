@@ -39,6 +39,7 @@ export class VotePage implements OnInit{
                 public navParams: NavParams) {
 
     }
+
   ngOnInit(): void {
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.get('token').then((val) => {
@@ -77,14 +78,12 @@ export class VotePage implements OnInit{
     ngAfterViewInit() {
         // Either subscribe in controller or set in HTML
         this.swingStack.throwin.subscribe((event: DragEvent) => {
-            event.target.style.background = '#ffffff';
+          event.target.style.background = '#ffffff';
         });
-
 
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad CommentPage');
 
     }
     ionViewWillEnter() {
@@ -95,7 +94,6 @@ export class VotePage implements OnInit{
     }
     Rank() {
         this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'forward'});
-
     }
 
     blur(event) {

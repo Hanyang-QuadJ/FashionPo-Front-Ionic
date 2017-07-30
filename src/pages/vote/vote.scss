@@ -1,6 +1,19 @@
 page-vote {
-
-
+  div {
+    height: 100% !important;
+  }
+  img {
+    height: 100% !important;
+  }
+  div.fixed-content {
+    margin-bottom: 0px !important;
+  }
+  div.scroll-content {
+    margin-bottom: 0px !important;
+  }
+  div#card-stack {
+    height: 100% !important;
+  }
   .toolbar-background {
     background-color: #ffffff;
 
