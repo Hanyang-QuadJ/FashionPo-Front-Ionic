@@ -22,7 +22,8 @@ import 'rxjs/add/operator/toPromise';
 import {IonicStorageModule} from '@ionic/storage';
 import {TabsPage} from "../pages/tabs/tabs";
 import {ThisWeekPicPage} from  '../pages/this-week-pic/this-week-pic'
-
+import {SearchUserPage} from '../pages/search-user/search-user'
+import {SearchTagsPage} from '../pages/search-tags/search-tags'
 import {SwingModule} from 'angular2-swing';
 
 import { File } from '@ionic-native/file';
@@ -42,10 +43,12 @@ import { FilePath } from '@ionic-native/file-path';
         TabsPage,
         MyrankPage,
         ThisWeekPicPage,
+        SearchUserPage,
+        SearchTagsPage,
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true,}),
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom'}),
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
@@ -61,6 +64,8 @@ import { FilePath } from '@ionic-native/file-path';
         TabsPage,
         MyrankPage,
         ThisWeekPicPage,
+        SearchUserPage,
+        SearchTagsPage,
     ],
     providers: [
         StatusBar,
