@@ -56,6 +56,8 @@ export class LoginPage {
 
     userLogin() {
         var APIUrl = '/auth';
+
+        
         // if (this.platform.is('ios') == true){
         //   APIUrl = 'http://54.162.160.91/api/auth';
         //   // console.log('yes');
