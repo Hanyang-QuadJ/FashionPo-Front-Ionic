@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
     <ion-title  *ngIf="!toggled">FaPo</ion-title>
-    <ion-searchbar *ngIf="toggled" animated="true" (click)="searchActive()" ></ion-searchbar>
+    <ion-searchbar *ngIf="toggled" animated="true" ></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!toggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
@@ -32,7 +32,7 @@
 
 <ion-content>
   <ion-tabs *ngIf="searchToggled" tabsPlacement="top"  primary>
-    <ion-tab tabTitle="Users" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="Users" [root]="tab1" (click)="abc()"></ion-tab>
     <ion-tab tabTitle="Tags" [root]="tab2"></ion-tab>
   </ion-tabs>
   <div *ngIf="!searchToggled">

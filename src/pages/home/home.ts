@@ -74,6 +74,11 @@ export class HomePage implements OnInit{
     });
     this.presentCustomModal();
   }
+
+  abc(){
+    console.log("!!@!@#!@#!@$!@#!@$");
+  }
+
   ionViewWillEnter() {
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
@@ -151,6 +156,7 @@ export class HomePage implements OnInit{
 
   toggleSearch() {
     this.toggled = this.toggled ? false : true;
+    this.searchToggled = true;
   }
 
   toggleSearch2() {
@@ -159,7 +165,7 @@ export class HomePage implements OnInit{
   }
 
   searchActive (){
-    this.searchToggled = this.searchToggled ? false : true;
+    this.searchToggled = true;
     console.log(this.searchToggled)
 
   }
