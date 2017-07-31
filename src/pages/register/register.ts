@@ -41,7 +41,7 @@ export class RegisterPage implements OnInit {
         // if (this.platform.is('ios') == true){
         //   APIUrl = 'http://54.162.160.91/api/user';
         // }
-        this.option = "view";
+        this.option = "favorites";
         this.storage.get('token').then((val) => {
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
