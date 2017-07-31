@@ -167,6 +167,29 @@ export class HomePage implements OnInit{
     console.log('1!!!!!!!!111')
   }
 
+  addFavorite(writtenBy,userName){
+    console.log(writtenBy);
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/user/favorite';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+      let body = {
+        _id:writtenBy
+      };
+
+      this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
+          .map(res => res.json())
+          .subscribe(data => {
+            console.log(data);
+          });
+    });
+  }
+
   ionViewWillLeave(){
     this.dismiss()
 
