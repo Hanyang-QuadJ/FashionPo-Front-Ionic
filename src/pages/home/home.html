@@ -67,7 +67,7 @@
             <p>{{rank.userName}}</p>
           </div>
           <div class="buttonArea">
-            <button ion-button outline small color="sub">Follow</button>
+            <button ion-button outline small color="sub" (click)='addFavorite(rank.writtenBy,rank);'>Follow</button>
           </div>
         </div>
       </div>
