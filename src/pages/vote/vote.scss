@@ -1,9 +1,9 @@
 page-vote {
   div {
-    height: 100% !important;
+    height: 96% !important;
   }
   img {
-    height: 100% !important;
+    height: 96% !important;
   }
   div.fixed-content {
     margin-bottom: 0px !important;
@@ -12,7 +12,7 @@ page-vote {
     margin-bottom: 0px !important;
   }
   div#card-stack {
-    height: 100% !important;
+    height: 96% !important;
   }
   .toolbar-background {
     background-color: #ffffff;
@@ -24,6 +24,9 @@ page-vote {
     font-weight: 700;
     color: #ff5733;
     pointer-events: auto;
+  }
+  .icon{
+    font-size: 20px;
   }
 
 
