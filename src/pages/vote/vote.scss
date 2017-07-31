@@ -1,22 +1,16 @@
 page-vote {
-  div {
-    height: 96% !important;
-  }
-  img {
-    height: 96% !important;
-  }
+
   div.fixed-content {
+    margin-top: 64px !important;
     margin-bottom: 0px !important;
   }
   div.scroll-content {
+    margin-top: 64px !important;
     margin-bottom: 0px !important;
   }
-  div#card-stack {
-    height: 96% !important;
-  }
+
   .toolbar-background {
     background-color: #ffffff;
-
   }
   .toolbar-title-ios {
     text-align: center;
@@ -25,10 +19,9 @@ page-vote {
     color: #ff5733;
     pointer-events: auto;
   }
-  .icon{
-    font-size: 20px;
+  .fire-icon {
+    font-size: 3.5em !important;
   }
-
 
 
 
