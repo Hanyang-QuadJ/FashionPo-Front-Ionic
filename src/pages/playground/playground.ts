@@ -77,8 +77,8 @@ export class PlaygroundPage implements OnInit{
   public takePicture(sourceType){
       let options = {
         targetWidth: 500,
-        targetHeight: 600,
-        quality: 100,
+        targetHeight: 800,
+        quality: 70,
         allowEdit: true,
         correctOrientation: false,
         saveToPhotoAlbum: false,
