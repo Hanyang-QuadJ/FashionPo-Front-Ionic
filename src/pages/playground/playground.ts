@@ -38,6 +38,15 @@ export class PlaygroundPage implements OnInit{
   {
 
   }
+  showToast(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'invalid user info',
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
+  }
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -62,12 +71,13 @@ export class PlaygroundPage implements OnInit{
     });
     actionSheet.present();
   }
+
   pictureTaken :boolean = false;
 
   public takePicture(sourceType){
       let options = {
         targetWidth: 500,
-        targetHeight: 500,
+        targetHeight: 600,
         quality: 100,
         allowEdit: true,
         correctOrientation: false,
@@ -83,9 +93,38 @@ export class PlaygroundPage implements OnInit{
         this.base64Image = "data:image/jpeg;base64," + imageData;
         let cameraImageSelector = document.getElementById('camera-image');
         cameraImageSelector.setAttribute('src', this.base64Image);
-      }, (err) => {
-        console.log(err);
-      });
+        var APIUrl = '/post';
+        if (this.platform.is('ios') == true){
+          APIUrl = 'http://54.162.160.91/api/post';
+          // console.log('yes');
+        }
+        this.storage.get('token').then((val) => {
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          headers.append('x-access-token', val);
+          // console.log(val);
+          let body = {
+            base_64: this.base64Image
+          };
+          this.http.post(APIUrl + "/s3upload", JSON.stringify(body), {headers: headers})
+            .map(res => res.json())
+            .subscribe(
+              data => {
+                let toast = this.toastCtrl.create({
+                  message: 'upload success',
+                  duration: 2000
+                });
+
+                toast.present(toast);
+              },
+              err => {
+
+              });
+        }, (err) => {
+          console.log(err);
+        });
+
+      })
 
   }
 

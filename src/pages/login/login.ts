@@ -35,12 +35,12 @@ export class LoginPage {
     }
 
   ngOnInit(): void {
-    this.storage.get('token').then((val) => {
-      const token = val;
-      if (token != null && token != '') {
-        this.navCtrl.push(TabsPage);
-      }
-    });
+    // this.storage.get('token').then((val) => {
+    //   const token = val;
+    //   if (token != null && token != '') {
+    //     this.navCtrl.push(TabsPage);
+    //   }
+    // });
   }
 
     showToast(position: string) {
@@ -57,11 +57,11 @@ export class LoginPage {
     userLogin() {
         var APIUrl = '/auth';
 
-        
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/api/auth';
-        //   // console.log('yes');
-        // }
+
+        if (this.platform.is('ios') == true){
+          APIUrl = 'http://54.162.160.91/api/auth';
+          // console.log('yes');
+        }
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let body = {
