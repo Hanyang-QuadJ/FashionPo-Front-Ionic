@@ -1,6 +1,12 @@
 page-register {
+  h2{
+    margin-bottom: 0px;
+  }
+  h4{
+    margin-top:0px;
+  }
   .toolbar-background {
-    background-color: #ffffff;
+    background-color: #fff2f1;
 
   }
   .toolbar-title-ios {
@@ -9,6 +15,9 @@ page-register {
     font-weight: 700;
     color: #ff5733;
     pointer-events: auto;
+  }
+  .container{
+    background-color: #fff2f1;
   }
 
   .image{
@@ -24,10 +33,44 @@ page-register {
     align-items: center;
   }
   .userName{
+    margin-top: 3%;
+    margin-bottom: 5%;
 
     font-weight: 300;
     font-size: 21px;
     color: black;
+  }
+  .information{
+    display: flex;
+    flex-direction: row;
+  }
+  .today{
+    flex:1;
+
+
+
+  }
+
+  .todayCount{
+    font-weight: 400;
+    margin-bottom: 0px;
+    color:#ff5733;
+    font-size:20px;
+  }
+  .todayText{
+    font-size:15px;
+    font-weight: 400;
+    color: #7a7a7a;
+
+  }
+  .rankCount{
+    font-weight: 300;
+  }
+  .my-rank{
+    flex:1;
+
+
+
   }
 
 }

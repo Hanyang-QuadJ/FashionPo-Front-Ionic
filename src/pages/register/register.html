@@ -46,13 +46,24 @@
     <div class="imageArea">
       <img class="image text-center" src="https://s3.amazonaws.com/fashionpoimagebucket/597850d3f522ae2f34c60e86.jpg">
     </div>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-12><h4 class="text-center userName">{{user.username}}</h4><br>Today</ion-col>
+    <div class="text-center"><h4 class="userName">{{user.username}}</h4></div>
+    <div class="information">
+      <div class="today">
+          <h2 class="todayCount text-center">23</h2>
+          <h4 class="todayText text-center">Today</h4>
 
-      </ion-row>
+      </div>
+      <div class="my-rank">
+        <h2 class="todayCount text-center">4</h2>
+        <h4 class="todayText text-center">Rank</h4>
+      </div>
+    </div>
+    <!--<ion-tabs tabsPlacement="top"  primary>-->
+      <!--<ion-tab tabTitle="Users" [root]="tab1"></ion-tab>-->
+      <!--<ion-tab tabTitle="Tags" [root]="tab2"></ion-tab>-->
+    <!--</ion-tabs>-->
 
-    </ion-grid>
+
 
   </div>
 
