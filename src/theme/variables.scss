@@ -83,6 +83,9 @@ $colors: (
 
 @import "ionic.ionicons";
 
+//$button-round-padding-top:100px;
+
+
 
 // Fonts
 // --------------------------------------------------
@@ -90,3 +93,4 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 @import "../pages/home/home";
+@import "../pages/login/login";
