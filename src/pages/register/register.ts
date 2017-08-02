@@ -28,8 +28,8 @@ export class RegisterPage implements OnInit {
     myposts: string = "";
     favorites: Array<object> = [];
     favoritesLength: string = "";
-  tab1 = SearchUserPage;
-  tab2 = SearchTagsPage;
+  tab1:any = SearchUserPage;
+  tab2:any = SearchTagsPage;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,

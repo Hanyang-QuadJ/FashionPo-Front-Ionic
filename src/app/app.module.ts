@@ -30,11 +30,14 @@ import {SwingModule} from 'angular2-swing';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
+// import { ScrollableTabs } from '../assets/components/scrollable-tabs'
+import { SuperTabsModule } from 'ionic2-super-tabs';
 // import { Camera } from '@ionic-native/camera';
 
 @NgModule({
 
     declarations: [
+
         MyApp,
         VotePage,
         LoginPage,
@@ -54,9 +57,11 @@ import { FilePath } from '@ionic-native/file-path';
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
+        SuperTabsModule.forRoot(),
     ],
     bootstrap: [IonicApp],
     entryComponents: [
+
         MyApp,
         VotePage,
         LoginPage,

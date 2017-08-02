@@ -8,13 +8,14 @@
   <ion-navbar>
     <ion-buttons start>
       <button (click)="Vote()" *ngIf="!toggled" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-back"></ion-icon>
+        <ion-icon name="ios-menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
       peggy_gould
     </ion-title>
     <ion-buttons end>
+
       <button (click)="Vote()" *ngIf="!toggled" ion-button icon-only color="primary">
         <ion-icon name="ios-settings"></ion-icon>
       </button>
@@ -42,30 +43,80 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <div class="imageArea">
-      <img class="image text-center" src="https://s3.amazonaws.com/fashionpoimagebucket/597850d3f522ae2f34c60e86.jpg">
-    </div>
-    <div class="text-center"><h4 class="userName">{{user.username}}</h4></div>
-    <div class="information">
-      <div class="today">
-          <h2 class="todayCount text-center">23</h2>
-          <h4 class="todayText text-center">Today</h4>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 offset-1 >
+        <img class="image" src="../../assets/images/vote.png">
+      </ion-col>
+      <ion-col col-4>
+        <div class="padding">
+          <!--<h5 class="userName">{{user.username}}</h5>-->
+          <h5 class="userName">Kendall Jenner</h5>
 
-      </div>
-      <div class="my-rank">
-        <h2 class="todayCount text-center">4</h2>
-        <h4 class="todayText text-center">Rank</h4>
-      </div>
-    </div>
-    <!--<ion-tabs tabsPlacement="top"  primary>-->
-      <!--<ion-tab tabTitle="Users" [root]="tab1"></ion-tab>-->
-      <!--<ion-tab tabTitle="Tags" [root]="tab2"></ion-tab>-->
-    <!--</ion-tabs>-->
+          <p class="profileText">The beginning of half is whole.</p>
+          <button class="add" ion-button outline small color="primary">Add</button>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <p class="infoText">Today</p>
+        <h5 class="todayCount">98</h5>
+      </ion-col>
+      <ion-col text-center>
+        <p class="infoText">Total</p>
+        <h5 class="totalCount">270</h5>
+      </ion-col>
+      <ion-col text-center>
+        <p class="infoText">Rank</p>
+        <h5 class="rankCount">23</h5>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <hr>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 offset-1>
+        <p class="infoText"><ion-icon name="ios-shirt"></ion-icon>&nbsp;This Week's Fits</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-scroll scrollX="true" class="twPic">
+
+
+    <img class="horiPic" src="../../assets/images/rank2.png">
+    <img class="horiPic" src="../../assets/images/rank3.png">
+    <img class="horiPic" src="../../assets/images/myPic1.png">
+    <img class="horiPic" src="../../assets/images/myPic2.png">
+    <img class="horiPic" src="../../assets/images/myPic3.png">
+    <img class="horiPic" src="../../assets/images/post1.png">
+    <img class="horiPic" src="../../assets/images/post2.png">
 
 
 
-  </div>
+  </ion-scroll>
+
+  <hr/>
+
+  <super-tabs toolbarColor="dark">
+    <super-tab [root]="tab1" title="My Fits"></super-tab>
+    <super-tab [root]="tab2" title="Favorites"></super-tab>
+
+  </super-tabs>
+
+
+
+
+
+
+
 
 
 

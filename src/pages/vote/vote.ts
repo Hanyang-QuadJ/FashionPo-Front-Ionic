@@ -75,6 +75,8 @@ export class VotePage implements OnInit{
         return 800;
       }
     };
+
+
   }
     ngAfterViewInit() {
         // Either subscribe in controller or set in HTML
@@ -87,12 +89,7 @@ export class VotePage implements OnInit{
     ionViewDidLoad() {
 
     }
-    ionViewWillEnter() {
-      this.tabBarElement.style.display = 'none';
-    }
-    ionViewWillLeave() {
-      this.tabBarElement.style.display = 'flex';
-    }
+
     Rank() {
         this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'forward'});
     }

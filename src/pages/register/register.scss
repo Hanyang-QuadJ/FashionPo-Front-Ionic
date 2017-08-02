@@ -4,9 +4,18 @@ page-register {
   }
   h4{
     margin-top:0px;
+    margin-bottom: 0px;
+  }
+  h5{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
+  p{
+    margin-top:0px;
+    margin-bottom: 0px;
   }
   .toolbar-background {
-    background-color: #fff2f1;
+    background-color: #ffffff;
 
   }
   .toolbar-title-ios {
@@ -16,16 +25,35 @@ page-register {
     color: #ff5733;
     pointer-events: auto;
   }
+  .padding{
+    padding-top: 5%;
+
+  }
+  .profileText{
+    margin-top: 3%;
+    font-weight: 300;
+    color: #4d4d4d;
+
+  }
+  .add{
+    margin-top: 10px;
+  }
+  .infoText{
+    color: #737373;
+  }
   .container{
     background-color: #fff2f1;
   }
 
   .image{
-    margin-top: 3%;
-    width:30%;
-    height:30%;
 
-    border-radius: 50%;
+    margin-left: 20%;
+    display: block;
+    max-width:100px;
+    max-height:200px;
+    width: auto;
+    height: auto;
+    border-radius: 5%;
   }
   .imageArea{
     display: flex;
@@ -33,12 +61,11 @@ page-register {
     align-items: center;
   }
   .userName{
-    margin-top: 3%;
-    margin-bottom: 5%;
+    text-align: left;
 
-    font-weight: 300;
-    font-size: 21px;
-    color: black;
+    font-weight: 400;
+    font-size: 20px;
+    color: #4d4d4d;
   }
   .information{
     display: flex;
@@ -52,19 +79,29 @@ page-register {
   }
 
   .todayCount{
-    font-weight: 400;
+    font-weight: 600;
     margin-bottom: 0px;
-    color:#ff5733;
-    font-size:20px;
+    color: #4d4d4d;
+    font-size:30px;
+  }
+  .totalCount{
+    color:#00AAA0;
+    font-size:30px;
+    font-weight: 600;
+    margin-bottom: 0px;
   }
   .todayText{
     font-size:15px;
     font-weight: 400;
-    color: #7a7a7a;
+    color: #898989;
 
   }
   .rankCount{
-    font-weight: 300;
+
+    color:#ff5733;
+    font-size:30px;
+    font-weight: 600;
+    margin-bottom: 0px;
   }
   .my-rank{
     flex:1;
@@ -72,5 +109,26 @@ page-register {
 
 
   }
+  .horiPic{
+    height: 150px;
+    width: 90px;
+    object-fit: cover; /*magic*/
+
+  }
+  .twPic{
+
+    height: 120px;
+
+  }
+  ion-scroll{
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button {
+
+    text-transform: none;
+    border-bottom: 0.55px rgba(0, 0, 0, 0.12) solid;
+  }
+
 
 }
