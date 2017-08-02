@@ -1,7 +1,7 @@
 
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform} from 'ionic-angular';
+import {NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
@@ -36,7 +36,8 @@ export class VotePage implements OnInit{
                 private storage: Storage,
                 public navCtrl: NavController,
                 public platform: Platform,
-                public navParams: NavParams) {
+                public navParams: NavParams,
+                public toastCtrl: ToastController) {
 
     }
 
@@ -78,7 +79,7 @@ export class VotePage implements OnInit{
     ngAfterViewInit() {
         // Either subscribe in controller or set in HTML
         this.swingStack.throwin.subscribe((event: DragEvent) => {
-          event.target.style.background = '#ffffff';
+          event.target.style.background = 'white';
         });
 
     }
@@ -95,7 +96,15 @@ export class VotePage implements OnInit{
     Rank() {
         this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'forward'});
     }
+    showToast(position: string, message: string) {
+      let toast = this.toastCtrl.create({
+        message: message,
+        duration: 2000,
+        position: position
+      });
 
+      toast.present(toast);
+    }
     blur(event) {
         if (event.target.style['-webkit-filter'] === `blur(10px)`) {
             event.target.style['-webkit-filter'] = `blur(0px)`;
@@ -117,9 +126,9 @@ export class VotePage implements OnInit{
         let removedCard = this.posts.pop();
         this.addNewposts();
         if (like) {
-
+          this.showToast("bottom", "you liked this post");
         } else {
-
+          this.showToast("bottom", "you passed this post");
         }
     }
 
@@ -127,7 +136,6 @@ export class VotePage implements OnInit{
     addNewposts() {
         this.posts.push(this.cachedPost.pop());
         console.log(this.cachedPost);
-
     }
 
 

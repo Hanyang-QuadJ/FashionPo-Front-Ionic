@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Login to Flex</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,11 +10,11 @@
     <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
+        <ion-input type="email" formControlName="email" placeholder="                    example@fitnyc.edu"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input type="password" formControlName="password" placeholder="                    least 12 numbers"></ion-input>
       </ion-item>
       <div padding>
         <button class="custom-button" ion-button type="submit" [disabled]="!loginForm.valid" color="danger" block>Sign In</button>
