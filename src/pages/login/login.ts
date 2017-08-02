@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
 import {TabsPage} from "../tabs/tabs";
 import { ToastController } from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 
 
 /**
@@ -33,8 +33,8 @@ export class LoginPage {
                 public toastCtrl: ToastController,
                 public fb: FormBuilder) {
       this.loginForm = this.fb.group({
-        email: ['', Validators.pattern("[a-zA-Z0-9]+@fit.edu")],
-        password: ['', Validators.minLength(12)],
+        email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
+        password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
       });
     }
 
