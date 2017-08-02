@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Signup to Flex</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <form [formGroup]="loginForm" (ngSubmit)="userSignup()">
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input type="email" formControlName="email" placeholder="example@fitnyc.edu"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Username</ion-label>
+        <ion-input type="text" formControlName="username" placeholder="At least 10 letters"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="At least 12 letters"></ion-input>
+      </ion-item>
+      <div padding>
+        <button class="custom-button" ion-button type="submit" [disabled]="!loginForm.valid" color="danger" block>Sign Up</button>
+      </div>
+    </form>
+
+  </ion-list>
+
+</ion-content>

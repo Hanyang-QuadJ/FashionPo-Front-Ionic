@@ -7,6 +7,7 @@ import {Storage} from '@ionic/storage';
 import {TabsPage} from "../tabs/tabs";
 import { ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
+import {SignupPage} from "../signup/signup";
 
 
 /**
@@ -39,14 +40,16 @@ export class LoginPage {
     }
 
   ngOnInit(): void {
-    this.storage.get('token').then((val) => {
-      const token = val;
-      if (token != null && token != '') {
-        this.navCtrl.push(TabsPage);
-      }
-    });
+    // this.storage.get('token').then((val) => {
+    //   const token = val;
+    //   if (token != null && token != '') {
+    //     this.navCtrl.push(TabsPage);
+    //   }
+    // });
   }
-
+  goToSignup() {
+      this.navCtrl.push(SignupPage);
+  }
     showToast(position: string) {
         let toast = this.toastCtrl.create({
             message: 'Check your email or password',

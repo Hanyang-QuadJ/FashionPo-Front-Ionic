@@ -15,8 +15,8 @@ import {VotePage} from '../pages/vote/vote';
 import {LoginPage} from '../pages/login/login';
 import {PlaygroundPage} from '../pages/playground/playground';
 import {RegisterPage} from '../pages/register/register';
-import {MyrankPage} from '../pages/myrank/myrank'
-
+import {MyrankPage} from '../pages/myrank/myrank';
+import {SignupPage} from '../pages/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -46,6 +46,7 @@ import { FilePath } from '@ionic-native/file-path';
         ThisWeekPicPage,
         SearchUserPage,
         SearchTagsPage,
+        SignupPage
     ],
     imports: [
         BrowserModule,
@@ -67,6 +68,7 @@ import { FilePath } from '@ionic-native/file-path';
         ThisWeekPicPage,
         SearchUserPage,
         SearchTagsPage,
+        SignupPage
     ],
     providers: [
         StatusBar,
