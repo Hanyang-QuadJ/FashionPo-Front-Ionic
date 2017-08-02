@@ -22,8 +22,6 @@ export class RegisterPage implements OnInit {
     mypostlist: Array<object> = [];
     option: string = "";
     myposts: string = "";
-    followings: string = "";
-    followeds: string = "";
     favorites: Array<object> = [];
     favoritesLength: string = "";
 
@@ -52,8 +50,6 @@ export class RegisterPage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     this.user = data.user[0];
-                    this.followings = data.user[0].following.length;
-                    this.followeds = data.user[0].followed.length;
                 });
 
             this.http.get(APIUrl_2 + '/myposts', {headers: headers})
@@ -63,11 +59,13 @@ export class RegisterPage implements OnInit {
                     this.myposts = data.posts.length;
                 });
 
-            this.http.get(APIUrl_1 + '/favorites', {headers: headers})
+            this.http.get(APIUrl_1 + '/favorite', {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
                     this.favorites = data.favorites;
+                    console.log(this.favorites);
                     this.favoritesLength = data.favorites.length;
+                  console.log(this.favoritesLength);
                 });
         });
     }
@@ -89,8 +87,6 @@ export class RegisterPage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     this.user = data.user[0];
-                    this.followings = data.user[0].following.length;
-                    this.followeds = data.user[0].followed.length;
                 });
 
             this.http.get(APIUrl_2 + '/myposts', {headers: headers})
@@ -99,6 +95,13 @@ export class RegisterPage implements OnInit {
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
                 });
+          this.http.get(APIUrl_1 + '/favorite', {headers: headers})
+            .map(res => res.json())
+            .subscribe(data => {
+              this.favorites = data.favorites;
+
+              this.favoritesLength = data.favorites.length;
+            });
         });
     }
 }
