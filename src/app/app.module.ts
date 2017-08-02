@@ -5,6 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import { Camera } from '@ionic-native/camera';
 import { PhotoLibrary } from '@ionic-native/photo-library';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 // import { NativeStorage } from '@ionic-native/native-storage';
 import {MyApp} from './app.component';
@@ -74,9 +75,8 @@ import { FilePath } from '@ionic-native/file-path';
         PhotoLibrary,
         File,
         Transfer,
-        FilePath,
-
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        FilePath
+      ,{provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 
 })

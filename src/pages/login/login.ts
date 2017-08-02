@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
 import {TabsPage} from "../tabs/tabs";
 import { ToastController } from 'ionic-angular';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -20,18 +22,20 @@ import { ToastController } from 'ionic-angular';
 })
 
 export class LoginPage {
-    login = {
-        email: '',
-        password: ''
-    };
+
+    loginForm : FormGroup;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private http: Http,
                 private storage: Storage,
                 public platform: Platform,
-                public toastCtrl: ToastController) {
-
+                public toastCtrl: ToastController,
+                public fb: FormBuilder) {
+      this.loginForm = this.fb.group({
+        email: ['', Validators.pattern("[a-zA-Z0-9]+@fit.edu")],
+        password: ['', Validators.minLength(12)],
+      });
     }
 
   ngOnInit(): void {
@@ -41,6 +45,7 @@ export class LoginPage {
     //     this.navCtrl.push(TabsPage);
     //   }
     // });
+
   }
 
     showToast(position: string) {
@@ -65,8 +70,8 @@ export class LoginPage {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let body = {
-            email: this.login.email,
-            password: this.login.password
+            email: this.loginForm.value.email,
+            password: this.loginForm.value.password
         };
         this.http.post(APIUrl + "/login", JSON.stringify(body), {headers: headers})
             .map(res => res.json())
