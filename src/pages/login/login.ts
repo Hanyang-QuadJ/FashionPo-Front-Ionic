@@ -32,10 +32,10 @@ export class LoginPage {
                 public platform: Platform,
                 public toastCtrl: ToastController,
                 public fb: FormBuilder) {
-      this.loginForm = this.fb.group({
-        email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
-        password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
-      });
+      // this.loginForm = this.fb.group({
+      //   email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
+      //   password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
+      // });
     }
 
   ngOnInit(): void {
