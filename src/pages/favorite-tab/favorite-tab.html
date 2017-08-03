@@ -4,15 +4,10 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>favorite_tab</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
-
+  <ion-list>
+    <ion-item *ngFor="let favorite of favorites">
+      <h2>{{favorite.name}}</h2>
+    </ion-item>
+  </ion-list>
 </ion-content>

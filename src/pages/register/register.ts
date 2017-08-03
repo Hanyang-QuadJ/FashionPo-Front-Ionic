@@ -3,8 +3,8 @@ import {NavController, NavParams, Platform} from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
-import { SearchUserPage } from '../search-user/search-user'
-import { SearchTagsPage } from '../search-tags/search-tags'
+import {PostTabPage} from "../post-tab/post-tab";
+import {FavoriteTabPage} from "../favorite-tab/favorite-tab";
 // import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the RegisterPage page.
@@ -28,8 +28,8 @@ export class RegisterPage implements OnInit {
     myposts: string = "";
     favorites: Array<object> = [];
     favoritesLength: string = "";
-    tab1:any = SearchUserPage;
-    tab2:any = SearchTagsPage;
+    tab1:any = PostTabPage;
+    tab2:any = FavoriteTabPage;
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,

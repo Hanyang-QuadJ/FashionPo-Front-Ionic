@@ -32,6 +32,8 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 // import { ScrollableTabs } from '../assets/components/scrollable-tabs'
 import { SuperTabsModule } from 'ionic2-super-tabs';
+import {PostTabPage} from "../pages/post-tab/post-tab";
+import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
 // import { Camera } from '@ionic-native/camera';
 
 @NgModule({
@@ -49,7 +51,9 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
         ThisWeekPicPage,
         SearchUserPage,
         SearchTagsPage,
-        SignupPage
+        SignupPage,
+        PostTabPage,
+        FavoriteTabPage
     ],
     imports: [
         BrowserModule,
@@ -73,7 +77,9 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
         ThisWeekPicPage,
         SearchUserPage,
         SearchTagsPage,
-        SignupPage
+        SignupPage,
+        PostTabPage,
+        FavoriteTabPage
     ],
     providers: [
         StatusBar,
@@ -82,7 +88,8 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
         PhotoLibrary,
         File,
         Transfer,
-        FilePath
+        FilePath,
+
       ,{provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 
