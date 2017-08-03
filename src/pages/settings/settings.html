@@ -14,10 +14,24 @@
 
 
 <ion-content>
+  <h1>Jeewoo Yoon</h1>
   <ion-list>
-    <button ion-item (click)="itemSelected(item)">
-      User Information
+    <ion-list-header>User information</ion-list-header>
+    <ion-item>Change Profile Image</ion-item>
+    <ion-item>Change Username</ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Action</ion-list-header>
+    <ion-item>Terminator II</ion-item>
+    <ion-item>The Empire Strikes Back</ion-item>
+    <ion-item>Blade Runner</ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header></ion-list-header>
+    <button ion-item (click)="logOut()">
+      Log out
     </button>
   </ion-list>
-  <button ion-button block outline [color]="primary" (click)="logOut()">Log Out</button>
 </ion-content>
