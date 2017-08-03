@@ -11,7 +11,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!toggled">FaPo</ion-title>
+    <ion-title  *ngIf="!toggled">Flex</ion-title>
     <ion-searchbar *ngIf="toggled" animated="true"></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!toggled" (click)="toggleSearch()" ion-button icon-only color="primary">
@@ -35,26 +35,35 @@
     <ion-tab tabTitle="Users" [root]="tab1" (click)="abc()"></ion-tab>
     <ion-tab tabTitle="Tags" [root]="tab2"></ion-tab>
   </ion-tabs>
-  <div *ngIf="!searchToggled">
-  <ion-card>
-    <ion-card-header>
-      <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{ picURL }}">
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid no-padding>
-        <ion-row>
-          <ion-col col-sm-12>
-            <h2 class="text-center firstPlaceIcon"><ion-icon name="trophy"></ion-icon></h2>
-            <h3 class="text-center firstPlace">Kendal Jenner</h3>
-            <div class="text-center">
-              <button ion-button outline small color="sub">Add</button>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngFor="let rank of ranks; let i = index">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+
+    </ion-refresher-content>
+  </ion-refresher>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{ picURL }}">
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col col-sm-12>
+              <h2 class="text-center firstPlaceIcon"><ion-icon name="trophy"></ion-icon></h2>
+              <h3 class="text-center firstPlace">Kendal Jenner</h3>
+              <div class="text-center">
+                <button ion-button outline small color="sub">Add</button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let rank of ranks; let i = index">
       <div class="box">
         <div class="numbering">
           <div class="numberingArea">
@@ -71,6 +80,8 @@
           </div>
         </div>
       </div>
-  </ion-card>
+    </ion-card>
   </div>
+
+
 </ion-content>

@@ -143,6 +143,36 @@ export class HomePage implements OnInit{
     console.log('1!!!!!!!!111')
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/rank';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          for(var i=1;i<data.posts.length;i++) {
+            this.ranks[i-1] = data.posts[i];
+          }
+          this.picURL = data.posts[0].picURL;
+        });
+    });
+
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
   addFavorite(writtenBy,userName){
     console.log(writtenBy);
     this.storage.get('token').then((val) => {
@@ -165,6 +195,7 @@ export class HomePage implements OnInit{
           });
     });
   }
+
 
 
 
