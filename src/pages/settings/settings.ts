@@ -14,7 +14,6 @@ import {LoginPage} from "../login/login";
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage) {
@@ -26,5 +25,7 @@ export class SettingsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
   }
-
+  itemSelected(item: string) {
+    console.log("Selected Item", item);
+  }
 }
