@@ -45,10 +45,10 @@ export class VotePage implements OnInit{
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/random';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/post/random';
-      //   // console.log('yes');
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/post/random';
+        // console.log('yes');
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);

@@ -24,7 +24,7 @@
   </ion-navbar>
 
 
-  <!--<ion-toolbar no-border-top>-->
+  <!--<ion-toolbar no-border-top>--
     <!--<ion-segment [(ngModel)]="option">-->
       <!--<ion-segment-button value="view">-->
         <!--{{myposts}} My Fits-->
@@ -106,8 +106,8 @@
   <hr/>
 
   <super-tabs toolbarColor="dark">
-    <super-tab [root]="tab1" title="My Fits"></super-tab>
-    <super-tab [root]="tab2" title="Favorites"></super-tab>
+    <super-tab [root]="tab1" title="{{myposts}} My Fits"></super-tab>
+    <super-tab [root]="tab2" title="{{favoritesLength}} Favorites"></super-tab>
 
   </super-tabs>
 
