@@ -34,6 +34,7 @@ import { FilePath } from '@ionic-native/file-path';
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import {PostTabPage} from "../pages/post-tab/post-tab";
 import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
+import {SettingsPage} from "../pages/settings/settings";
 // import { Camera } from '@ionic-native/camera';
 
 @NgModule({
@@ -53,7 +54,8 @@ import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
         SearchTagsPage,
         SignupPage,
         PostTabPage,
-        FavoriteTabPage
+        FavoriteTabPage,
+        SettingsPage
     ],
     imports: [
         BrowserModule,
@@ -79,7 +81,8 @@ import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
         SearchTagsPage,
         SignupPage,
         PostTabPage,
-        FavoriteTabPage
+        FavoriteTabPage,
+        SettingsPage
     ],
     providers: [
         StatusBar,

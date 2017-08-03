@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
 import {PostTabPage} from "../post-tab/post-tab";
 import {FavoriteTabPage} from "../favorite-tab/favorite-tab";
+import {SettingsPage} from "../settings/settings";
 // import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the RegisterPage page.
@@ -75,7 +76,9 @@ export class RegisterPage implements OnInit {
                 });
         });
     }
-
+    Settings() {
+      this.navCtrl.push(SettingsPage);
+    }
     ionViewWillEnter() {
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
