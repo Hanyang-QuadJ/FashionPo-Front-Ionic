@@ -72,7 +72,7 @@ export class HomePage implements OnInit{
           this.picURL = data.posts[0].picURL;
         });
     });
-    this.presentCustomModal();
+
   }
 
   abc(){
@@ -100,58 +100,28 @@ export class HomePage implements OnInit{
           this.picURL = data.posts[0].picURL;
         });
     });
-    this.presentCustomModal();
+
   }
   Vote(){
     this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'back'});
   }
 
-  presentToast() {
-    if(this.toastInstance) {
-      return;
-    }
 
-    this.toastInstance = this.toastCtrl.create({
-      message: 'User was added successfully',
-
-      position: 'bottom',
-      showCloseButton: true,
-      closeButtonText: 'close',
-    });
-
-    this.toastInstance.onDidDismiss(() => {
-      this.toastInstance = null;
-    });
-
-    this.toastInstance.present();
-    // let toast = this.toastCtrl.create({
-    //   message: 'Your Rank is 150',
-    //   position: 'bottom',
-    //
-    //   cssClass :'myclass'
-    // });
-    //
-    // toast.onDidDismiss(() => {
-    //   console.log('Dismissed toast');
-    // });
-    //
-    // toast.present();
-  }
-  presentCustomModal() {
-    if(this.modalInstance) {
-      return;
-    }
-
-    this.modalInstance = this.modalCtrl.create(MyrankPage,{
-
-    },{cssClass:'custom-modal-page'});
-
-    this.modalInstance.onDidDismiss(() => {
-      this.modalInstance = null;
-    });
-
-    this.modalInstance.present();
-  }
+  // presentCustomModal() {
+  //   if(this.modalInstance) {
+  //     return;
+  //   }
+  //
+  //   this.modalInstance = this.modalCtrl.create(MyrankPage,{
+  //
+  //   },{cssClass:'custom-modal-page'});
+  //
+  //   this.modalInstance.onDidDismiss(() => {
+  //     this.modalInstance = null;
+  //   });
+  //
+  //   this.modalInstance.present();
+  // }
 
 
   toggleSearch() {
@@ -196,18 +166,9 @@ export class HomePage implements OnInit{
     });
   }
 
-  ionViewWillLeave(){
-    this.dismiss()
 
-  }
 
-  public dismiss(){
-    if(this.modalInstance == null){
-      return
-    }
-    this.modalInstance.dismiss();
 
-  }
 
 
 

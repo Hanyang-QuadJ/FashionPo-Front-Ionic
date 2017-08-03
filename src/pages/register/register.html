@@ -7,7 +7,7 @@
 <ion-header no-border>
   <ion-navbar>
     <ion-buttons start>
-      <button (click)="Vote()" *ngIf="!toggled" ion-button icon-only color="primary">
+      <button (click)="toggleRank()"  ion-button icon-only color="primary">
         <ion-icon name="ios-menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -16,7 +16,7 @@
     </ion-title>
     <ion-buttons end>
 
-      <button (click)="Settings()" *ngIf="!toggled" ion-button icon-only color="primary">
+      <button (click)="Settings()" ion-button icon-only color="primary">
         <ion-icon name="ios-settings"></ion-icon>
       </button>
     </ion-buttons>
@@ -43,6 +43,22 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid no-padding>
+    <ion-row justify-content-center align-items-center>
+      <ion-col col-2 text-center offset-1>
+        <p class="infoText">Today</p>
+      </ion-col>
+      <ion-col col-2 no-padding>
+        <h5 class="todayCount">98</h5>
+      </ion-col>
+        <ion-col col-2 text-center *ngIf="toggled">
+          <p class="infoText">Rank</p>
+        </ion-col>
+        <ion-col col-2 no-padding *ngIf="toggled">
+          <h5 class="rankCount">4<span class="small">th</span></h5>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-grid>
     <ion-row>
       <ion-col col-6 offset-1 >
@@ -54,38 +70,17 @@
           <h5 class="userName">Kendall Jenner</h5>
 
           <p class="profileText">The beginning of half is whole.</p>
-          <button class="add" ion-button outline small color="primary">Add</button>
+          <button class="add" ion-button outline small color="sub">Add</button>
           </div>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <p class="infoText">Today</p>
-        <h5 class="todayCount">98</h5>
-      </ion-col>
-      <ion-col text-center>
-        <p class="infoText">Total</p>
-        <h5 class="totalCount">270</h5>
-      </ion-col>
-      <ion-col text-center>
-        <p class="infoText">Rank</p>
-        <h5 class="rankCount">23</h5>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
-
   <hr>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-6 offset-1>
+
+
         <p class="infoText"><ion-icon name="ios-shirt"></ion-icon>&nbsp;This Week's Fits</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+
 
 
   <ion-scroll scrollX="true" class="twPic">
@@ -103,7 +98,7 @@
 
   </ion-scroll>
 
-  <hr/>
+
 
   <super-tabs toolbarColor="dark">
     <super-tab [root]="tab1" title="{{myposts}} My Fits"></super-tab>

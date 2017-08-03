@@ -40,6 +40,10 @@ page-register {
   }
   .infoText{
     color: #737373;
+    font-size: 12px;
+    padding-left: 8%;
+    padding-top:1%;
+    padding-bottom: 3%;
   }
   .container{
     background-color: #fff2f1;
@@ -110,10 +114,14 @@ page-register {
 
   }
   .horiPic{
-    height: 150px;
-    width: 90px;
+    height: 120px;
+    width: 75px;
     object-fit: cover; /*magic*/
 
+
+  }
+  .small{
+    font-size: 8px;
   }
   .twPic{
 

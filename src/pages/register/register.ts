@@ -19,10 +19,9 @@ import {SettingsPage} from "../settings/settings";
     templateUrl: 'register.html',
 })
 
+
 export class RegisterPage implements OnInit {
-
-
-
+  public toggled: boolean;
     user: object = {};
     mypostlist: Array<object> = [];
     option: string = "";
@@ -41,6 +40,7 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit(): void {
+      this.toggled = false;
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
         // if (this.platform.is('ios') == true){
@@ -76,6 +76,10 @@ export class RegisterPage implements OnInit {
                 });
         });
     }
+  toggleRank() {
+    this.toggled = this.toggled ? false : true;
+
+  }
     Settings() {
       this.navCtrl.push(SettingsPage);
     }
