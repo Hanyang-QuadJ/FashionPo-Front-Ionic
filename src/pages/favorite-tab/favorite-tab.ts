@@ -34,8 +34,14 @@ export class FavoriteTabPage implements OnInit{
       this.http.get(APIUrl_1 + '/favorite', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
-          this.favorites = data.favorites;
-          console.log(this.favorites);
+          const body = {users:data.favorites};
+
+          this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
+              .map(res => res.json())
+              .subscribe(
+                  data => {
+                    this.favorites = data;
+                  });
         });
     });
   }
