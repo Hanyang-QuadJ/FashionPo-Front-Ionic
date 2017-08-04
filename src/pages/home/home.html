@@ -7,7 +7,7 @@
 <ion-header no-border>
   <ion-navbar hideBackButton="true">
     <ion-buttons start>
-      <button (click)="Vote()" *ngIf="!toggled" ion-button icon-only color="primary">
+      <button  (click)="Vote()"  *ngIf="!toggled" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -40,7 +40,7 @@
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
       refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+      refreshingText="">
 
     </ion-refresher-content>
   </ion-refresher>

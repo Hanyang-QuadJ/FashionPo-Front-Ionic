@@ -40,16 +40,16 @@ export class LoginPage {
     }
 
   ngOnInit(): void {
-    this.storage.get('token').then((val) => {
-      const token = val;
-      if (token != null && token != '') {
-
-        this.navCtrl.push(TabsPage);
-      }
-    });
+    // this.storage.get('token').then((val) => {
+    //   const token = val;
+    //   if (token != null && token != '') {
+    //
+    //     this.navCtrl.setRoot(TabsPage);
+    //   }
+    // });
   }
   goToSignup() {
-      this.navCtrl.push(SignupPage);
+      this.navCtrl.setRoot(SignupPage);
   }
     showToast(position: string) {
         let toast = this.toastCtrl.create({
@@ -81,7 +81,7 @@ export class LoginPage {
             .subscribe(
                 data => {
                     this.storage.set('token', data.token);
-                    this.navCtrl.push(TabsPage);
+                    this.navCtrl.setRoot(TabsPage);
                 },
                 err => {
                     this.showToast("bottom");

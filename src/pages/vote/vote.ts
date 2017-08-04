@@ -1,7 +1,7 @@
 
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, ToastController} from 'ionic-angular';
+import {NavController, NavParams, Platform, ToastController,App} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
@@ -16,6 +16,7 @@ import {
     SwingCardComponent
 } from 'angular2-swing';
 import {HomePage} from "../home/home";
+import {TabsPage} from "../tabs/tabs";
 
 @Component({
     selector: 'page-vote',
@@ -37,6 +38,7 @@ export class VotePage implements OnInit{
                 public navCtrl: NavController,
                 public platform: Platform,
                 public navParams: NavParams,
+                private app:App,
                 public toastCtrl: ToastController) {
 
     }
@@ -91,7 +93,7 @@ export class VotePage implements OnInit{
     }
 
     Rank() {
-        this.navCtrl.setRoot(HomePage,{},{animate: true, direction: 'forward'});
+        this.navCtrl.setRoot(TabsPage, {}, {animate:true, direction:'forward'})
     }
     showToast(position: string, message: string) {
       let toast = this.toastCtrl.create({

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform,App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -36,6 +36,7 @@ export class HomePage implements OnInit{
   public searchToggled: boolean;
   tab1 = SearchUserPage;
   tab2 = SearchTagsPage;
+  pushPage: any;
 
 
   constructor(
@@ -46,10 +47,13 @@ export class HomePage implements OnInit{
     public platform: Platform,
     private toastCtrl: ToastController,
     public modalCtrl: ModalController,
+    private app:App,
     public viewCtrl: ViewController ) {
+
 
   }
   ngOnInit(): void {
+    this.pushPage = VotePage;
     this.toggled = false;
     this.searchToggled = false;
     this.storage.get('token').then((val) => {
@@ -102,26 +106,30 @@ export class HomePage implements OnInit{
     });
 
   }
+
+
   Vote(){
-    this.navCtrl.setRoot(VotePage,  {}, {animate: true, direction: 'back'});
+
+    this.navCtrl.parent.parent.setRoot(VotePage,  {}, {animate: true, animation:'ios-transition', direction: 'back'});
+
   }
 
 
-  // presentCustomModal() {
-  //   if(this.modalInstance) {
-  //     return;
-  //   }
-  //
-  //   this.modalInstance = this.modalCtrl.create(MyrankPage,{
-  //
-  //   },{cssClass:'custom-modal-page'});
-  //
-  //   this.modalInstance.onDidDismiss(() => {
-  //     this.modalInstance = null;
-  //   });
-  //
-  //   this.modalInstance.present();
-  // }
+  presentCustomModal() {
+    if(this.modalInstance) {
+      return;
+    }
+
+    this.modalInstance = this.modalCtrl.create(VotePage,{
+
+    },);
+
+    this.modalInstance.onDidDismiss(() => {
+      this.modalInstance = null;
+    });
+
+    this.modalInstance.present();
+  }
 
 
   toggleSearch() {
@@ -141,6 +149,9 @@ export class HomePage implements OnInit{
   }
   test(){
     console.log('1!!!!!!!!111')
+  }
+  ionViewWillLeave(){
+
   }
 
   doRefresh(refresher) {

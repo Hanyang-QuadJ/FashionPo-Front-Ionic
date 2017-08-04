@@ -59,10 +59,12 @@ import {SettingsPage} from "../pages/settings/settings";
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom'}),
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom',      modalEnter: 'modal-slide-in',
+          modalLeave: 'modal-slide-out',}),
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
+
         SuperTabsModule.forRoot(),
     ],
     bootstrap: [IonicApp],
