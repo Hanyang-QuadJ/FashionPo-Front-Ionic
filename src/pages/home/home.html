@@ -11,7 +11,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!toggled">Flex</ion-title>
+    <ion-title  *ngIf="!toggled" (click)="scrollToTop()">Flex</ion-title>
     <ion-searchbar *ngIf="toggled" animated="true"></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!toggled" (click)="toggleSearch()" ion-button icon-only color="primary">

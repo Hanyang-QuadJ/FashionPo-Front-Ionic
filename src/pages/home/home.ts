@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { NavController, NavParams, Platform,App } from 'ionic-angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import { NavController, NavParams, Platform,App,Content } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -29,6 +29,7 @@ export class HomePage implements OnInit{
 
   ranks: Array<object> = [];
   picURL: string = "";
+  @ViewChild(Content) content: Content;
 
   private toastInstance: Toast;
   private modalInstance: Modal;
@@ -152,6 +153,10 @@ export class HomePage implements OnInit{
   }
   ionViewWillLeave(){
 
+  }
+
+  scrollToTop(){
+    this.content.scrollToTop();
   }
 
   doRefresh(refresher) {
