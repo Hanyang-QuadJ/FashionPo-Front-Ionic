@@ -44,24 +44,27 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col col-2 text-center>
-        <p class="infoText">Today</p>
-        <h5 class="todayCount">98</h5>
-        <br>
-        <p *ngIf="toggled" class="infoText">Rank</p>
-        <h5 *ngIf="toggled"  class="rankCount">4</h5>
+    <ion-row justify-content-center align-items-center>
+      <!--<ion-col col-2 text-center>-->
+        <!--<p class="infoText">Today</p>-->
+        <!--<h5 class="todayCount">98</h5>-->
+        <!--<br>-->
+        <!--<p *ngIf="toggled" class="infoText">Rank</p>-->
+        <!--<h5 *ngIf="toggled"  class="rankCount">4</h5>-->
+      <!--</ion-col>-->
+      <ion-col col-5 text-center>
+        <img class="image" src="../../assets/images/myPic1.png">
       </ion-col>
-      <ion-col col-5>
-        <img class="image" src="../../assets/images/vote.png">
-      </ion-col>
-      <ion-col col-4>
+      <ion-col col-6>
         <div class="padding">
           <!--<h5 class="userName">{{user.username}}</h5>-->
-          <h5 class="userName">Kendall Jenner</h5>
+          <h5 class="userName">{{user.username}}</h5>
 
-          <p class="profileText">The beginning of half is whole.</p>
+          <p class="profileText">Model</p>
+          <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
+          <button class="add" ion-button small color="dark">Today 98</button>
           <button class="add" ion-button outline small color="sub">Add</button>
+
           </div>
       </ion-col>
     </ion-row>
@@ -69,15 +72,12 @@
   <hr>
 
 
-        <p class="infoText"><ion-icon name="ios-shirt"></ion-icon>&nbsp;This Week's Fits</p>
+        <p class="infoText">This Week's Fits</p>
 
 
 
 
   <ion-scroll scrollX="true" class="twPic">
-
-
-    <img class="horiPic" src="../../assets/images/rank2.png">
     <img class="horiPic" src="../../assets/images/rank3.png">
     <img class="horiPic" src="../../assets/images/myPic1.png">
     <img class="horiPic" src="../../assets/images/myPic2.png">
@@ -85,9 +85,15 @@
     <img class="horiPic" src="../../assets/images/post1.png">
     <img class="horiPic" src="../../assets/images/post2.png">
 
-
-
   </ion-scroll>
+
+
+
+
+
+
+
+
 
 
 

@@ -1,13 +1,13 @@
 page-vote {
 
-  div.fixed-content {
-    margin-top: 64px !important;
-    margin-bottom: 0px !important;
-  }
-  div.scroll-content {
-    margin-top: 64px !important;
-    margin-bottom: 0px !important;
-  }
+  //div.fixed-content {
+  //  margin-top: 64px !important;
+  //  margin-bottom: 0px !important;
+  //}
+  //div.scroll-content {
+  //  margin-top: 64px !important;
+  //  margin-bottom: 0px !important;
+  //}
 
   .toolbar-background {
     background-color: #ffffff;
@@ -18,6 +18,29 @@ page-vote {
     font-weight: 700;
     color: #ff5733;
     pointer-events: auto;
+  }
+  .container{
+    display: flex;
+
+  }
+  .skipArea{
+    flex:1;
+    display:flex;
+    justify-content: center;
+    border-right: 0.55px solid rgba(0,0,0,0.1);
+
+  }
+  .closetArea{
+    flex:1;
+    display:flex;
+    justify-content: center;
+    border-right: 0.55px solid rgba(0,0,0,0.1);
+
+  }
+  .likeArea{
+    flex:1;
+    display:flex;
+    justify-content: center;
   }
 
 

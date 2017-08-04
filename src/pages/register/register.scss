@@ -39,10 +39,11 @@ page-register {
     margin-top: 10px;
   }
   .infoText{
-    color: #737373;
-    font-size: 12px;
-    padding-left: 8%;
+    color: #4d4d4d;
+    font-size: 14px;
+    padding-left: 3%;
     padding-top:1%;
+    font-weight: 500;
     padding-bottom: 3%;
   }
   .container{
@@ -51,10 +52,9 @@ page-register {
 
   .image{
 
-    display: block;
-    max-width:100px;
-    max-height:200px;
-    width: auto;
+
+
+    width: 100px;
     height: auto;
     border-radius: 5%;
   }
@@ -113,8 +113,10 @@ page-register {
 
   }
   .horiPic{
-    height: 120px;
-    width: 75px;
+    height: 110px;
+    width: 80px;
+
+
     object-fit: cover; /*magic*/
 
 

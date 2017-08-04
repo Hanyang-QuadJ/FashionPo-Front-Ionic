@@ -105,13 +105,13 @@ export class VotePage implements OnInit{
       toast.present(toast);
     }
     blur(event) {
-        if (event.target.style['-webkit-filter'] === `blur(10px)`) {
+        if (event.target.style['-webkit-filter'] === `blur(20px)`) {
             event.target.style['-webkit-filter'] = `blur(0px)`;
             event.target.style['filter'] = `blur(0px)`;
         }
         else {
-            event.target.style['-webkit-filter'] = `blur(10px)`;
-            event.target.style['filter'] = `blur(10px)`;
+            event.target.style['-webkit-filter'] = `blur(20px)`;
+            event.target.style['filter'] = `blur(20px)`;
         }
 
     }
@@ -125,11 +125,39 @@ export class VotePage implements OnInit{
         let removedCard = this.posts.pop();
         this.addNewposts();
         if (like) {
-          this.showToast("bottom", "you liked this post");
+          this.presentLikeToast()
         } else {
-          this.showToast("bottom", "you passed this post");
+          this.presentSkipToast()
         }
     }
+
+  presentLikeToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Liked!',
+      duration: 200,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
+
+  presentSkipToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Skip!',
+      duration: 200,
+      position: 'middle'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 
 // Add new posts to our array
     addNewposts() {
