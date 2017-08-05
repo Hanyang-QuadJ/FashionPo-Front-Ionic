@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams, Platform, ModalController} from 'ionic-angular';
+import {NavController, NavParams, Platform, ModalController,LoadingController} from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
@@ -38,11 +38,13 @@ export class RegisterPage implements OnInit {
                 private storage: Storage,
                 private http: Http,
                 public modalCtrl: ModalController,
+                public loadingCtrl: LoadingController,
                 public platform: Platform) {
 
     }
 
     ngOnInit(): void {
+      this.presentLoadingDefault();
       this.toggled = false;
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
@@ -120,6 +122,17 @@ export class RegisterPage implements OnInit {
             });
         });
     }
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 2000);
+  }
 
 
 

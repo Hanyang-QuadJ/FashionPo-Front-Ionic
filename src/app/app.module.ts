@@ -37,9 +37,7 @@ import {FavoriteTabPage} from "../pages/WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../pages/WardrobePage/settings/settings";
 import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-photo'
 // import { Camera } from '@ionic-native/camera';
-import { Config } from 'ionic-angular';
-import { ModalScaleUpLeaveTransition } from '../assets/components/scale-up-leave.transition'
-import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.transition'
+
 
 @NgModule({
 
@@ -63,8 +61,8 @@ import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom', modalEnter: '',
-          modalLeave: 'modal-slide-out',}),
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom'}
+          ),
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
@@ -81,7 +79,6 @@ import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.
         RegisterPage,
         HomePage,
         TabsPage,
-
         SearchUserPage,
         SearchTagsPage,
         SignupPage,
@@ -104,12 +101,5 @@ import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.
 
 })
 export class AppModule {
-  constructor(public config: Config) {
-    this.setCustomTransitions();
-  }
 
-  private setCustomTransitions() {
-    this.config.setTransition('modal-scale-up-leave', ModalScaleUpLeaveTransition);
-    this.config.setTransition('modal-scale-up-enter', ModalScaleUpEnterTransition);
-  }
 }

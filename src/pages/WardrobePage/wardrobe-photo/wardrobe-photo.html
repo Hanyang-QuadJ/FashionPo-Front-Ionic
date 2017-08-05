@@ -19,7 +19,8 @@
 
 
 <ion-content>
-  <br><br><br><br>
+
+
 
     <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
   <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
@@ -32,10 +33,12 @@
     </ion-item>
 
 
-    <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{post.picURL}}">
+    <img src="{{post.picURL}}">
 
     <ion-card-content>
-      <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+
+        <span *ngFor="let post of postList">{{post.tags}} &nbsp;</span>
+
     </ion-card-content>
 
     <ion-row>
@@ -45,11 +48,11 @@
           <div>{{post.likeCnt}} Likes</div>
         </button>
       </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
+      <!--<ion-col center text-center>-->
+        <!--<ion-note>-->
+          <!--11h ago-->
+        <!--</ion-note>-->
+      <!--</ion-col>-->
     </ion-row>
 
   </ion-card>

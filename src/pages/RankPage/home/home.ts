@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { NavController, NavParams, Platform,App,Content } from 'ionic-angular';
+import { NavController, NavParams, Platform,App,Content,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -52,11 +52,13 @@ export class HomePage implements OnInit{
     private toastCtrl: ToastController,
     public modalCtrl: ModalController,
     private app:App,
+    public loadingCtrl:LoadingController,
     public viewCtrl: ViewController ) {
 
 
   }
   ngOnInit(): void {
+    this.presentLoadingDefault();
     this.pushPage = VotePage;
     this.toggled = false;
     this.searchToggled = false;
@@ -314,6 +316,17 @@ export class HomePage implements OnInit{
             console.log(data);
           });
     });
+  }
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    }, 2000);
   }
 
 

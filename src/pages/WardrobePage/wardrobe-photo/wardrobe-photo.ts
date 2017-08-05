@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component,ViewChild,OnInit } from '@angular/core';
 import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
 
 /**
@@ -12,7 +12,7 @@ import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
   selector: 'page-wardrobe-photo',
   templateUrl: 'wardrobe-photo.html',
 })
-export class WardrobePhotoPage {
+export class WardrobePhotoPage implements OnInit{
   @ViewChild(Content) content: Content;
   postList ="";
   postListIndex:string="";
@@ -22,23 +22,31 @@ export class WardrobePhotoPage {
     console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
-    this.scrollToCard();
+
+
+
+
+  }
+
+  ionViewWillEnter(){
+    this.scrollToCard()
+  }
+  scrollToCard(){
+    let yOffset = document.getElementById(this.postListIndex).offsetTop;
+    console.log(yOffset)
+    this.content.scrollTo(0,yOffset,0);
+  }
+  ngOnInit(): void {
 
 
   }
 
 
-
-
-
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
 
-//   scrollTo(this.postListIndex){
-//   let yOffset = document.getElementById(this.postListIndex).offsetTop;
-//   this.content.scrollTo(0, yOffset, 4000)
+
+
   }
 
 
@@ -48,10 +56,7 @@ export class WardrobePhotoPage {
     this.viewCtrl.dismiss()
   }
 
-  scrollToCard(){
-    let yOffset = document.getElementById(this.postListIndex).offsetTop;
-    this.content.scrollTo(0, yOffset, 3000);
-  }
+
 
 
 

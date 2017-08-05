@@ -52,20 +52,13 @@ export class PostTabPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostTabPage');
-    console.log(this.mypostlist+"!!!!!!!!")
+
   }
 
 
-
   presentProfileModal(i) {
-
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist, postListIndex:'fit'+i},{ showBackdrop: false,
-        enableBackdropDismiss: false,
-        enterAnimation: 'modal-scale-up-enter',
-        leaveAnimation: 'back'});
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist, postListIndex:'fit'+i},{leaveAnimation:'back'});
       profileModal.present();
-
-
 
   }
 
