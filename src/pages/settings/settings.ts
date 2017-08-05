@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,App } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPage} from "../login/login";
 /**
@@ -16,11 +16,12 @@ import {LoginPage} from "../login/login";
 export class SettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              private app: App,
               private storage: Storage) {
   }
   logOut() {
     this.storage.set('token', null);
-    this.navCtrl.setRoot(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
