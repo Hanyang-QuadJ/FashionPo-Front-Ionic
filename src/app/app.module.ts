@@ -10,21 +10,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // import { NativeStorage } from '@ionic-native/native-storage';
 import {MyApp} from './app.component';
 
-import {HomePage} from '../pages/home/home';
-import {VotePage} from '../pages/vote/vote';
-import {LoginPage} from '../pages/login/login';
-import {PlaygroundPage} from '../pages/playground/playground';
-import {RegisterPage} from '../pages/register/register';
-import {MyrankPage} from '../pages/myrank/myrank';
-import {SignupPage} from '../pages/signup/signup';
+import {HomePage} from '../pages/RankPage/home/home';
+import {VotePage} from '../pages/VotePage/vote/vote';
+import {LoginPage} from '../pages/AuthPage/login/login';
+import {PlaygroundPage} from '../pages/CameraPage/playground/playground';
+import {RegisterPage} from '../pages/WardrobePage/register/register';
+
+import {SignupPage} from '../pages/AuthPage/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {IonicStorageModule} from '@ionic/storage';
 import {TabsPage} from "../pages/tabs/tabs";
-import {ThisWeekPicPage} from  '../pages/this-week-pic/this-week-pic'
-import {SearchUserPage} from '../pages/search-user/search-user'
-import {SearchTagsPage} from '../pages/search-tags/search-tags'
+
+import {SearchUserPage} from '../pages/RankPage/search-user/search-user'
+import {SearchTagsPage} from '../pages/RankPage/search-tags/search-tags'
 import {SwingModule} from 'angular2-swing';
 
 import { File } from '@ionic-native/file';
@@ -32,10 +32,10 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 // import { ScrollableTabs } from '../assets/components/scrollable-tabs'
 import { SuperTabsModule } from 'ionic2-super-tabs';
-import {PostTabPage} from "../pages/post-tab/post-tab";
-import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
-import {SettingsPage} from "../pages/settings/settings";
-import {WardrobePhotoPage} from '../pages/wardrobe-photo/wardrobe-photo'
+import {PostTabPage} from "../pages/WardrobePage/post-tab/post-tab";
+import {FavoriteTabPage} from "../pages/WardrobePage/favorite-tab/favorite-tab";
+import {SettingsPage} from "../pages/WardrobePage/settings/settings";
+import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-photo'
 // import { Camera } from '@ionic-native/camera';
 import { Config } from 'ionic-angular';
 import { ModalScaleUpLeaveTransition } from '../assets/components/scale-up-leave.transition'
@@ -52,8 +52,7 @@ import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.
         RegisterPage,
         HomePage,
         TabsPage,
-        MyrankPage,
-        ThisWeekPicPage,
+
         SearchUserPage,
         SearchTagsPage,
         SignupPage,
@@ -82,8 +81,7 @@ import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.
         RegisterPage,
         HomePage,
         TabsPage,
-        MyrankPage,
-        ThisWeekPicPage,
+
         SearchUserPage,
         SearchTagsPage,
         SignupPage,

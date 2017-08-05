@@ -4,7 +4,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
-import {TabsPage} from "../tabs/tabs";
+import {TabsPage} from "../../tabs/tabs";
 import { ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams,App } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
-import {LoginPage} from "../login/login";
+import {LoginPage} from "../../AuthPage/login/login";
 /**
  * Generated class for the SettingsPage page.
  *

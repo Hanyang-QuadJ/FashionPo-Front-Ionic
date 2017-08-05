@@ -4,8 +4,7 @@ import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
-import { VotePage } from '../vote/vote'
-import { MyrankPage } from '../myrank/myrank';
+import { VotePage } from '../../VotePage/vote/vote'
 import { SearchUserPage } from '../search-user/search-user'
 import { SearchTagsPage } from '../search-tags/search-tags'
 import { ToastController, ModalController, ViewController,Toast,Modal } from 'ionic-angular'

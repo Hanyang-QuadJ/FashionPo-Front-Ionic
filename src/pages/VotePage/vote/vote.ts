@@ -15,8 +15,8 @@ import {
     SwingStackComponent,
     SwingCardComponent
 } from 'angular2-swing';
-import {HomePage} from "../home/home";
-import {TabsPage} from "../tabs/tabs";
+import {HomePage} from "../../RankPage/home/home";
+import {TabsPage} from "../../tabs/tabs";
 
 
 @Component({

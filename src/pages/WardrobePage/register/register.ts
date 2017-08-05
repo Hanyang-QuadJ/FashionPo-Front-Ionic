@@ -3,12 +3,12 @@ import {NavController, NavParams, Platform, ModalController} from 'ionic-angular
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
-import {PostTabPage} from "../post-tab/post-tab";
-import {FavoriteTabPage} from "../favorite-tab/favorite-tab";
-import {SettingsPage} from "../settings/settings";
+import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
+import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
+import {SettingsPage} from "../../WardrobePage/settings/settings";
 // import {TabsPage} from "../tabs/tabs";
 
-import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
+
 /**
  * Generated class for the RegisterPage page.
  *
