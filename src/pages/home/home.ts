@@ -163,10 +163,10 @@ export class HomePage implements OnInit{
     console.log('Begin async operation', refresher);
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/rank';
-      //   // console.log('yes');
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/rank';
+        // console.log('yes');
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);

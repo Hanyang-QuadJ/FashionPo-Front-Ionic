@@ -35,7 +35,11 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 import {PostTabPage} from "../pages/post-tab/post-tab";
 import {FavoriteTabPage} from "../pages/favorite-tab/favorite-tab";
 import {SettingsPage} from "../pages/settings/settings";
+import {WardrobePhotoPage} from '../pages/wardrobe-photo/wardrobe-photo'
 // import { Camera } from '@ionic-native/camera';
+import { Config } from 'ionic-angular';
+import { ModalScaleUpLeaveTransition } from '../assets/components/scale-up-leave.transition'
+import { ModalScaleUpEnterTransition} from '../assets/components/scale-up-enter.transition'
 
 @NgModule({
 
@@ -55,11 +59,12 @@ import {SettingsPage} from "../pages/settings/settings";
         SignupPage,
         PostTabPage,
         FavoriteTabPage,
-        SettingsPage
+        SettingsPage,
+        WardrobePhotoPage,
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom',      modalEnter: 'modal-slide-in',
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom', modalEnter: '',
           modalLeave: 'modal-slide-out',}),
         IonicStorageModule.forRoot(),
         HttpModule,
@@ -84,7 +89,8 @@ import {SettingsPage} from "../pages/settings/settings";
         SignupPage,
         PostTabPage,
         FavoriteTabPage,
-        SettingsPage
+        SettingsPage,
+        WardrobePhotoPage,
     ],
     providers: [
         StatusBar,
@@ -100,4 +106,12 @@ import {SettingsPage} from "../pages/settings/settings";
 
 })
 export class AppModule {
+  constructor(public config: Config) {
+    this.setCustomTransitions();
+  }
+
+  private setCustomTransitions() {
+    this.config.setTransition('modal-scale-up-leave', ModalScaleUpLeaveTransition);
+    this.config.setTransition('modal-scale-up-enter', ModalScaleUpEnterTransition);
+  }
 }

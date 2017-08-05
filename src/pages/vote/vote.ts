@@ -18,6 +18,7 @@ import {
 import {HomePage} from "../home/home";
 import {TabsPage} from "../tabs/tabs";
 
+
 @Component({
     selector: 'page-vote',
     templateUrl: 'vote.html'
@@ -32,6 +33,7 @@ export class VotePage implements OnInit{
     stackConfig: StackConfig;
     cachedPost: Array<object> = [];
     tabBarElement: any;
+    overlayColor: string = 'transparent'; //Default Color
 
     constructor(private http: Http,
                 private storage: Storage,
@@ -108,10 +110,17 @@ export class VotePage implements OnInit{
         if (event.target.style['-webkit-filter'] === `blur(20px)`) {
             event.target.style['-webkit-filter'] = `blur(0px)`;
             event.target.style['filter'] = `blur(0px)`;
+
+
+
+
         }
         else {
+
             event.target.style['-webkit-filter'] = `blur(20px)`;
             event.target.style['filter'] = `blur(20px)`;
+            event.target.style.background = "pink";
+
         }
 
     }
@@ -164,6 +173,8 @@ export class VotePage implements OnInit{
         this.posts.push(this.cachedPost.pop());
         console.log(this.cachedPost);
     }
+
+
 
 
 }

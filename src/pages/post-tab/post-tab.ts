@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ModalController } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
+import { WardrobePhotoPage } from '../wardrobe-photo/wardrobe-photo'
 /**
  * Generated class for the PostTabPage page.
  *
@@ -15,7 +16,7 @@ import {Storage} from '@ionic/storage';
 })
 export class PostTabPage {
   // // user: object = {};
-  mypostlist: Array<object> = [];
+  public mypostlist: Array<object> = [];
   // // option: string = "";
   // // myposts: string = "";
   // // favorites: Array<object> = [];
@@ -23,6 +24,7 @@ export class PostTabPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
+              public modalCtrl: ModalController,
               public http: Http) {
   }
   ngOnInit(): void {
@@ -49,6 +51,20 @@ export class PostTabPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostTabPage');
+  }
+
+
+
+  presentProfileModal(i) {
+
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist[i]},{ showBackdrop: false,
+        enableBackdropDismiss: false,
+        enterAnimation: 'modal-scale-up-enter',
+        leaveAnimation: 'back'});
+      profileModal.present();
+
+
+
   }
 
 }

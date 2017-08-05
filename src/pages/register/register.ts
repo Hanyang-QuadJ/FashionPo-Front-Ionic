@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
+import {NavController, NavParams, Platform, ModalController} from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
@@ -7,6 +7,8 @@ import {PostTabPage} from "../post-tab/post-tab";
 import {FavoriteTabPage} from "../favorite-tab/favorite-tab";
 import {SettingsPage} from "../settings/settings";
 // import {TabsPage} from "../tabs/tabs";
+
+import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
 /**
  * Generated class for the RegisterPage page.
  *
@@ -35,6 +37,7 @@ export class RegisterPage implements OnInit {
                 public navParams: NavParams,
                 private storage: Storage,
                 private http: Http,
+                public modalCtrl: ModalController,
                 public platform: Platform) {
 
     }
@@ -117,6 +120,9 @@ export class RegisterPage implements OnInit {
             });
         });
     }
+
+
+
 }
 
 
