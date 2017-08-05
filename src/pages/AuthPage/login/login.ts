@@ -40,13 +40,13 @@ export class LoginPage {
     }
 
   ngOnInit(): void {
-    this.storage.get('token').then((val) => {
-      const token = val;
-      if (token != null && token != '') {
-
-        this.navCtrl.setRoot(TabsPage);
-      }
-    });
+    // this.storage.get('token').then((val) => {
+    //   const token = val;
+    //   if (token != null && token != '') {
+    //
+    //     this.navCtrl.setRoot(TabsPage);
+    //   }
+    // });
   }
   goToSignup() {
       this.navCtrl.setRoot(SignupPage);

@@ -16,7 +16,7 @@
   <!--</ion-list>-->
   <ion-row wrap no-padding>
     <ion-col col-4 *ngFor="let post of mypostlist; let i = index">
-      <img  (click)="presentProfileModal(i)" class="myFitImage" src="https://s3.amazonaws.com/fashionpoimagebucket/{{post.picURL}}">
+      <img (click)="presentProfileModal(i)" class="myFitImage" src="https://s3.amazonaws.com/fashionpoimagebucket/{{post.picURL}}">
     </ion-col>
   </ion-row>
   </ion-grid>

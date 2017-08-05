@@ -17,10 +17,10 @@ import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-ph
 export class PostTabPage {
   // // user: object = {};
   public mypostlist: Array<object> = [];
-  // // option: string = "";
-  // // myposts: string = "";
-  // // favorites: Array<object> = [];
-  // // favoritesLength: string = "";
+  // option: string = "";
+  // myposts: string = "";
+  // favorites: Array<object> = [];
+  // favoritesLength: string = "";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
@@ -29,9 +29,9 @@ export class PostTabPage {
   }
   ngOnInit(): void {
     var APIUrl_2 = '/post';
-  //   // if (this.platform.is('ios') == true){
-  //   //   APIUrl = 'http://54.162.160.91/api/user';
-  //   // }
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://54.162.160.91/api/user';
+    // }
     this.storage.get('token').then((val) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -42,6 +42,7 @@ export class PostTabPage {
         .map(res => res.json())
         .subscribe(data => {
           this.mypostlist = data.posts;
+
           // this.myposts = data.posts.length;
         });
     });
@@ -51,13 +52,14 @@ export class PostTabPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostTabPage');
+    console.log(this.mypostlist+"!!!!!!!!")
   }
 
 
 
   presentProfileModal(i) {
 
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist[i]},{ showBackdrop: false,
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist, postListIndex:'fit'+i},{ showBackdrop: false,
         enableBackdropDismiss: false,
         enterAnimation: 'modal-scale-up-enter',
         leaveAnimation: 'back'});

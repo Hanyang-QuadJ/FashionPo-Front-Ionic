@@ -6,31 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-toolbar>
     <ion-buttons start>
       <button (click)="dismiss()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>WardrobePhoto</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">
-  <ion-card>
+<ion-content>
+  <br><br><br><br>
 
+    <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
+  <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
     <ion-item>
       <ion-avatar item-start>
-        <img src="img/marty-avatar.png">
+        <img src="../../../assets/images/myPic3.png">
       </ion-avatar>
       <h2>Marty McFly</h2>
       <p>November 5, 1955</p>
     </ion-item>
 
-    <img src="img/advance-card-bttf.png">
+
+    <img src="https://s3.amazonaws.com/fashionpoimagebucket/{{post.picURL}}">
 
     <ion-card-content>
       <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
@@ -39,14 +41,8 @@
     <ion-row>
       <ion-col>
         <button ion-button icon-left clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>12 Likes</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>4 Comments</div>
+          <ion-icon name="heart"></ion-icon>
+          <div>{{post.likeCnt}} Likes</div>
         </button>
       </ion-col>
       <ion-col center text-center>

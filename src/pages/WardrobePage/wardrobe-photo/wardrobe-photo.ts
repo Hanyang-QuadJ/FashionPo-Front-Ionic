@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams,ViewController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
 
 /**
  * Generated class for the WardrobePhotoPage page.
@@ -13,19 +13,48 @@ import { NavController, NavParams,ViewController } from 'ionic-angular';
   templateUrl: 'wardrobe-photo.html',
 })
 export class WardrobePhotoPage {
-  postList =""
+  @ViewChild(Content) content: Content;
+  postList ="";
+  postListIndex:string="";
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    console.log(navParams.get('postList'));
-    this.postList = navParams.get('postList')
+    console.log(navParams.get('postListIndex'));
+    this.postList = navParams.get('postList');
+    this.postListIndex = navParams.get('postListIndex');
+    this.scrollToCard();
+
+
   }
+
+
+
+
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
+
+//   scrollTo(this.postListIndex){
+//   let yOffset = document.getElementById(this.postListIndex).offsetTop;
+//   this.content.scrollTo(0, yOffset, 4000)
   }
+
+
+
 
   public dismiss(){
     this.viewCtrl.dismiss()
   }
+
+  scrollToCard(){
+    let yOffset = document.getElementById(this.postListIndex).offsetTop;
+    this.content.scrollTo(0, yOffset, 3000);
+  }
+
+
+
+
 
 }
