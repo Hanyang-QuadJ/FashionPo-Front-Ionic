@@ -42,7 +42,7 @@ export class PostTabPage {
         .map(res => res.json())
         .subscribe(data => {
           this.mypostlist = data.posts;
-
+          console.log(this.mypostlist);
           // this.myposts = data.posts.length;
         });
     });
