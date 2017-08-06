@@ -36,6 +36,7 @@ export class PostTabPage implements OnInit{
   }
   ngOnInit(): void {
     this.myPost = this.navParams.data.sample;
+    // this.myPost = this.navParams.data.sample;
     // var APIUrl_2 = '/post';
     // // if (this.platform.is('ios') == true){
     // //   APIUrl = 'http://54.162.160.91/api/user';

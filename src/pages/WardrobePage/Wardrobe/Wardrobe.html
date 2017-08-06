@@ -81,11 +81,13 @@
     <img class="horiPic" src="../../assets/images/post2.png">
 
   </ion-scroll>
+  <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
 
-  <super-tabs *ngIf="mypostlist!==[]" toolbarColor="dark">
-    <super-tab [root]="tab1" [rootParams]="{sample:mypostlist}" title="My Fits"></super-tab>
-    <super-tab [root]="tab2" title="Favorites"></super-tab>
-  </super-tabs>
+    <super-tabs *ngIf="loaded" toolbarColor="dark">
+      <super-tab [root]="tab1" [rootParams]="{sample:mypostlist}" title="My Fits"></super-tab>
+      <super-tab [root]="tab2" title="Favorites"></super-tab>
+    </super-tabs>
+
 
 
 

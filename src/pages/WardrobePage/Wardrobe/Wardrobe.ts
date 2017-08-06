@@ -27,8 +27,12 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 export class WardrobePage implements OnInit {
   public toggled: boolean;
 
-    sample:Array<object> =[];
+    sample:Array<object>=[    {id: 1, text: 'Sentence 1'},
+      {id: 2, text: 'Sentence 2'},
+      {id: 3, text: 'Sentence 3'},
+      {id: 4, text: 'Sentenc4 '},];
     user: object = {};
+    loaded:boolean;
     mypostlist: Array<object> = [];
     option: string = "";
     myposts: string = "";
@@ -36,6 +40,7 @@ export class WardrobePage implements OnInit {
     favoritesLength: string = "";
     tab1:any = PostTabPage;
     tab2:any = FavoriteTabPage;
+
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -46,9 +51,11 @@ export class WardrobePage implements OnInit {
                 public platform: Platform) {
 
 
+
     }
 
     ngOnInit(): void {
+      this.loaded = false;
 
       this.toggled = false;
         var APIUrl_1 = '/user';
@@ -83,6 +90,9 @@ export class WardrobePage implements OnInit {
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
                     console.log('!!!@!@!@!@!@')
+                    this.loaded = true;
+
+
 
                 });
 
@@ -95,6 +105,7 @@ export class WardrobePage implements OnInit {
                     this.favoritesLength = data.favorites.length;
                   // console.log(this.favoritesLength);
                 });
+
         });
         loading.dismiss();
     }
@@ -145,7 +156,9 @@ export class WardrobePage implements OnInit {
     ionViewDidLoad(){
       console.log('outside')
       console.log(this.mypostlist+"HERE")
+
     }
+
 
 
 
