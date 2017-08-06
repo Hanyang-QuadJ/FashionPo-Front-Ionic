@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams,ModalController,LoadingController } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
+import {WardrobePage} from '../../WardrobePage/wardrobe/wardrobe'
 import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-photo'
 /**
  * Generated class for the PostTabPage page.
@@ -13,8 +14,9 @@ import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-ph
 @Component({
   selector: 'page-post-tab',
   templateUrl: 'post-tab.html',
+
 })
-export class PostTabPage {
+export class PostTabPage implements OnInit{
   // // user: object = {};
   public mypostlist: Array<object> = [];
   // option: string = "";
@@ -27,6 +29,7 @@ export class PostTabPage {
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
               public http: Http) {
+
   }
   ngOnInit(): void {
     var APIUrl_2 = '/post';
@@ -42,21 +45,23 @@ export class PostTabPage {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
-      console.log(val);
 
       this.http.get(APIUrl_2 + '/myposts', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.mypostlist = data.posts;
-          console.log(this.mypostlist);
           // this.myposts = data.posts.length;
         });
     });
     loading.dismiss();
+    // console.log(this.wardrobe.sample)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PostTabPage');
+    console.log('----ionViewDidLoad PostTabPage----');
+    console.log(this.navParams.data.sample);
+
+
 
   }
   presentProfileModal(i) {

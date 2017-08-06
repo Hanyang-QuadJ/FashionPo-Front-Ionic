@@ -6,6 +6,7 @@ import {Storage} from '@ionic/storage';
 import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
+import 'rxjs/add/operator/map';
 // import {TabsPage} from "../tabs/tabs";
 
 
@@ -19,11 +20,14 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 @Component({
     selector: 'page-register',
     templateUrl: 'wardrobe.html',
+
 })
 
 
 export class WardrobePage implements OnInit {
   public toggled: boolean;
+
+    sample:any ="Shin";
     user: object = {};
     mypostlist: Array<object> = [];
     option: string = "";
@@ -40,6 +44,7 @@ export class WardrobePage implements OnInit {
                 public modalCtrl: ModalController,
                 public loadingCtrl: LoadingController,
                 public platform: Platform) {
+
 
     }
 
@@ -124,7 +129,6 @@ export class WardrobePage implements OnInit {
             .map(res => res.json())
             .subscribe(data => {
               this.favorites = data.favorites;
-
               this.favoritesLength = data.favorites.length;
             });
         });

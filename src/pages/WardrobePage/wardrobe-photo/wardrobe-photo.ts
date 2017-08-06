@@ -26,6 +26,7 @@ export class WardrobePhotoPage implements OnInit{
 
 
 
+
   }
 
   ionViewWillEnter(){
@@ -44,6 +45,7 @@ export class WardrobePhotoPage implements OnInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
+
 
 
 

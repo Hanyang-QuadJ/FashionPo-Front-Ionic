@@ -96,7 +96,8 @@ import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-p
         Transfer,
         FilePath,
 
-      ,{provide: ErrorHandler, useClass: IonicErrorHandler}
+      ,{provide: ErrorHandler, useClass: IonicErrorHandler},
+
     ]
 
 })
