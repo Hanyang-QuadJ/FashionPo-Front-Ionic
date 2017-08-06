@@ -108,6 +108,7 @@ export class HomePage implements OnInit{
                   console.log(this.users[1]);
                   console.log(this.firstPost);
                   console.log(this.ranks);
+                  loading.dismiss();
                 });
           });
 
@@ -132,7 +133,6 @@ export class HomePage implements OnInit{
             console.log(this.user);
           });
     });
-    loading.dismiss();
 
 
 
