@@ -76,7 +76,7 @@
             <p >{{users[i].username}}</p>
           </div>
           <div class="buttonArea">
-            <button *ngIf="user._id!==ranks[i].writtenBy" ion-button outline small color="sub" (dblclick)="test()" (click)='addFavorite(rank);'>Add</button>
+            <button *ngIf="user&&user._id!==ranks[i].writtenBy" ion-button outline small color="sub" (dblclick)="test()" (click)='addFavorite(rank);'>Add</button>
           </div>
         </div>
       </div>
