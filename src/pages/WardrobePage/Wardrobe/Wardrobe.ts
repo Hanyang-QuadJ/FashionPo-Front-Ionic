@@ -18,7 +18,7 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 
 @Component({
     selector: 'page-register',
-    templateUrl: 'Wardrobe.html',
+    templateUrl: 'wardrobe.html',
 })
 
 
@@ -96,10 +96,6 @@ export class WardrobePage implements OnInit {
     }
     ionViewWillEnter() {
 
-      let loading = this.loadingCtrl.create({
-
-      });
-      loading.present();
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
         // if (this.platform.is('ios') == true){
@@ -132,7 +128,7 @@ export class WardrobePage implements OnInit {
               this.favoritesLength = data.favorites.length;
             });
         });
-      loading.dismiss();
+
     }
 
 

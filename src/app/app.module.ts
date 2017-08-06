@@ -14,7 +14,7 @@ import {HomePage} from '../pages/RankPage/home/home';
 import {VotePage} from '../pages/VotePage/vote/vote';
 import {LoginPage} from '../pages/AuthPage/login/login';
 import {CameraPage} from '../pages/CameraPage/Camera/Camera';
-import {WardrobePage} from '../pages/WardrobePage/Wardrobe/Wardrobe';
+import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe';
 
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
