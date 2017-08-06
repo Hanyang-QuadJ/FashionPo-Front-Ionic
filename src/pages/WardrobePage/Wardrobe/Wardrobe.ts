@@ -6,7 +6,7 @@ import {Storage} from '@ionic/storage';
 import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
-import 'rxjs/add/operator/map';
+
 // import {TabsPage} from "../tabs/tabs";
 
 
@@ -27,7 +27,7 @@ import 'rxjs/add/operator/map';
 export class WardrobePage implements OnInit {
   public toggled: boolean;
 
-    sample:any ="Shin";
+    sample:Array<object> =[];
     user: object = {};
     mypostlist: Array<object> = [];
     option: string = "";
@@ -72,22 +72,28 @@ export class WardrobePage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     this.user = data.user[0];
+
                 });
+
 
             this.http.get(APIUrl_2 + '/myposts', {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
+                    console.log(this.mypostlist)
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
+                    console.log('!!!@!@!@!@!@')
+
                 });
+
 
             this.http.get(APIUrl_1 + '/favorite', {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
                     this.favorites = data.favorites;
-                    console.log(this.favorites);
+                    // console.log(this.favorites);
                     this.favoritesLength = data.favorites.length;
-                  console.log(this.favoritesLength);
+                  // console.log(this.favoritesLength);
                 });
         });
         loading.dismiss();
@@ -124,6 +130,7 @@ export class WardrobePage implements OnInit {
                 .subscribe(data => {
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
+                    console.log(this.mypostlist)
                 });
           this.http.get(APIUrl_1 + '/favorite', {headers: headers})
             .map(res => res.json())
@@ -133,7 +140,13 @@ export class WardrobePage implements OnInit {
             });
         });
 
+
     }
+    ionViewDidLoad(){
+      console.log('outside')
+      console.log(this.mypostlist+"HERE")
+    }
+
 
 
 
