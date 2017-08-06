@@ -39,6 +39,7 @@ export class HomePage implements OnInit{
   tab2 = SearchTagsPage;
   pushPage: any;
   user: object;
+  loading: any;
   firstPost: object;
   firstUser: object;
 
@@ -58,10 +59,13 @@ export class HomePage implements OnInit{
 
   }
   ngOnInit(): void {
-    this.presentLoadingDefault();
+
     this.pushPage = VotePage;
     this.toggled = false;
     this.searchToggled = false;
+    let loading = this.loadingCtrl.create({
+    });
+    loading.present();
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
       // if (this.platform.is('ios') == true){
@@ -128,6 +132,10 @@ export class HomePage implements OnInit{
             console.log(this.user);
           });
     });
+    loading.dismiss();
+
+
+
 
   }
 
@@ -136,6 +144,8 @@ export class HomePage implements OnInit{
   }
 
   ionViewWillEnter() {
+
+
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
       // if (this.platform.is('ios') == true){
@@ -183,6 +193,7 @@ export class HomePage implements OnInit{
 
           });
     });
+
 
   }
 
@@ -317,17 +328,9 @@ export class HomePage implements OnInit{
           });
     });
   }
-  presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
 
-    });
 
-    loading.present();
 
-    setTimeout(() => {
-      loading.dismiss();
-    }, 2000);
-  }
 
 
 

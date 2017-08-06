@@ -13,8 +13,8 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/RankPage/home/home';
 import {VotePage} from '../pages/VotePage/vote/vote';
 import {LoginPage} from '../pages/AuthPage/login/login';
-import {PlaygroundPage} from '../pages/CameraPage/playground/playground';
-import {RegisterPage} from '../pages/WardrobePage/register/register';
+import {CameraPage} from '../pages/CameraPage/Camera/Camera';
+import {WardrobePage} from '../pages/WardrobePage/Wardrobe/Wardrobe';
 
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
@@ -46,8 +46,8 @@ import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-p
         MyApp,
         VotePage,
         LoginPage,
-        PlaygroundPage,
-        RegisterPage,
+        CameraPage,
+        WardrobePage,
         HomePage,
         TabsPage,
 
@@ -75,8 +75,8 @@ import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-p
         MyApp,
         VotePage,
         LoginPage,
-        PlaygroundPage,
-        RegisterPage,
+        CameraPage,
+        WardrobePage,
         HomePage,
         TabsPage,
         SearchUserPage,

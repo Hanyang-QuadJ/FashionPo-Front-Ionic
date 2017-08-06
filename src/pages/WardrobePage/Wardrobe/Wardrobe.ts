@@ -18,11 +18,11 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 
 @Component({
     selector: 'page-register',
-    templateUrl: 'register.html',
+    templateUrl: 'Wardrobe.html',
 })
 
 
-export class RegisterPage implements OnInit {
+export class WardrobePage implements OnInit {
   public toggled: boolean;
     user: object = {};
     mypostlist: Array<object> = [];
@@ -44,7 +44,7 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit(): void {
-      this.presentLoadingDefault();
+
       this.toggled = false;
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
@@ -52,6 +52,11 @@ export class RegisterPage implements OnInit {
         //   APIUrl = 'http://54.162.160.91/api/user';
         // }
         this.option = "favorites";
+      let loading = this.loadingCtrl.create({
+
+      });
+
+      loading.present();
         this.storage.get('token').then((val) => {
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -80,6 +85,7 @@ export class RegisterPage implements OnInit {
                   console.log(this.favoritesLength);
                 });
         });
+        loading.dismiss();
     }
   toggleRank() {
     this.toggled = this.toggled ? false : true;
@@ -89,6 +95,11 @@ export class RegisterPage implements OnInit {
       this.navCtrl.push(SettingsPage);
     }
     ionViewWillEnter() {
+
+      let loading = this.loadingCtrl.create({
+
+      });
+      loading.present();
         var APIUrl_1 = '/user';
         var APIUrl_2 = '/post';
         // if (this.platform.is('ios') == true){
@@ -121,18 +132,10 @@ export class RegisterPage implements OnInit {
               this.favoritesLength = data.favorites.length;
             });
         });
-    }
-  presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-
-    });
-
-    loading.present();
-
-    setTimeout(() => {
       loading.dismiss();
-    }, 2000);
-  }
+    }
+
+
 
 
 

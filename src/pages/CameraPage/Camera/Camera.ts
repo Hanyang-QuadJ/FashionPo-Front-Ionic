@@ -19,10 +19,10 @@ declare var cordova: any;
 
 @Component({
   selector: 'page-playground',
-  templateUrl: 'playground.html'
+  templateUrl: 'Camera.html'
 })
 
-export class PlaygroundPage implements OnInit{
+export class CameraPage implements OnInit{
   public base64Image: any;
 
   constructor(private http: Http,
