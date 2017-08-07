@@ -24,6 +24,7 @@ declare var cordova: any;
 
 export class CameraPage implements OnInit{
   public base64Image: any;
+  public tags:Array<object> = [];
 
   constructor(private http: Http,
               private storage : Storage,
@@ -104,7 +105,9 @@ export class CameraPage implements OnInit{
           headers.append('x-access-token', val);
           // console.log(val);
           let body = {
-            base_64: this.base64Image
+            base_64: this.base64Image,
+            tags:[{'tag':'Selstagram'},{'tag':'Mukstagram'}]
+
           };
           this.http.post(APIUrl + "/s3upload", JSON.stringify(body), {headers: headers})
             .map(res => res.json())
