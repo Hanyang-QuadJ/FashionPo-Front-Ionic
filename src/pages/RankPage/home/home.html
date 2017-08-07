@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
     <ion-title  *ngIf="!toggled" (click)="scrollToTop()">Flex</ion-title>
-    <ion-searchbar *ngIf="toggled" animated="true"></ion-searchbar>
+    <ion-searchbar *ngIf="toggled" animated="true" value="abgasdfasd"></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!toggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
@@ -76,7 +76,7 @@
             <p >{{users[i].username}}</p>
           </div>
           <div class="buttonArea">
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy" ion-button outline small color="sub" (dblclick)="test()" (click)='addFavorite(rank);'>Add</button>
+            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i]._id)!==-1" ion-button outline small color="sub" (dblclick)="test()" (click)='addFavorite(rank);'>Add</button>
           </div>
         </div>
       </div>
