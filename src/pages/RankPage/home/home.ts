@@ -68,10 +68,10 @@ export class HomePage implements OnInit{
     loading.present();
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/rank';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -86,10 +86,10 @@ export class HomePage implements OnInit{
           this.firstPost = data.posts[0];
           this.storage.get('token').then((val) => {
             let APIUrl = '/user';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://54.162.160.91/api/user';
-              // console.log('yes');
-            }
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   // console.log('yes');
+            // }
             let writtenBys = [];
             for(let i=0;i<data.posts.length;i++){
               writtenBys.push(data.posts[i].writtenBy);
@@ -121,10 +121,10 @@ export class HomePage implements OnInit{
 
     this.storage.get('token').then((val) => {
       let APIUrl = '/user/authed';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/user/authed';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/authed';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -152,10 +152,10 @@ export class HomePage implements OnInit{
 
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/rank';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -170,10 +170,10 @@ export class HomePage implements OnInit{
             this.firstPost = data.posts[0];
             this.storage.get('token').then((val) => {
               let APIUrl = '/user';
-              if (this.platform.is('ios') == true){
-                APIUrl = 'http://54.162.160.91/api/user';
-                // console.log('yes');
-              }
+              // if (this.platform.is('ios') == true){
+              //   APIUrl = 'http://54.162.160.91/api/user';
+              //   // console.log('yes');
+              // }
               let writtenBys = [];
               for(let i=0;i<data.posts.length;i++){
                 writtenBys.push(data.posts[i].writtenBy);
@@ -260,10 +260,10 @@ export class HomePage implements OnInit{
     console.log('Begin async operation', refresher);
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/rank';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       // headers.append('x-access-token', val);
@@ -278,10 +278,10 @@ export class HomePage implements OnInit{
             this.firstPost = data.posts[0];
             this.storage.get('token').then((val) => {
               let APIUrl = '/user';
-              if (this.platform.is('ios') == true){
-                APIUrl = 'http://54.162.160.91/api/user';
-                // console.log('yes');
-              }
+              // if (this.platform.is('ios') == true){
+              //   APIUrl = 'http://54.162.160.91/api/user';
+              //   // console.log('yes');
+              // }
               let writtenBys = [];
               for(let i=0;i<data.posts.length;i++){
                 writtenBys.push(data.posts[i].writtenBy);
@@ -321,10 +321,10 @@ export class HomePage implements OnInit{
     console.log(post);
     this.storage.get('token').then((val) => {
       var APIUrl = '/user/favorite';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/user/favorite';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
