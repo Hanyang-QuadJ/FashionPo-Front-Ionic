@@ -6,8 +6,8 @@
 -->
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let favorite of favorites">
-      <h2>{{favorite.username}}</h2>
+    <ion-item *ngFor="let favorite of favorites; let i = index;">
+      <h2 (click)="presentFavModal(i)" >{{favorite.username}}</h2>
     </ion-item>
   </ion-list>
 </ion-content>

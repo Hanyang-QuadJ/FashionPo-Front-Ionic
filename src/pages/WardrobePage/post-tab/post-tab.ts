@@ -20,12 +20,6 @@ export class PostTabPage implements OnInit{
   // user: object = {};
 
   myPost: Array<object> = [];
-
-
-  // option: string = "";
-  // myposts: string = "";
-  // favorites: Array<object> = [];
-  // favoritesLength: string = "";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
@@ -35,36 +29,12 @@ export class PostTabPage implements OnInit{
 
   }
   ngOnInit(): void {
-    this.myPost = this.navParams.data.sample;
-    // this.myPost = this.navParams.data.sample;
-    // var APIUrl_2 = '/post';
-    // // if (this.platform.is('ios') == true){
-    // //   APIUrl = 'http://54.162.160.91/api/user';
-    // // }
-    // let loading = this.loadingCtrl.create({
-    //
-    // });
-    //
-    // loading.present();
-    // this.storage.get('token').then((val) => {
-    //   let headers = new Headers();
-    //   headers.append('Content-Type', 'application/json');
-    //   headers.append('x-access-token', val);
-    //
-    //   this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-    //     .map(res => res.json())
-    //     .subscribe(data => {
-    //       this.mypostlist = data.posts;
-    //       // this.myposts = data.posts.length;
-    //     });
-    // });
-    // loading.dismiss();
-    // console.log(this.wardrobe.sample)
+    this.myPost = this.navParams.data.mypost;
   }
 
   ionViewDidLoad() {
     console.log('----ionViewDidLoad PostTabPage----');
-    console.log(this.navParams.data.sample);
+
 
 
 

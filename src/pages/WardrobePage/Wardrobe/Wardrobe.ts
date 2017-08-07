@@ -27,12 +27,9 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 export class WardrobePage implements OnInit {
   public toggled: boolean;
 
-    sample:Array<object>=[    {id: 1, text: 'Sentence 1'},
-      {id: 2, text: 'Sentence 2'},
-      {id: 3, text: 'Sentence 3'},
-      {id: 4, text: 'Sentenc4 '},];
     user: object = {};
     loaded:boolean;
+    loadedd:boolean;
     mypostlist: Array<object> = [];
     option: string = "";
     myposts: string = "";
@@ -56,6 +53,7 @@ export class WardrobePage implements OnInit {
 
     ngOnInit(): void {
       this.loaded = false;
+      this.loadedd = false;
 
       this.toggled = false;
         var APIUrl_1 = '/user';
@@ -86,28 +84,31 @@ export class WardrobePage implements OnInit {
             this.http.get(APIUrl_2 + '/myposts', {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log(this.mypostlist)
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
-                    console.log('!!!@!@!@!@!@')
-                    this.loaded = true;
-
-
+                  this.loaded = true;
 
                 });
-
 
             this.http.get(APIUrl_1 + '/favorite', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.favorites = data.favorites;
-                    // console.log(this.favorites);
-                    this.favoritesLength = data.favorites.length;
-                  // console.log(this.favoritesLength);
-                });
+              .map(res => res.json())
+              .subscribe(data => {
+                const body = {users:data.favorites};
+
+                this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
+                  .map(res => res.json())
+                  .subscribe(
+                    data => {
+                      this.favorites = data;
+                      this.loadedd = true;
+                      loading.dismiss();
+                    });
+
+
+              });
 
         });
-        loading.dismiss();
+
     }
   toggleRank() {
     this.toggled = this.toggled ? false : true;
@@ -116,43 +117,38 @@ export class WardrobePage implements OnInit {
     Settings() {
       this.navCtrl.push(SettingsPage);
     }
-    ionViewWillEnter() {
-
-        var APIUrl_1 = '/user';
-        var APIUrl_2 = '/post';
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/api/user';
-        // }
-        this.option = "view";
-        this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            // console.log(val);
-
-            this.http.get(APIUrl_1 + '/authed', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.user = data.user[0];
-                });
-
-            this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.mypostlist = data.posts;
-                    this.myposts = data.posts.length;
-                    console.log(this.mypostlist)
-                });
-          this.http.get(APIUrl_1 + '/favorite', {headers: headers})
-            .map(res => res.json())
-            .subscribe(data => {
-              this.favorites = data.favorites;
-              this.favoritesLength = data.favorites.length;
-            });
-        });
-
-
-    }
+    // ionViewWillEnter() {
+    //
+    //     var APIUrl_1 = '/user';
+    //     var APIUrl_2 = '/post';
+    //     // if (this.platform.is('ios') == true){
+    //     //   APIUrl = 'http://54.162.160.91/api/user';
+    //     // }
+    //     this.option = "view";
+    //     this.storage.get('token').then((val) => {
+    //         let headers = new Headers();
+    //         headers.append('Content-Type', 'application/json');
+    //         headers.append('x-access-token', val);
+    //         // console.log(val);
+    //
+    //         this.http.get(APIUrl_1 + '/authed', {headers: headers})
+    //             .map(res => res.json())
+    //             .subscribe(data => {
+    //                 this.user = data.user[0];
+    //             });
+    //
+    //         this.http.get(APIUrl_2 + '/myposts', {headers: headers})
+    //             .map(res => res.json())
+    //             .subscribe(data => {
+    //                 this.mypostlist = data.posts;
+    //                 this.myposts = data.posts.length;
+    //                 console.log(this.mypostlist)
+    //             });
+    //
+    //     });
+    //
+    //
+    // }
     ionViewDidLoad(){
       console.log('outside')
       console.log(this.mypostlist+"HERE")

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
+import {FavoriteUserPage} from '../favorite-user/favorite-user'
 /**
  * Generated class for the FavoriteTabPage page.
  *
@@ -18,38 +19,21 @@ export class FavoriteTabPage implements OnInit{
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
+              public modalCtrl : ModalController,
               public http: Http) {
   }
   ngOnInit(): void {
-    var APIUrl_1 = '/user';
-    // if (this.platform.is('ios') == true){
-    //   APIUrl = 'http://54.162.160.91/api/user';
-    // }
-    this.storage.get('token').then((val) => {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // console.log(val);
+    this.favorites = this.navParams.data.favorite;
 
-      this.http.get(APIUrl_1 + '/favorite', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          const body = {users:data.favorites};
-
-          this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
-              .map(res => res.json())
-              .subscribe(
-                  data => {
-                    this.favorites = data;
-                  });
-        });
-    });
   }
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavoriteTabPage');
+  }
+  presentFavModal(i) {
+    let profileModal = this.modalCtrl.create(FavoriteUserPage, { favList:this.favorites[i]},{leaveAnimation:'back'});
+    profileModal.present();
+
   }
 
 }

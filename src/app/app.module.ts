@@ -35,7 +35,8 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 import {PostTabPage} from "../pages/WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../pages/WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../pages/WardrobePage/settings/settings";
-import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-photo'
+import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-photo';
+import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-user'
 // import { Camera } from '@ionic-native/camera';
 
 
@@ -58,6 +59,7 @@ import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-p
         FavoriteTabPage,
         SettingsPage,
         WardrobePhotoPage,
+        FavoriteUserPage,
     ],
     imports: [
         BrowserModule,
@@ -86,6 +88,7 @@ import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-p
         FavoriteTabPage,
         SettingsPage,
         WardrobePhotoPage,
+        FavoriteUserPage,
     ],
     providers: [
         StatusBar,

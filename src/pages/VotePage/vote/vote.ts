@@ -62,6 +62,7 @@ export class VotePage implements OnInit{
         .map(res => res.json())
         .subscribe(data => {
           this.cachedPost = data.message;
+          console.log('&&&&&&&&&&&&')
           console.log(this.cachedPost);
           this.posts = [];
           this.addNewposts();
@@ -110,9 +111,6 @@ export class VotePage implements OnInit{
         if (event.target.style['-webkit-filter'] === `blur(20px)`) {
             event.target.style['-webkit-filter'] = `blur(0px)`;
             event.target.style['filter'] = `blur(0px)`;
-
-
-
 
         }
         else {

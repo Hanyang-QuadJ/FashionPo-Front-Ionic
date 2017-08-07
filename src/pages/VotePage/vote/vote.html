@@ -7,7 +7,7 @@
 <ion-header no-border>
 
   <ion-navbar hide-tabs>
-    <ion-title *ngFor="let post of posts"><p id="post-name">{{post.userName}}<p></ion-title>
+    <ion-title *ngFor="let post of posts"><p id="post-name">{{post.writtenBy}}<p></ion-title>
     <ion-buttons end>
       <button (click)="Rank()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-forward"></ion-icon>
@@ -23,7 +23,7 @@
     <div  #mycards1 swing-card *ngFor="let post of posts">
       <!--<img *ngIf="post" [src]="post.picURL">-->
 
-      <img  style="width:auto; height:495px; object-fit: cover; /*magic*/" (click)="blur($event)" *ngIf="post" src="https://s3.amazonaws.com/fashionpoimagebucket/{{ post.picURL }}">
+      <img  style="width:auto; height:495px; object-fit: cover; /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
     </div>
   </div>
 </ion-content>

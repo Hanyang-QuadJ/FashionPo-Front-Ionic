@@ -83,9 +83,9 @@
   </ion-scroll>
   <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
 
-    <super-tabs *ngIf="loaded" toolbarColor="dark">
-      <super-tab [root]="tab1" [rootParams]="{sample:mypostlist}" title="My Fits"></super-tab>
-      <super-tab [root]="tab2" title="Favorites"></super-tab>
+    <super-tabs *ngIf="loaded && loadedd" toolbarColor="dark">
+      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist}" title="My Fits"></super-tab>
+      <super-tab [root]="tab2" [rootParams]="{favorite:favorites}"title="Favorites"></super-tab>
     </super-tabs>
 
 
