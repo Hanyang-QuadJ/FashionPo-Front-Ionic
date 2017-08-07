@@ -47,7 +47,7 @@
   <hr>
 
 
-  <p class="infoText">{{favUser.my_posts[0]}}</p>
+  <p class="infoText">{{favUser._id}}</p>
 
 
 
@@ -64,6 +64,13 @@
   <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
   <hr>
   <p class="infoText">Fits</p>
+  <ion-grid no-padding>
+    <ion-row wrap no-padding>
+      <ion-col col-4 *ngFor="let post of posts; let i = index">
+        <img class="myFitImage" src={{post.picURL}}>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
 
