@@ -104,14 +104,18 @@ export class HomePage implements OnInit{
             this.http.post(APIUrl,JSON.stringify(body),{headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
+                  console.log(data)
+                  console.log('********')
                   this.firstUser = data[0];
                   for(let i =1;i<data.length;i++){
                     this.users.push(data[i]);
                   }
-                  console.log(this.firstUser);
-                  console.log(this.users[1]);
-                  console.log(this.firstPost);
-                  console.log(this.ranks);
+                  console.log(this.ranks)
+                  console.log(this.users)
+                  // console.log(this.firstUser);
+                  // console.log(this.users[1]);
+                  // console.log(this.firstPost);
+                  // console.log(this.ranks);
                   loading.dismiss();
                 });
           });
@@ -134,7 +138,7 @@ export class HomePage implements OnInit{
           .map(res => res.json())
           .subscribe(data => {
             this.user = data.user[0];
-            console.log(this.user);
+            // console.log(this.user);
           });
     });
 
@@ -147,63 +151,63 @@ export class HomePage implements OnInit{
     console.log("!!@!@#!@#!@$!@#!@$");
   }
 
-  ionViewWillEnter() {
+  // ionViewWillEnter() {
+  //
+  //
+  //   this.storage.get('token').then((val) => {
+  //     var APIUrl = '/rank';
+  //     // if (this.platform.is('ios') == true){
+  //     //   APIUrl = 'http://54.162.160.91/api/rank';
+  //     //   // console.log('yes');
+  //     // }
+  //     let headers = new Headers();
+  //     headers.append('Content-Type', 'application/json');
+  //     headers.append('x-access-token', val);
+  //
+  //
+  //     this.http.get(APIUrl, {headers: headers})
+  //         .map(res => res.json())
+  //         .subscribe(data => {
+  //           for(var i=1;i<data.posts.length;i++) {
+  //             this.ranks[i-1] = data.posts[i];
+  //           }
+  //           this.firstPost = data.posts[0];
+  //           this.storage.get('token').then((val) => {
+  //             let APIUrl = '/user';
+  //             // if (this.platform.is('ios') == true){
+  //             //   APIUrl = 'http://54.162.160.91/api/user';
+  //             //   // console.log('yes');
+  //             // }
+  //             let writtenBys = [];
+  //             for(let i=0;i<data.posts.length;i++){
+  //               writtenBys.push(data.posts[i].writtenBy);
+  //             }
+  //             // console.log(writtenBys);
+  //             let body = {users:writtenBys};
+  //             let headers = new Headers();
+  //             headers.append('Content-Type', 'application/json');
+  //             headers.append('x-access-token', val);
+  //
+  //
+  //             this.http.post(APIUrl,JSON.stringify(body),{headers: headers})
+  //                 .map(res => res.json())
+  //                 .subscribe(data => {
+  //                   this.firstUser = data[0];
+  //                   for(let i =1;i<data.length;i++){
+  //                     this.users.push(data[i]);
+  //                   }
+  //                   // console.log(this.firstUser);
+  //                   // console.log(this.users[1]);
+  //                   // console.log(this.firstPost);
+  //                   // console.log(this.ranks);
+  //                 });
+  //           });
+  //
+  //         });
+  //   });
 
 
-    this.storage.get('token').then((val) => {
-      var APIUrl = '/rank';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/rank';
-      //   // console.log('yes');
-      // }
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-
-
-      this.http.get(APIUrl, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            for(var i=1;i<data.posts.length;i++) {
-              this.ranks[i-1] = data.posts[i];
-            }
-            this.firstPost = data.posts[0];
-            this.storage.get('token').then((val) => {
-              let APIUrl = '/user';
-              // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://54.162.160.91/api/user';
-              //   // console.log('yes');
-              // }
-              let writtenBys = [];
-              for(let i=0;i<data.posts.length;i++){
-                writtenBys.push(data.posts[i].writtenBy);
-              }
-              console.log(writtenBys);
-              let body = {users:writtenBys};
-              let headers = new Headers();
-              headers.append('Content-Type', 'application/json');
-              headers.append('x-access-token', val);
-
-
-              this.http.post(APIUrl,JSON.stringify(body),{headers: headers})
-                  .map(res => res.json())
-                  .subscribe(data => {
-                    this.firstUser = data[0];
-                    for(let i =1;i<data.length;i++){
-                      this.users.push(data[i]);
-                    }
-                    console.log(this.firstUser);
-                    console.log(this.users[1]);
-                    console.log(this.firstPost);
-                    console.log(this.ranks);
-                  });
-            });
-
-          });
-    });
-
-
-  }
+  // }
 
 
   Vote(){
@@ -258,6 +262,12 @@ export class HomePage implements OnInit{
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    this.pushPage = VotePage;
+    this.toggled = false;
+    this.searchToggled = false;
+    let loading = this.loadingCtrl.create({
+    });
+    loading.present();
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
       // if (this.platform.is('ios') == true){
@@ -266,55 +276,80 @@ export class HomePage implements OnInit{
       // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      // headers.append('x-access-token', val);
+      headers.append('x-access-token', val);
 
 
       this.http.get(APIUrl, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            for(var i=1;i<data.posts.length;i++) {
-              this.ranks[i-1] = data.posts[i];
+        .map(res => res.json())
+        .subscribe(data => {
+          for(var i=1;i<data.posts.length;i++) {
+            this.ranks[i-1] = data.posts[i];
+          }
+          this.firstPost = data.posts[0];
+          this.storage.get('token').then((val) => {
+            let APIUrl = '/user';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   // console.log('yes');
+            // }
+            let writtenBys = [];
+            for(let i=0;i<data.posts.length;i++){
+              writtenBys.push(data.posts[i].writtenBy);
             }
-            this.firstPost = data.posts[0];
-            this.storage.get('token').then((val) => {
-              let APIUrl = '/user';
-              // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://54.162.160.91/api/user';
-              //   // console.log('yes');
-              // }
-              let writtenBys = [];
-              for(let i=0;i<data.posts.length;i++){
-                writtenBys.push(data.posts[i].writtenBy);
-              }
-              console.log(writtenBys);
-              let body = {users:writtenBys};
-              let headers = new Headers();
-              headers.append('Content-Type', 'application/json');
-              headers.append('x-access-token', val);
+            console.log(writtenBys);
+            let body = {users:writtenBys};
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
 
 
-              this.http.post(APIUrl,JSON.stringify(body),{headers: headers})
-                  .map(res => res.json())
-                  .subscribe(data => {
-                    this.firstUser = data[0];
-                    for(let i =1;i<data.length;i++){
-                      this.users.push(data[i]);
-                    }
-                    console.log(this.firstUser);
-                    console.log(this.users[1]);
-                    console.log(this.firstPost);
-                    console.log(this.ranks);
-                  });
-            });
+            this.http.post(APIUrl,JSON.stringify(body),{headers: headers})
+              .map(res => res.json())
+              .subscribe(data => {
+                console.log(data)
+                console.log('********')
 
+                this.firstUser = data[0];
+                this.users = [];
+                for(let i =1;i<data.length;i++){
+                  this.users.push(data[i]);
+                }
+                console.log(this.ranks)
+                console.log(this.users)
+                // console.log(this.firstUser);
+                // console.log(this.users[1]);
+                // console.log(this.firstPost);
+                // console.log(this.ranks);
+                loading.dismiss();
+              });
           });
+
+        });
+    });
+
+    this.storage.get('token').then((val) => {
+      let APIUrl = '/user/authed';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/authed';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.user = data.user[0];
+          // console.log(this.user);
+          refresher.complete();
+        });
     });
 
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
+
+
   }
 
   addFavorite(post){

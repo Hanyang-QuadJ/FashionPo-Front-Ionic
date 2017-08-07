@@ -45,6 +45,7 @@ export class WardrobePhotoPage implements OnInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
+    console.log(this.postList)
 
 
 
