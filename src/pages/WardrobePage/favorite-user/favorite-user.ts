@@ -15,7 +15,8 @@ import {Http, Headers } from '@angular/http';
   templateUrl: 'favorite-user.html',
 })
 export class FavoriteUserPage implements OnInit{
-  favUser=""
+  favUser:any=""
+  posts:any=""
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,    private storage : Storage,
@@ -26,22 +27,24 @@ export class FavoriteUserPage implements OnInit{
   ngOnInit(): void {
     this.favUser = this.navParams.get('favList');
     console.log(this.favUser);
-    // this.storage.get('token').then((val) => {
-    //   var APIUrl = '/myposts';
-    //   // if (this.platform.is('ios') == true){
-    //   //   APIUrl = 'http://54.162.160.91/api/rank';
-    //   //   // console.log('yes');
-    //   // }
-    //   let headers = new Headers();
-    //   headers.append('Content-Type', 'application/json');
-    //   headers.append('x-access-token', val);
-
-    //   this.http.post(APIUrl, {headers: headers})
-    //     .map(res => res.json())
-    //     .subscribe(data => {
-    //
-    //     });
-    // });
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/post/userid';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+      let body = {
+        _id:this.favUser._id
+      }
+      this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.posts = data;
+        });
+    });
 
 
   }

@@ -31,9 +31,13 @@
 
 
 <ion-content>
-  <super-tabs *ngIf="searchToggled" tabsPlacement="top"  primary>
-    <super-tab tabTitle="Users" [root]="tab1" (click)="abc()"></super-tab>
-    <super-tab tabTitle="Tags" [root]="tab2"></super-tab>
+
+
+
+  <super-tabs *ngIf="searchToggled" toolbarColor="dark">
+    <super-tab title="Users" [root]="tab1" (click)="abc()"></super-tab>
+    <super-tab title="Tags" [root]="tab2"></super-tab>
+
   </super-tabs>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
