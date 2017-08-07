@@ -30,6 +30,7 @@ export class VotePage implements OnInit{
     @ViewChildren('myposts1') swingposts: QueryList<SwingCardComponent>;
 
     posts: Array<any>;
+    nextPost: object;
     stackConfig: StackConfig;
     cachedPost: Array<object> = [];
     tabBarElement: any;
@@ -49,10 +50,10 @@ export class VotePage implements OnInit{
     this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/random';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/post/random';
-      //   // console.log('yes');
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/post/random';
+        // console.log('yes');
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -65,6 +66,7 @@ export class VotePage implements OnInit{
           console.log('&&&&&&&&&&&&')
           console.log(this.cachedPost);
           this.posts = [];
+          this.nextPost = this.cachedPost.pop();
           this.addNewposts();
         });
     });
@@ -168,8 +170,12 @@ export class VotePage implements OnInit{
 
 // Add new posts to our array
     addNewposts() {
-        this.posts.push(this.cachedPost.pop());
-        console.log(this.cachedPost);
+        this.posts.push(this.nextPost);
+        console.log("-----------");
+        console.log(this.posts);
+        console.log("-----------");
+        this.nextPost = this.cachedPost.pop();
+
     }
 
 

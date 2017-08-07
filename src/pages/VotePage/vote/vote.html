@@ -23,8 +23,9 @@
     <div  #mycards1 swing-card *ngFor="let post of posts">
       <!--<img *ngIf="post" [src]="post.picURL">-->
 
-      <img  style="width:auto; height:495px; object-fit: cover; /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
+      <img  style="position:absolute;border:3px solid red;width:auto; z-index:0; height:495px; object-fit: cover; /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
     </div>
+    <img  style="position:absolute;border:3px solid blue;width:auto; z-index:-9; height:495px; object-fit: cover; /*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">
   </div>
 </ion-content>
 
