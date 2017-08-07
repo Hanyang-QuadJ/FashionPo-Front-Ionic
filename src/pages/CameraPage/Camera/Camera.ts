@@ -109,7 +109,7 @@ export class CameraPage implements OnInit{
             tags:[{'tag':'Selstagram'},{'tag':'Mukstagram'}]
 
           };
-          this.http.post(APIUrl + "/s3upload", JSON.stringify(body), {headers: headers})
+          this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
             .map(res => res.json())
             .subscribe(
               data => {
