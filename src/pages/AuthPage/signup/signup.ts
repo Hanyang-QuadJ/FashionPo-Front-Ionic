@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
+import {ActionSheetController, LoadingController, NavController, NavParams, Platform} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -7,6 +7,9 @@ import {Storage} from '@ionic/storage';
 import {TabsPage} from "../../tabs/tabs";
 import { ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
+import {FilePath} from "@ionic-native/file-path";
+import {Transfer} from "@ionic-native/transfer";
+import {Camera} from "@ionic-native/camera";
 
 
 /**
@@ -24,13 +27,20 @@ import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 export class SignupPage {
 
   loginForm : FormGroup;
+  public base64Image: any;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private http: Http,
-              private storage: Storage,
-              public platform: Platform,
+  constructor(private http: Http,
+              private storage : Storage,
+              private camera: Camera,
+              private transfer: Transfer,
+              private file: File,
+              private filePath: FilePath,
+              public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController,
+              public platform: Platform,
+              public loadingCtrl: LoadingController,
+              public navCtrl: NavController,
+              public navParams: NavParams,
               public fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
@@ -42,7 +52,30 @@ export class SignupPage {
   ngOnInit(): void {
 
   }
-
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
   showToast(position: string, message: string) {
     let toast = this.toastCtrl.create({
       message: message,
@@ -64,7 +97,8 @@ export class SignupPage {
       let body = {
         email: this.loginForm.value.email,
         username: this.loginForm.value.username,
-        password: this.loginForm.value.password
+        password: this.loginForm.value.password,
+        base_64: this.base64Image
       };
       this.http.post(APIUrl + "/register", JSON.stringify(body), {headers: headers})
         .map(res => res.json())
@@ -78,6 +112,29 @@ export class SignupPage {
           });
     }
 
+  pictureTaken :boolean = false;
 
+  public takePicture(sourceType){
+    let options = {
+      targetWidth: 500,
+      targetHeight: 500,
+      quality: 70,
+      allowEdit: true,
+      correctOrientation: false,
+      saveToPhotoAlbum: false,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+    };
+    this.camera.getPicture(options).then((imageData) => {
+      this.pictureTaken = true;
+      // imageData is a base64 encoded string
+      this.base64Image = "data:image/jpeg;base64," + imageData;
+      let cameraImageSelector = document.getElementById('camera-image');
+      cameraImageSelector.setAttribute('src', this.base64Image);
+    })
+
+  }
 
 }
