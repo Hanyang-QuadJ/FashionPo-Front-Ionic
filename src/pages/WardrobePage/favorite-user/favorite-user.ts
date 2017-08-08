@@ -1,8 +1,10 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController } from 'ionic-angular';
+import { NavController, NavParams,ViewController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
-import {stringify} from "@angular/core/src/util";
+
+
+
 
 /**
  * Generated class for the FavoriteUserPage page.
@@ -21,7 +23,7 @@ export class FavoriteUserPage implements OnInit{
   favUsers:any=""
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,    private storage : Storage,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,    private storage : Storage, public modalCtrl: ModalController,
               private http: Http
               ) {
   }
@@ -56,7 +58,9 @@ export class FavoriteUserPage implements OnInit{
         .map(res => res.json())
         .subscribe(data => {
 
+
           this.favUsers = data;
+          console.log('&^%^$$%$%')
           console.log(this.favUsers)
         });
 
@@ -74,5 +78,13 @@ export class FavoriteUserPage implements OnInit{
   public dismiss(){
     this.viewCtrl.dismiss()
   }
+
+  // presentFavModal(i) {
+  //   let profileModal = this.modalCtrl.create(FavoriteUserPage, { favList:this.favorites[i]},{leaveAnimation:'back'});
+  //   profileModal.present();
+  //
+  // }
+
+
 
 }

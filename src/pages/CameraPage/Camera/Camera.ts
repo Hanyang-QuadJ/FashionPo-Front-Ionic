@@ -14,6 +14,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import {filter} from "rxjs/operator/filter";
 
 declare var cordova: any;
 
@@ -25,6 +26,8 @@ declare var cordova: any;
 export class CameraPage implements OnInit{
   public base64Image: any;
   public tags:Array<object> = [];
+  public tagsInput:any;
+
 
   constructor(private http: Http,
               private storage : Storage,
@@ -132,6 +135,27 @@ export class CameraPage implements OnInit{
   }
 
   ngOnInit(): void {
+
+    // for(var i  = 0  ;i<this.tagsInput.length; i++){
+    //     while(this.tagsInput[i]!==''){
+    //       console.log(this.tagsInput[i])
+    //
+    //
+    //     }
+    //
+    //
+    // }
+
+
+
+  }
+  post(){
+    var jbSplit = this.tagsInput.split(' ',100);
+    var myArray = jbSplit.filter(v=>v!='');
+    var final = myArray.split('#',100);
+    console.log(final)
+
+
 
   }
 

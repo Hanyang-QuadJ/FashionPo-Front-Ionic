@@ -109,16 +109,10 @@ page-register {
   .my-rank{
     flex:1;
 
-
-
   }
   .horiPic{
-    height: 110px;
-    width: 80px;
-
-
-    object-fit: cover; /*magic*/
-
+    height: 53%;
+    width: 33%;
 
   }
   .small{
@@ -126,7 +120,7 @@ page-register {
   }
   .twPic{
 
-    height: 120px;
+    height: 23%;
 
   }
   ion-scroll{

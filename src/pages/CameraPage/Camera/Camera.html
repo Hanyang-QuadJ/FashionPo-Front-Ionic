@@ -21,10 +21,11 @@
 
     <ion-item>
       <ion-label>Tag</ion-label>
-      <ion-input type="text"[(ngModel)]="tags"></ion-input>
+      <ion-input type="text"[(ngModel)]="tagsInput"></ion-input>
     </ion-item>
 
-
-
   </ion-list>
+  <ion-buttons>
+    <button (click)="post()" ion-button outline>POST</button>
+  </ion-buttons>
 </ion-content>
