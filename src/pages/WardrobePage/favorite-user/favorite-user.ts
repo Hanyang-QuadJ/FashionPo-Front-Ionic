@@ -55,8 +55,9 @@ export class FavoriteUserPage implements OnInit{
       this.http.post(APIUrl_1,JSON.stringify(body2),{headers:headers})
         .map(res => res.json())
         .subscribe(data => {
-          console.log(data)
+
           this.favUsers = data;
+          console.log(this.favUsers)
         });
 
 

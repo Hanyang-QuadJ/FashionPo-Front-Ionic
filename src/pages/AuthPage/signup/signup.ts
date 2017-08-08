@@ -52,30 +52,30 @@ export class SignupPage {
   ngOnInit(): void {
 
   }
-  public presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
-      buttons: [
-        {
-          text: 'Load from Library',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'Use Camera',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+  // public presentActionSheet() {
+  //   let actionSheet = this.actionSheetCtrl.create({
+  //     title: 'Select Image Source',
+  //     buttons: [
+  //       {
+  //         text: 'Load from Library',
+  //         handler: () => {
+  //           this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+  //         }
+  //       },
+  //       {
+  //         text: 'Use Camera',
+  //         handler: () => {
+  //           this.takePicture(this.camera.PictureSourceType.CAMERA);
+  //         }
+  //       },
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel'
+  //       }
+  //     ]
+  //   });
+  //   actionSheet.present();
+  // }
   showToast(position: string, message: string) {
     let toast = this.toastCtrl.create({
       message: message,
@@ -114,27 +114,27 @@ export class SignupPage {
 
   pictureTaken :boolean = false;
 
-  public takePicture(sourceType){
-    let options = {
-      targetWidth: 500,
-      targetHeight: 500,
-      quality: 70,
-      allowEdit: true,
-      correctOrientation: false,
-      saveToPhotoAlbum: false,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: sourceType,
-    };
-    this.camera.getPicture(options).then((imageData) => {
-      this.pictureTaken = true;
-      // imageData is a base64 encoded string
-      this.base64Image = "data:image/jpeg;base64," + imageData;
-      let cameraImageSelector = document.getElementById('camera-image');
-      cameraImageSelector.setAttribute('src', this.base64Image);
-    })
-
-  }
+  // public takePicture(sourceType){
+  //   let options = {
+  //     targetWidth: 500,
+  //     targetHeight: 500,
+  //     quality: 70,
+  //     allowEdit: true,
+  //     correctOrientation: false,
+  //     saveToPhotoAlbum: false,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE,
+  //     sourceType: sourceType,
+  //   };
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     this.pictureTaken = true;
+  //     // imageData is a base64 encoded string
+  //     this.base64Image = "data:image/jpeg;base64," + imageData;
+  //     let cameraImageSelector = document.getElementById('camera-image');
+  //     cameraImageSelector.setAttribute('src', this.base64Image);
+  //   })
+  //
+  // }
 
 }
