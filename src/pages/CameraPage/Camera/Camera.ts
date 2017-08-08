@@ -25,7 +25,9 @@ declare var cordova: any;
 
 export class CameraPage implements OnInit{
   public base64Image: any;
-  public tags:Array<object> = [];
+
+  tags: Array<any> = [];
+
   public tagsInput:any;
 
 
@@ -97,38 +99,40 @@ export class CameraPage implements OnInit{
         this.base64Image = "data:image/jpeg;base64," + imageData;
         let cameraImageSelector = document.getElementById('camera-image');
         cameraImageSelector.setAttribute('src', this.base64Image);
-        var APIUrl = '/post';
-        if (this.platform.is('ios') == true){
-          APIUrl = 'http://54.162.160.91/api/post';
-          // console.log('yes');
-        }
-        this.storage.get('token').then((val) => {
-          let headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('x-access-token', val);
-          // console.log(val);
-          let body = {
-            base_64: this.base64Image,
-            tags:[{'tag':'Selstagram'},{'tag':'Mukstagram'}]
 
-          };
-          this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
-            .map(res => res.json())
-            .subscribe(
-              data => {
-                let toast = this.toastCtrl.create({
-                  message: 'upload success',
-                  duration: 2000
-                });
 
-                toast.present(toast);
-              },
-              err => {
-
-              });
-        }, (err) => {
-          console.log(err);
-        });
+        // var APIUrl = '/post';
+        // if (this.platform.is('ios') == true){
+        //   APIUrl = 'http://54.162.160.91/api/post';
+        //   // console.log('yes');
+        // }
+        // this.storage.get('token').then((val) => {
+        //   let headers = new Headers();
+        //   headers.append('Content-Type', 'application/json');
+        //   headers.append('x-access-token', val);
+        //   // console.log(val);
+        //   let body = {
+        //     base_64: this.base64Image,
+        //     tags:[{'tag':'Selstagram'},{'tag':'Mukstagram'}]
+        //
+        //   };
+        //   this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
+        //     .map(res => res.json())
+        //     .subscribe(
+        //       data => {
+        //         let toast = this.toastCtrl.create({
+        //           message: 'upload success',
+        //           duration: 2000
+        //         });
+        //
+        //         toast.present(toast);
+        //       },
+        //       err => {
+        //
+        //       });
+        // }, (err) => {
+        //   console.log(err);
+        // });
 
       })
 
@@ -152,8 +156,51 @@ export class CameraPage implements OnInit{
   post(){
     var jbSplit = this.tagsInput.split(' ',100);
     var myArray = jbSplit.filter(v=>v!='');
-    var final = myArray.split('#',100);
-    console.log(final)
+    for(var i = 0; i<myArray.length; i++){
+      this.tags.push({'tag':myArray[i]})
+    }
+
+    console.log(this.tags)
+
+
+    // var APIUrl = '/post';
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://54.162.160.91/api/post';
+    //   // console.log('yes');
+    // }
+    // this.storage.get('token').then((val) => {
+    //   let headers = new Headers();
+    //   headers.append('Content-Type', 'application/json');
+    //   headers.append('x-access-token', val);
+    //   // console.log(val);
+    //
+    //   for(var i = 0; i<this.tags.length;i++){
+    //     this.tagsArray=this.tags[i]
+    //   }
+    //   let body = {
+    //     // base_64: this.base64Image,
+    //     tags:this.tags
+    //
+    //   };
+    //   this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
+    //     .map(res => res.json())
+    //     .subscribe(
+    //       data => {
+    //         let toast = this.toastCtrl.create({
+    //           message: 'upload success',
+    //           duration: 2000
+    //         });
+    //
+    //         toast.present(toast);
+    //       },
+    //       err => {
+    //
+    //       });
+    // }, (err) => {
+    //   console.log(err);
+    // });
+
+
 
 
 

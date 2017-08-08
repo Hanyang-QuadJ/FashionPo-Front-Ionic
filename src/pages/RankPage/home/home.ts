@@ -44,6 +44,7 @@ export class HomePage implements OnInit {
     loading: any;
     firstPost: object;
     firstUser: object;
+    search: string = "";
 
 
     constructor(public navCtrl: NavController,
@@ -58,9 +59,16 @@ export class HomePage implements OnInit {
                 public viewCtrl: ViewController) {
 
 
+
+
+
     }
 
     ngOnInit(): void {
+
+
+
+
 
         this.pushPage = VotePage;
         this.toggled = false;
@@ -243,6 +251,7 @@ export class HomePage implements OnInit {
     toggleSearch() {
         this.toggled = this.toggled ? false : true;
         this.searchToggled = true;
+      this.search="User"
     }
 
     toggleSearch2() {
@@ -252,7 +261,8 @@ export class HomePage implements OnInit {
 
     searchActive() {
         this.searchToggled = true;
-        console.log(this.searchToggled)
+
+
 
     }
 
