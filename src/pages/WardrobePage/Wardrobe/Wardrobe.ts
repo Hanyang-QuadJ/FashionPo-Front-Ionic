@@ -53,65 +53,69 @@ export class WardrobePage implements OnInit {
     }
 
     ngOnInit(): void {
-      this.loaded = false;
-      this.loadedd = false;
-
-      this.toggled = false;
-        var APIUrl_1 = '/user';
-        var APIUrl_2 = '/post';
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/api/user';
-        // }
-        this.option = "favorites";
-      let loading = this.loadingCtrl.create({
-
-      });
-
-      loading.present();
-        this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            // console.log(val);
-
-            this.http.get(APIUrl_1 + '/authed', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.user = data.user[0];
-
-                });
-
-
-            this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.mypostlist = data.posts;
-                    this.myposts = data.posts.length;
-                    this.loaded = true;
-                  loading.dismiss();
-
-
-
-                });
-
-            this.http.get(APIUrl_1 + '/favorite', {headers: headers})
-              .map(res => res.json())
-              .subscribe(data => {
-                console.log('******#$#**')
-                const body = {users:data.favorites};
-                this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
-                  .map(res => res.json())
-                  .subscribe(
-                    data => {
-                      this.favorites = data;
-                      this.loadedd = true;
-
-                    });
-
-
-              });
-
-        });
+      // this.loaded = false;
+      // this.loadedd = false;
+      //
+      // this.toggled = false;
+      //   var APIUrl_1 = '/user';
+      //   var APIUrl_2 = '/post';
+      //   // if (this.platform.is('ios') == true){
+      //   //   APIUrl = 'http://54.162.160.91/api/user';
+      //   // }
+      //   this.option = "favorites";
+      // let loading = this.loadingCtrl.create({
+      //
+      // });
+      //
+      // loading.present();
+      //   this.storage.get('token').then((val) => {
+      //       let headers = new Headers();
+      //       headers.append('Content-Type', 'application/json');
+      //       headers.append('x-access-token', val);
+      //       // console.log(val);
+      //
+      //       this.http.get(APIUrl_1 + '/authed', {headers: headers})
+      //           .map(res => res.json())
+      //           .subscribe(data => {
+      //               this.user = data.user[0];
+      //
+      //           });
+      //
+      //
+      //       this.http.get(APIUrl_2 + '/myposts', {headers: headers})
+      //           .map(res => res.json())
+      //           .subscribe(data => {
+      //               this.mypostlist = data.posts;
+      //               this.myposts = data.posts.length;
+      //               this.loaded = true;
+      //
+      //
+      //
+      //
+      //           });
+      //
+      //       this.http.get(APIUrl_1 + '/favorite', {headers: headers})
+      //         .map(res => res.json())
+      //         .subscribe(data => {
+      //           console.log('******#$#**')
+      //           if(data.favorites === undefined || data.favorites.length == 0){
+      //             this.favorites = [];
+      //             this.loadedd = true;
+      //             loading.dismiss();
+      //           }
+      //           else{
+      //             const body = {users:data.favorites};
+      //             this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
+      //               .map(res => res.json())
+      //               .subscribe(
+      //                 data => {
+      //                   this.favorites = data;
+      //                   this.loadedd = true;
+      //                 });
+      //           }
+      //         });
+      //
+      //   });
 
     }
   toggleRank() {
@@ -121,38 +125,76 @@ export class WardrobePage implements OnInit {
     Settings() {
       this.navCtrl.push(SettingsPage);
     }
-    // ionViewWillEnter() {
-    //
-    //     var APIUrl_1 = '/user';
-    //     var APIUrl_2 = '/post';
-    //     // if (this.platform.is('ios') == true){
-    //     //   APIUrl = 'http://54.162.160.91/api/user';
-    //     // }
-    //     this.option = "view";
-    //     this.storage.get('token').then((val) => {
-    //         let headers = new Headers();
-    //         headers.append('Content-Type', 'application/json');
-    //         headers.append('x-access-token', val);
-    //         // console.log(val);
-    //
-    //         this.http.get(APIUrl_1 + '/authed', {headers: headers})
-    //             .map(res => res.json())
-    //             .subscribe(data => {
-    //                 this.user = data.user[0];
-    //             });
-    //
-    //         this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-    //             .map(res => res.json())
-    //             .subscribe(data => {
-    //                 this.mypostlist = data.posts;
-    //                 this.myposts = data.posts.length;
-    //                 console.log(this.mypostlist)
-    //             });
-    //
-    //     });
-    //
-    //
-    // }
+    ionViewWillEnter() {
+      this.loaded = false;
+      this.loadedd = false;
+
+      this.toggled = false;
+      var APIUrl_1 = '/user';
+      var APIUrl_2 = '/post';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user';
+      // }
+      this.option = "favorites";
+      let loading = this.loadingCtrl.create({
+
+      });
+
+      loading.present();
+      this.storage.get('token').then((val) => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', val);
+        // console.log(val);
+
+        this.http.get(APIUrl_1 + '/authed', {headers: headers})
+          .map(res => res.json())
+          .subscribe(data => {
+            this.user = data.user[0];
+
+          });
+
+
+        this.http.get(APIUrl_2 + '/myposts', {headers: headers})
+          .map(res => res.json())
+          .subscribe(data => {
+            this.mypostlist = data.posts;
+            this.myposts = data.posts.length;
+            this.loaded = true;
+
+
+
+
+          });
+
+        this.http.get(APIUrl_1 + '/favorite', {headers: headers})
+          .map(res => res.json())
+          .subscribe(data => {
+            console.log('******#$#**')
+            if(data.favorites === undefined || data.favorites.length == 0){
+              this.favorites = [];
+              this.loadedd = true;
+              loading.dismiss();
+            }
+            else{
+              const body = {users:data.favorites};
+              this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
+                .map(res => res.json())
+                .subscribe(
+                  data => {
+                    this.favorites = data;
+                    this.loadedd = true;
+                    loading.dismiss();
+                  });
+
+            }
+          });
+
+      });
+
+
+
+    }
     ionViewDidLoad(){
       console.log('outside')
       console.log(this.mypostlist+"HERE")
