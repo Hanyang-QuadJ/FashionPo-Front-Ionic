@@ -20,7 +20,7 @@ import {Storage} from '@ionic/storage';
 
 export class UsernamePage {
     usernameForm: FormGroup;
-
+    loaded:boolean = false;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
@@ -50,6 +50,8 @@ export class UsernamePage {
                     data => {
                         console.log(data.user[0].username);
                         this.usernameForm.value.username = data.user[0].username;
+                        this.usernameForm.setValue({username:data.user[0].username});
+                        this.loaded = true;
                     });
 
 

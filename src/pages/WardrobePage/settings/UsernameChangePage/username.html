@@ -16,7 +16,7 @@
 
 
 <ion-content>
-    <form [formGroup]="usernameForm" (ngSubmit)="usernameChange()">
+    <form [formGroup]="usernameForm" (ngSubmit)="usernameChange()" *ngIf="loaded">
         <ion-item>
             <ion-label floating>Username</ion-label>
             <ion-input type="email" formControlName="username" placeholder="                    "></ion-input>
