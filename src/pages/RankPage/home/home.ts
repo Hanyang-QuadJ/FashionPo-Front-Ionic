@@ -47,6 +47,7 @@ export class HomePage implements OnInit {
     search: string = "";
 
 
+
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 private storage: Storage,
@@ -65,6 +66,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
+      this.search="User";
 
     }
 
@@ -173,12 +175,14 @@ export class HomePage implements OnInit {
     toggleSearch() {
         this.toggled = this.toggled ? false : true;
         this.searchToggled = true;
-      this.search="User"
+
+      this.content.resize();
     }
 
     toggleSearch2() {
         this.toggled = this.toggled ? false : true;
         this.searchToggled = false;
+      this.content.resize();
     }
 
     searchActive() {

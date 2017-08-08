@@ -5,39 +5,36 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <ion-navbar hideBackButton="true">
+  <ion-toolbar hideBackButton="true">
     <ion-buttons start>
       <button  (click)="Vote()"  *ngIf="!toggled" ion-button icon-only color="primay">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!toggled" (click)="scrollToTop()">Flex</ion-title>
-    <ion-searchbar *ngIf="toggled" animated="true" value="abgasdfasd"></ion-searchbar>
+    <ion-title  *ngIf="!searchToggled" (click)="scrollToTop()">Flex</ion-title>
+    <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd"></ion-searchbar>
     <ion-buttons end>
-      <button *ngIf="!toggled" (click)="toggleSearch()" ion-button icon-only color="primary">
+      <button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
       </button>
-      <button *ngIf="toggled" (click)="toggleSearch2()" ion-button icon-only color="primary">
+      <button *ngIf="searchToggled" (click)="toggleSearch2()" ion-button icon-only color="primary">
         <ion-icon name="ios-close-circle-outline"></ion-icon>
       </button>
       <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
         <!--<ion-icon name="md-list"></ion-icon>-->
       <!--</button>-->
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
   <ion-toolbar *ngIf="searchToggled">
     <ion-segment [(ngModel)]="search" color="primary">
       <ion-segment-button value="user" >
         Users
-
       </ion-segment-button>
       <ion-segment-button value="tag">
         Tags
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-
-
 </ion-header>
 
 
@@ -93,7 +90,7 @@
     </ion-card>
   </div>
   <div  *ngIf="searchToggled" [ngSwitch]="search">
-    <ion-list  *ngSwitchCase="'user'">
+    <ion-list *ngSwitchCase="'user'">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="../../../assets/images/rank2.png">
@@ -114,7 +111,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'tags'">
+    <ion-list *ngSwitchCase="'tag'">
       <ion-item>
         <ion-thumbnail item-left>
           <img src="img/women-image1.png">
