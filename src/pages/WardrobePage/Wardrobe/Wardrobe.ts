@@ -36,6 +36,7 @@ export class WardrobePage implements OnInit {
     myposts: string = "";
     favorites: Array<object> = [];
     favoritesLength: string = "";
+    postAlert:string="";
     tab1:any = PostTabPage;
     tab2:any = FavoriteTabPage;
 
@@ -87,19 +88,16 @@ export class WardrobePage implements OnInit {
           .map(res => res.json())
           .subscribe(data => {
             this.user = data.user[0];
-
           });
 
 
         this.http.get(APIUrl_2 + '/myposts', {headers: headers})
           .map(res => res.json())
           .subscribe(data => {
+
             this.mypostlist = data.posts;
             this.myposts = data.posts.length;
             this.loaded = true;
-
-
-
 
           });
 

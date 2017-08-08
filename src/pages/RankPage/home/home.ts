@@ -71,6 +71,7 @@ export class HomePage implements OnInit {
     }
 
     ionViewWillEnter() {
+      this.search="User";
       this.pushPage = VotePage;
       this.toggled = false;
       this.searchToggled = false;

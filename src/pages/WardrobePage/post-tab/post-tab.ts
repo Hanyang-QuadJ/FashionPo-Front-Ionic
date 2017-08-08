@@ -4,6 +4,7 @@ import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
 import {WardrobePage} from '../wardrobe/wardrobe'
 import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-photo'
+import { CameraPage } from '../../CameraPage/Camera/Camera'
 /**
  * Generated class for the PostTabPage page.
  *
@@ -20,6 +21,8 @@ export class PostTabPage implements OnInit{
   // user: object = {};
 
   myPost: Array<object> = [];
+  postAlert:string="";
+  check:boolean;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
@@ -29,13 +32,22 @@ export class PostTabPage implements OnInit{
 
   }
   ngOnInit(): void {
+    this.check=false;
     this.myPost = this.navParams.data.mypost;
+    this.postAlert = this.navParams.data.postAlert;
+    if(this.myPost.length == 0){
+      this.check=true;
+    }
   }
 
   ionViewDidLoad() {
     console.log('----ionViewDidLoad PostTabPage----');
 
 
+  }
+  goToCamera(){
+    let cameraModal = this.modalCtrl.create(CameraPage)
+    cameraModal.present();
 
 
   }

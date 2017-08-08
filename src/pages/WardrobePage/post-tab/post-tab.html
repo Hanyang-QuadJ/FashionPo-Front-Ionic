@@ -6,7 +6,7 @@
 -->
 <ion-content>
 
-  <ion-grid no-padding>
+  <ion-grid  *ngIf="!check" no-padding>
   <!--<ion-list>-->
     <!--<ion-item *ngFor="let post of mypostlist">-->
       <!--<ion-thumbnail item-start>-->
@@ -20,5 +20,24 @@
       <img (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
     </ion-col>
   </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="check">
+    <br><br>
+    <ion-row>
+      <ion-col text-center>
+        <h4>Become a Champion</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <p>Post your photos to be 1st!</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <br>
+        <button  (click)="goToCamera()"ion-button round outline large><ion-icon name="add"></ion-icon></button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
