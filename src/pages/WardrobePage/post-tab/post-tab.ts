@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { NavController, NavParams,ModalController,LoadingController } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
-import {WardrobePage} from '../../WardrobePage/wardrobe/wardrobe'
+import {WardrobePage} from '../wardrobe/wardrobe'
 import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-photo'
 /**
  * Generated class for the PostTabPage page.

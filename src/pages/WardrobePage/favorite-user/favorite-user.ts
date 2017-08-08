@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams,ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
+import {stringify} from "@angular/core/src/util";
 
 /**
  * Generated class for the FavoriteUserPage page.
@@ -17,6 +18,7 @@ import {Http, Headers } from '@angular/http';
 export class FavoriteUserPage implements OnInit{
   favUser:any=""
   posts:any=""
+  favUsers:any=""
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,    private storage : Storage,
@@ -29,6 +31,7 @@ export class FavoriteUserPage implements OnInit{
     console.log(this.favUser);
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
+      var APIUrl_1 = '/user'
       // if (this.platform.is('ios') == true){
       //   APIUrl = 'http://54.162.160.91/api/rank';
       //   // console.log('yes');
@@ -44,6 +47,21 @@ export class FavoriteUserPage implements OnInit{
         .subscribe(data => {
           this.posts = data;
         });
+
+      let body2 = {
+        users:this.favUser.favorites
+      }
+
+      this.http.post(APIUrl_1,JSON.stringify(body2),{headers:headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          console.log(data)
+          this.favUsers = data;
+        });
+
+
+
+
     });
 
 

@@ -7,6 +7,7 @@ import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
 
+
 // import {TabsPage} from "../tabs/tabs";
 
 
@@ -86,22 +87,25 @@ export class WardrobePage implements OnInit {
                 .subscribe(data => {
                     this.mypostlist = data.posts;
                     this.myposts = data.posts.length;
-                  this.loaded = true;
+                    this.loaded = true;
+                  loading.dismiss();
+
+
 
                 });
 
             this.http.get(APIUrl_1 + '/favorite', {headers: headers})
               .map(res => res.json())
               .subscribe(data => {
+                console.log('******#$#**')
                 const body = {users:data.favorites};
-
                 this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
                   .map(res => res.json())
                   .subscribe(
                     data => {
                       this.favorites = data;
                       this.loadedd = true;
-                      loading.dismiss();
+
                     });
 
 
