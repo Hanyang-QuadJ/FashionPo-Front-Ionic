@@ -15,6 +15,7 @@ import {VotePage} from '../pages/VotePage/vote/vote';
 import {LoginPage} from '../pages/AuthPage/login/login';
 import {CameraPage} from '../pages/CameraPage/Camera/Camera';
 import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe';
+import {UsernamePage} from '../pages/WardrobePage/settings/UsernameChangePage/username';
 
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
@@ -60,6 +61,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         SettingsPage,
         WardrobePhotoPage,
         FavoriteUserPage,
+        UsernamePage,
     ],
     imports: [
         BrowserModule,
@@ -89,6 +91,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         SettingsPage,
         WardrobePhotoPage,
         FavoriteUserPage,
+        UsernamePage,
     ],
     providers: [
         StatusBar,

@@ -18,12 +18,15 @@
   <ion-list>
     <ion-list-header>User information</ion-list-header>
     <ion-item>Change Profile Image</ion-item>
-    <ion-item>Change Username</ion-item>
+    <ion-item (click)="presentUsernameModal()">Change Username</ion-item>
   </ion-list>
 
   <ion-list>
     <ion-list-header>Action</ion-list-header>
-    <ion-item>Terminator II</ion-item>
+    <ion-item>
+      <ion-label> Sam</ion-label>
+      <ion-toggle disabled checked="false"></ion-toggle>
+    </ion-item>
     <ion-item>The Empire Strikes Back</ion-item>
     <ion-item>Blade Runner</ion-item>
   </ion-list>

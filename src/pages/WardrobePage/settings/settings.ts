@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,App } from 'ionic-angular';
+import { NavController, NavParams,App,ModalController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPage} from "../../AuthPage/login/login";
+import {UsernamePage} from "./UsernameChangePage/username";
 /**
  * Generated class for the SettingsPage page.
  *
@@ -17,6 +18,7 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app: App,
+              public modalCtrl: ModalController,
               private storage: Storage) {
   }
   logOut() {
@@ -28,5 +30,10 @@ export class SettingsPage {
   }
   itemSelected(item: string) {
     console.log("Selected Item", item);
+  }
+  presentUsernameModal() {
+    let profileModal = this.modalCtrl.create(UsernamePage, { },{leaveAnimation:'back'});
+    profileModal.present();
+
   }
 }
