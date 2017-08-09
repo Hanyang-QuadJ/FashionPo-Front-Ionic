@@ -164,10 +164,10 @@ export class CameraPage implements OnInit{
 
 
     var APIUrl = '/post';
-    // if (this.platform.is('ios') == true){
-    //   APIUrl = 'http://54.162.160.91/api/post';
-    //   // console.log('yes');
-    // }
+    if (this.platform.is('ios') == true){
+      APIUrl = 'http://54.162.160.91/api/post';
+      // console.log('yes');
+    }
     this.storage.get('token').then((val) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -175,7 +175,7 @@ export class CameraPage implements OnInit{
       // console.log(val);
 
       let body = {
-        // base_64: this.base64Image,
+        base_64: this.base64Image,
         tags:this.tags
 
       };
