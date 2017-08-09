@@ -25,7 +25,7 @@ import {SettingsPage} from "../../WardrobePage/settings/settings";
 })
 
 
-export class WardrobePage implements OnInit {
+export class WardrobePage {
   public toggled: boolean;
 
     user: object = {};
@@ -53,77 +53,6 @@ export class WardrobePage implements OnInit {
 
     }
 
-    ngOnInit(): void {
-      this.loaded = false;
-      this.loadedd = false;
-
-      this.option = "favorites";
-      let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
-
-      });
-
-      loading.present();
-      this.storage.get('token').then((val) => {
-        var APIUrl_1 = '/user/authed';
-        var APIUrl_2 = '/post/myposts';
-        var APIUrl_3 = '/user/favorite';
-        var APIUrl_4 = '/user';
-        if (this.platform.is('ios') == true){
-          APIUrl_1 = 'http://54.162.160.91/api/user/authed';
-          APIUrl_2 = 'http://54.162.160.91/api/post/myposts';
-          APIUrl_3 = 'http://54.162.160.91/api/user/favorite';
-          APIUrl_4 = 'http://54.162.160.91/api/user';
-        }
-
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', val);
-        // console.log(val);
-
-        this.http.get(APIUrl_1, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            this.user = data.user[0];
-          });
-
-
-        this.http.get(APIUrl_2, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-
-            this.mypostlist = data.posts;
-            this.myposts = data.posts.length;
-            this.loaded = true;
-
-          });
-
-        this.http.get(APIUrl_3, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            console.log('******#$#**')
-            if(data.favorites === undefined || data.favorites.length == 0){
-              this.favorites = [];
-              this.loadedd = true;
-              loading.dismiss();
-            }
-            else{
-              const body = {users:data.favorites};
-              this.http.post(APIUrl_4, JSON.stringify(body), {headers: headers})
-                .map(res => res.json())
-                .subscribe(
-                  data => {
-                    this.favorites = data;
-                    this.loadedd = true;
-                    loading.dismiss();
-                  });
-
-            }
-          });
-
-      });
-
-
-    }
   toggleRank() {
     this.toggled = this.toggled ? false : true;
 
@@ -131,12 +60,72 @@ export class WardrobePage implements OnInit {
     Settings() {
       this.navCtrl.push(SettingsPage);
     }
-    ionViewWillEnter() {
+ ionViewWillEnter(){
+   this.loaded = false;
+   this.loadedd = false;
+
+   this.option = "favorites";
+   // let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
+   //
+   // });
+
+   // loading.present();
+   this.storage.get('token').then((val) => {
+     var APIUrl = '/user';
+     var APIUrl_2 = '/post';
+     if (this.platform.is('ios') == true){
+       APIUrl = 'http://54.162.160.91/api/user';
+       APIUrl_2 = 'http://54.162.160.91/api/post';
+     }
+
+     let headers = new Headers();
+     headers.append('Content-Type', 'application/json');
+     headers.append('x-access-token', val);
+     // console.log(val);
+
+     this.http.get(APIUrl+'/authed', {headers: headers})
+       .map(res => res.json())
+       .subscribe(data => {
+         this.user = data.user[0];
+       });
 
 
+     this.http.get(APIUrl_2+'/myposts', {headers: headers})
+       .map(res => res.json())
+       .subscribe(data => {
 
+         this.mypostlist = data.posts;
+         this.myposts = data.posts.length;
+         this.loaded = true;
 
-    }
+       });
+
+     this.http.get(APIUrl+'/favorite', {headers: headers})
+       .map(res => res.json())
+       .subscribe(data => {
+         console.log('******#$#**')
+         if(data.favorites === undefined || data.favorites.length == 0){
+           this.favorites = [];
+           this.loadedd = true;
+           // loading.dismiss();
+         }
+         else{
+           const body = {users:data.favorites};
+           this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+             .map(res => res.json())
+             .subscribe(
+               data => {
+                 this.favorites = data;
+                 this.loadedd = true;
+                 // loading.dismiss();
+               });
+
+         }
+       });
+
+   });
+
+ }
     ionViewDidLoad(){
       console.log('outside')
       console.log(this.mypostlist+"HERE")
