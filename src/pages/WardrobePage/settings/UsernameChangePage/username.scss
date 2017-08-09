@@ -1,7 +1,25 @@
-page-wardrobe-photo {
+username-settings {
+  h2{
+    margin-bottom: 0px;
+  }
+  h4{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
+  h5{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
+  p{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
   .toolbar-background {
     background-color: #ffffff;
 
+  }
+  .toolbar{
+    box-shadow: 0px 0.05rem 0px #ff5733! important;
   }
   .toolbar-title-ios {
     text-align: center;
@@ -10,5 +28,9 @@ page-wardrobe-photo {
     color: #ff5733;
     pointer-events: auto;
   }
+  .profileImage{
+    border-radius: 5%;
+  }
+
 
 }

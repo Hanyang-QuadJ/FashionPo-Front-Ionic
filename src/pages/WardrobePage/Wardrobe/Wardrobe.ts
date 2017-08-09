@@ -58,7 +58,8 @@ export class WardrobePage {
 
   }
     Settings() {
-      this.navCtrl.push(SettingsPage);
+
+      this.navCtrl.push(SettingsPage,{users:this.user},{});
     }
  ionViewWillEnter(){
    this.loaded = false;
@@ -87,6 +88,7 @@ export class WardrobePage {
        .map(res => res.json())
        .subscribe(data => {
          this.user = data.user[0];
+
        });
 
 
@@ -103,7 +105,6 @@ export class WardrobePage {
      this.http.get(APIUrl+'/favorite', {headers: headers})
        .map(res => res.json())
        .subscribe(data => {
-         console.log('******#$#**')
          if(data.favorites === undefined || data.favorites.length == 0){
            this.favorites = [];
            this.loadedd = true;
@@ -127,16 +128,8 @@ export class WardrobePage {
 
  }
     ionViewDidLoad(){
-      console.log('outside')
-      console.log(this.mypostlist+"HERE")
 
     }
-
-
-
-
-
-
 
 }
 

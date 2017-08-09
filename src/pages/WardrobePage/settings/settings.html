@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header no-border>
 
   <ion-navbar>
     <ion-title>Settings</ion-title>
@@ -14,27 +14,62 @@
 
 
 <ion-content>
-  <h1>Jeewoo Yoon</h1>
-  <ion-list>
-    <ion-list-header>User information</ion-list-header>
-    <ion-item (click)="presentUserProfileModal()">Change Profile Image</ion-item>
-    <ion-item (click)="presentUsernameModal()">Change Username</ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col col-5 text-center>
+          <img  class="profileImage" src="{{user.profile_img}}">
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--<ion-list>-->
+    <!--<ion-list-header>User information</ion-list-header>-->
+    <!--<ion-item (click)="presentUserProfileModal()">Change Profile Image</ion-item>-->
+    <!--<ion-item (click)="presentUsernameModal()">Change Username</ion-item>-->
+  <!--</ion-list>-->
 
+  <!--<ion-list>-->
+    <!--<ion-list-header>Action</ion-list-header>-->
+    <!--<ion-item>-->
+      <!--<ion-label> Sam</ion-label>-->
+      <!--<ion-toggle disabled checked="false"></ion-toggle>-->
+    <!--</ion-item>-->
+    <!--<ion-item>The Empire Strikes Back</ion-item>-->
+    <!--<ion-item>Blade Runner</ion-item>-->
+  <!--</ion-list>-->
+
+  <!--<ion-list>-->
+    <!--<ion-list-header></ion-list-header>-->
+    <!--<button ion-item (click)="logOut()">-->
+      <!--Log out-->
+    <!--</button>-->
+  <!--</ion-list>-->
   <ion-list>
-    <ion-list-header>Action</ion-list-header>
-    <ion-item>
-      <ion-label> Sam</ion-label>
-      <ion-toggle disabled checked="false"></ion-toggle>
+    <ion-list-header>Account</ion-list-header>
+    <ion-item (click)="presentUserProfileModal()">
+      <ion-icon name="ios-image" color="primary" item-start></ion-icon>
+      Change Profile Image
+
+
     </ion-item>
-    <ion-item>The Empire Strikes Back</ion-item>
-    <ion-item>Blade Runner</ion-item>
-  </ion-list>
+    <ion-item (click)="presentUsernameModal()">
+      <ion-icon name="ios-person"color="primary" item-start></ion-icon>
+      Change User Name
+      <p item-end>{{user.username}}</p>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="ios-shirt" color="primary"item-start></ion-icon>
+      Change Wardrobe Name
 
-  <ion-list>
-    <ion-list-header></ion-list-header>
-    <button ion-item (click)="logOut()">
-      Log out
-    </button>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="md-list" color="primary"item-start></ion-icon>
+      Change Introduce
+
+    </ion-item>
+    <ion-item>
+      <ion-icon name="md-key"color="primary" item-start></ion-icon>
+      Change Password
+
+    </ion-item>
   </ion-list>
 </ion-content>

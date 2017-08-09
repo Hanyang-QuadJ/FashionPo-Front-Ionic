@@ -61,6 +61,9 @@ export class UserProfileChange {
     });
 
   }
+  public dismiss(){
+    this.viewCtrl.dismiss()
+  }
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',

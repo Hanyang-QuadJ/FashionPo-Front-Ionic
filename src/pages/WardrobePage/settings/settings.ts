@@ -16,11 +16,16 @@ import {UserProfileChange} from "./UserProfileChangePage/userprofile";
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
+  user: object = {};
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app: App,
               public modalCtrl: ModalController,
               private storage: Storage) {
+    this.user = this.navParams.get('users');
+
+
+
   }
   logOut() {
     this.storage.set('token', null);
@@ -28,6 +33,8 @@ export class SettingsPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+    console.log('@@#@#@#@#@')
+    console.log(this.user)
   }
   itemSelected(item: string) {
     console.log("Selected Item", item);
