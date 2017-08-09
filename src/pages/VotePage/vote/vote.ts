@@ -1,10 +1,11 @@
 
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, ToastController,App} from 'ionic-angular';
+import {NavController, NavParams, Platform, ToastController, ModalController, App} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
+import {VoteWardrobePage} from './vote-wardrobe/vote-wardrobe';
 
 import {
     StackConfig,
@@ -42,7 +43,8 @@ export class VotePage implements OnInit{
                 public platform: Platform,
                 public navParams: NavParams,
                 private app:App,
-                public toastCtrl: ToastController) {
+                public toastCtrl: ToastController,
+                public modalCtrl: ModalController,) {
 
     }
 
@@ -175,6 +177,12 @@ export class VotePage implements OnInit{
         console.log(this.posts);
         console.log("-----------");
         this.nextPost = this.cachedPost.pop();
+
+    }
+
+    presentWardrobeModal(user) {
+        let profileModal = this.modalCtrl.create(VoteWardrobePage, {user_id:user },{leaveAnimation:'back'});
+        profileModal.present();
 
     }
 

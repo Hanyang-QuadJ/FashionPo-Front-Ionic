@@ -3,8 +3,8 @@ import {ErrorHandler, NgModule} from '@angular/core';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
-import { Camera } from '@ionic-native/camera';
-import { PhotoLibrary } from '@ionic-native/photo-library';
+import {Camera} from '@ionic-native/camera';
+import {PhotoLibrary} from '@ionic-native/photo-library';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 // import { NativeStorage } from '@ionic-native/native-storage';
@@ -18,6 +18,7 @@ import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe';
 import {UsernamePage} from '../pages/WardrobePage/settings/UsernameChangePage/username';
 import {WardrobeCameraPage} from '../pages/WardrobePage/wardrobe-camera/wardrobe-camera';
 import {SignupPage} from '../pages/AuthPage/signup/signup';
+import {VoteWardrobePage} from '../pages/VotePage/vote/vote-wardrobe/vote-wardrobe';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -28,11 +29,11 @@ import {SearchUserPage} from '../pages/RankPage/search-user/search-user'
 import {SearchTagsPage} from '../pages/RankPage/search-tags/search-tags'
 import {SwingModule} from 'angular2-swing';
 
-import { File } from '@ionic-native/file';
-import { Transfer } from '@ionic-native/transfer';
-import { FilePath } from '@ionic-native/file-path';
+import {File} from '@ionic-native/file';
+import {Transfer} from '@ionic-native/transfer';
+import {FilePath} from '@ionic-native/file-path';
 // import { ScrollableTabs } from '../assets/components/scrollable-tabs'
-import { SuperTabsModule } from 'ionic2-super-tabs';
+import {SuperTabsModule} from 'ionic2-super-tabs';
 import {PostTabPage} from "../pages/WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../pages/WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../pages/WardrobePage/settings/settings";
@@ -63,11 +64,12 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         WardrobePhotoPage,
         FavoriteUserPage,
         UsernamePage,
+        VoteWardrobePage,
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement:'bottom'}
-          ),
+        IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, tabsOnSupPagesPlacement: 'bottom'}
+        ),
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
@@ -93,7 +95,8 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         WardrobePhotoPage,
         FavoriteUserPage,
         UsernamePage,
-      WardrobeCameraPage,
+        WardrobeCameraPage,
+        VoteWardrobePage,
     ],
     providers: [
         StatusBar,
@@ -104,7 +107,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         Transfer,
         FilePath,
 
-      ,{provide: ErrorHandler, useClass: IonicErrorHandler},
+        , {provide: ErrorHandler, useClass: IonicErrorHandler},
 
     ]
 
