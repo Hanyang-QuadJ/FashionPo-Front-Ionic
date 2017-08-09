@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 import {VotePage} from '../../VotePage/vote/vote'
 import {SearchUserPage} from '../search-user/search-user'
 import {SearchTagsPage} from '../search-tags/search-tags'
-import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular'
+import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular';
+import {HistoryListPage } from '../history-list/history-list'
 
 /**
  * Generated class for the HomePage page.
@@ -365,7 +366,7 @@ export class HomePage implements OnInit {
         });
     }
     presentHistoryModal(){
-      let historyModal = this.modalCtrl.create(WardrobePhotoPage, { },{leaveAnimation:'back'});
+      let historyModal = this.modalCtrl.create(HistoryListPage, { },{leaveAnimation:'back'});
       historyModal.present();
     }
 

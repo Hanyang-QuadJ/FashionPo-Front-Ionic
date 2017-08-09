@@ -7,6 +7,11 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons start>
+      <button  (click)="dismiss()" ion-button icon-only color="primay">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>HistoryList</ion-title>
   </ion-navbar>
 
@@ -14,5 +19,11 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <button *ngFor="let dates of date" ion-item>
+      {{dates.createdAt}}
+    </button>
+
+  </ion-list>
 
 </ion-content>
