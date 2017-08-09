@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Change Profile Image</ion-title>
+  </ion-navbar>
+  <button (click)="dismiss()" ion-button icon-only color="primary">
+    <ion-icon name="ios-arrow-back"></ion-icon>
+  </button>
+  <button (click)="update()" ion-button icon-end small color="primary">
+    Update
+  </button>
+</ion-header>
+<ion-content>
+<button ion-button icon-start outline (click)="presentActionSheet()" full><ion-icon name="camera"></ion-icon>Select Image</button>
+
+
+  <ion-item *ngIf="!pictureTaken">
+    <img src="{{profile_img}}" />
+  </ion-item>
+  <img id="camera-image" />
+
+
+</ion-content>

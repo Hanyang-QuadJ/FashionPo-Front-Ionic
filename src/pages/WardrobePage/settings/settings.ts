@@ -3,6 +3,7 @@ import { NavController, NavParams,App,ModalController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPage} from "../../AuthPage/login/login";
 import {UsernamePage} from "./UsernameChangePage/username";
+import {UserProfileChange} from "./UserProfileChangePage/userprofile";
 /**
  * Generated class for the SettingsPage page.
  *
@@ -33,6 +34,12 @@ export class SettingsPage {
   }
   presentUsernameModal() {
     let profileModal = this.modalCtrl.create(UsernamePage, { },{leaveAnimation:'back'});
+    profileModal.present();
+
+  }
+
+  presentUserProfileModal() {
+    let profileModal = this.modalCtrl.create(UserProfileChange, { },{leaveAnimation:'back'});
     profileModal.present();
 
   }

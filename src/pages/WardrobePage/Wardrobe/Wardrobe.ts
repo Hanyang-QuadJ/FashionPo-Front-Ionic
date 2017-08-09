@@ -56,11 +56,7 @@ export class WardrobePage implements OnInit {
     ngOnInit(): void {
       this.loaded = false;
       this.loadedd = false;
-      var APIUrl_1 = '/user';
-      var APIUrl_2 = '/post';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/user';
-      // }
+
       this.option = "favorites";
       let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
 
@@ -68,19 +64,30 @@ export class WardrobePage implements OnInit {
 
       loading.present();
       this.storage.get('token').then((val) => {
+        var APIUrl_1 = '/user/authed';
+        var APIUrl_2 = '/post/myposts';
+        var APIUrl_3 = '/user/favorite';
+        var APIUrl_4 = '/user';
+        if (this.platform.is('ios') == true){
+          APIUrl_1 = 'http://54.162.160.91/api/user/authed';
+          APIUrl_2 = 'http://54.162.160.91/api/post/myposts';
+          APIUrl_3 = 'http://54.162.160.91/api/user/favorite';
+          APIUrl_4 = 'http://54.162.160.91/api/user';
+        }
+
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', val);
         // console.log(val);
 
-        this.http.get(APIUrl_1 + '/authed', {headers: headers})
+        this.http.get(APIUrl_1, {headers: headers})
           .map(res => res.json())
           .subscribe(data => {
             this.user = data.user[0];
           });
 
 
-        this.http.get(APIUrl_2 + '/myposts', {headers: headers})
+        this.http.get(APIUrl_2, {headers: headers})
           .map(res => res.json())
           .subscribe(data => {
 
@@ -90,7 +97,7 @@ export class WardrobePage implements OnInit {
 
           });
 
-        this.http.get(APIUrl_1 + '/favorite', {headers: headers})
+        this.http.get(APIUrl_3, {headers: headers})
           .map(res => res.json())
           .subscribe(data => {
             console.log('******#$#**')
@@ -101,7 +108,7 @@ export class WardrobePage implements OnInit {
             }
             else{
               const body = {users:data.favorites};
-              this.http.post(APIUrl_1, JSON.stringify(body), {headers: headers})
+              this.http.post(APIUrl_4, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(
                   data => {
