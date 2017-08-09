@@ -1,7 +1,8 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController, ModalController } from 'ionic-angular';
+import { NavController, NavParams,ViewController, ModalController,LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
+import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite-user-post'
 
 
 
@@ -23,12 +24,14 @@ export class FavoriteUserPage implements OnInit{
   favUsers:any=""
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,    private storage : Storage, public modalCtrl: ModalController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, public loadingCtrl:LoadingController,  private storage : Storage, public modalCtrl: ModalController,
               private http: Http
               ) {
   }
 
   ngOnInit(): void {
+    let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
+    loading.present();
     this.favUser = this.navParams.get('favList');
     console.log(this.favUser);
     this.storage.get('token').then((val) => {
@@ -62,6 +65,7 @@ export class FavoriteUserPage implements OnInit{
           this.favUsers = data;
           console.log('&^%^$$%$%')
           console.log(this.favUsers)
+          loading.dismiss();
         });
 
 
@@ -79,11 +83,11 @@ export class FavoriteUserPage implements OnInit{
     this.viewCtrl.dismiss()
   }
 
-  // presentFavModal(i) {
-  //   let profileModal = this.modalCtrl.create(FavoriteUserPage, { favList:this.favorites[i]},{leaveAnimation:'back'});
-  //   profileModal.present();
-  //
-  // }
+  presentFavModal(i) {
+    let profileModal = this.modalCtrl.create(FavoriteUserPostPage, { postList:this.posts,postListIndex:'fit'+i},{leaveAnimation:'back'});
+    profileModal.present();
+
+  }
 
 
 

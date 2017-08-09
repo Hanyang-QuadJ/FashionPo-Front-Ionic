@@ -7,12 +7,48 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons start>
+      <button (click)="dismiss()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>FavoriteUserPost</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../../../assets/images/myPic1.png">
+      </ion-avatar>
+      <h2>Marty McFly</h2>
+      <p>November 5, 1955</p>
+    </ion-item>
+    <img src="{{post.picURL}}">
+
+    <ion-card-content>
+
+      <span *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
+
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="heart"></ion-icon>
+          <div>{{post.likeCnt}} Likes</div>
+        </button>
+      </ion-col>
+      <!--<ion-col center text-center>-->
+      <!--<ion-note>-->
+      <!--11h ago-->
+      <!--</ion-note>-->
+      <!--</ion-col>-->
+    </ion-row>
+
+  </ion-card>
 
 </ion-content>

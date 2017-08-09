@@ -114,7 +114,7 @@ export class VotePage implements OnInit{
       toast.present(toast);
     }
     blur(event) {
-        if (event.target.style['-webkit-filter'] === `blur(20px)`) {
+        if (event.target.style['-webkit-filter'] === `blur(10px)`) {
             event.target.style['-webkit-filter'] = `blur(0px)`;
             event.target.style['filter'] = `blur(0px)`;
 
@@ -122,7 +122,7 @@ export class VotePage implements OnInit{
         else {
 
             event.target.style['-webkit-filter'] = `blur(20px)`;
-            event.target.style['filter'] = `blur(20px)`;
+            event.target.style['filter'] = `blur(10px)`;
 
 
         }

@@ -42,6 +42,7 @@ import {SettingsPage} from "../pages/WardrobePage/settings/settings";
 import {WardrobePhotoPage} from '../pages/WardrobePage/wardrobe-photo/wardrobe-photo';
 import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-user'
 import {UserProfileChange} from "../pages/WardrobePage/settings/UserProfileChangePage/userprofile";
+import {FavoriteUserPostPage} from '../pages/WardrobePage/favorite-user/favorite-user-post/favorite-user-post';
 // import { Camera } from '@ionic-native/camera';
 
 
@@ -69,7 +70,8 @@ import {UserProfileChange} from "../pages/WardrobePage/settings/UserProfileChang
         UsernamePage,
         VoteWardrobePage,
         HistoryListPage,
-        UserProfileChange
+        UserProfileChange,
+        FavoriteUserPostPage,
     ],
     imports: [
         BrowserModule,
@@ -104,7 +106,8 @@ import {UserProfileChange} from "../pages/WardrobePage/settings/UserProfileChang
         VoteWardrobePage,
         HistoryListPage,
         HistoryRankPage,
-        UserProfileChange
+        UserProfileChange,
+      FavoriteUserPostPage,
     ],
     providers: [
         StatusBar,

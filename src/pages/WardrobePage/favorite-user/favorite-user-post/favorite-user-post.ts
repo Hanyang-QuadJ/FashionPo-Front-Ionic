@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,ViewChild,OnInit } from '@angular/core';
+import { NavController, NavParams,Content,ViewController } from 'ionic-angular';
 
 /**
  * Generated class for the FavoriteUserPostPage page.
@@ -12,12 +12,36 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-favorite-user-post',
   templateUrl: 'favorite-user-post.html',
 })
-export class FavoriteUserPostPage {
+export class FavoriteUserPostPage implements OnInit{
+  @ViewChild(Content) content: Content;
+  postList ="";
+  postListIndex:string="";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
+    this.postList = navParams.get('postList');
+    this.postListIndex = navParams.get('postListIndex');
+  }
+  ngOnInit(): void {
+
+
+  }
+
+  ionViewWillEnter(){
+    this.scrollToCard()
+  }
+
+  public dismiss(){
+    this.viewCtrl.dismiss()
+  }
+
+  scrollToCard(){
+    let yOffset = document.getElementById(this.postListIndex).offsetTop;
+    console.log(yOffset)
+    this.content.scrollTo(0,yOffset,0);
   }
 
   ionViewDidLoad() {
+
     console.log('ionViewDidLoad FavoriteUserPostPage');
   }
 
