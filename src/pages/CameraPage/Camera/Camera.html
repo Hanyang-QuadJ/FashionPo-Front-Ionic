@@ -1,17 +1,24 @@
-<ion-header>
-  <ion-navbar color="primary">
+<ion-header no-border>
+  <ion-navbar>
     <ion-title>
-      Image Upload
+      Upload
     </ion-title>
+    <ion-buttons end>
+
+      <button (click)="post()" ion-button icon-end small color="primary">
+        Post
+      </button>
+      <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
+      <!--<ion-icon name="md-list"></ion-icon>-->
+      <!--</button>-->
+    </ion-buttons>
+
   </ion-navbar>
-  <div padding>
-    <button ion-button icon-left (click)="presentActionSheet()" block>
-      <ion-icon name="camera"></ion-icon>Select Image
-    </button>
-  </div>
 </ion-header>
 
 <ion-content>
+  <button ion-button icon-start outline (click)="presentActionSheet()" full><ion-icon name="camera"></ion-icon>Select Image</button>
+
   <ion-item *ngIf="!pictureTaken" style="display: none;">
     <img src="{{placeholderImage}}" />
   </ion-item>
@@ -25,7 +32,5 @@
     </ion-item>
 
   </ion-list>
-  <ion-buttons>
-    <button (click)="post()" ion-button outline>POST</button>
-  </ion-buttons>
+
 </ion-content>

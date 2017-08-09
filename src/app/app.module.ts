@@ -13,10 +13,10 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/RankPage/home/home';
 import {VotePage} from '../pages/VotePage/vote/vote';
 import {LoginPage} from '../pages/AuthPage/login/login';
-import {CameraPage} from '../pages/CameraPage/Camera/Camera';
+import {CameraPage} from '../pages/CameraPage/Camera/camera';
 import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe';
 import {UsernamePage} from '../pages/WardrobePage/settings/UsernameChangePage/username';
-
+import {WardrobeCameraPage} from '../pages/WardrobePage/wardrobe-camera/wardrobe-camera';
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
@@ -52,6 +52,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         WardrobePage,
         HomePage,
         TabsPage,
+        WardrobeCameraPage,
 
         SearchUserPage,
         SearchTagsPage,
@@ -92,6 +93,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         WardrobePhotoPage,
         FavoriteUserPage,
         UsernamePage,
+      WardrobeCameraPage,
     ],
     providers: [
         StatusBar,

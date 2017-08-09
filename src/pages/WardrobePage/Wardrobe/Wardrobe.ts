@@ -54,17 +54,6 @@ export class WardrobePage implements OnInit {
     }
 
     ngOnInit(): void {
-
-
-    }
-  toggleRank() {
-    this.toggled = this.toggled ? false : true;
-
-  }
-    Settings() {
-      this.navCtrl.push(SettingsPage);
-    }
-    ionViewWillEnter() {
       this.loaded = false;
       this.loadedd = false;
       var APIUrl_1 = '/user';
@@ -73,7 +62,7 @@ export class WardrobePage implements OnInit {
       //   APIUrl = 'http://54.162.160.91/api/user';
       // }
       this.option = "favorites";
-      let loading = this.loadingCtrl.create({
+      let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
 
       });
 
@@ -125,6 +114,18 @@ export class WardrobePage implements OnInit {
           });
 
       });
+
+
+    }
+  toggleRank() {
+    this.toggled = this.toggled ? false : true;
+
+  }
+    Settings() {
+      this.navCtrl.push(SettingsPage);
+    }
+    ionViewWillEnter() {
+
 
 
 

@@ -19,8 +19,8 @@ import {filter} from "rxjs/operator/filter";
 declare var cordova: any;
 
 @Component({
-  selector: 'page-playground',
-  templateUrl: 'Camera.html'
+  selector: 'page-camera',
+  templateUrl: 'camera.html'
 })
 
 export class CameraPage implements OnInit{

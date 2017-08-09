@@ -4,7 +4,7 @@ import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
 import {WardrobePage} from '../wardrobe/wardrobe'
 import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-photo'
-import { CameraPage } from '../../CameraPage/Camera/Camera'
+import { CameraPage } from '../../CameraPage/Camera/camera'
 /**
  * Generated class for the PostTabPage page.
  *

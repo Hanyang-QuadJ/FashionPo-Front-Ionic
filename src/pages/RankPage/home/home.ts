@@ -58,6 +58,7 @@ export class HomePage implements OnInit {
                 private app: App,
                 public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController) {
+      this.search="User";
 
 
 
@@ -66,7 +67,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
-      this.search="User";
+
 
     }
 
@@ -75,7 +76,7 @@ export class HomePage implements OnInit {
       this.pushPage = VotePage;
       this.toggled = false;
       this.searchToggled = false;
-      let loading = this.loadingCtrl.create({});
+      let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
       loading.present();
       this.storage.get('token').then((val) => {
         var APIUrl = '/rank';
