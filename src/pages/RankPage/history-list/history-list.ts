@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController } from 'ionic-angular';
+import { NavController, NavParams,ViewController,ModalController, } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {HistoryRankPage} from '../history-rank/history-rank';
@@ -17,12 +17,16 @@ import {HistoryRankPage} from '../history-rank/history-rank';
 })
 export class HistoryListPage implements OnInit{
   date:Array<object>=[];
+  ranksheet:Array<object>=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,private storage: Storage,
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,private storage: Storage, public modalCtrl:ModalController,
               private http: Http) {
   }
 
   ngOnInit(): void {
+
+    this.ranksheet
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank/save';
       // if (this.platform.is('ios') == true){
@@ -35,12 +39,20 @@ export class HistoryListPage implements OnInit{
 
       this.http.get(APIUrl,{headers: headers})
         .map(res => res.json())
+
         .subscribe(data => {
+
           this.date = data.ranks;
+          for(var i = 0; i<this.date.length; i++){
+            this.ranksheet.push(data.ranks[i].rankSheet)
+          }
           console.log("&&&&&&&&&")
-          console.log(this.date)
+          console.log(this.ranksheet)
+
         });
     });
+
+
 
 
 
@@ -52,8 +64,10 @@ export class HistoryListPage implements OnInit{
   public dismiss(){
     this.viewCtrl.dismiss()
   }
-  goToPage(){
-    this.navCtrl.push(HistoryRankPage)
+  goToPage(i){
+    let historyRankModal = this.modalCtrl.create(HistoryRankPage, { rankSheet:this.ranksheet[i]},{leaveAnimation:'back'});
+    historyRankModal.present();
+
   }
 
 }

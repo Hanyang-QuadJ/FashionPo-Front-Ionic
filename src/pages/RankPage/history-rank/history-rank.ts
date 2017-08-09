@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,ViewController, } from 'ionic-angular';
 
 /**
  * Generated class for the HistoryRankPage page.
@@ -13,15 +13,18 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'history-rank.html',
 })
 export class HistoryRankPage {
+  rankSheet:Array<any>=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
+    this.rankSheet = navParams.get('rankSheet');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HistoryRankPage');
+    console.log(this.rankSheet)
   }
   pop(){
-    this.navCtrl.pop()
+    this.viewCtrl.dismiss();
 
   }
 

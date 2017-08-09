@@ -30,27 +30,27 @@
         </ion-grid>
       </ion-card-content>
     </ion-card>
-    <!--<ion-card *ngFor="let rank of ranks; let i = index">-->
-      <!--<div class="box">-->
-        <!--<div class="numbering">-->
-          <!--<div class="numberingArea">-->
-            <!--<p class="rankNumber">{{i+2}}</p>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="image"><img src={{ranks[i].picURL}}></div>-->
-        <!--<div class="name">-->
-          <!--<div class="nameArea" *ngIf="users[i]">-->
-            <!--<p >{{users[i].username}}</p>-->
-          <!--</div>-->
-          <!--<div class="buttonArea">-->
-            <!--&lt;!&ndash;<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)!==-1" ion-button small color="sub" (click)='removeFavorite(rank);'>Add</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>&ndash;&gt;-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</ion-card>-->
+    <ion-card *ngFor="let rank of rankSheet; let i = index">
+      <div class="box">
+        <div class="numbering">
+          <div class="numberingArea">
+            <p class="rankNumber">{{i+2}}</p>
+          </div>
+        </div>
+        <div class="image"><img src={{rank.picURL}}></div>
+        <div class="name">
+          <div class="nameArea">
+            <p >{{rank.username}}</p>
+          </div>
+          <div class="buttonArea">
+            <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
+            <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)!==-1" ion-button small color="sub" (click)='removeFavorite(rank);'>Add</button>-->
+            <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
+            <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>-->
+          </div>
+        </div>
+      </div>
+    </ion-card>
 
 
 

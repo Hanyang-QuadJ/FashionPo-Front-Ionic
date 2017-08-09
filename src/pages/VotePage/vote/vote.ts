@@ -1,7 +1,7 @@
 
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, Content, ToastController, ModalController, App} from 'ionic-angular';
+import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
