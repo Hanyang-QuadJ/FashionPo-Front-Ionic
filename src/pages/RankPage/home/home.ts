@@ -46,6 +46,7 @@ export class HomePage implements OnInit {
     firstPost: object;
     firstUser: object;
     search: string = "";
+    try: boolean = false;
 
 
 
@@ -289,6 +290,7 @@ export class HomePage implements OnInit {
     }
 
     addFavorite(post) {
+        this.try = true;
         console.log(post);
         for(let i = 0;i<this.users.length;i++){
             if(this.users[i]._id === post.writtenBy){
@@ -319,7 +321,8 @@ export class HomePage implements OnInit {
             this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log()
+                    console.log(data);
+                    this.try = false;
 
                 });
 
@@ -327,6 +330,7 @@ export class HomePage implements OnInit {
     }
 
     removeFavorite(post) {
+        this.try = true;
         console.log(post);
         for(let i = 0;i<this.users.length;i++){
             if(this.users[i]._id === post.writtenBy){
@@ -361,6 +365,7 @@ export class HomePage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     console.log(data);
+                    this.try = false;
 
                 });
         });

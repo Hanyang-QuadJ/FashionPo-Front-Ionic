@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams, ViewController, Content} from 'ionic-angular';
 import {Platform, ModalController, LoadingController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
-import {Http, Headers} from "@angular/http";
+import {Http, Headers,RequestOptions} from "@angular/http";
 import {ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 
@@ -27,6 +27,8 @@ export class VoteWardrobePage {
     User: any;
     loaded: boolean = false;
     posts: any;
+    button:boolean = false;
+    try:boolean = false;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
@@ -94,7 +96,32 @@ export class VoteWardrobePage {
                                         .map(res => res.json())
                                         .subscribe(data => {
                                             console.log(data);
-                                            this.loaded = true;
+                                            this.storage.get('token').then((val) => {
+                                                let APIUrl = '/user/authed';
+                                                // if (this.platform.is('ios') == true){
+                                                //   APIUrl = 'http://54.162.160.91/api/user/authed';
+                                                //   // console.log('yes');
+                                                // }
+                                                let headers = new Headers();
+                                                headers.append('Content-Type', 'application/json');
+                                                headers.append('x-access-token', val);
+
+
+                                                this.http.get(APIUrl, {headers: headers})
+                                                    .map(res => res.json())
+                                                    .subscribe(data => {
+                                                        console.log(data.user[0].favorites.indexOf(this.User._id));
+                                                        if(data.user[0].favorites.indexOf(this.User._id)!==-1){
+                                                            this.button = true;
+                                                        }
+                                                        else
+                                                            this.button = false;
+                                                        this.loaded = true;
+
+
+                                                    });
+                                            });
+
                                         });
 
                                 });
@@ -110,6 +137,66 @@ export class VoteWardrobePage {
 
     public dismiss() {
         this.viewCtrl.dismiss()
+    }
+
+    addFavorite() {
+        this.button = true;
+        this.try = true;
+        this.storage.get('token').then((val) => {
+            var APIUrl = '/user/favorite';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+            //   // console.log('yes');
+            // }
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+            let body = {
+                _id: this.User._id
+            };
+
+
+            this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+                .map(res => res.json())
+                .subscribe(data => {
+                    console.log(data);
+                    this.button = true;
+                    this.try = false;
+
+                });
+
+        });
+    }
+
+    removeFavorite(post) {
+
+        this.button = false;
+        this.try = true;
+        this.storage.get('token').then((val) => {
+            var APIUrl = '/user/favorite';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+            //   // console.log('yes');
+            // }
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+            let body = JSON.stringify({
+                _id: this.User._id
+            });
+            let options = new RequestOptions({
+                headers: headers,
+                body: body
+            });
+
+            this.http.delete(APIUrl, options)
+                .map(res => res.json())
+                .subscribe(data => {
+                    console.log(data);
+                    this.try = false;
+
+                });
+        });
     }
 
 

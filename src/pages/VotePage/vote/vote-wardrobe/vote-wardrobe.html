@@ -41,7 +41,8 @@
                         <p class="profileText">He determined to drop his litigation with the monastry, and
                             relinguish.</p>
                         <button class="add" ion-button small color="dark">Today {{User.viewCnt}}</button>
-                        <button class="add" ion-button small outline color="dark">add</button>
+                        <button *ngIf="!button" (click)="addFavorite()" class="add" [disabled]= "try" ion-button small outline color="dark">add</button>
+                        <button *ngIf="button" (click)="removeFavorite()" class="add" [disabled]= "try" ion-button small color="dark">added</button>
                     </div>
                 </ion-col>
             </ion-row>

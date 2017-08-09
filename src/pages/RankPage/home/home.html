@@ -86,8 +86,8 @@
           <div class="buttonArea">
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)!==-1" ion-button small color="sub" (click)='removeFavorite(rank);'>Add</button>-->
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
+            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>
+            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
           </div>
         </div>
       </div>
