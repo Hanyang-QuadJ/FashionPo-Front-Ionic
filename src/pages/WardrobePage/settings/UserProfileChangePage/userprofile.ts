@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ViewController, Content} from 'ionic-angular';
+import {NavController, NavParams, ViewController, Content, ActionSheetController} from 'ionic-angular';
 import {Platform, ModalController, LoadingController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {Http, Headers} from "@angular/http";
@@ -29,17 +29,19 @@ export class UserProfileChange {
               private storage: Storage,
               private http: Http,
               public toastCtrl: ToastController,
-              public camera: Camera
+              public camera: Camera,
+              public actionSheetCtrl: ActionSheetController
   ) {
 
   }
 
   ngOnInit(): void {
-    var APIUrl_1 = '/user/authed';
-    if (this.platform.is('ios') == true){
-      APIUrl_1 = 'http://54.162.160.91/api/user/authed';
-    }
+
     this.storage.get('token').then((val) => {
+      var APIUrl_1 = '/user';
+      if (this.platform.is('ios') == true){
+        APIUrl_1 = 'http://54.162.160.91/api/user';
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -59,7 +61,30 @@ export class UserProfileChange {
     });
 
   }
-
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
   pictureTaken :boolean = false;
   public takePicture(sourceType){
     let options = {
@@ -85,11 +110,12 @@ export class UserProfileChange {
 
   }
   update() {
-    var APIUrl = '/user';
-    if (this.platform.is('ios') == true){
-      APIUrl = 'http://54.162.160.91/api/user';
-    }
+
     this.storage.get('token').then((val) => {
+      var APIUrl = '/user';
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/user';
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
