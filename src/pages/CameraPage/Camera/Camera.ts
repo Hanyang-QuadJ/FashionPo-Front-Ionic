@@ -156,46 +156,55 @@ export class CameraPage implements OnInit{
   post(){
     var jbSplit = this.tagsInput.split(' ',100);
     var myArray = jbSplit.filter(v=>v!='');
-    for(var i = 0; i<myArray.length; i++){
-      this.tags.push({'tag':myArray[i]})
+    var myArray2=[];
+
+    for(var i = 0; i<myArray.length;i++){
+
+      if(myArray[i].includes('#')){
+        myArray2.push(myArray[i])
+      }
+    }
+
+    for(var j = 0; j<myArray2.length; j++){
+      this.tags.push({'tag':myArray2[j]})
     }
 
     console.log(this.tags)
 
 
-    var APIUrl = '/post';
-    if (this.platform.is('ios') == true){
-      APIUrl = 'http://54.162.160.91/api/post';
-      // console.log('yes');
-    }
-    this.storage.get('token').then((val) => {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // console.log(val);
-
-      let body = {
-        base_64: this.base64Image,
-        tags:this.tags
-
-      };
-      this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
-        .map(res => res.json())
-        .subscribe(
-          data => {
-            let toast = this.toastCtrl.create({
-              message: 'upload success',
-              duration: 2000
-            });
-
-            toast.present(toast);
-          },
-          err => {
-
-          });
-    }, (err) => {
-      console.log(err);
-    });
+    // var APIUrl = '/post';
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://54.162.160.91/api/post';
+    //   // console.log('yes');
+    // }
+    // this.storage.get('token').then((val) => {
+    //   let headers = new Headers();
+    //   headers.append('Content-Type', 'application/json');
+    //   headers.append('x-access-token', val);
+    //   // console.log(val);
+    //
+    //   let body = {
+    //     base_64: this.base64Image,
+    //     tags:this.tags
+    //
+    //   };
+    //   this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
+    //     .map(res => res.json())
+    //     .subscribe(
+    //       data => {
+    //         let toast = this.toastCtrl.create({
+    //           message: 'upload success',
+    //           duration: 2000
+    //         });
+    //
+    //         toast.present(toast);
+    //       },
+    //       err => {
+    //
+    //       });
+    // }, (err) => {
+    //   console.log(err);
+    // });
 
 
 

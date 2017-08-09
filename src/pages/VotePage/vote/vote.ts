@@ -123,7 +123,7 @@ export class VotePage implements OnInit{
 
             event.target.style['-webkit-filter'] = `blur(20px)`;
             event.target.style['filter'] = `blur(20px)`;
-            event.target.style.background = "pink";
+
 
         }
 

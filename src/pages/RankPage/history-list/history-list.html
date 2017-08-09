@@ -20,8 +20,8 @@
 
 <ion-content padding>
   <ion-list>
-    <button (click)="goToPage(i)" *ngFor="let dates of date; let i = index" ion-item>
-      {{dates.createdAt}}
+    <button (click)="goToPage(i)" *ngFor="let dates of dateFinal; let i = index" ion-item>
+      {{dates.mon}} {{dates.sDay}} ~ {{dates.eDay}}  , {{dates.yr}}
     </button>
 
   </ion-list>

@@ -14,9 +14,12 @@ import { NavController, NavParams,ViewController, } from 'ionic-angular';
 })
 export class HistoryRankPage {
   rankSheet:Array<any>=[];
+  date:Array<any>=[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
     this.rankSheet = navParams.get('rankSheet');
+    this.date = navParams.get('week')
+
   }
 
   ionViewDidLoad() {

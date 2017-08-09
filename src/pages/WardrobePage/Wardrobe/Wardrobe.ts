@@ -73,10 +73,10 @@ export class WardrobePage {
    this.storage.get('token').then((val) => {
      var APIUrl = '/user';
      var APIUrl_2 = '/post';
-     if (this.platform.is('ios') == true){
-       APIUrl = 'http://54.162.160.91/api/user';
-       APIUrl_2 = 'http://54.162.160.91/api/post';
-     }
+     // if (this.platform.is('ios') == true){
+     //   APIUrl = 'http://54.162.160.91/api/user';
+     //   APIUrl_2 = 'http://54.162.160.91/api/post';
+     // }
 
      let headers = new Headers();
      headers.append('Content-Type', 'application/json');
