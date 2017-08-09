@@ -1,18 +1,22 @@
 page-home {
   $tabs-ios-tab-padding-top:20px;
 
-
+  p{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
   .toolbar-background {
     background-color: #ffffff;
 
   }
   .toolbar-title-ios {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #ff5733;
     pointer-events: auto;
   }
+
   .toolbar{
     box-shadow: 0px 0.05rem 0px #ff5733! important;
   }
@@ -65,6 +69,12 @@ page-home {
   .image {
 
     flex: 1;
+
+  }
+  .history{
+    font-weight: 600;
+    color: #7a7a7a;
+    font-size: 13px;
 
   }
   .name {

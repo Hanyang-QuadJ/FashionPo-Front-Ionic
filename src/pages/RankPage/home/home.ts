@@ -318,62 +318,7 @@ export class HomePage implements OnInit {
             this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log(data);
-                    // this.storage.get('token').then((val) => {
-                    //     let APIUrl = '/user';
-                    //     // if (this.platform.is('ios') == true){
-                    //     //   APIUrl = 'http://54.162.160.91/api/user';
-                    //     //   // console.log('yes');
-                    //     // }
-                    //
-                    //     console.log(this.writtenBys);
-                    //     let body = {users: this.writtenBys};
-                    //     let headers = new Headers();
-                    //     headers.append('Content-Type', 'application/json');
-                    //     headers.append('x-access-token', val);
-                    //
-                    //
-                    //     this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
-                    //         .map(res => res.json())
-                    //         .subscribe(data => {
-                    //             console.log(data)
-                    //             console.log('********')
-                    //
-                    //             this.firstUser = data[0];
-                    //             this.users = [];
-                    //             for (let i = 1; i < data.length; i++) {
-                    //                 this.users.push(data[i]);
-                    //             }
-                    //             console.log(this.ranks)
-                    //             console.log(this.users)
-                    //             // console.log(this.firstUser);
-                    //             // console.log(this.users[1]);
-                    //             // console.log(this.firstPost);
-                    //             // console.log(this.ranks);
-                    //             this.storage.get('token').then((val) => {
-                    //                 let APIUrl = '/user/authed';
-                    //                 // if (this.platform.is('ios') == true){
-                    //                 //   APIUrl = 'http://54.162.160.91/api/user/authed';
-                    //                 //   // console.log('yes');
-                    //                 // }
-                    //                 let headers = new Headers();
-                    //                 headers.append('Content-Type', 'application/json');
-                    //                 headers.append('x-access-token', val);
-                    //
-                    //
-                    //                 this.http.get(APIUrl, {headers: headers})
-                    //                     .map(res => res.json())
-                    //                     .subscribe(data => {
-                    //                         this.user = data.user[0];
-                    //                         for (let i = 0; i < this.ranks.length; i++)
-                    //                             this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
-                    //                         console.log("-------------------");
-                    //                         console.log(this.buttons);
-                    //                         console.log("-------------------");
-                    //                     });
-                    //             });
-                    //         });
-                    // });
+
 
                 });
 
@@ -415,63 +360,13 @@ export class HomePage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     console.log(data);
-                    // this.storage.get('token').then((val) => {
-                    //     let APIUrl = '/user';
-                    //     // if (this.platform.is('ios') == true){
-                    //     //   APIUrl = 'http://54.162.160.91/api/user';
-                    //     //   // console.log('yes');
-                    //     // }
-                    //
-                    //     console.log(this.writtenBys);
-                    //     let body = {users: this.writtenBys};
-                    //     let headers = new Headers();
-                    //     headers.append('Content-Type', 'application/json');
-                    //     headers.append('x-access-token', val);
-                    //
-                    //
-                    //     this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
-                    //         .map(res => res.json())
-                    //         .subscribe(data => {
-                    //             console.log(data)
-                    //             console.log('********')
-                    //
-                    //             this.firstUser = data[0];
-                    //             this.users = [];
-                    //             for (let i = 1; i < data.length; i++) {
-                    //                 this.users.push(data[i]);
-                    //             }
-                    //             console.log(this.ranks)
-                    //             console.log(this.users)
-                    //             // console.log(this.firstUser);
-                    //             // console.log(this.users[1]);
-                    //             // console.log(this.firstPost);
-                    //             // console.log(this.ranks);
-                    //             this.storage.get('token').then((val) => {
-                    //                 let APIUrl = '/user/authed';
-                    //                 // if (this.platform.is('ios') == true){
-                    //                 //   APIUrl = 'http://54.162.160.91/api/user/authed';
-                    //                 //   // console.log('yes');
-                    //                 // }
-                    //                 let headers = new Headers();
-                    //                 headers.append('Content-Type', 'application/json');
-                    //                 headers.append('x-access-token', val);
-                    //
-                    //
-                    //                 this.http.get(APIUrl, {headers: headers})
-                    //                     .map(res => res.json())
-                    //                     .subscribe(data => {
-                    //                         this.user = data.user[0];
-                    //                         for (let i = 0; i < this.ranks.length; i++)
-                    //                             this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
-                    //                         console.log("-------------------");
-                    //                         console.log(this.buttons);
-                    //                         console.log("-------------------");
-                    //                     });
-                    //             });
-                    //         });
-                    // });
+
                 });
         });
+    }
+    presentHistoryModal(){
+      let historyModal = this.modalCtrl.create(WardrobePhotoPage, { },{leaveAnimation:'back'});
+      historyModal.present();
     }
 
 

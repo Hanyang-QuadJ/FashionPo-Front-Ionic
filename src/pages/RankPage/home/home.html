@@ -5,18 +5,21 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <ion-toolbar hideBackButton="true">
+  <ion-navbar hideBackButton="true">
     <ion-buttons start>
       <button  (click)="Vote()"  *ngIf="!toggled" ion-button icon-only color="primay">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!searchToggled" (click)="scrollToTop()">Flex</ion-title>
+    <ion-title  *ngIf="!searchToggled" (click)="scrollToTop()">Flex<br><span class="history">Aug 1 ~ Aug 7,2017</span></ion-title>
+
+
     <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd"></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
       </button>
+
       <button *ngIf="searchToggled" (click)="toggleSearch2()" ion-button icon-only color="primary">
         <ion-icon name="ios-close-circle-outline"></ion-icon>
       </button>
@@ -24,7 +27,8 @@
         <!--<ion-icon name="md-list"></ion-icon>-->
       <!--</button>-->
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
+
   <ion-toolbar *ngIf="searchToggled">
     <ion-segment [(ngModel)]="search" color="primary">
       <ion-segment-button value="user" >

@@ -19,6 +19,7 @@ import {UsernamePage} from '../pages/WardrobePage/settings/UsernameChangePage/us
 import {WardrobeCameraPage} from '../pages/WardrobePage/wardrobe-camera/wardrobe-camera';
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 import {VoteWardrobePage} from '../pages/VotePage/vote/vote-wardrobe/vote-wardrobe';
+import {HistoryListPage} from '../pages/RankPage/history-list/history-list';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -65,6 +66,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         FavoriteUserPage,
         UsernamePage,
         VoteWardrobePage,
+        HistoryListPage,
     ],
     imports: [
         BrowserModule,
@@ -97,6 +99,7 @@ import {FavoriteUserPage} from '../pages/WardrobePage/favorite-user/favorite-use
         UsernamePage,
         WardrobeCameraPage,
         VoteWardrobePage,
+        HistoryListPage,
     ],
     providers: [
         StatusBar,
