@@ -319,7 +319,7 @@ export class HomePage implements OnInit {
             this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-
+                    console.log()
 
                 });
 

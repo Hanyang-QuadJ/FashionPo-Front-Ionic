@@ -1,7 +1,7 @@
 
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, ToastController, ModalController, App} from 'ionic-angular';
+import {NavController, NavParams, Platform, Content, ToastController, ModalController, App} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
@@ -36,7 +36,8 @@ export class VotePage implements OnInit{
     cachedPost: Array<object> = [];
     tabBarElement: any;
     overlayColor: string = 'transparent'; //Default Color
-
+    user: any;
+    @ViewChild(Content) content: Content;
     constructor(private http: Http,
                 private storage: Storage,
                 public navCtrl: NavController,
@@ -72,6 +73,7 @@ export class VotePage implements OnInit{
           this.addNewposts();
         });
     });
+
 
     this.stackConfig = {
       throwOutConfidence: (offsetX, offsetY, element) => {
@@ -173,6 +175,26 @@ export class VotePage implements OnInit{
 // Add new posts to our array
     addNewposts() {
         this.posts.push(this.nextPost);
+        this.storage.get('token').then((val) => {
+            var APIUrl = '/user';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   // console.log('yes');
+            // }
+            let headers = new Headers();
+            let body = {
+                users:[this.posts[0].writtenBy]
+            }
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+
+
+            this.http.post(APIUrl,JSON.stringify(body) ,{headers: headers})
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.user = data[0];
+                });
+        });
         console.log("-----------");
         console.log(this.posts);
         console.log("-----------");

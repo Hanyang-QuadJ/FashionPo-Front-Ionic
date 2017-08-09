@@ -4,128 +4,70 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header no-border>
     <ion-navbar>
+        <ion-buttons start>
+            <button (click)="dismiss()" ion-button icon-only color="primary">
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
         <ion-title>
-            peggy_gould
+            HanyangWardrobe
         </ion-title>
         <ion-buttons end>
 
-            <button (click)="Settings()" ion-button icon-only color="primary">
-                <ion-icon name="ios-settings"></ion-icon>
-            </button>
+
         </ion-buttons>
 
     </ion-navbar>
 
-
-    <!--<ion-toolbar no-border-top>--
-      <!--<ion-segment [(ngModel)]="option">-->
-    <!--<ion-segment-button value="view">-->
-    <!--{{myposts}} My Fits-->
-    <!--</ion-segment-button>-->
-    <!--&lt;!&ndash;<ion-segment-button value="following">&ndash;&gt;-->
-    <!--&lt;!&ndash;{{followings}} Followings&ndash;&gt;-->
-    <!--&lt;!&ndash;</ion-segment-button>&ndash;&gt;-->
-    <!--&lt;!&ndash;<ion-segment-button value="follower">&ndash;&gt;-->
-    <!--&lt;!&ndash;{{followeds}} Followers&ndash;&gt;-->
-    <!--&lt;!&ndash;</ion-segment-button>&ndash;&gt;-->
-    <!--<ion-segment-button value="favorites">-->
-    <!--{{favoritesLength}} Favorites-->
-    <!--</ion-segment-button>-->
-    <!--</ion-segment>-->
-    <!--</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row justify-content-center align-items-center>
-            <!--<ion-col col-2 text-center>-->
-            <!--<p class="infoText">Today</p>-->
-            <!--<h5 class="todayCount">98</h5>-->
-            <!--<br>-->
-            <!--<p *ngIf="toggled" class="infoText">Rank</p>-->
-            <!--<h5 *ngIf="toggled"  class="rankCount">4</h5>-->
-            <!--</ion-col>-->
-            <ion-col col-5 text-center>
-                <img class="image" src="{{user.profile_img}}">
-            </ion-col>
-            <ion-col col-6>
-                <div class="padding">
-                    <!--<h5 class="userName">{{user.username}}</h5>-->
-                    <h5 class="userName">{{user.username}}</h5>
+    <div *ngIf="loaded">
+        <ion-grid>
+            <ion-row justify-content-center align-items-center>
 
-                    <p class="profileText">Model</p>
-                    <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
-                    <button class="add" ion-button small color="dark">Today 98</button>
+                <ion-col col-5 text-center>
+                    <img class="image" src="../../assets/images/myPic3.png">
+                </ion-col>
+                <ion-col col-6>
+                    <div class="padding">
+                        <!--<h5 class="userName">{{user.username}}</h5>-->
+                        <h5 class="userName">{{User.username}}</h5>
 
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <hr>
+                        <p class="profileText">Student</p>
+                        <p class="profileText">He determined to drop his litigation with the monastry, and
+                            relinguish.</p>
+                        <button class="add" ion-button small color="dark">Today {{User.viewCnt}}</button>
+                        <button class="add" ion-button small outline color="dark">add</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <hr>
+        <p class="infoText">This Week's Fits</p>
+        <ion-scroll scrollX="true" class="twPic">
 
+            <img class="horiPic" src="../../assets/images/post2.png">
+            <img class="horiPic" src="../../assets/images/post2.png">
+            <img class="horiPic" src="../../assets/images/post2.png">
+            <img class="horiPic" src="../../assets/images/post2.png">
+            <img class="horiPic" src="../../assets/images/post2.png">
+            <img class="horiPic" src="../../assets/images/post2.png">
 
-    <p class="infoText">This Week's Fits</p>
-
-
-
-
-    <ion-scroll scrollX="true" class="twPic">
-
-        <div>
-
-
-
-
-
-
-            <img class="horiPic" src="../../assets/images/post1.png">
-            <img class="horiPic" src="../../assets/images/post1.png">
-            <img class="horiPic" src="../../assets/images/post1.png">
-            <img class="horiPic" src="../../assets/images/post1.png">
-        </div>
-
-
-
-
-
-
-        <!--<img class="horiPic" src="../../assets/images/myPic2.png">-->
-        <!--<img class="horiPic" src="../../assets/images/myPic3.png">-->
-        <!--<img class="horiPic" src="../../assets/images/post1.png">-->
-        <!--<img class="horiPic" src="../../assets/images/post2.png">-->
-    </ion-scroll>
-    <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
-
-    <super-tabs *ngIf="loaded && loadedd" toolbarColor="dark">
-        <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist}" title="My Fits"></super-tab>
-        <super-tab [root]="tab2" [rootParams]="{favorite:favorites}"title="Favorites"></super-tab>
-    </super-tabs>
-
-
-
-
-    <!--<div [ngSwitch]="option">-->
-
-
-    <!--<ion-list *ngSwitchCase="'following'">-->
-    <!--<ion-item *ngFor="let following of user.following">-->
-    <!--<ion-thumbnail item-start>-->
-    <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/3.jpg">-->
-    <!--</ion-thumbnail>-->
-    <!--<h2>{{following.name}}</h2>-->
-    <!--</ion-item>-->
-    <!--</ion-list>-->
-
-    <!--<ion-list *ngSwitchCase="'follower'">-->
-    <!--<ion-item *ngFor="let followed of user.followed">-->
-    <!--<ion-thumbnail item-start>-->
-    <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/4.jpg">-->
-    <!--</ion-thumbnail>-->
-    <!--<h2>{{followed.name}}</h2>-->
-    <!--</ion-item>-->
-    <!--</ion-list>-->
-    <!--</div>-->
+        </ion-scroll>
+        <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
+        <hr>
+        <p class="infoText">Fits</p>
+        <ion-grid no-padding>
+            <ion-row wrap no-padding>
+                <ion-col col-4 *ngFor="let post of posts; let i = index">
+                    <img class="myFitImage" src={{post.picURL}}>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-content>
 

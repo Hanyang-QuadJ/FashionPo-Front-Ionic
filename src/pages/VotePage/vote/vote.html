@@ -7,7 +7,7 @@
 <ion-header no-border>
 
   <ion-navbar hide-tabs>
-    <ion-title *ngFor="let post of posts"><p id="post-name">{{post.writtenBy}}<p></ion-title>
+    <ion-title *ngIf="user"><p id="post-name">{{user.username}}<p></ion-title>
     <ion-buttons end>
       <button (click)="Rank()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-forward"></ion-icon>

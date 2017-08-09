@@ -23,13 +23,17 @@ import {Storage} from '@ionic/storage';
 
 export class VoteWardrobePage {
     usernameForm: FormGroup;
-    loaded:boolean = false;
+    User_id: any;
+    User: any;
+    loaded: boolean = false;
+    posts: any;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
                 private storage: Storage,
                 private http: Http,
                 public toastCtrl: ToastController,
+                public navParams: NavParams,
     ) {
         this.usernameForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
@@ -38,70 +42,77 @@ export class VoteWardrobePage {
     }
 
     ngOnInit(): void {
+        this.User_id = this.navParams.get('user_id');
         this.storage.get('token').then((val) => {
-            var APIUrl = '/user/authed';
+            var APIUrl = '/user';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/authed';
-            //   // console.log('yes');
-            // }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            this.http.get(APIUrl, {headers: headers})
-                .map(res => res.json())
-                .subscribe(
-                    data => {
-                        console.log(data.user[0].username);
-                        this.usernameForm.value.username = data.user[0].username;
-                        this.usernameForm.setValue({username:data.user[0].username});
-                        this.loaded = true;
-                    });
-
-
-        });
-    }
-
-    public dismiss() {
-        this.viewCtrl.dismiss()
-    }
-
-    showToast(position: string) {
-        let toast = this.toastCtrl.create({
-            message: 'this username is already used',
-            duration: 2000,
-            position: position
-        });
-
-        toast.present(toast);
-    }
-
-    public usernameChange() {
-        this.storage.get('token').then((val) => {
-            var APIUrl = '/user/update/username';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/update/username';
+            //   APIUrl = 'http://54.162.160.91/api/user';
             //   // console.log('yes');
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
             let body = {
-                username: this.usernameForm.value.username,
+                users:[this.User_id]
             }
-            console.log(this.usernameForm.value.username);
-            this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+            this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
-                .subscribe(
-                    data => {
-                        this.dismiss();
-                    },
-                    err => {
-                        this.showToast("bottom");
-                    });
+                .subscribe(data => {
+                    this.User = data[0];
+                    console.log("--------------------");
+                    console.log(this.User);
+                    console.log("--------------------");
+                    this.storage.get('token').then((val) => {
+                        var APIUrl = '/post/userid';
+                        // if (this.platform.is('ios') == true){
+                        //   APIUrl = 'http://54.162.160.91/api/post/userid';
+                        //   // console.log('yes');
+                        // }
+                        let headers = new Headers();
+                        headers.append('Content-Type', 'application/json');
+                        headers.append('x-access-token', val);
+                        let body = {
+                            _id:[this.User_id]
+                        }
+                        this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
+                            .map(res => res.json())
+                            .subscribe(data => {
+                                this.posts = data;
+                                this.storage.get('token').then((val) => {
+                                    var APIUrl = '/post/view';
+                                    // if (this.platform.is('ios') == true){
+                                    //   APIUrl = 'http://54.162.160.91/api/post/view';
+                                    //   // console.log('yes');
+                                    // }
+                                    let headers = new Headers();
+                                    headers.append('Content-Type', 'application/json');
+                                    headers.append('x-access-token', val);
+                                    let body = {
+                                        user_id:[this.User_id]
+                                    }
+                                    this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
+                                        .map(res => res.json())
+                                        .subscribe(data => {
+                                            console.log(data);
+                                            this.loaded = true;
+                                        });
 
+                                });
+                            });
+
+                    });
+                });
 
         });
+
+
     }
+
+    public dismiss() {
+        this.viewCtrl.dismiss()
+    }
+
+
 
 
 }
