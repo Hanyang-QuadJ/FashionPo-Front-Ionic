@@ -210,93 +210,9 @@ export class WardrobePage {
              this.month.push('Dec')
            }
 
-           //음수 예외처리.....
-           if(Number(this.date[h].substring(8,10))===6){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(31)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(28)
-             }
-             else{
-               this.startDay.push(30);
-             }
-
-           }
-           else if(Number(this.date[h].substring(8,10))===5){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(30)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(27)
-             }
-             else{
-               this.startDay.push(29);
-             }
-
-           }
-           else if(Number(this.date[h].substring(8,10))===4){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(29)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(26)
-             }
-             else{
-               this.startDay.push(28);
-             }
-
-           }
-           else if(Number(this.date[h].substring(8,10))===3){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(28)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(25)
-             }
-             else{
-               this.startDay.push(27);
-             }
-
-           }
-           else if(Number(this.date[h].substring(8,10))===2){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(27)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(24)
-             }
-             else{
-               this.startDay.push(26);
-             }
-
-           }
-           else if(Number(this.date[h].substring(8,10))===1){
-             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
-               this.startDay.push(26)
-
-             }
-             else if(this.month[h]==="Mar"){
-               this.startDay.push(23)
-             }
-             else{
-               this.startDay.push(25);
-             }
-
-           }
-           else{
-             this.startDay.push(Number(this.date[h].substring(8,10))-6);
-           }
-           //음수예외처리 끝
 
            this.endDay.push(Number(this.date[h].substring(8,10)));
 
-           this.mypostlist[h]['sDay']=this.startDay[h]
              this.mypostlist[h]['eDay']=this.endDay[h]
                this.mypostlist[h]['mon']=this.month[h]
                  this.mypostlist[h]['yr']=this.year[h]
