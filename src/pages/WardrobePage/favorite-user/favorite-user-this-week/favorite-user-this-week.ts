@@ -1,70 +1,41 @@
-import { Component,ViewChild,OnInit } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
 
 /**
- * Generated class for the WardrobePhotoPage page.
+ * Generated class for the FavoriteUserThisWeekPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-wardrobe-photo',
-  templateUrl: 'wardrobe-photo.html',
+  selector: 'page-favorite-user-this-week',
+  templateUrl: 'favorite-user-this-week.html',
 })
-export class WardrobePhotoPage implements OnInit{
+export class FavoriteUserThisWeekPage {
   @ViewChild(Content) content: Content;
-  postList ="";
-  postListIndex:string="";
-  date:Array<any>=[];
-
-
+  postList:"";
+  postListIndex:"";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    console.log(navParams.get('postListIndex'));
-    this.postList = navParams.get('postList');
-    this.postListIndex = navParams.get('postListIndex');
+    this.postList = this.navParams.get('thisWeekPost');
+    this.postListIndex = this.navParams.get('thisWeekPostIndex');
+  }
 
-
-
-
-
-
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad FavoriteUserThisWeekPage');
   }
 
   ionViewWillEnter(){
     this.scrollToCard()
+
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
     console.log(yOffset)
     this.content.scrollTo(0,yOffset,0);
   }
-  ngOnInit(): void {
-
-
-  }
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WardrobePhotoPage');
-    console.log(this.postList)
-
-
-
-
-  }
-
-
-
-
   public dismiss(){
     this.viewCtrl.dismiss()
   }
-
-
-
-
-
-
 
 }

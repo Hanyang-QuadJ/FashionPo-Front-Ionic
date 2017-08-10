@@ -59,55 +59,323 @@ export class HistoryListPage implements OnInit{
           for(var j = 0; j<this.rankList.length; j++){
             this.ranksheet.push(data.ranks[j].rankSheet)
           }
+          console.log(Number(this.date[1].substring(8,10)));
           for(var h = 0; h<this.date.length; h++){
             this.year.push(this.date[h].substring(0,4));
-            this.startDay.push(Number(this.date[h].substring(8,10))-6);
+            if(Number(this.date[h].substring(8,10))===6){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(31)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+              }
+              if(this.date[h].substring(5,7)==='03'){
+                this.startDay.push(28)
+                this.month.push('Feb')
+              }
+              else{
+                this.startDay.push(30);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))===5){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(30)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+
+              }
+              if(this.date[h].substring(5,7)==='03'){
+                this.startDay.push(27)
+                this.month.push('Feb')
+              }
+              else{
+                this.startDay.push(29);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))===4){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(29)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+
+              }
+              if(this.date[h].substring(5,7)==='03'){
+                this.startDay.push(26)
+                this.month.push('Feb')
+              }
+              else{
+                this.startDay.push(28);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))===3){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(28)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+
+              }
+              if(this.date[h].substring(5,7)==='03'){
+                this.startDay.push(25)
+                this.month.push('Feb')
+              }
+              else{
+                this.startDay.push(27);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))===2){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(27)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+
+              }
+              if(Number(this.date[h].substring(5,7))===3){
+                this.startDay.push(24)
+                this.month.push('Feb')
+              }
+              else{
+                this.startDay.push(26);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))===1){
+              if(this.date[h].substring(5,7)==='04' || '06' ||'09'|| '11'){
+                this.startDay.push(26)
+                if(this.date[h].substring(5,7)==='04'){
+                  this.month.push('Mar')
+                }
+                else if(this.date[h].substring(5,7)==='06'){
+                  this.month.push('May')
+                }
+                else if(this.date[h].substring(5,7)==='09'){
+                  this.month.push('Aug')
+                }
+                else if(this.date[h].substring(5,7)==='11'){
+                  this.month.push('Oct')
+                }
+
+              }
+              if(this.date[h].substring(5,7)==='03'){
+                this.startDay.push(23)
+                this.month.push('Feb')
+
+              }
+              else{
+                this.startDay.push(25);
+                if(this.date[h].substring(5,7)==='01'){
+                  this.month.push('Dec')
+                }
+                else if(this.date[h].substring(5,7)==='02'){
+                  this.month.push('Jan')
+                }
+                else if(this.date[h].substring(5,7)==='03'){
+                  this.month.push('Feb')
+                }
+                else if(this.date[h].substring(5,7)==='05'){
+                  this.month.push('Apr')
+                }
+                else if(this.date[h].substring(5,7)==='07'){
+                  this.month.push('Jun')
+                }
+                else if(this.date[h].substring(5,7)==='08'){
+                  this.month.push('Jul')
+                }
+
+              }
+
+            }
+            else if(Number(this.date[h].substring(8,10))>6){
+              if(this.date[h].substring(5,7)==='01'){
+                this.month.push('Jan')
+              }
+              else if(this.date[h].substring(5,7)==='02'){
+                this.month.push('Feb')
+              }
+              else if(this.date[h].substring(5,7)==='03'){
+                this.month.push('Mar')
+              }
+              else if(this.date[h].substring(5,7)==='04'){
+                this.month.push('Apr')
+              }
+              else if(this.date[h].substring(5,7)==='05'){
+                this.month.push('May')
+              }
+              else if(this.date[h].substring(5,7)==='06'){
+                this.month.push('Jun')
+              }
+              else if(this.date[h].substring(5,7)==='07'){
+                this.month.push('Jul')
+              }
+              else if(this.date[h].substring(5,7)==='08'){
+                this.month.push('Aug')
+              }
+              else if(this.date[h].substring(5,7)==='09'){
+                this.month.push('Sep')
+              }
+              else if(this.date[h].substring(5,7)==='10'){
+                this.month.push('Oct')
+              }
+              else if(this.date[h].substring(5,7)==='11'){
+                this.month.push('Nov')
+              }
+              else if(this.date[h].substring(5,7)==='12'){
+                this.month.push('Dec')
+              }
+              this.startDay.push(Number(this.date[h].substring(8,10))-6);
+            }
+            //음수예외처리 끝
+
             this.endDay.push(Number(this.date[h].substring(8,10)));
-            if(this.date[h].substring(5,7)==='01'){
-              this.month.push('Jan')
-            }
-            else if(this.date[h].substring(5,7)==='02'){
-              this.month.push('Feb')
-            }
-            else if(this.date[h].substring(5,7)==='03'){
-              this.month.push('Mar')
-            }
-            else if(this.date[h].substring(5,7)==='04'){
-              this.month.push('Apr')
-            }
-            else if(this.date[h].substring(5,7)==='05'){
-              this.month.push('May')
-            }
-            else if(this.date[h].substring(5,7)==='06'){
-              this.month.push('Jun')
-            }
-            else if(this.date[h].substring(5,7)==='07'){
-              this.month.push('Jul')
-            }
-            else if(this.date[h].substring(5,7)==='08'){
-              this.month.push('Aug')
-            }
-            else if(this.date[h].substring(5,7)==='09'){
-              this.month.push('Sep')
-            }
-            else if(this.date[h].substring(5,7)==='10'){
-              this.month.push('Oct')
-            }
-            else if(this.date[h].substring(5,7)==='11'){
-              this.month.push('Nov')
-            }
-            else if(this.date[h].substring(5,7)==='12'){
-              this.month.push('Dec')
-            }
+
             this.dateFinal.push({'sDay':this.startDay[h],'eDay':this.endDay[h],'mon':this.month[h],'yr':this.year[h]})
           }
 
           console.log("&&&&&&&&&")
-          console.log(this.date)
-          console.log(this.year);
-          console.log(this.month);
-          console.log(this.startDay);
-          console.log(this.endDay);
+
           console.log(this.dateFinal);
 
         });

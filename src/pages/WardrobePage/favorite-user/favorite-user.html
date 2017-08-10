@@ -46,15 +46,13 @@
   <p class="infoText">This Week's Fits</p>
   <ion-scroll scrollX="true" class="twPic">
 
-    <img class="horiPic" src="../../assets/images/post2.png">
-    <img class="horiPic" src="../../assets/images/post2.png">
-    <img class="horiPic" src="../../assets/images/post2.png">
-    <img class="horiPic" src="../../assets/images/post2.png">
-    <img class="horiPic" src="../../assets/images/post2.png">
-    <img class="horiPic" src="../../assets/images/post2.png">
+
+        <img (click)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost; let i = index" class="horiPic" src="{{tWeek.picURL}}">
+
+
 
   </ion-scroll>
-  <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
+
   <hr>
   <p class="infoText">Fits</p>
   <ion-grid no-padding>

@@ -3,6 +3,7 @@ import { NavController, NavParams,ViewController, ModalController,LoadingControl
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite-user-post'
+import {FavoriteUserThisWeekPage} from '../favorite-user/favorite-user-this-week/favorite-user-this-week';
 
 
 
@@ -20,7 +21,8 @@ import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite
 })
 export class FavoriteUserPage implements OnInit{
   favUser:any=""
-  posts:any=""
+  posts:Array<any>=[];
+  thisWeekPost:Array<any>=[];
   favUsers:any=""
 
 
@@ -33,7 +35,6 @@ export class FavoriteUserPage implements OnInit{
     let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
     loading.present();
     this.favUser = this.navParams.get('favList');
-    console.log(this.favUser);
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
       var APIUrl_1 = '/user'
@@ -50,25 +51,20 @@ export class FavoriteUserPage implements OnInit{
       this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
-          this.posts = data;
-        });
+          for(var i = 0; i<data.length; i++){
+            if(data[i].isThisWeek===true){
+              this.thisWeekPost.push(data[i]);
+            }
+            else if(data[i].isThisWeek === false){
+              this.posts.push(data[i]);
+            }
 
-      let body2 = {
-        users:this.favUser.favorites
-      }
+          }
+          console.log(this.thisWeekPost)
+          console.log(this.posts)
 
-      this.http.post(APIUrl_1,JSON.stringify(body2),{headers:headers})
-        .map(res => res.json())
-        .subscribe(data => {
-
-
-          this.favUsers = data;
-          console.log('&^%^$$%$%')
-          console.log(this.favUsers)
           loading.dismiss();
         });
-
-
 
 
     });
@@ -88,6 +84,12 @@ export class FavoriteUserPage implements OnInit{
     profileModal.present();
 
   }
+  presentThisWeekModal(i){
+    let thisWeekModal = this.modalCtrl.create(FavoriteUserThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i},{leaveAnimation:'back'});
+    thisWeekModal.present();
+  }
+
+
 
 
 

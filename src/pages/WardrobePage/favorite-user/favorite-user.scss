@@ -113,12 +113,9 @@ page-favorite-user {
 
   }
   .horiPic{
-    height: 110px;
-    width: 80px;
-
-
-    object-fit: cover; /*magic*/
-
+    height: auto;
+    width: 33%;
+    margin-right: 2px;
 
   }
   .small{
@@ -137,7 +134,7 @@ page-favorite-user {
     width:100%;
     height:100%;
     padding-right: 2px;
-    padding-bottom:2px
+    padding-top:2px;
   }
   super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button {
 

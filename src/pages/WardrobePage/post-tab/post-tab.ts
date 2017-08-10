@@ -22,6 +22,7 @@ export class PostTabPage implements OnInit{
 
   myPost: Array<object> = [];
   postAlert:string="";
+  date:Array<any> = [];
   check:boolean;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -35,6 +36,8 @@ export class PostTabPage implements OnInit{
     this.check=false;
     this.myPost = this.navParams.data.mypost;
     this.postAlert = this.navParams.data.postAlert;
+
+
     if(this.myPost.length == 0){
       this.check=true;
     }

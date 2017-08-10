@@ -20,14 +20,17 @@
 
 <ion-content>
 
-    <div style="flex:1" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
+    <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
       <div #mycards1 swing-card *ngFor="let post of posts">
         <!--<img *ngIf="post" [src]="post.picURL">-->
 
-        <img  style="position:absolute;border:3px solid red;width:100%; z-index:0; height:90vh;  /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
+        <img  style="position:absolute;width:auto; height: auto; z-index:0; /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
       </div>
-      <img  style="position:absolute;border:3px solid blue;width:100%; z-index:-9; height:90vh; /*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">
+      <img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">
     </div>
+
+
+
 
 </ion-content>
 

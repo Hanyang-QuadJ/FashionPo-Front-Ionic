@@ -7,20 +7,14 @@
 <ion-content>
 
   <ion-grid  *ngIf="!check" no-padding>
-  <!--<ion-list>-->
-    <!--<ion-item *ngFor="let post of mypostlist">-->
-      <!--<ion-thumbnail item-start>-->
-        <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{post.picURL}}">-->
-      <!--</ion-thumbnail>-->
-      <!--<h2>{{post.likeCnt}} Likes</h2>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
-  <ion-row wrap no-padding>
-    <ion-col col-4 *ngFor="let post of myPost; let i = index">
-      <img (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
-    </ion-col>
-  </ion-row>
+    <ion-row wrap no-padding>
+      <ion-col col-4 *ngFor="let post of myPost; let i = index">
+        <img (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
+
   <ion-grid *ngIf="check">
     <br><br>
     <ion-row>

@@ -73,31 +73,12 @@
 
 
   <ion-scroll scrollX="true" class="twPic">
+    <div>
+        <img (click)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost; let i = index" class="horiPic" src="{{tWeek.picURL}}">
 
-<div>
-
-
-
-
-
-
-        <img class="horiPic" src="../../assets/images/post1.png">
-        <img class="horiPic" src="../../assets/images/post1.png">
-    <img class="horiPic" src="../../assets/images/post1.png">
-    <img class="horiPic" src="../../assets/images/post1.png">
-</div>
-
-
-
-
-
-
-        <!--<img class="horiPic" src="../../assets/images/myPic2.png">-->
-        <!--<img class="horiPic" src="../../assets/images/myPic3.png">-->
-        <!--<img class="horiPic" src="../../assets/images/post1.png">-->
-        <!--<img class="horiPic" src="../../assets/images/post2.png">-->
+    </div>
   </ion-scroll>
-  <!--<div *ngFor=" let post of mypostlist">{{post.picURL}}</div>-->
+
 
     <super-tabs *ngIf="loaded && loadedd" toolbarColor="dark">
       <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist}" title="My Fits"></super-tab>

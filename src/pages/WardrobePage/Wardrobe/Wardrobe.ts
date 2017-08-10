@@ -6,6 +6,7 @@ import {Storage} from '@ionic/storage';
 import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
+import {WardrobeThisWeekPage} from '../../WardrobePage/wardrobe-this-week/wardrobe-this-week'
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -32,6 +33,7 @@ export class WardrobePage {
     loaded:boolean;
     loadedd:boolean;
     mypostlist: Array<object> = [];
+    thisWeekPost: Array<object> =[];
     option: string = "";
     myposts: string = "";
     favorites: Array<object> = [];
@@ -39,6 +41,18 @@ export class WardrobePage {
     postAlert:string="";
     tab1:any = PostTabPage;
     tab2:any = FavoriteTabPage;
+    date:Array<string>=[];
+    date2:Array<string>=[];
+    dateFinal:Array<object>=[];
+
+    year:Array<any>=[];
+    year2:Array<any>=[];
+    startDay:Array<any>=[];
+    endDay:Array<any>=[];
+    endDay2:Array<any>=[];
+    month:Array<any>=[];
+    month2:Array<any>=[];
+
 
 
     constructor(public navCtrl: NavController,
@@ -66,11 +80,11 @@ export class WardrobePage {
    this.loadedd = false;
 
    this.option = "favorites";
-   // let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
-   //
-   // });
+   let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
 
-   // loading.present();
+   });
+
+   loading.present();
    this.storage.get('token').then((val) => {
      var APIUrl = '/user';
      var APIUrl_2 = '/post';
@@ -96,9 +110,206 @@ export class WardrobePage {
        .map(res => res.json())
        .subscribe(data => {
 
-         this.mypostlist = data.posts;
-         this.myposts = data.posts.length;
+         for (var i = 0; i<data.posts.length;i++){
+           //이번주 사진
+           if(data.posts[i].isThisWeek===true){
+             this.thisWeekPost.push(data.posts[i])
+             this.date2.push(data.posts[i].writtenAt)
+
+           }
+           //모든 사진
+           else if(data.posts[i].isThisWeek===false){
+             this.date.push(data.posts[i].writtenAt)
+             this.mypostlist.push(data.posts[i]);
+
+           }
+         }
+         //이번주 사진 날짜 파싱
+         for(var d = 0; d<this.date2.length; d++){
+           this.year2.push(this.date2[d].substring(0,4));
+           this.endDay2.push(Number(this.date2[d].substring(8,10)));
+           if(this.date2[d].substring(5,7)==='01'){
+             this.month2.push('Jan')
+           }
+           else if(this.date2[d].substring(5,7)==='02'){
+             this.month2.push('Feb')
+           }
+           else if(this.date2[d].substring(5,7)==='03'){
+             this.month2.push('Mar')
+           }
+           else if(this.date2[d].substring(5,7)==='04'){
+             this.month2.push('Apr')
+           }
+           else if(this.date2[d].substring(5,7)==='05'){
+             this.month2.push('May')
+           }
+           else if(this.date2[d].substring(5,7)==='06'){
+             this.month2.push('Jun')
+           }
+           else if(this.date2[d].substring(5,7)==='07'){
+             this.month2.push('Jul')
+           }
+           else if(this.date2[d].substring(5,7)==='08'){
+             this.month2.push('Aug')
+           }
+           else if(this.date2[d].substring(5,7)==='09'){
+             this.month2.push('Sep')
+           }
+           else if(this.date2[d].substring(5,7)==='10'){
+             this.month2.push('Oct')
+           }
+           else if(this.date2[d].substring(5,7)==='11'){
+             this.month2.push('Nov')
+           }
+           else if(this.date2[d].substring(5,7)==='12'){
+             this.month2.push('Dec')
+           }
+           this.thisWeekPost[d]['eDay']=this.endDay2[d]
+           this.thisWeekPost[d]['mon']=this.month2[d]
+           this.thisWeekPost[d]['yr']=this.year2[d]
+
+         }
+
+         //모든 사진 날짜 파싱
+         for(var h = 0; h<this.date.length; h++){
+           this.year.push(this.date[h].substring(0,4));
+           if(this.date[h].substring(5,7)==='01'){
+             this.month.push('Jan')
+           }
+           else if(this.date[h].substring(5,7)==='02'){
+             this.month.push('Feb')
+           }
+           else if(this.date[h].substring(5,7)==='03'){
+             this.month.push('Mar')
+           }
+           else if(this.date[h].substring(5,7)==='04'){
+             this.month.push('Apr')
+           }
+           else if(this.date[h].substring(5,7)==='05'){
+             this.month.push('May')
+           }
+           else if(this.date[h].substring(5,7)==='06'){
+             this.month.push('Jun')
+           }
+           else if(this.date[h].substring(5,7)==='07'){
+             this.month.push('Jul')
+           }
+           else if(this.date[h].substring(5,7)==='08'){
+             this.month.push('Aug')
+           }
+           else if(this.date[h].substring(5,7)==='09'){
+             this.month.push('Sep')
+           }
+           else if(this.date[h].substring(5,7)==='10'){
+             this.month.push('Oct')
+           }
+           else if(this.date[h].substring(5,7)==='11'){
+             this.month.push('Nov')
+           }
+           else if(this.date[h].substring(5,7)==='12'){
+             this.month.push('Dec')
+           }
+
+           //음수 예외처리.....
+           if(Number(this.date[h].substring(8,10))===6){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(31)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(28)
+             }
+             else{
+               this.startDay.push(30);
+             }
+
+           }
+           else if(Number(this.date[h].substring(8,10))===5){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(30)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(27)
+             }
+             else{
+               this.startDay.push(29);
+             }
+
+           }
+           else if(Number(this.date[h].substring(8,10))===4){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(29)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(26)
+             }
+             else{
+               this.startDay.push(28);
+             }
+
+           }
+           else if(Number(this.date[h].substring(8,10))===3){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(28)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(25)
+             }
+             else{
+               this.startDay.push(27);
+             }
+
+           }
+           else if(Number(this.date[h].substring(8,10))===2){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(27)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(24)
+             }
+             else{
+               this.startDay.push(26);
+             }
+
+           }
+           else if(Number(this.date[h].substring(8,10))===1){
+             if(this.month[h]==="Apr" || "Jun" || "Sep" || "Nov"){
+               this.startDay.push(26)
+
+             }
+             else if(this.month[h]==="Mar"){
+               this.startDay.push(23)
+             }
+             else{
+               this.startDay.push(25);
+             }
+
+           }
+           else{
+             this.startDay.push(Number(this.date[h].substring(8,10))-6);
+           }
+           //음수예외처리 끝
+
+           this.endDay.push(Number(this.date[h].substring(8,10)));
+
+           this.mypostlist[h]['sDay']=this.startDay[h]
+             this.mypostlist[h]['eDay']=this.endDay[h]
+               this.mypostlist[h]['mon']=this.month[h]
+                 this.mypostlist[h]['yr']=this.year[h]
+
+
+
+
+         }
          this.loaded = true;
+         console.log('****Check******')
+         console.log(this.thisWeekPost)
+
+
 
        });
 
@@ -108,7 +319,7 @@ export class WardrobePage {
          if(data.favorites === undefined || data.favorites.length == 0){
            this.favorites = [];
            this.loadedd = true;
-           // loading.dismiss();
+           loading.dismiss();
          }
          else{
            const body = {users:data.favorites};
@@ -118,7 +329,7 @@ export class WardrobePage {
                data => {
                  this.favorites = data;
                  this.loadedd = true;
-                 // loading.dismiss();
+                 loading.dismiss();
                });
 
          }
@@ -129,6 +340,10 @@ export class WardrobePage {
  }
     ionViewDidLoad(){
 
+    }
+    presentThisWeekModal(i){
+      let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i},{leaveAnimation:'back'});
+      thisWeekModal.present();
     }
 
 }
