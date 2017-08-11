@@ -9,6 +9,7 @@ import {SearchUserPage} from '../search-user/search-user'
 import {SearchTagsPage} from '../search-tags/search-tags'
 import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular';
 import {HistoryListPage } from '../history-list/history-list'
+import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
 
 /**
  * Generated class for the HomePage page.
@@ -47,6 +48,7 @@ export class HomePage implements OnInit {
     firstUser: object;
     search: string = "";
     try: boolean = false;
+    nameCheck:Array<any>=[];
 
 
 
@@ -61,11 +63,7 @@ export class HomePage implements OnInit {
                 public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController) {
       this.search="User";
-
-
-
-
-
+      this.initializeItems();
     }
 
     ngOnInit(): void {
@@ -77,6 +75,7 @@ export class HomePage implements OnInit {
     ionViewWillEnter() {
       this.search="User";
       this.pushPage = VotePage;
+
       this.toggled = false;
       this.searchToggled = false;
       let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
@@ -146,6 +145,15 @@ export class HomePage implements OnInit {
                       .map(res => res.json())
                       .subscribe(data => {
                         this.user = data.user[0];
+
+
+
+                        for(let j = 0; j<this.ranks.length; j++){
+                          this.nameCheck[j]=false;
+                          if(this.ranks[j].writtenBy===this.user._id){
+                            this.nameCheck[j] = true;
+                          }
+                        }
                         for (let i = 0; i < this.ranks.length; i++)
                           this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
                         console.log("-------------------");
@@ -165,6 +173,9 @@ export class HomePage implements OnInit {
 
 
 
+    }
+    test(){
+      console.log('Check!!Check!!')
     }
 
 
@@ -376,5 +387,63 @@ export class HomePage implements OnInit {
       historyModal.present();
     }
 
+  presentWardrobeModal(i){
+    let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks:this.ranks[i] },{leaveAnimation:'back'});
+    WardrobeModal.present();
+  }
+
+  allUsers;
+
+  initializeItems() {
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/user/all';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/all';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.allUsers = data.usersList;
+
+        });
+    });
+
+  }
+
+  getItems(ev) {
+    // Reset items back to all of the items
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/user/all';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/all';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.allUsers = data.usersList;
+          var val = ev.target.value;
+
+          // if the value is an empty string don't filter the items
+          if (val && val.trim() != '') {
+            this.allUsers = this.allUsers.filter((item) => {
+              return (item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
+          }
+        });
+    });
+
+    // set val to the value of the ev target
+
+  }
 
 }

@@ -1,15 +1,4 @@
-vote-wardrobe{
-  h2{
-    margin-bottom: 0px;
-  }
-  h4{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  h5{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
+page-rank-wardrobe {
   p{
     margin-top:0px;
     margin-bottom: 0px;
@@ -20,10 +9,14 @@ vote-wardrobe{
   }
   .toolbar-title-ios {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #ff5733;
     pointer-events: auto;
+  }
+
+  .toolbar{
+    box-shadow: 0px 0.05rem 0px #ffffff ! important;
   }
   .padding{
     padding-top: 5%;
@@ -111,7 +104,6 @@ vote-wardrobe{
     height: auto;
     width: 33%;
     margin-right: 2px;
-
 
   }
   .small{

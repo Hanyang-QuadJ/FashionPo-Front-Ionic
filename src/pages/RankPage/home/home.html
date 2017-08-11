@@ -14,7 +14,7 @@
     <ion-title  *ngIf="!searchToggled" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ Aug 7,2017</span></ion-title>
 
 
-    <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd"></ion-searchbar>
+    <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-buttons end>
       <button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
@@ -81,7 +81,8 @@
         <div class="image"><img src={{ranks[i].picURL}}></div>
         <div class="name">
           <div class="nameArea" *ngIf="users[i]">
-            <p >{{users[i].username}}</p>
+            <p (click)="presentWardrobeModal(i)" *ngIf="!nameCheck[i]">{{users[i].username}}</p>
+            <p *ngIf="nameCheck[i]">{{users[i].username}}</p>
           </div>
           <div class="buttonArea">
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
@@ -95,23 +96,8 @@
   </div>
   <div  *ngIf="searchToggled" [ngSwitch]="search">
     <ion-list *ngSwitchCase="'user'">
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="../../../assets/images/rank2.png">
-        </ion-thumbnail>
-        <h2>Cothing</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="../../../assets/images/myPic1.png">
-        </ion-thumbnail>
-        <h2>Watches</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="../../../assets/images/rank2.png">
-        </ion-thumbnail>
-        <h2>Footwear</h2>
+      <ion-item *ngFor="let item of allUsers">
+        {{ item.username }}
       </ion-item>
     </ion-list>
 

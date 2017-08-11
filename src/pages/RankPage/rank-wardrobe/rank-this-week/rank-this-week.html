@@ -1,5 +1,5 @@
 <!--
-  Generated template for the FavoriteUserPostPage page.
+  Generated template for the WardrobeThisWeekPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -12,16 +12,16 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>FavoriteUserPost</ion-title>
+    <ion-title>This Week Pictures</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
+  <ion-card *ngFor="let post of thisWeekPost; let i =index" [id]="'fit'+i">
     <ion-item>
-      <!--<p>{{post.eDay}} {{post.mon}} , {{post.yr}}</p>-->
+      <p>{{post.writtenAt}}</p>
     </ion-item>
     <img src="{{post.picURL}}">
 
