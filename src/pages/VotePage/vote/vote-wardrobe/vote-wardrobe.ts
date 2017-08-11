@@ -31,6 +31,7 @@ export class VoteWardrobePage {
     button:boolean = false;
     try:boolean = false;
     view_cnt: any;
+    today_disable = false;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
@@ -206,6 +207,7 @@ export class VoteWardrobePage {
     }
 
     refreshViewCnt(){
+        this.today_disable = true;
         this.button_loaded = false;
         this.User_id = this.navParams.get('user_id');
         this.storage.get('token').then((val) => {
@@ -227,6 +229,7 @@ export class VoteWardrobePage {
 
                     this.view_cnt = data[0].viewCnt;
                     this.button_loaded = true;
+                    setTimeout(function(){ this.today_disable = false; console.log("!");}, 1000);
 
                 })
         });
