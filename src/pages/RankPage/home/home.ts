@@ -189,6 +189,7 @@ export class HomePage implements OnInit {
     }
 
     toggleSearch() {
+
         this.toggled = this.toggled ? false : true;
         this.searchToggled = true;
 
@@ -393,7 +394,7 @@ export class HomePage implements OnInit {
   }
 
   allUsers;
-
+  allTags;
   initializeItems() {
     this.storage.get('token').then((val) => {
       var APIUrl = '/user/all';
@@ -427,6 +428,22 @@ export class HomePage implements OnInit {
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
 
+      var APIUrl2 = '/search/searchTag';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+      //   // console.log('yes');
+      // }
+
+      let body = {
+        searchParam : ev.target.value
+      };
+
+
+      this.http.post(APIUrl2, JSON.stringify(body), {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            this.allTags = data.message;
+        });
       this.http.get(APIUrl, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
