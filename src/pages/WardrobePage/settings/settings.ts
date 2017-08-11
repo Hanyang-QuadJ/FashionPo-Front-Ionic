@@ -50,4 +50,5 @@ export class SettingsPage {
     profileModal.present();
 
   }
+
 }

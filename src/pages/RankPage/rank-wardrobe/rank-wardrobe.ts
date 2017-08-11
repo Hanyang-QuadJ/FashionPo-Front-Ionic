@@ -36,6 +36,8 @@ export class RankWardrobePage {
     loading.present();
 
 
+
+
     this.storage.get('token').then((val) => {
       var APIUrl = '/user';
       var APIUrl2 = '/post/userid'
@@ -48,7 +50,7 @@ export class RankWardrobePage {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
-      const body = {users: [this.ranks.writtenBy]}
+      const body = {users: [this.ranks._id]}
 
       this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
         .map(res => res.json())
@@ -59,7 +61,7 @@ export class RankWardrobePage {
             console.log(this.user)
           });
 
-      const body2 = {_id:this.ranks.writtenBy}
+      const body2 = {_id:this.ranks._id}
       this.http.post(APIUrl2,JSON.stringify(body2), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
@@ -70,15 +72,19 @@ export class RankWardrobePage {
             else{
               this.posts.push(data[i])
             }
+
           }
-          loading.dismiss();
+
 
 
         });
 
 
 
+
     });
+    loading.dismiss();
+
   }
 
 

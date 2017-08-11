@@ -69,6 +69,7 @@
   <ion-scroll scrollX="true" class="twPic">
     <div>
         <img (click)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost; let i = index" class="horiPic" src="{{tWeek.picURL}}">
+      <p *ngIf="alertThis" text-center>Post Your Pictures</p>
 
     </div>
   </ion-scroll>

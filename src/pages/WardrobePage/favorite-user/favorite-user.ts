@@ -33,6 +33,9 @@ export class FavoriteUserPage implements OnInit{
   endDay2:Array<any>=[];
   month:Array<any>=[];
   month2:Array<any>=[];
+  checkPost:boolean;
+  checkThis:any="";
+  alertThis:boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, public loadingCtrl:LoadingController,  private storage : Storage, public modalCtrl: ModalController,
@@ -43,6 +46,9 @@ export class FavoriteUserPage implements OnInit{
   ngOnInit(): void {
     let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
     loading.present();
+    this.checkThis = 0;
+    this.checkPost=false;
+    this.alertThis=false;
     this.favUser = this.navParams.get('favList');
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
@@ -61,20 +67,22 @@ export class FavoriteUserPage implements OnInit{
         .map(res => res.json())
         .subscribe(data => {
           for(var i = 0; i<data.length; i++){
+
             if(data[i].isThisWeek===true){
+
               this.thisWeekPost.push(data[i]);
-              this.date2.push(data[i].writtenAt)
+
             }
+
             else if(data[i].isThisWeek === false){
               this.posts.push(data[i]);
-              this.date.push(data[i].writtenAt);
+
             }
 
           }
 
 
-          console.log('qwetqwetqwetqwetwqey')
-          console.log(this.date2)
+
 
           loading.dismiss();
         });

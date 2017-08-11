@@ -2,12 +2,14 @@
  * Created by jeonghyunlee on 2017. 8. 9..
  */
 import {Component} from '@angular/core';
-import {NavController, NavParams, ViewController, Content} from 'ionic-angular';
+import {NavController, NavParams, ViewController, Content,} from 'ionic-angular';
 import {Platform, ModalController, LoadingController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {Http, Headers,RequestOptions} from "@angular/http";
 import {ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
+import {VoteThisWeekPage} from '../vote-wardrobe/vote-this-week/vote-this-week'
+import {VotePhotoPage} from '../vote-wardrobe/vote-photo/vote-photo'
 
 /**
  * Generated class for the SettingsPage page.
@@ -28,7 +30,7 @@ export class VoteWardrobePage {
     loaded: boolean = false;
     button_loaded:boolean = true;
     posts: any = "";
-    thisWeek:any="";
+    thisWeekPost:any="";
     button:boolean = false;
     try:boolean = false;
     view_cnt: any;
@@ -40,6 +42,7 @@ export class VoteWardrobePage {
                 public toastCtrl: ToastController,
                 public navParams: NavParams,
                 public loadingCtrl: LoadingController,
+                public modalCtrl: ModalController,
     ) {
         this.usernameForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
@@ -48,8 +51,9 @@ export class VoteWardrobePage {
     }
 
     ngOnInit(): void {
-        this.thisWeek=[];
         this.posts=[];
+
+        this.thisWeekPost=[];
         this.User_id = this.navParams.get('user_id');
         let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
         });
@@ -90,7 +94,7 @@ export class VoteWardrobePage {
                             .subscribe(data => {
                               for(var i = 0; i<data.length;i++){
                                 if(data[i].isThisWeek===true){
-                                  this.thisWeek.push(data[i])
+                                  this.thisWeekPost.push(data[i])
                                 }
                                 else{
                                   this.posts.push(data[i])
@@ -242,6 +246,17 @@ export class VoteWardrobePage {
                 })
         });
     }
+
+  presentFavModal(i) {
+    let profileModal = this.modalCtrl.create(VotePhotoPage, { postList:this.posts,postListIndex:'fit'+i},{leaveAnimation:'back'});
+    profileModal.present();
+
+  }
+
+  presentThisWeekModal(i){
+    let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i},{leaveAnimation:'back'});
+    thisWeekModal.present();
+  }
 
 
 

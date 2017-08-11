@@ -44,11 +44,13 @@ export class HomePage implements OnInit {
     pushPage: any;
     user: any;
     loading: any;
-    firstPost: object;
-    firstUser: object;
+
+    firstPost: any;
+    firstUser: any;
     search: string = "";
     try: boolean = false;
     nameCheck:Array<any>=[];
+  firstCheck: boolean;
 
 
 
@@ -73,6 +75,9 @@ export class HomePage implements OnInit {
     }
 
     ionViewWillEnter() {
+
+      this.ranks=[];
+      this.firstCheck=false;
       this.search="User";
       this.pushPage = VotePage;
 
@@ -107,7 +112,7 @@ export class HomePage implements OnInit {
               for (let i = 0; i < data.posts.length; i++) {
                 this.writtenBys.push(data.posts[i].writtenBy);
               }
-              console.log(this.writtenBys);
+
               let body = {users: this.writtenBys};
               let headers = new Headers();
               headers.append('Content-Type', 'application/json');
@@ -117,14 +122,16 @@ export class HomePage implements OnInit {
               this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-                  console.log(data)
+
                   console.log('********')
                   this.firstUser = data[0];
+                  this.users=[];
                   for (let i = 1; i < data.length; i++) {
                     this.users.push(data[i]);
                   }
 
                   console.log(this.ranks)
+                  console.log("^^^^^^^^")
                   console.log(this.users)
                   // console.log(this.firstUser);
                   // console.log(this.users[1]);
@@ -145,7 +152,9 @@ export class HomePage implements OnInit {
                       .map(res => res.json())
                       .subscribe(data => {
                         this.user = data.user[0];
-
+                        if(this.firstUser._id === this.user._id){
+                          this.firstCheck = true;
+                        }
 
 
                         for(let j = 0; j<this.ranks.length; j++){
@@ -210,6 +219,8 @@ export class HomePage implements OnInit {
     }
 
     doRefresh(refresher) {
+      this.users=[];
+      this.ranks=[];
         console.log('Begin async operation', refresher);
         this.pushPage = VotePage;
         this.toggled = false;
@@ -243,7 +254,7 @@ export class HomePage implements OnInit {
                         for (let i = 0; i < data.posts.length; i++) {
                             this.writtenBys.push(data.posts[i].writtenBy);
                         }
-                        console.log(this.writtenBys);
+
                         let body = {users: this.writtenBys};
                         let headers = new Headers();
                         headers.append('Content-Type', 'application/json');
@@ -261,6 +272,7 @@ export class HomePage implements OnInit {
                                 }
 
                                 console.log(this.ranks)
+                                console.log("^^^^^^^^^")
                                 console.log(this.users)
                                 // console.log(this.firstUser);
                                 // console.log(this.users[1]);
@@ -388,9 +400,15 @@ export class HomePage implements OnInit {
     }
 
   presentWardrobeModal(i){
-    let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks:this.ranks[i] },{leaveAnimation:'back'});
+    let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks:this.users[i] },{leaveAnimation:'back'});
     WardrobeModal.present();
   }
+
+  presentFirstModal() {
+      let profileModal = this.modalCtrl.create(RankWardrobePage, { ranks:this.firstUser},{leaveAnimation:'back'});
+      profileModal.present();
+
+    }
 
   allUsers;
 

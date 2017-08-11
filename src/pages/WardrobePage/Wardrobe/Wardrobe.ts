@@ -44,6 +44,9 @@ export class WardrobePage {
     date:Array<string>=[];
     date2:Array<string>=[];
     dateFinal:Array<object>=[];
+    checkThis=0;
+    alertThis:boolean;
+
 
     year:Array<any>=[];
     year2:Array<any>=[];
@@ -80,11 +83,11 @@ export class WardrobePage {
     }
  ionViewWillEnter(){
    console.log("11111111111")
+
    this.mypostlist=[]
    this.thisWeekPost=[]
 
-   console.log(this.mypostlist)
-   console.log(this.thisWeekPost)
+
 
    this.loaded = false;
    this.loadedd = false;
@@ -120,26 +123,22 @@ export class WardrobePage {
        .map(res => res.json())
        .subscribe(data => {
 
-         for (var i = 0; i<data.posts.length;i++){
-           //이번주 사진
-           if(data.posts[i].isThisWeek===true){
-             this.thisWeekPost.push(data.posts[i])
-             this.date2.push(data.posts[i].writtenAt)
 
-           }
-           //모든 사진
-           else if(data.posts[i].isThisWeek===false){
-             this.date.push(data.posts[i].writtenAt)
-             this.mypostlist.push(data.posts[i]);
+           for (var i = 0; i<data.posts.length;i++){
+             //이번주 사진
+             if(data.posts[i].isThisWeek===true){
+               this.thisWeekPost.push(data.posts[i])
+             }
+             //모든 사진
+             else {
+               this.mypostlist.push(data.posts[i]);
+             }
 
-           }
          }
 
-
          this.loaded = true;
-         console.log("2222222")
-         console.log(this.mypostlist)
-         console.log(this.thisWeekPost)
+
+
 
        });
 
