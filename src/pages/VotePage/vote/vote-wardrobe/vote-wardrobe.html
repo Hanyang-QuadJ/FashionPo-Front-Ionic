@@ -64,13 +64,12 @@
         <hr>
         <p class="infoText">This Week's Fits</p>
         <ion-scroll scrollX="true" class="twPic">
-            <span *ngFor="let post of posts">
-                <img *ngIf="post.isThisWeek" class="horiPic" src={{post.picURL}}>
-            </span>
+
+                <img *ngFor="let post of thisWeek" class="horiPic" src={{post.picURL}}>
+
 
         </ion-scroll>
-        <div *ngFor=" let post of mypostlist">{{post.picURL}}</div>
-        <hr>
+
         <p class="infoText">Fits</p>
         <ion-grid no-padding>
             <ion-row wrap no-padding>

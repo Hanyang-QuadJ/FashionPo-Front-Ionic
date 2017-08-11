@@ -28,6 +28,7 @@ export class VoteWardrobePage {
     loaded: boolean = false;
     button_loaded:boolean = true;
     posts: any = "";
+    thisWeek:any="";
     button:boolean = false;
     try:boolean = false;
     view_cnt: any;
@@ -47,6 +48,8 @@ export class VoteWardrobePage {
     }
 
     ngOnInit(): void {
+        this.thisWeek=[];
+        this.posts=[];
         this.User_id = this.navParams.get('user_id');
         let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
         });
@@ -85,7 +88,15 @@ export class VoteWardrobePage {
                         this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
                             .map(res => res.json())
                             .subscribe(data => {
-                                this.posts = data;
+                              for(var i = 0; i<data.length;i++){
+                                if(data[i].isThisWeek===true){
+                                  this.thisWeek.push(data[i])
+                                }
+                                else{
+                                  this.posts.push(data[i])
+                                }
+                              }
+
                                 this.storage.get('token').then((val) => {
                                     var APIUrl = '/post/view';
                                     // if (this.platform.is('ios') == true){

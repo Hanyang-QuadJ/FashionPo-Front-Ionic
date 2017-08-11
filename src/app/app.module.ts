@@ -46,6 +46,8 @@ import {FavoriteUserPostPage} from '../pages/WardrobePage/favorite-user/favorite
 import {WardrobeThisWeekPage} from '../pages/WardrobePage/wardrobe-this-week/wardrobe-this-week';
 import {FavoriteUserThisWeekPage} from '../pages/WardrobePage/favorite-user/favorite-user-this-week/favorite-user-this-week'
 import {RankWardrobePage} from '../pages/RankPage/rank-wardrobe/rank-wardrobe';
+import {RankPhotoPage} from '../pages/RankPage/rank-wardrobe/rank-photo/rank-photo';
+import {RankThisWeekPage} from '../pages/RankPage/rank-wardrobe/rank-this-week/rank-this-week';
 
 // import { Camera } from '@ionic-native/camera';
 
@@ -79,6 +81,8 @@ import {RankWardrobePage} from '../pages/RankPage/rank-wardrobe/rank-wardrobe';
       WardrobeThisWeekPage,
       FavoriteUserThisWeekPage,
       RankWardrobePage,
+      RankPhotoPage,
+      RankThisWeekPage,
     ],
     imports: [
         BrowserModule,
@@ -118,6 +122,8 @@ import {RankWardrobePage} from '../pages/RankPage/rank-wardrobe/rank-wardrobe';
       WardrobeThisWeekPage,
       FavoriteUserThisWeekPage,
       RankWardrobePage,
+      RankPhotoPage,
+      RankThisWeekPage,
     ],
     providers: [
         StatusBar,
