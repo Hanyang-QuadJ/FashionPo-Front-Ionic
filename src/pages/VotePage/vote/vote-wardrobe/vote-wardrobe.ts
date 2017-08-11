@@ -26,9 +26,11 @@ export class VoteWardrobePage {
     User_id: any;
     User: any;
     loaded: boolean = false;
-    posts: any;
+    button_loaded:boolean = true;
+    posts: any = "";
     button:boolean = false;
     try:boolean = false;
+    view_cnt: any;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
@@ -36,6 +38,7 @@ export class VoteWardrobePage {
                 private http: Http,
                 public toastCtrl: ToastController,
                 public navParams: NavParams,
+                public loadingCtrl: LoadingController,
     ) {
         this.usernameForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
@@ -45,6 +48,9 @@ export class VoteWardrobePage {
 
     ngOnInit(): void {
         this.User_id = this.navParams.get('user_id');
+        let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
+        });
+        loading.present();
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
             // if (this.platform.is('ios') == true){
@@ -117,7 +123,7 @@ export class VoteWardrobePage {
                                                         else
                                                             this.button = false;
                                                         this.loaded = true;
-
+                                                        loading.dismiss();
 
                                                     });
                                             });
@@ -199,6 +205,32 @@ export class VoteWardrobePage {
         });
     }
 
+    refreshViewCnt(){
+        this.button_loaded = false;
+        this.User_id = this.navParams.get('user_id');
+        this.storage.get('token').then((val) => {
+            var APIUrl = '/user';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   // console.log('yes');
+            // }
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+            let body = {
+                users: [this.User_id]
+            }
+            this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.User = data[0];
+
+                    this.view_cnt = data[0].viewCnt;
+                    this.button_loaded = true;
+
+                })
+        });
+    }
 
 
 
