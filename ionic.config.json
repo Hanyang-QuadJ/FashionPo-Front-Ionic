@@ -19,6 +19,10 @@
     {
       "path": "/user",
       "proxyUrl": "http://54.162.160.91/api/user"
+    },
+    {
+      "path": "/search",
+      "proxyUrl": "http://54.162.160.91/api/search"
     }
   ]
 }

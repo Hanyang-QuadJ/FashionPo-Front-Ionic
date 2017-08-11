@@ -103,25 +103,11 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'tag'">
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="img/women-image1.png">
-        </ion-thumbnail>
-        <h2>woadsf</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="img/women-image1.png">
-        </ion-thumbnail>
-        <h2>asdffdg</h2>
-      </ion-item>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img src="/img/women-image1.png">
-        </ion-thumbnail>
-        <h2>qwerv</h2>
+      <ion-item *ngFor="let item of allTags">
+        {{ item._id }}
       </ion-item>
     </ion-list>
+
   </div>
 
 
