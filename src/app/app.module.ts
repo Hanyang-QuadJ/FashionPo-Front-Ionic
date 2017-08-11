@@ -21,6 +21,7 @@ import {SignupPage} from '../pages/AuthPage/signup/signup';
 import {VoteWardrobePage} from '../pages/VotePage/vote/vote-wardrobe/vote-wardrobe';
 import {HistoryListPage} from '../pages/RankPage/history-list/history-list';
 import {HistoryRankPage} from '../pages/RankPage/history-rank/history-rank';
+import {FindPasswordPage} from '../pages/AuthPage/FindPasswordPage/find';
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -80,13 +81,14 @@ import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vot
         HistoryListPage,
         UserProfileChange,
         FavoriteUserPostPage,
-      WardrobeThisWeekPage,
-      FavoriteUserThisWeekPage,
-      RankWardrobePage,
-      RankPhotoPage,
-      RankThisWeekPage,
-      VoteThisWeekPage,
-      VotePhotoPage,
+        WardrobeThisWeekPage,
+        FavoriteUserThisWeekPage,
+        RankWardrobePage,
+        RankPhotoPage,
+        RankThisWeekPage,
+        VoteThisWeekPage,
+        VotePhotoPage,
+        FindPasswordPage,
     ],
     imports: [
         BrowserModule,
@@ -122,14 +124,15 @@ import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vot
         HistoryListPage,
         HistoryRankPage,
         UserProfileChange,
-      FavoriteUserPostPage,
-      WardrobeThisWeekPage,
-      FavoriteUserThisWeekPage,
-      RankWardrobePage,
-      RankPhotoPage,
-      RankThisWeekPage,
-      VoteThisWeekPage,
-      VotePhotoPage,
+        FavoriteUserPostPage,
+        WardrobeThisWeekPage,
+        FavoriteUserThisWeekPage,
+        RankWardrobePage,
+        RankPhotoPage,
+        RankThisWeekPage,
+        VoteThisWeekPage,
+        VotePhotoPage,
+        FindPasswordPage,
     ],
     providers: [
         StatusBar,

@@ -8,6 +8,7 @@ import {TabsPage} from "../../tabs/tabs";
 import { ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {SignupPage} from "../signup/signup";
+import {FindPasswordPage} from "../FindPasswordPage/find";
 
 
 /**
@@ -50,6 +51,9 @@ export class LoginPage {
   }
   goToSignup() {
     this.navCtrl.setRoot(SignupPage);
+  }
+  goToFind() {
+    this.navCtrl.setRoot(FindPasswordPage);
   }
   showToast(position: string) {
     let toast = this.toastCtrl.create({

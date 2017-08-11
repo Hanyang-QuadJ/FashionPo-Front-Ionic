@@ -4,6 +4,7 @@ import {Storage} from '@ionic/storage';
 import {LoginPage} from "../../AuthPage/login/login";
 import {UsernamePage} from "./UsernameChangePage/username";
 import {UserProfileChange} from "./UserProfileChangePage/userprofile";
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -50,5 +51,6 @@ export class SettingsPage {
     profileModal.present();
 
   }
+
 
 }
