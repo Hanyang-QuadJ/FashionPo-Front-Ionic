@@ -75,8 +75,9 @@ export class HomePage implements OnInit {
     }
 
     ionViewWillEnter() {
-
+      this.users=[];
       this.ranks=[];
+      this.writtenBys=[];
       this.firstCheck=false;
       this.search="User";
       this.pushPage = VotePage;

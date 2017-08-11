@@ -30,6 +30,7 @@ export class RankWardrobePage {
               public loadingCtrl:LoadingController,
               public modalCtrl:ModalController) {
     this.ranks = this.navParams.get('ranks')
+
     this.posts=[];
     this.thisWeekPost=[];
     let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
@@ -57,14 +58,16 @@ export class RankWardrobePage {
         .subscribe(
           data => {
             this.user = data[0]
-            console.log('!!!!!!!')
-            console.log(this.user)
+
+
           });
 
-      const body2 = {_id:this.ranks._id}
+      const body2 = {_id:[this.ranks._id]}
+
       this.http.post(APIUrl2,JSON.stringify(body2), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
+          console.log(data)
           for(var i = 0; i<data.length;i++){
             if(data[i].isThisWeek===true){
               this.thisWeekPost.push(data[i])
@@ -74,6 +77,10 @@ export class RankWardrobePage {
             }
 
           }
+          console.log('!!!!!!!')
+          console.log(this.thisWeekPost)
+          console.log('???????')
+          console.log(this.posts)
 
 
 
