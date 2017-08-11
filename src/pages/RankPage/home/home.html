@@ -81,7 +81,8 @@
         <div class="image"><img src={{ranks[i].picURL}}></div>
         <div class="name">
           <div class="nameArea" *ngIf="users[i]">
-            <p >{{users[i].username}}</p>
+            <p (click)="presentWardrobeModal(i)" *ngIf="!nameCheck[i]">{{users[i].username}}</p>
+            <p *ngIf="nameCheck[i]">{{users[i].username}}</p>
           </div>
           <div class="buttonArea">
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->

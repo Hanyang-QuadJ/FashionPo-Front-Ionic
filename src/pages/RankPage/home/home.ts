@@ -9,6 +9,7 @@ import {SearchUserPage} from '../search-user/search-user'
 import {SearchTagsPage} from '../search-tags/search-tags'
 import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular';
 import {HistoryListPage } from '../history-list/history-list'
+import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
 
 /**
  * Generated class for the HomePage page.
@@ -47,6 +48,7 @@ export class HomePage implements OnInit {
     firstUser: object;
     search: string = "";
     try: boolean = false;
+    nameCheck:Array<any>=[];
 
 
 
@@ -77,6 +79,7 @@ export class HomePage implements OnInit {
     ionViewWillEnter() {
       this.search="User";
       this.pushPage = VotePage;
+
       this.toggled = false;
       this.searchToggled = false;
       let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
@@ -146,6 +149,15 @@ export class HomePage implements OnInit {
                       .map(res => res.json())
                       .subscribe(data => {
                         this.user = data.user[0];
+
+
+
+                        for(let j = 0; j<this.ranks.length; j++){
+                          this.nameCheck[j]=false;
+                          if(this.ranks[j].writtenBy===this.user._id){
+                            this.nameCheck[j] = true;
+                          }
+                        }
                         for (let i = 0; i < this.ranks.length; i++)
                           this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
                         console.log("-------------------");
@@ -165,6 +177,9 @@ export class HomePage implements OnInit {
 
 
 
+    }
+    test(){
+      console.log('Check!!Check!!')
     }
 
 
@@ -375,6 +390,14 @@ export class HomePage implements OnInit {
       let historyModal = this.modalCtrl.create(HistoryListPage, { },{leaveAnimation:'back'});
       historyModal.present();
     }
+
+  presentWardrobeModal(i){
+    let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks:this.ranks[i] },{leaveAnimation:'back'});
+    WardrobeModal.present();
+  }
+
+
+
 
 
 }

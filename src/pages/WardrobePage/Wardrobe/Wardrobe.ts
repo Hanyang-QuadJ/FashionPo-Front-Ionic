@@ -134,100 +134,12 @@ export class WardrobePage {
 
            }
          }
-         //이번주 사진 날짜 파싱
-         for(var d = 0; d<this.date2.length; d++){
-           this.year2.push(this.date2[d].substring(0,4));
-           this.endDay2.push(Number(this.date2[d].substring(8,10)));
-           if(this.date2[d].substring(5,7)==='01'){
-             this.month2.push('Jan')
-           }
-           else if(this.date2[d].substring(5,7)==='02'){
-             this.month2.push('Feb')
-           }
-           else if(this.date2[d].substring(5,7)==='03'){
-             this.month2.push('Mar')
-           }
-           else if(this.date2[d].substring(5,7)==='04'){
-             this.month2.push('Apr')
-           }
-           else if(this.date2[d].substring(5,7)==='05'){
-             this.month2.push('May')
-           }
-           else if(this.date2[d].substring(5,7)==='06'){
-             this.month2.push('Jun')
-           }
-           else if(this.date2[d].substring(5,7)==='07'){
-             this.month2.push('Jul')
-           }
-           else if(this.date2[d].substring(5,7)==='08'){
-             this.month2.push('Aug')
-           }
-           else if(this.date2[d].substring(5,7)==='09'){
-             this.month2.push('Sep')
-           }
-           else if(this.date2[d].substring(5,7)==='10'){
-             this.month2.push('Oct')
-           }
-           else if(this.date2[d].substring(5,7)==='11'){
-             this.month2.push('Nov')
-           }
-           else if(this.date2[d].substring(5,7)==='12'){
-             this.month2.push('Dec')
-           }
 
 
-         }
-
-         //모든 사진 날짜 파싱
-         for(var h = 0; h<this.date.length; h++){
-           this.year.push(this.date[h].substring(0,4));
-           if(this.date[h].substring(5,7)==='01'){
-             this.month.push('Jan')
-           }
-           else if(this.date[h].substring(5,7)==='02'){
-             this.month.push('Feb')
-           }
-           else if(this.date[h].substring(5,7)==='03'){
-             this.month.push('Mar')
-           }
-           else if(this.date[h].substring(5,7)==='04'){
-             this.month.push('Apr')
-           }
-           else if(this.date[h].substring(5,7)==='05'){
-             this.month.push('May')
-           }
-           else if(this.date[h].substring(5,7)==='06'){
-             this.month.push('Jun')
-           }
-           else if(this.date[h].substring(5,7)==='07'){
-             this.month.push('Jul')
-           }
-           else if(this.date[h].substring(5,7)==='08'){
-             this.month.push('Aug')
-           }
-           else if(this.date[h].substring(5,7)==='09'){
-             this.month.push('Sep')
-           }
-           else if(this.date[h].substring(5,7)==='10'){
-             this.month.push('Oct')
-           }
-           else if(this.date[h].substring(5,7)==='11'){
-             this.month.push('Nov')
-           }
-           else if(this.date[h].substring(5,7)==='12'){
-             this.month.push('Dec')
-           }
-           this.endDay.push(Number(this.date[h].substring(8,10)));
-
-
-         }
          this.loaded = true;
          console.log("2222222")
          console.log(this.mypostlist)
          console.log(this.thisWeekPost)
-
-
-
 
        });
 
