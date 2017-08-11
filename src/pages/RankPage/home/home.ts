@@ -71,6 +71,7 @@ export class HomePage implements OnInit {
     ngOnInit(): void {
 
 
+
     }
 
     ionViewWillEnter() {

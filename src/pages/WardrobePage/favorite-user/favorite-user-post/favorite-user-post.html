@@ -21,11 +21,7 @@
 <ion-content>
   <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
     <ion-item>
-      <ion-avatar item-start>
-        <img src="../../../assets/images/myPic1.png">
-      </ion-avatar>
-      <h2>Marty McFly</h2>
-      <p>November 5, 1955</p>
+      <!--<p>{{post.eDay}} {{post.mon}} , {{post.yr}}</p>-->
     </ion-item>
     <img src="{{post.picURL}}">
 

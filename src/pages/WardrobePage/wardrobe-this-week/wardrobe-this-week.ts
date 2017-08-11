@@ -17,12 +17,17 @@ export class WardrobeThisWeekPage implements OnInit{
   postList="";
   postListIndex="";
 
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+
     this.postList = this.navParams.get('thisWeekPost')
     this.postListIndex = this.navParams.get('thisWeekPostIndex')
+
   }
 
   ngOnInit(): void {
+
 
 
   }

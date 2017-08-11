@@ -65,6 +65,9 @@ export class WardrobePage {
 
 
 
+
+
+
     }
 
   toggleRank() {
@@ -76,6 +79,13 @@ export class WardrobePage {
       this.navCtrl.push(SettingsPage,{users:this.user},{});
     }
  ionViewWillEnter(){
+   console.log("11111111111")
+   this.mypostlist=[]
+   this.thisWeekPost=[]
+
+   console.log(this.mypostlist)
+   console.log(this.thisWeekPost)
+
    this.loaded = false;
    this.loadedd = false;
 
@@ -164,9 +174,7 @@ export class WardrobePage {
            else if(this.date2[d].substring(5,7)==='12'){
              this.month2.push('Dec')
            }
-           this.thisWeekPost[d]['eDay']=this.endDay2[d]
-           this.thisWeekPost[d]['mon']=this.month2[d]
-           this.thisWeekPost[d]['yr']=this.year2[d]
+
 
          }
 
@@ -209,21 +217,15 @@ export class WardrobePage {
            else if(this.date[h].substring(5,7)==='12'){
              this.month.push('Dec')
            }
-
-
            this.endDay.push(Number(this.date[h].substring(8,10)));
-
-             this.mypostlist[h]['eDay']=this.endDay[h]
-               this.mypostlist[h]['mon']=this.month[h]
-                 this.mypostlist[h]['yr']=this.year[h]
-
-
 
 
          }
          this.loaded = true;
-         console.log('****Check******')
+         console.log("2222222")
+         console.log(this.mypostlist)
          console.log(this.thisWeekPost)
+
 
 
 
@@ -256,6 +258,10 @@ export class WardrobePage {
  }
     ionViewDidLoad(){
 
+    }
+    ionViewDidLeave(){
+      this.mypostlist=[]
+      this.thisWeekPost=[]
     }
     presentThisWeekModal(i){
       let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i},{leaveAnimation:'back'});

@@ -21,7 +21,7 @@
 <ion-content>
   <ion-card *ngFor="let post of postList; let i =index" [id]="'fit'+i">
     <ion-item>
-      <p>{{post.eDay}} {{post.mon}} , {{post.yr}}</p>
+      <p>{{post.writtenAt}}</p>
     </ion-item>
     <img src="{{post.picURL}}">
 
