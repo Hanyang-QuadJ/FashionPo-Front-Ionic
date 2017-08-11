@@ -63,11 +63,7 @@ export class HomePage implements OnInit {
                 public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController) {
       this.search="User";
-
-
-
-
-
+      this.initializeItems();
     }
 
     ngOnInit(): void {
@@ -396,8 +392,58 @@ export class HomePage implements OnInit {
     WardrobeModal.present();
   }
 
+  allUsers;
 
+  initializeItems() {
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/user/all';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/all';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
 
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.allUsers = data.usersList;
 
+        });
+    });
+
+  }
+
+  getItems(ev) {
+    // Reset items back to all of the items
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/user/all';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/user/all';
+      //   // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.allUsers = data.usersList;
+          var val = ev.target.value;
+
+          // if the value is an empty string don't filter the items
+          if (val && val.trim() != '') {
+            this.allUsers = this.allUsers.filter((item) => {
+              return (item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
+          }
+        });
+    });
+
+    // set val to the value of the ev target
+
+  }
 
 }
