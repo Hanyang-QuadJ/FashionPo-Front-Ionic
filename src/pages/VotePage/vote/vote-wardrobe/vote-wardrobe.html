@@ -41,14 +41,25 @@
                         <p class="profileText">Student</p>
                         <p class="profileText">He determined to drop his litigation with the monastry, and
                             relinguish.</p>
-                        <button *ngIf="!button_loaded" class="add" ion-button small color="dark"
+                        <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="dark"
                                 (click)="refreshViewCnt()">
                             <ion-spinner name="circles"></ion-spinner>
                         </button>
-                        <button *ngIf="button_loaded&&!view_cnt&&User" class="add" ion-button small color="dark"
+
+                        <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="dark"
+                                (click)="refreshViewCnt()">
+                            <ion-spinner name="circles"></ion-spinner>
+                        </button>
+                        <button *ngIf="button_loaded&&!view_cnt&&User&&today_disable" [disabled]="true" class="add" ion-button small color="dark"
                                 (click)="refreshViewCnt()">Today {{User.viewCnt}}
                         </button>
-                        <button *ngIf="button_loaded&&view_cnt" class="add" ion-button small color="dark"
+                        <button *ngIf="button_loaded&&view_cnt&&today_disable" [disabled]="true" class="add" ion-button small color="dark"
+                                (click)="refreshViewCnt()">Today {{view_cnt}}
+                        </button>
+                        <button *ngIf="button_loaded&&!view_cnt&&User&&!today_disable" class="add" ion-button small color="dark"
+                                (click)="refreshViewCnt()">Today {{User.viewCnt}}
+                        </button>
+                        <button *ngIf="button_loaded&&view_cnt&&!today_disable" class="add" ion-button small color="dark"
                                 (click)="refreshViewCnt()">Today {{view_cnt}}
                         </button>
                         <button *ngIf="!button" (click)="addFavorite()" class="add" [disabled]="try" ion-button small
