@@ -142,6 +142,7 @@ export class VotePage implements OnInit{
         } else {
           this.presentSkipToast()
         }
+        this.content.resize()
     }
 
   presentLikeToast() {
