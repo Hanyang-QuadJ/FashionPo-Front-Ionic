@@ -44,8 +44,8 @@ export class RankWardrobePage {
       var APIUrl2 = '/post/userid'
 
       // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/user';
-      //   APIUrl_2 = 'http://54.162.160.91/api/post';
+      //   APIUrl = 'http://54.162.160.91/user';
+      //   APIUrl_2 = 'http://54.162.160.91/post/userid';
       // }
 
       let headers = new Headers();

@@ -41,7 +41,7 @@ export class HistoryListPage implements OnInit{
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank/save';
       // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   APIUrl = 'http://54.162.160.91/rank/save';
       //   // console.log('yes');
       // }
       let headers = new Headers();

@@ -54,10 +54,17 @@
   </ion-refresher>
   <div *ngIf="!searchToggled">
     <ion-card>
-      <ion-card-header>
-        <img *ngIf="firstPost" src={{firstPost.picURL}}>
-      </ion-card-header>
-      <ion-card-content>
+
+
+          <div *ngIf="firstPost" class="firstLike"><h5 class="likeNum">{{firstPost.likeCnt}}<span class="likeText"> Likes</span></h5></div>
+
+      <img *ngIf="firstPost" src={{firstPost.picURL}}>
+
+
+
+
+      <ion-card-content no-padding>
+
         <ion-grid no-padding>
           <ion-row>
             <ion-col col-sm-12>
@@ -73,6 +80,12 @@
       </ion-card-content>
     </ion-card>
     <ion-card *ngFor="let rank of ranks; let i = index">
+      <ion-row justify-content-end>
+        <ion-col no-padding>
+          <div class="rankSub"><h5 class="likeNum2">132<span class="likeText2"> Likes</span></h5></div>
+        </ion-col>
+      </ion-row>
+
       <div class="box">
         <div class="numbering">
           <div class="numberingArea">
@@ -86,13 +99,25 @@
             <p *ngIf="nameCheck[i]">{{users[i].username}}</p>
           </div>
           <div class="buttonArea">
+
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)!==-1" ion-button small color="sub" (click)='removeFavorite(rank);'>Add</button>-->
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>
+            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button><br>
+
             <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
           </div>
         </div>
       </div>
+      <ion-row justify-content-end>
+        <ion-col no-padding>
+          <div class="rankSub"><h5 class="likeNumm">{{ranks[i].likeCnt}}<span class="likeText"> Likes</span></h5></div>
+        </ion-col>
+      </ion-row>
+
+
+
+
+
     </ion-card>
   </div>
   <div  *ngIf="searchToggled" [ngSwitch]="search">
