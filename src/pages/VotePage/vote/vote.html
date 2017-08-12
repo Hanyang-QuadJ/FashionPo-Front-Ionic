@@ -21,37 +21,51 @@
 <ion-content>
 
     <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
-      <div #mycards1 swing-card *ngFor="let post of posts">
-        <!--<img *ngIf="post" [src]="post.picURL">-->
+      <ion-card #mycards1 swing-card *ngFor="let post of posts">
+        <ion-item>
+          <ion-avatar item-left>
+            <img *ngIf="user" src="{{user.profile_img}}">
+          </ion-avatar>
+          <h5 *ngIf="user" id="post-name" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.username}}</h5>
+        </ion-item>
 
-        <img  style="position:absolute;width:auto; height: auto; z-index:0; /*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
-      </div>
-      <img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">
+        <img  style="/*magic*/" (click)="blur($event)" *ngIf="post" src="{{ post.picURL }}">
+        <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
+
+        <ion-row>
+          <ion-col text-center>
+            <button ion-button clear small icon-left color="dark" (click)="voteUp(false)"><ion-icon name="ios-backspace-outline"></ion-icon>
+              <div>SKIP</div></button>
+          </ion-col>
+
+          <ion-col text-center>
+            <button ion-button icon-left clear small (click)="voteUp(true)" ><ion-icon name="heart"></ion-icon>
+              <div>LIKE</div></button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
     </div>
-
-
-
-
 </ion-content>
 
-<ion-footer no-border >
-  <ion-toolbar no-padding>
-    <div class="container">
-      <div class="skipArea">
 
-        <button ion-button clear small icon-left color="dark" (click)="voteUp(false)"><ion-icon name="ios-backspace-outline"></ion-icon>
-           SKIP</button>
-      </div>
-      <div class="closetArea">
-        <button ion-button icon-left clear small color="sub" (click)="presentWardrobeModal(posts[0].writtenBy)"><ion-icon name="shirt"></ion-icon>
-           WARDROBE</button>
-      </div>
-      <div class="likeArea">
-        <button ion-button icon-left clear small (click)="voteUp(true)" ><ion-icon name="heart"></ion-icon>
-          LIKE</button>
-      </div>
-    </div>
-  </ion-toolbar>
-</ion-footer>
+
+<!--<ion-footer no-border >-->
+  <!--<ion-toolbar no-padding>-->
+    <!--<div class="container">-->
+      <!--<div class="skipArea">-->
+
+
+      <!--</div>-->
+      <!--<div class="closetArea">-->
+        <!--<button ion-button icon-left clear small color="sub" (click)="presentWardrobeModal(posts[0].writtenBy)"><ion-icon name="shirt"></ion-icon>-->
+           <!--WARDROBE</button>-->
+      <!--</div>-->
+      <!--<div class="likeArea">-->
+
+      <!--</div>-->
+    <!--</div>-->
+  <!--</ion-toolbar>-->
+<!--</ion-footer>-->
 
 
