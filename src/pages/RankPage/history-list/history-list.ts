@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams,ViewController,ModalController, } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
-import {HistoryRankPage} from '../history-rank/history-rank';
+import {HomePage} from '../../RankPage/home/home';
 
 /**
  * Generated class for the HistoryListPage page.
@@ -480,7 +480,7 @@ export class HistoryListPage implements OnInit{
     this.viewCtrl.dismiss()
   }
   goToPage(i){
-    let historyRankModal = this.modalCtrl.create(HistoryRankPage, { rankSheet:this.ranksheet[i],week:this.dateFinal[i]},{leaveAnimation:'back'});
+    let historyRankModal = this.modalCtrl.create(HomePage, { rankSheet:this.ranksheet[i],week:this.dateFinal[i]},{leaveAnimation:'back'});
     historyRankModal.present();
 
   }

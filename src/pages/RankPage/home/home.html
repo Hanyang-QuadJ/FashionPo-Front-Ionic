@@ -56,7 +56,6 @@
     <ion-card>
 
 
-          <div *ngIf="firstPost" class="firstLike"><h5 class="likeNum">{{firstPost.likeCnt}}<span class="likeText"> Likes</span></h5></div>
 
       <img *ngIf="firstPost" src={{firstPost.picURL}}>
 
@@ -72,6 +71,8 @@
               <h3 class="text-center firstPlace" *ngIf="firstUser && firstCheck">{{firstUser.username}}</h3>
               <h3 (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser && !firstCheck">{{firstUser.username}}</h3>
               <div class="text-center">
+                <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon name="md-heart"></ion-icon></span></h5>
+
                 <button *ngIf="firstUser&&!firstCheck&&!firstButton" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(firstPost);'>Add</button>
                 <button *ngIf="firstUser&&!firstCheck&&firstButton" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(firstPost);'>Added</button>
               </div>
@@ -83,7 +84,6 @@
     <ion-card *ngFor="let rank of ranks; let i = index">
       <ion-row justify-content-end>
         <ion-col no-padding>
-          <!--<div class="rankSub"><h5 class="likeNum2">132<span class="likeText2"> Likes</span></h5></div>-->
         </ion-col>
       </ion-row>
 
@@ -98,14 +98,19 @@
           <div class="nameArea" *ngIf="users[i]">
             <p (click)="presentWardrobeModal(i)" *ngIf="!nameCheck[i]">{{users[i].username}}</p>
             <p *ngIf="nameCheck[i]">{{users[i].username}}</p>
+            <div class="rankSub"><h5 class="likeNum">{{ranks[i].likeCnt}}<span class="likeText"> <ion-icon name="md-heart"></ion-icon></span></h5></div>
+
           </div>
           <div class="buttonArea">
 
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)===-1" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>-->
             <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&user.favorites.indexOf(ranks[i].writtenBy)!==-1" ion-button small color="sub" (click)='removeFavorite(rank);'>Add</button>-->
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button><br>
+            <div class="likeArea">
+              <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>
+              <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
 
-            <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
+
+            </div>
           </div>
         </div>
       </div>

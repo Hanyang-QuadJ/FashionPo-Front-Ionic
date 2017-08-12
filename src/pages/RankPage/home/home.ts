@@ -65,6 +65,7 @@ export class HomePage implements OnInit {
                 public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController) {
         this.search = "User";
+
         this.initializeItems();
     }
 
@@ -74,6 +75,7 @@ export class HomePage implements OnInit {
     }
 
     ionViewWillEnter() {
+
         this.users = [];
         this.ranks = [];
         this.writtenBys = [];
@@ -85,6 +87,10 @@ export class HomePage implements OnInit {
         this.searchToggled = false;
         let loading = this.loadingCtrl.create({showBackdrop: false, cssClass: 'loading', spinner: 'crescent'});
         loading.present();
+        console.log(this.navParams.get("rankSheet"))
+        if(this.navParams.get("rankSheet")===undefined){
+          console.log("Yeahhh!!!")
+        }
         this.storage.get('token').then((val) => {
             var APIUrl = '/rank';
             // if (this.platform.is('ios') == true){
