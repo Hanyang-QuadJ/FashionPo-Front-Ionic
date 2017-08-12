@@ -22,6 +22,7 @@ import {VoteWardrobePage} from '../pages/VotePage/vote/vote-wardrobe/vote-wardro
 import {HistoryListPage} from '../pages/RankPage/history-list/history-list';
 import {HistoryRankPage} from '../pages/RankPage/history-rank/history-rank';
 import {FindPasswordPage} from '../pages/AuthPage/FindPasswordPage/find';
+
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
 import {HttpModule} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -51,6 +52,7 @@ import {RankPhotoPage} from '../pages/RankPage/rank-wardrobe/rank-photo/rank-pho
 import {RankThisWeekPage} from '../pages/RankPage/rank-wardrobe/rank-this-week/rank-this-week';
 import {VoteThisWeekPage} from '../pages/VotePage/vote/vote-wardrobe/vote-this-week/vote-this-week';
 import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vote-photo';
+import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangePage/password";
 
 // import { Camera } from '@ionic-native/camera';
 
@@ -89,6 +91,7 @@ import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vot
         VoteThisWeekPage,
         VotePhotoPage,
         FindPasswordPage,
+        PasswordChangePage,
     ],
     imports: [
         BrowserModule,
@@ -133,6 +136,7 @@ import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vot
         VoteThisWeekPage,
         VotePhotoPage,
         FindPasswordPage,
+        PasswordChangePage,
     ],
     providers: [
         StatusBar,
