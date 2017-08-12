@@ -244,7 +244,8 @@ export class VoteWardrobePage {
 
                     this.view_cnt = data[0].viewCnt;
                     this.button_loaded = true;
-                    setTimeout(function(){ this.today_disable = false; console.log("!");}, 1000);
+                    this.today_disable = false;
+
 
                 })
         });

@@ -76,9 +76,9 @@ export class PasswordChangePage {
             // if (this.platform.is('ios') == true){
             //   APIUrl = 'http://54.162.160.91/api/user/changepw';
             //   // console.log('yes');
-            // }
+            // }t
             let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
+            headers.append('Conten-Type', 'application/json');
             headers.append('x-access-token', val);
             let body = {
                 password1: this.usernameForm.value.password1,
