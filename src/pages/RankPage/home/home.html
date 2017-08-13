@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <ion-navbar hideBackButton="true">
+  <ion-toolbar hideBackButton="true">
     <ion-buttons start>
       <button  (click)="Vote()"  *ngIf="!toggled && !modalCheck" ion-button icon-only color="primay">
         <ion-icon name="ios-arrow-back"></ion-icon>
@@ -34,7 +34,7 @@
         <!--<ion-icon name="md-list"></ion-icon>-->
       <!--</button>-->
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
 
   <ion-toolbar *ngIf="searchToggled">
     <ion-segment [(ngModel)]="search" color="primary">

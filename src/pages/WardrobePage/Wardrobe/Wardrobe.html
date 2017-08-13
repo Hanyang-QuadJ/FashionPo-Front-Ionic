@@ -66,11 +66,11 @@
                   (click)="refreshViewCnt()">
             <ion-spinner name="circles"></ion-spinner>
           </button>
-          <button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" class="add" ion-button small color="dark"
+          <button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">Today {{user.viewCnt}}
           </button>
 
-          <button *ngIf="button_loaded&&user&&!today_disable" class="add" ion-button small color="dark"
+          <button *ngIf="button_loaded&&user&&!today_disable" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">Today {{user.viewCnt}}
           </button>
 
