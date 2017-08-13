@@ -43,37 +43,37 @@
   <!--</ion-list>-->
   <ion-list>
     <ion-list-header>Account</ion-list-header>
-    <ion-item (click)="presentUserProfileModal()">
+    <button (click)="presentUserProfileModal()" ion-item>
       <ion-icon name="ios-image" color="primary" item-start></ion-icon>
-      Edit Profile Image
+      <h4>Edit Profile Image</h4>
 
 
-    </ion-item>
-    <ion-item (click)="presentUsernameModal()">
+    </button>
+    <button (click)="presentUsernameModal()" ion-item>
 
       <ion-icon name="ios-person"color="primary" item-start></ion-icon>
-      Edit User Name
+      <h4>Edit User Name</h4>
       <p item-end>{{user.username}}</p>
-    </ion-item>
+    </button>
 
-    <ion-item>
+    <button ion-item>
       <ion-icon name="ios-shirt" color="primary"item-start></ion-icon>
-      Edit Wardrobe Name
+      <h4>Edit Wardrobe Name</h4>
 
-    </ion-item>
-    <ion-item>
+    </button>
+    <button ion-item>
       <ion-icon name="md-list" color="primary"item-start></ion-icon>
-      Edit Introduce
+      <h4>Edit Introduce</h4>
 
-    </ion-item>
-    <ion-item (click)="presentPasswordModal()">
+    </button>
+    <button ion-item (click)="presentPasswordModal()">
       <ion-icon name="md-key"color="primary" item-start></ion-icon>
-      Edit Password
+      <h4>Edit Password</h4>
 
-    </ion-item>
+    </button>
 
     <button ion-item (click)="logOut()">
-      Log out
+      <h4>Log out</h4>
     </button>
   </ion-list>
 </ion-content>
