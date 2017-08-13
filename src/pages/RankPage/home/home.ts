@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
     user: any;
     loading: any;
     historyRank: any;
+  firstCheck: boolean;
 
     firstPost: any;
     firstUser: any;
@@ -81,6 +82,7 @@ export class HomePage implements OnInit {
     }
 
     ionViewWillEnter() {
+      this.firstCheck = false;
        this.modalCheck= false;
         this.users = [];
         this.ranks = [];
@@ -173,6 +175,10 @@ export class HomePage implements OnInit {
                             console.log(this.firstUser._id);
                             console.log(this.user._id);
                             console.log("------------------");
+                          if (this.firstUser._id == this.user._id) {
+                            this.firstCheck = true;
+                            console.log(this.firstCheck);
+                           }
 
 
 
