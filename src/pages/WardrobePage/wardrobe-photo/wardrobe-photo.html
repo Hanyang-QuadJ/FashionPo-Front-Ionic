@@ -25,13 +25,13 @@
     <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
   <ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
     <ion-item>
-      <!--<p>{{post.mon}} {{post.eDay}},{{post.yr}}</p>-->
+      <p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p>
     </ion-item>
     <img src="{{post.picURL}}">
 
     <ion-card-content>
 
-        <span *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
+        <span class="tag" *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
 
     </ion-card-content>
 

@@ -23,6 +23,7 @@ export class WardrobePhotoPage implements OnInit{
     console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
+    this.date = navParams.get('date');
 
 
 

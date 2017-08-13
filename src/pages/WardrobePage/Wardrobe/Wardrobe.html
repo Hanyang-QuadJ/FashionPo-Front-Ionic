@@ -92,7 +92,7 @@
 
 
     <super-tabs *ngIf="loaded && loadedd" toolbarColor="dark">
-      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist}" title="My Fits"></super-tab>
+      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, date:dateFinal}" title="My Fits"></super-tab>
       <super-tab [root]="tab2" [rootParams]="{favorite:favorites}"title="Favorites"></super-tab>
     </super-tabs>
 

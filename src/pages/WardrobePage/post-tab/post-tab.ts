@@ -36,6 +36,7 @@ export class PostTabPage implements OnInit{
     this.check=false;
     this.myPost = this.navParams.data.mypost;
     this.postAlert = this.navParams.data.postAlert;
+    this.date = this.navParams.data.date;
 
 
     if(this.myPost.length == 0){
@@ -55,7 +56,7 @@ export class PostTabPage implements OnInit{
 
   }
   presentProfileModal(i) {
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost, postListIndex:'fit'+i},{leaveAnimation:'back'});
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost, postListIndex:'fit'+i,date:this.date},{leaveAnimation:'back'});
       profileModal.present();
 
   }

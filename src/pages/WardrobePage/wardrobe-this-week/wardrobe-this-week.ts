@@ -16,6 +16,7 @@ export class WardrobeThisWeekPage implements OnInit{
   @ViewChild(Content) content: Content;
   postList="";
   postListIndex="";
+  date="";
 
 
 
@@ -23,6 +24,7 @@ export class WardrobeThisWeekPage implements OnInit{
 
     this.postList = this.navParams.get('thisWeekPost')
     this.postListIndex = this.navParams.get('thisWeekPostIndex')
+    this.date = this.navParams.get('date')
 
   }
 

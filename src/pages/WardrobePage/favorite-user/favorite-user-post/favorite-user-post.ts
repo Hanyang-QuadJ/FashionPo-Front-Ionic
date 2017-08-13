@@ -16,10 +16,12 @@ export class FavoriteUserPostPage implements OnInit{
   @ViewChild(Content) content: Content;
   postList ="";
   postListIndex:string="";
+  date="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
+    this.date = this.navParams.get('date');
   }
   ngOnInit(): void {
 

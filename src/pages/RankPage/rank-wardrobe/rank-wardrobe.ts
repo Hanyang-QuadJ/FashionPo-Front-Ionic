@@ -23,13 +23,14 @@ export class RankWardrobePage {
   posts:any="";
   thisWeekPost:any="";
   user:any="";
-
+  rankNumber:any="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl:ViewController,private http: Http, private storage:Storage,
               public loadingCtrl:LoadingController,
               public modalCtrl:ModalController) {
     this.ranks = this.navParams.get('ranks')
+    this.rankNumber = this.navParams.get('rankNumber');
 
     this.posts=[];
     this.thisWeekPost=[];

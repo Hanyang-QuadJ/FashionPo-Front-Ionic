@@ -480,7 +480,7 @@ export class HistoryListPage implements OnInit{
     this.viewCtrl.dismiss()
   }
   goToPage(i){
-    let historyRankModal = this.modalCtrl.create(HomePage, { rankSheet:this.ranksheet[i],week:this.dateFinal[i]},{leaveAnimation:'back'});
+    let historyRankModal = this.modalCtrl.create(HomePage, {rankSheet:this.ranksheet[i], rankDate:this.dateFinal[i]},{leaveAnimation:'back'});
     historyRankModal.present();
 
   }

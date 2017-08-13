@@ -7,15 +7,22 @@
 <ion-header no-border>
   <ion-navbar hideBackButton="true">
     <ion-buttons start>
-      <button  (click)="Vote()"  *ngIf="!toggled" ion-button icon-only color="primay">
+      <button  (click)="Vote()"  *ngIf="!toggled && !modalCheck" ion-button icon-only color="primay">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!searchToggled" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ Aug 7,2017</span></ion-title>
+    <ion-buttons *ngIf="modalCheck" start>
+      <button  (click)="dismiss()"  ion-button icon-only color="primay">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title  *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ Aug 7,2017</span></ion-title>
+    <ion-title  *ngIf="modalCheck" (click)="scrollToTop()">{{rankDate.mon}} {{rankDate.sDay}} ~ {{rankDate.eDay}}  , {{rankDate.yr}}</ion-title>
+
 
 
     <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd" (ionInput)="getItems($event)"></ion-searchbar>
-    <ion-buttons end>
+    <ion-buttons *ngIf="!modalCheck" end>
       <button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
       </button>

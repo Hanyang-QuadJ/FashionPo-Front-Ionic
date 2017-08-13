@@ -16,9 +16,11 @@ export class FavoriteUserThisWeekPage {
   @ViewChild(Content) content: Content;
   postList:"";
   postListIndex:"";
+  date:"";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.postList = this.navParams.get('thisWeekPost');
     this.postListIndex = this.navParams.get('thisWeekPostIndex');
+    this.date = this.navParams.get('date');
   }
 
   ionViewDidLoad() {
