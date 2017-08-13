@@ -8,7 +8,7 @@
   <ion-toolbar hideBackButton="true">
     <ion-buttons start>
       <button  (click)="Vote()"  *ngIf="!toggled && !modalCheck" ion-button icon-only color="primay">
-        <ion-icon name="md-heart"></ion-icon>
+        <ion-icon name="md-heart-outline"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons *ngIf="modalCheck" start>
@@ -21,7 +21,7 @@
 
 
 
-    <ion-searchbar *ngIf="searchToggled" animated="true"  value="abgasdfasd" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar no-border *ngIf="searchToggled" animated="true"  value="abgasdfasd" (ionInput)="getItems($event)"></ion-searchbar>
     <ion-buttons *ngIf="!modalCheck" end>
       <button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
         <ion-icon name="ios-search"></ion-icon>
@@ -38,8 +38,8 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar *ngIf="searchToggled" no-padding>
-    <ion-segment [(ngModel)]="search" color="primary" no-padding>
+
+    <ion-segment *ngIf="searchToggled" [(ngModel)]="search" color="primary" no-padding>
       <ion-segment-button value="user" >
         Users
       </ion-segment-button>
@@ -47,7 +47,7 @@
         Tags
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
+
 </ion-header>
 
 
@@ -130,7 +130,7 @@
   </div>
 
   <div  *ngIf="searchToggled" [ngSwitch]="search">
-    <ion-list no-lines *ngSwitchCase="'user'">
+    <ion-list *ngSwitchCase="'user'">
       <button *ngFor="let item of allUsers" ion-item>
         <ion-avatar item-start>
           <img src="{{item.profile_img}}">
