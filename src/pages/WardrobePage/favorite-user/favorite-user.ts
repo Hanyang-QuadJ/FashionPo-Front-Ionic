@@ -76,11 +76,13 @@ export class FavoriteUserPage implements OnInit{
             if(data[i].isThisWeek===true){
 
               this.thisWeekPost.push(data[i]);
+              this.date2.push(data[i].writtenAt)
 
             }
 
             else if(data[i].isThisWeek === false){
               this.posts.push(data[i]);
+              this.date.push(data[i].writtenAt)
 
             }
 
@@ -190,12 +192,12 @@ export class FavoriteUserPage implements OnInit{
   }
 
   presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(FavoriteUserPostPage, { postList:this.posts,postListIndex:'fit'+i, date:this.date},{leaveAnimation:'back'});
+    let profileModal = this.modalCtrl.create(FavoriteUserPostPage, { postList:this.posts,postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
     profileModal.present();
 
   }
   presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(FavoriteUserThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i,date:this.date},{leaveAnimation:'back'});
+    let thisWeekModal = this.modalCtrl.create(FavoriteUserThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
     thisWeekModal.present();
   }
 

@@ -19,36 +19,25 @@
 
 
 <ion-content>
-
-
-
     <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
   <ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
-    <ion-item>
-      <p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p>
-    </ion-item>
+
     <img src="{{post.picURL}}">
 
-    <ion-card-content>
-
-        <span class="tag" *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
-
-    </ion-card-content>
-
-    <ion-row>
-      <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="heart"></ion-icon>
           <div>{{post.likeCnt}} Likes</div>
         </button>
-      </ion-col>
-      <!--<ion-col center text-center>-->
-        <!--<ion-note>-->
-          <!--11h ago-->
-        <!--</ion-note>-->
-      <!--</ion-col>-->
-    </ion-row>
 
+    <ion-card-content>
+      <span class="tag" *ngFor="let tag of post.tags"> {{tag.tag}}</span>
+    </ion-card-content>
+
+    <ion-item>
+      <ion-note><p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p></ion-note>
+
+
+    </ion-item>
   </ion-card>
 
 </ion-content>

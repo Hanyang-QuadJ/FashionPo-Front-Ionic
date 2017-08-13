@@ -18,7 +18,7 @@ page-home {
   }
 
   .toolbar{
-    box-shadow: 0px 0.05rem 0px #ff5733! important;
+    box-shadow: 0px 0.05rem 0px #ffffff ! important;
   }
   .firstPlace{
     font-size: 18px;
@@ -72,6 +72,9 @@ page-home {
     flex: 1;
 
   }
+  ion-segment{
+    align-items: start;
+  }
   .history{
     font-weight: 400;
     color: #6a6a6a;
@@ -118,21 +121,21 @@ page-home {
     margin-bottom: 2%;
   }
   .likeNum{
-    color:#709fb0;
+    color:#ff5733;
     font-weight: 400;
     font-size: 1.4rem;
     letter-spacing: 0px;
 
   }
   .likeNumm{
-    color:#709fb0;
+    color:#ff5733;
     font-weight: 500;
     font-size: 1.6rem;
 
 
   }
   .likeText{
-    color: #709fb0;
+    color: #ff5733;
     font-size: 1.1rem;
     font-weight: 400;
     letter-spacing: 1px;
@@ -142,13 +145,13 @@ page-home {
 
   }
   .likeText2{
-    color: #709fb0;
+    color: #ff5733;
     font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 1px;
   }
   .likeNum2{
-    color:#7094b0;
+    color:#ff5733;
     font-weight: 500;
     font-size: 1.6rem;
 

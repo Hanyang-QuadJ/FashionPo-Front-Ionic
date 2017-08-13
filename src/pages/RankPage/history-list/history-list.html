@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-buttons start>
-      <button  (click)="dismiss()" ion-button icon-only color="primay">
+      <button  (click)="dismiss()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-list inset>
     <button (click)="goToPage(i)" *ngFor="let dates of dateFinal; let i = index" ion-item>
       <h4>{{dates.mon}} {{dates.sDay}} ~ {{dates.endMon}} {{dates.eDay}}  , {{dates.yr}}</h4>

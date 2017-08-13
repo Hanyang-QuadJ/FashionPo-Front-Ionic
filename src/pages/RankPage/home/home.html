@@ -16,7 +16,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title  *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ Aug 7,2017</span></ion-title>
+    <ion-title  *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ 7 <ion-icon style="padding-top: 5%" name="arrow-down"></ion-icon></span></ion-title>
     <ion-title  *ngIf="modalCheck" (click)="scrollToTop()">{{rankDate.mon}} {{rankDate.sDay}} ~ {{rankDate.eDay}}  , {{rankDate.yr}}</ion-title>
 
 
@@ -27,17 +27,19 @@
         <ion-icon name="ios-search"></ion-icon>
       </button>
 
-      <button *ngIf="searchToggled" (click)="toggleSearch2()" ion-button icon-only color="primary">
-        <ion-icon name="ios-close-circle-outline"></ion-icon>
+      <button ion-button clear small *ngIf="searchToggled" (click)="toggleSearch2()" ion-button icon-only color="primary">
+        Cancel
       </button>
+
+
       <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
         <!--<ion-icon name="md-list"></ion-icon>-->
       <!--</button>-->
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar *ngIf="searchToggled">
-    <ion-segment [(ngModel)]="search" color="primary">
+  <ion-toolbar *ngIf="searchToggled" no-padding>
+    <ion-segment [(ngModel)]="search" color="primary" no-padding>
       <ion-segment-button value="user" >
         Users
       </ion-segment-button>
@@ -126,23 +128,22 @@
           <!--<div class="rankSub"><h5 class="likeNumm">{{ranks[i].likeCnt}}<span class="likeText"> Likes</span></h5></div>-->
         </ion-col>
       </ion-row>
-
-
-
-
-
     </ion-card>
   </div>
+
   <div  *ngIf="searchToggled" [ngSwitch]="search">
-    <ion-list *ngSwitchCase="'user'">
-      <ion-item *ngFor="let item of allUsers">
-        {{ item.username }}
-      </ion-item>
+    <ion-list no-lines *ngSwitchCase="'user'">
+      <button *ngFor="let item of allUsers" ion-item>
+        <ion-avatar item-start>
+          <img src="{{item.profile_img}}">
+        </ion-avatar>
+        <h4>{{ item.username }}</h4>
+      </button>
     </ion-list>
 
     <ion-list *ngSwitchCase="'tag'">
       <ion-item *ngFor="let item of allTags">
-        {{ item._id }}
+        <h4>{{ item._id }}</h4>
       </ion-item>
     </ion-list>
 
