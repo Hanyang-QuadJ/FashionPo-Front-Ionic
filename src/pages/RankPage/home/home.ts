@@ -54,7 +54,7 @@ export class HomePage implements OnInit {
     search: string = "";
     try: boolean = false;
     nameCheck: Array<any> = [];
-    firstCheck: boolean;
+
     firstButton: boolean;
 
 
@@ -85,7 +85,7 @@ export class HomePage implements OnInit {
         this.users = [];
         this.ranks = [];
         this.writtenBys = [];
-        this.firstCheck = false;
+
         this.search = "User";
         this.pushPage = VotePage;
 
@@ -173,18 +173,10 @@ export class HomePage implements OnInit {
                             console.log(this.firstUser._id);
                             console.log(this.user._id);
                             console.log("------------------");
-                            if (this.firstUser._id == this.user._id) {
-                              this.firstCheck = true;
-                              console.log(this.firstCheck);
-                            }
 
 
-                            for (let j = 0; j < this.ranks.length; j++) {
-                              this.nameCheck[j] = false;
-                              if (this.ranks[j].writtenBy === this.user._id) {
-                                this.nameCheck[j] = true;
-                              }
-                            }
+
+
                             for (let i = 0; i < this.ranks.length; i++)
                               this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
                             this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1
@@ -256,10 +248,7 @@ export class HomePage implements OnInit {
                     .subscribe(data => {
                       this.user = data.user[0];
 
-                      if (this.firstUser._id == this.user._id) {
-                        this.firstCheck = true;
-                        console.log(this.firstCheck);
-                      }
+
 
 
                       for (let j = 0; j < this.ranks.length; j++) {

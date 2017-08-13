@@ -77,7 +77,6 @@
           <ion-row>
             <ion-col>
               <h2 class="text-center firstPlaceIcon"><ion-icon name="trophy"></ion-icon></h2>
-              <h3 class="text-center firstPlace" *ngIf="firstUser && firstCheck">{{firstUser.username}}</h3>
               <h3 (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser && !firstCheck">{{firstUser.username}}</h3>
               <div class="text-center">
                 <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon name="md-heart"></ion-icon></span></h5>
@@ -106,7 +105,6 @@
         <div class="name">
           <div class="nameArea" *ngIf="users[i]">
             <p (click)="presentWardrobeModal(i)" *ngIf="!nameCheck[i]">{{users[i].username}}</p>
-            <p *ngIf="nameCheck[i]">{{users[i].username}}</p>
             <div class="rankSub"><h5 class="likeNum">{{ranks[i].likeCnt}}<span class="likeText"> <ion-icon name="md-heart"></ion-icon></span></h5></div>
 
           </div>
