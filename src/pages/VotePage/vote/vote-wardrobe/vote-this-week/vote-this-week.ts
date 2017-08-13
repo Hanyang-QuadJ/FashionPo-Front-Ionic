@@ -17,9 +17,11 @@ export class VoteThisWeekPage {
   @ViewChild(Content) content: Content;
   thisWeekPost:"";
   thisWeekPostIndex:"";
+  date:any="";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.thisWeekPost = this.navParams.get('thisWeekPost');
     this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
+    this.date = this.navParams.get('date')
   }
 
   ionViewDidLoad() {

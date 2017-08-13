@@ -47,6 +47,8 @@ export class FavoriteUserPage implements OnInit{
   }
 
   ngOnInit(): void {
+    this.date2=[];
+    this.date=[];
     let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
     loading.present();
     this.checkThis = 0;

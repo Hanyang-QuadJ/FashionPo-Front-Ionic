@@ -21,13 +21,13 @@
 <ion-content>
   <ion-card *ngFor="let post of thisWeekPost; let i =index" [id]="'fit'+i">
     <ion-item>
-      <p>{{post.writtenAt}}</p>
+      <p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p>
     </ion-item>
     <img src="{{post.picURL}}">
 
     <ion-card-content>
 
-      <span *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
+      <span class="tag" *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span>
 
     </ion-card-content>
 

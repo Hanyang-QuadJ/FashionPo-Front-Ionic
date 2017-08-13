@@ -16,10 +16,12 @@ export class VotePhotoPage {
   @ViewChild(Content) content: Content;
   postList:any="";
   postListIndex:any="";
+  date:any="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController) {
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
+    this.date = this.navParams.get('date');
   }
 
   ionViewDidLoad() {
