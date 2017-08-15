@@ -7,7 +7,6 @@
       "path": "/post",
       "proxyUrl": "http://54.162.160.91/api/post"
     },
-
     {
       "path": "/auth",
       "proxyUrl": "http://54.162.160.91/api/auth"
@@ -24,7 +23,8 @@
       "path": "/search",
       "proxyUrl": "http://54.162.160.91/api/search"
     }
-  ]
+  ],
+  "integrations": {
+    "cordova": {}
+  }
 }
-
-

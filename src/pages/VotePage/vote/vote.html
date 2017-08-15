@@ -19,10 +19,21 @@
 
 
 <ion-content no-padding>
+  <ion-card *ngIf="noCard">
+    <ion-card-content>
+      <img src="../../../assets/images/nomore.jpg">
 
-    <div *ngIf="noCard"> No more card for today </div>
+    </ion-card-content>
+    <ion-item>
+      <h2 text-center>No More Cards For Today</h2>
+    </ion-item>
+  </ion-card>
+
+
+
     <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
       <div *ngFor="let post of posts">
+
         <ion-card #mycards1 swing-card style="position:absolute;z-index: 0">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf=" user && post" src="{{ post.picURL }}">
 
@@ -44,7 +55,17 @@
 
 
         </ion-card>
-          <div *ngIf="noNextCard"> No more card for today </div>
+
+          <ion-card *ngIf="noNextCard">
+            <ion-card-content>
+              <img src="../../../assets/images/nomore.jpg">
+
+            </ion-card-content>
+            <ion-item>
+              <h3>No More Cards For Today</h3>
+            </ion-item>
+
+          </ion-card>
 
         <ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf="user && post" src="{{ nextPost.picURL }}">
@@ -58,7 +79,7 @@
     </div>
 </ion-content>
 
-<ion-footer no-border>
+<ion-footer *ngIf="!noCard" no-border>
   <ion-row>
     <ion-col text-center>
       <button ion-button clear small icon-left color="dark" (click)="voteUp(false)"><ion-icon name="ios-backspace-outline"></ion-icon>

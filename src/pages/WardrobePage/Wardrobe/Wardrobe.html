@@ -57,14 +57,14 @@
 
           <p class="profileText">Model</p>
           <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
-          <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="dark"
+          <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">
-            <ion-spinner name="circles"></ion-spinner>
+            <ion-spinner  color="light" name="circles"></ion-spinner>
           </button>
 
-          <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="dark"
+          <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">
-            <ion-spinner name="circles"></ion-spinner>
+            <ion-spinner color="light" name="circles"></ion-spinner>
           </button>
           <button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">Today {{user.viewCnt}}

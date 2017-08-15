@@ -134,7 +134,7 @@
 
   <div  *ngIf="searchToggled" [ngSwitch]="search">
     <ion-list *ngSwitchCase="'user'">
-      <button *ngFor="let item of allUsers" ion-item>
+      <button (click)="presentSearchModal(i)" *ngFor="let item of allUsers; let i = index" ion-item>
         <ion-avatar item-start>
           <img src="{{item.profile_img}}">
         </ion-avatar>
