@@ -175,7 +175,7 @@ export class HomePage implements OnInit {
                             console.log(this.firstUser._id);
                             console.log(this.user._id);
                             console.log("------------------");
-                          if (this.firstUser._id == this.user._id) {
+                          if (this.firstUser._id === this.user._id) {
                             this.firstCheck = true;
                             console.log(this.firstCheck);
                            }
@@ -238,6 +238,7 @@ export class HomePage implements OnInit {
                   this.users.push(data[i]);
                 }
 
+
                 this.storage.get('token').then((val) => {
                   let APIUrl = '/user/authed';
                   // if (this.platform.is('ios') == true){
@@ -253,9 +254,10 @@ export class HomePage implements OnInit {
                     .map(res => res.json())
                     .subscribe(data => {
                       this.user = data.user[0];
-
-
-
+                      if (this.firstUser._id === this.user._id) {
+                        this.firstCheck = true;
+                        console.log(this.firstCheck);
+                      }
 
                       for (let j = 0; j < this.ranks.length; j++) {
                         this.nameCheck[j] = false;
