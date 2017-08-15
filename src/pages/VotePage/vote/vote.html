@@ -26,6 +26,9 @@
     </ion-card-content>
     <ion-item>
       <h2 text-center>No More Cards For Today</h2>
+      <br>
+      <p text-center>Thank You</p>
+
     </ion-item>
   </ion-card>
 
@@ -56,16 +59,16 @@
 
         </ion-card>
 
-          <ion-card *ngIf="noNextCard">
-            <ion-card-content>
-              <img src="../../../assets/images/nomore.jpg">
+          <!--<ion-card *ngIf="noNextCard">-->
+            <!--<ion-card-content>-->
+              <!--<img src="../../../assets/images/nomore.jpg">-->
 
-            </ion-card-content>
-            <ion-item>
-              <h3>No More Cards For Today</h3>
-            </ion-item>
+            <!--</ion-card-content>-->
+            <!--<ion-item>-->
+              <!--<h2 text-center="">No More Cards For Today</h2>-->
+            <!--</ion-item>-->
 
-          </ion-card>
+          <!--</ion-card>-->
 
         <ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf="user && post" src="{{ nextPost.picURL }}">

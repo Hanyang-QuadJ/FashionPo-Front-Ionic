@@ -17,20 +17,30 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button icon-start outline (click)="presentActionSheet()" full><ion-icon name="camera"></ion-icon>Select Image</button>
-
-  <ion-item *ngIf="!pictureTaken" style="display: none;">
-    <img src="{{placeholderImage}}" />
-  </ion-item>
-  <img id="camera-image" />
-
-  <ion-list>
-
-    <ion-item>
-      <ion-label>Tag</ion-label>
-      <ion-input type="text"[(ngModel)]="tagsInput"></ion-input>
+  <ion-card>
+    <ion-item text-center>
+      <button ion-button icon-start clear small outline (click)="presentActionSheet()" ><ion-icon name="camera"></ion-icon>Select Image</button>
     </ion-item>
+    <div *ngIf="!pictureTaken">
+      <img id="camera-image" />
+      <img src="{{placeholderImage}}" />
+      <!--<img src="../../../assets/images/post4.png">-->
+    </div>
+    <ion-card-content>
 
-  </ion-list>
+        <p>Tag</p>
+        <ion-textarea type="text" [(ngModel)]="tagsInput" placeholder="Enter your caption and tags"></ion-textarea>
+
+    </ion-card-content>
+
+
+
+  </ion-card>
+
+  <!--<ion-item *ngIf="!pictureTaken" style="display: none;">-->
+  <!--</ion-item>-->
+
+
+
 
 </ion-content>

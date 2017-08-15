@@ -29,8 +29,7 @@ import 'rxjs/add/operator/toPromise';
 import {IonicStorageModule} from '@ionic/storage';
 import {TabsPage} from "../pages/tabs/tabs";
 
-import {SearchUserPage} from '../pages/RankPage/search-user/search-user'
-import {SearchTagsPage} from '../pages/RankPage/search-tags/search-tags'
+
 import {SwingModule} from 'angular2-swing';
 
 import {File} from '@ionic-native/file';
@@ -70,8 +69,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         TabsPage,
         WardrobeCameraPage,
         HistoryRankPage,
-        SearchUserPage,
-        SearchTagsPage,
+
         SignupPage,
         PostTabPage,
         FavoriteTabPage,
@@ -113,8 +111,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         WardrobePage,
         HomePage,
         TabsPage,
-        SearchUserPage,
-        SearchTagsPage,
+
         SignupPage,
         PostTabPage,
         FavoriteTabPage,

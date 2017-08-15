@@ -5,8 +5,6 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {VotePage} from '../../VotePage/vote/vote'
-import {SearchUserPage} from '../search-user/search-user'
-import {SearchTagsPage} from '../search-tags/search-tags'
 import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular';
 import {HistoryListPage} from '../history-list/history-list'
 import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
@@ -42,8 +40,7 @@ export class HomePage implements OnInit {
     private modalInstance: Modal;
     public toggled: boolean;
     public searchToggled: boolean;
-    tab1 = SearchUserPage;
-    tab2 = SearchTagsPage;
+
     pushPage: any;
     user: any;
     loading: any;

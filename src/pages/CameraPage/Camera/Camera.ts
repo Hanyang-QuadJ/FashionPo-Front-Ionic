@@ -140,6 +140,7 @@ export class CameraPage implements OnInit{
 
   ngOnInit(): void {
 
+
     // for(var i  = 0  ;i<this.tagsInput.length; i++){
     //     while(this.tagsInput[i]!==''){
     //       console.log(this.tagsInput[i])
@@ -153,7 +154,11 @@ export class CameraPage implements OnInit{
 
 
   }
+  test(){
+    console.log(this.tagsInput)
+  }
   post(){
+
     var jbSplit = this.tagsInput.split(' ',100);
     var myArray = jbSplit.filter(v=>v!='');
     var myArray2=[];
@@ -169,7 +174,7 @@ export class CameraPage implements OnInit{
       this.tags.push({'tag':myArray2[j]})
     }
 
-    console.log(this.tags)
+
 
 
     var APIUrl = '/post';
