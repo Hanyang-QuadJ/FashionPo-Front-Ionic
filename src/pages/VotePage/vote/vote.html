@@ -20,8 +20,8 @@
 
 <ion-content no-padding>
 
-
-    <div swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
+    <div *ngIf="noCard"> No more card for today </div>
+    <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
       <div *ngFor="let post of posts">
         <ion-card #mycards1 swing-card style="position:absolute;z-index: 0">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf=" user && post" src="{{ post.picURL }}">
@@ -44,8 +44,9 @@
 
 
         </ion-card>
+          <div *ngIf="noNextCard"> No more card for today </div>
 
-        <ion-card #mycards1 swing-card style="position:absolute ;z-index: -300">
+        <ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf="user && post" src="{{ nextPost.picURL }}">
           <ion-card-content>
             <h2 *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.username}}</h2>
