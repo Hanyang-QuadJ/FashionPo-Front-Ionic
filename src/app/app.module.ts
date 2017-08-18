@@ -52,6 +52,7 @@ import {RankThisWeekPage} from '../pages/RankPage/rank-wardrobe/rank-this-week/r
 import {VoteThisWeekPage} from '../pages/VotePage/vote/vote-wardrobe/vote-this-week/vote-this-week';
 import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vote-photo';
 import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangePage/password";
+import {IonicImageViewerModule} from 'ionic-img-viewer'
 
 // import { Camera } from '@ionic-native/camera';
 
@@ -98,6 +99,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         IonicStorageModule.forRoot(),
         HttpModule,
         SwingModule,
+        IonicImageViewerModule,
 
         SuperTabsModule.forRoot(),
     ],
@@ -143,8 +145,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         File,
         Transfer,
         FilePath,
-
-        , {provide: ErrorHandler, useClass: IonicErrorHandler},
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
 
     ]
 

@@ -34,6 +34,7 @@ export class WardrobePhotoPage implements OnInit{
 
   ionViewWillEnter(){
     this.scrollToCard()
+
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
@@ -49,7 +50,6 @@ export class WardrobePhotoPage implements OnInit{
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
     console.log(this.postList)
-
 
 
 

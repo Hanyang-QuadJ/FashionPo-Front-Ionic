@@ -108,7 +108,6 @@ export class WardrobePage {
             //   APIUrl = 'http://54.162.160.91/api/user';
             //   APIUrl_2 = 'http://54.162.160.91/api/post';
             // }
-
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);

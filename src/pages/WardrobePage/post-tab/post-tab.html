@@ -9,7 +9,7 @@
   <ion-grid  *ngIf="!check" no-padding>
     <ion-row wrap no-padding>
       <ion-col col-4 *ngFor="let post of myPost; let i = index">
-        <img (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
+        <button class="btn" (click)="presentProfileModal(i)"><img  class="myFitImage" src={{post.picURL}}></button>
       </ion-col>
     </ion-row>
   </ion-grid>

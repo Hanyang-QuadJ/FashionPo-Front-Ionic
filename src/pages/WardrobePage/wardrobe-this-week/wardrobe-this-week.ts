@@ -36,7 +36,6 @@ export class WardrobeThisWeekPage implements OnInit{
 
   ionViewWillEnter(){
     this.scrollToCard()
-
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
@@ -46,6 +45,7 @@ export class WardrobeThisWeekPage implements OnInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobeThisWeekPage');
+
   }
   public dismiss(){
     this.viewCtrl.dismiss()

@@ -82,9 +82,9 @@ export class CameraPage implements OnInit{
 
   public takePicture(sourceType){
       let options = {
-        targetWidth: 500,
-        targetHeight: 800,
-        quality: 70,
+        targetWidth: 900,
+        targetHeight: 900,
+        quality: 80,
         allowEdit: true,
         correctOrientation: false,
         saveToPhotoAlbum: false,

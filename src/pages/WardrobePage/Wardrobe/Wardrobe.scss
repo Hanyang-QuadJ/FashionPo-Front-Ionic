@@ -108,28 +108,40 @@ page-register {
 
   }
   .horiPic{
-    height: 33%;
-    width: 33%;
-    margin-right: 2px;
 
+    padding-right: 3px;
+
+
+  }
+  .btn{
+    background-color: transparent;
+    padding: 0;
+    margin:0;
   }
   .small{
     font-size: 8px;
   }
-  .twPic{
-
-    height: 23%;
+  .myFitImage{
+    width:100%;
+    height:100%;
+    padding-right: 3px;
 
   }
+
   ion-scroll{
-    overflow: scroll;
+
     white-space: nowrap;
+    height: 23%;
   }
   super-tabs-toolbar > ion-toolbar.toolbar .tab-buttons-container .tab-buttons super-tab-button {
 
     text-transform: none;
     border-bottom: 0.55px rgba(0, 0, 0, 0.12) solid;
   }
+  .image-slider{
+    height:23%
+  }
 
 
 }
+
