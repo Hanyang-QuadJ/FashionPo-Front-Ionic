@@ -46,21 +46,19 @@
     <button (click)="presentUserProfileModal()" ion-item>
       <ion-icon name="ios-image" color="primary" item-start></ion-icon>
       <h4>Edit Profile Image</h4>
-
-
     </button>
-    <button (click)="presentUsernameModal()" ion-item>
 
+    <button (click)="presentUsernameModal()" ion-item>
       <ion-icon name="ios-person"color="primary" item-start></ion-icon>
       <h4>Edit User Name</h4>
       <p item-end>{{user.username}}</p>
     </button>
 
-    <button ion-item>
+    <button ion-item (click)="presentWardrobeModal()">
       <ion-icon name="ios-shirt" color="primary"item-start></ion-icon>
       <h4>Edit Wardrobe Name</h4>
-
     </button>
+
     <button ion-item>
       <ion-icon name="md-list" color="primary"item-start></ion-icon>
       <h4>Edit Introduce</h4>

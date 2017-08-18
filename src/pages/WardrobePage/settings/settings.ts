@@ -5,6 +5,7 @@ import {LoginPage} from "../../AuthPage/login/login";
 import {UsernamePage} from "./UsernameChangePage/username";
 import {UserProfileChange} from "./UserProfileChangePage/userprofile";
 import {PasswordChangePage} from "./PasswordChangePage/password";
+import {ChangeWardrobeNamePage} from "./WardrobeNameChangePage/wardrobename";
 
 /**
  * Generated class for the SettingsPage page.
@@ -55,6 +56,11 @@ export class SettingsPage {
 
   presentPasswordModal() {
     let profileModal = this.modalCtrl.create(PasswordChangePage, { },{leaveAnimation:'back'});
+    profileModal.present();
+  }
+
+  presentWardrobeModal() {
+    let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, { },{leaveAnimation:'back'});
     profileModal.present();
   }
 }
