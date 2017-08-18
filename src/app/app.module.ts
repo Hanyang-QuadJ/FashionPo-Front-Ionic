@@ -52,6 +52,7 @@ import {RankThisWeekPage} from '../pages/RankPage/rank-wardrobe/rank-this-week/r
 import {VoteThisWeekPage} from '../pages/VotePage/vote/vote-wardrobe/vote-this-week/vote-this-week';
 import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vote-photo';
 import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangePage/password";
+import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNameChangePage/wardrobename";
 
 // import { Camera } from '@ionic-native/camera';
 
@@ -90,6 +91,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         VotePhotoPage,
         FindPasswordPage,
         PasswordChangePage,
+        ChangeWardrobeNamePage,
     ],
     imports: [
         BrowserModule,
@@ -134,6 +136,7 @@ import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangeP
         VotePhotoPage,
         FindPasswordPage,
         PasswordChangePage,
+        ChangeWardrobeNamePage,
     ],
     providers: [
         StatusBar,
