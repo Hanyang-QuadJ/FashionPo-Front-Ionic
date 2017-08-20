@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController, ModalController,LoadingController } from 'ionic-angular';
+import { NavController, NavParams,ViewController, ModalController,LoadingController,Platform} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
 import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite-user-post'
@@ -42,7 +42,7 @@ export class FavoriteUserPage implements OnInit{
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, public loadingCtrl:LoadingController,  private storage : Storage, public modalCtrl: ModalController,
-              private http: Http
+              private http: Http, public platform: Platform,
               ) {
   }
 
@@ -59,7 +59,8 @@ export class FavoriteUserPage implements OnInit{
       var APIUrl = '/post/userid';
       var APIUrl_1 = '/user'
       // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/rank';
+      //   APIUrl = 'http://54.162.160.91/api/post/userid'
+      //   APIUrl_1 = 'http://54.162.160.91/api/user'
       //   // console.log('yes');
       // }
       let headers = new Headers();

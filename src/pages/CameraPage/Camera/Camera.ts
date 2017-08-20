@@ -2,8 +2,8 @@
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
 import {
-  ActionSheetController, Loading, LoadingController, NavController, NavParams, Platform,
-  ToastController
+  ActionSheetController, LoadingController, NavController, NavParams, Platform,
+  ToastController,
 } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
@@ -40,6 +40,7 @@ export class CameraPage implements OnInit{
               public actionSheetCtrl: ActionSheetController,
               public toastCtrl: ToastController,
               public platform: Platform,
+              public navCtrl: NavController,
               public loadingCtrl: LoadingController)
   {
 
@@ -82,10 +83,11 @@ export class CameraPage implements OnInit{
 
   public takePicture(sourceType){
       let options = {
-        targetWidth: 900,
-        targetHeight: 900,
-        quality: 80,
-        allowEdit: true,
+
+        quality: 75,
+        allowEdit:true,
+
+
         correctOrientation: false,
         saveToPhotoAlbum: false,
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -158,6 +160,8 @@ export class CameraPage implements OnInit{
     console.log(this.tagsInput)
   }
   post(){
+    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
+    loading.present();
 
     var jbSplit = this.tagsInput.split(' ',100);
     var myArray = jbSplit.filter(v=>v!='');
@@ -201,7 +205,8 @@ export class CameraPage implements OnInit{
               message: 'upload success',
               duration: 2000
             });
-
+            loading.dismiss();
+            this.tags=[];
             toast.present(toast);
           },
           err => {
@@ -215,6 +220,13 @@ export class CameraPage implements OnInit{
 
 
 
+
+
+
+
+  }
+  switchTabs() {
+    this.navCtrl.parent.select(2);
   }
 
 

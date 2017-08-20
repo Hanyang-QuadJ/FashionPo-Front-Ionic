@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+
 
 // import { AboutPage } from '../about/about';
 import { HomePage } from '../RankPage/home/home';
@@ -11,10 +12,13 @@ import { WardrobePage} from "../WardrobePage/wardrobe/wardrobe";
 })
 export class TabsPage {
 
+
+
   tab1Root = HomePage;
   tab2Root = CameraPage;
   tab3Root = WardrobePage;
   constructor() {
+
 
   }
 }

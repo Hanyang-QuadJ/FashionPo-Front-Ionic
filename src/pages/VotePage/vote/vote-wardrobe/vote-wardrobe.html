@@ -74,12 +74,11 @@
         </ion-grid>
         <hr>
         <p class="infoText">This Week's Fits</p>
-        <ion-scroll scrollX="true" class="twPic">
-
-                <img (click)="presentThisWeekModal(i)" *ngFor="let post of thisWeekPost; let i = index" class="horiPic" src={{post.picURL}}>
-
-
-        </ion-scroll>
+        <ion-slides class="image-slider" slidesPerView="3" loop="true">
+          <ion-slide *ngFor="let tWeek of thisWeekPost; let i = index">
+            <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
+          </ion-slide>
+        </ion-slides>
 
         <p class="infoText">Fits</p>
         <ion-grid no-padding>

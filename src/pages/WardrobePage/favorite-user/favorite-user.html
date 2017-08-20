@@ -28,9 +28,9 @@
     <ion-row justify-content-center align-items-center>
 
       <ion-col col-5 text-center>
-        <img class="image" src="{{favUser.profile_img}}">
+        <img class="image" src="{{favUser.profile_img}}" imageViewer>
       </ion-col>
-      <ion-col col-6>
+      <ion-col col-7>
         <div class="padding">
           <!--<h5 class="userName">{{user.username}}</h5>-->
           <h5 class="userName">{{favUser.username}}</h5>
@@ -44,22 +44,19 @@
   </ion-grid>
   <hr>
   <p class="infoText">This Week's Fits</p>
-  <ion-scroll scrollX="true" class="twPic">
+
+  <ion-slides class="image-slider" slidesPerView="3">
+    <ion-slide *ngFor="let tWeek of thisWeekPost; let i = index">
+      <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
+    </ion-slide>
+  </ion-slides>
 
 
-        <img (click)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost; let i = index" class="horiPic" src="{{tWeek.picURL}}">
-
-
-
-
-  </ion-scroll>
-
-  <hr>
   <p class="infoText">Fits</p>
   <ion-grid no-padding>
     <ion-row wrap no-padding>
       <ion-col col-4 *ngFor="let post of posts; let i = index">
-        <img (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
+        <img tappable (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -113,9 +113,8 @@ page-favorite-user {
 
   }
   .horiPic{
-    height: 33%;
-    width: 33%;
-    margin-right: 2px;
+
+    padding-right: 3px;
 
   }
   .small{
@@ -126,10 +125,7 @@ page-favorite-user {
     height: 23%;
 
   }
-  ion-scroll{
-    overflow: scroll;
-    white-space: nowrap;
-  }
+
   .myFitImage{
     width:100%;
     height:100%;
@@ -140,6 +136,9 @@ page-favorite-user {
 
     text-transform: none;
     border-bottom: 0.55px rgba(0, 0, 0, 0.12) solid;
+  }
+  .image-slider{
+    height:23%
   }
 
 }

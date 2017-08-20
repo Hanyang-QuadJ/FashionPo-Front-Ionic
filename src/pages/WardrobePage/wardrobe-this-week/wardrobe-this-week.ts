@@ -17,31 +17,32 @@ export class WardrobeThisWeekPage implements OnInit{
   postList="";
   postListIndex="";
   date="";
+  yOffset:any="";
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
 
-    this.postList = this.navParams.get('thisWeekPost')
-    this.postListIndex = this.navParams.get('thisWeekPostIndex')
-    this.date = this.navParams.get('date')
+
+
+
 
   }
 
   ngOnInit(): void {
+    this.postList = this.navParams.get('thisWeekPost')
+    this.postListIndex = this.navParams.get('thisWeekPostIndex')
+    this.date = this.navParams.get('date')
 
 
 
   }
 
   ionViewWillEnter(){
-    this.scrollToCard()
+    this.yOffset = document.getElementById(this.postListIndex).offsetTop;
+    this.content.scrollTo(0,this.yOffset,0);
   }
-  scrollToCard(){
-    let yOffset = document.getElementById(this.postListIndex).offsetTop;
-    console.log(yOffset)
-    this.content.scrollTo(0,yOffset,0);
-  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobeThisWeekPage');
