@@ -68,7 +68,7 @@ export class VotePage implements OnInit {
                 .map(res => res.json())
                 .subscribe(data => {
                     this.cachedPost = data.message;
-                    console.log('&&&&&&&&&&&&')
+                    console.log('&&&&&&&&&&&&');
                     console.log(this.cachedPost);
                     this.posts = [];
                     this.nextPost = this.cachedPost.pop();
@@ -196,7 +196,7 @@ export class VotePage implements OnInit {
                 let headers = new Headers();
                 let body = {
                     users: [this.posts[0].writtenBy]
-                }
+                };
                 headers.append('Content-Type', 'application/json');
                 headers.append('x-access-token', val);
 

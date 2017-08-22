@@ -1,5 +1,8 @@
 import { Component,ViewChild,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,AlertController } from 'ionic-angular';
+import {Storage} from '@ionic/storage';
+import {Http, Headers} from "@angular/http";
+import 'rxjs/add/operator/map';
 
 /**
  * Generated class for the WardrobePhotoPage page.
@@ -14,12 +17,13 @@ import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
 })
 export class WardrobePhotoPage implements OnInit{
   @ViewChild(Content) content: Content;
-  postList ="";
-  postListIndex:string="";
+  postList:any ="";
+  postListIndex:any=null;
   date:Array<any>=[];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public alertCtrl: AlertController, public storage: Storage, public http: Http, ) {
     console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
@@ -38,10 +42,11 @@ export class WardrobePhotoPage implements OnInit{
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
-    console.log(yOffset)
+    console.log(yOffset);
     this.content.scrollTo(0,yOffset,0);
   }
   ngOnInit(): void {
+
 
 
   }
@@ -49,23 +54,67 @@ export class WardrobePhotoPage implements OnInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WardrobePhotoPage');
-    console.log(this.postList)
+    console.log(this.postList);
+    console.log(this.postList[this.postListIndex]._id);
+    console.log(this.postList[this.postListIndex].writtenBy);
+
 
 
 
   }
+  presentConfirm(i) {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      message: 'Do you want to delete this post?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.storage.get('token').then((val) => {
+              var APIUrl = '/post/delete';
 
 
+              // if (this.platform.is('ios') == true){
+              //   APIUrl = 'http://54.162.160.91/post/delete';
+              //
+              // }
+
+              let headers = new Headers();
+              headers.append('Content-Type', 'application/json');
+              headers.append('x-access-token', val);
+              const body = {_id: this.postList[i]._id,
+                writtenBy:this.postList[i].writtenBy
+
+              };
+
+              this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+                .map(res => res.json())
+                .subscribe(
+                  data => {
+                    console.log('deleted');
+                    let check = "check"
+                    this.viewCtrl.dismiss(check);
 
 
+                  });
+            });
+
+
+            console.log('Buy clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
   public dismiss(){
     this.viewCtrl.dismiss()
   }
-
-
-
-
-
-
-
 }

@@ -20,7 +20,7 @@
 
 <ion-content>
     <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
-  <ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
+  <ion-card *ngFor=" let post of postList; let i =index" [id]="i">
 
     <img src="{{post.picURL}}">
 
@@ -35,7 +35,8 @@
 
     <ion-item>
       <ion-note><p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p></ion-note>
-      <button large ion-button clear item-end color="secondary"><ion-icon large name="ios-trash"></ion-icon></button>
+
+      <button (click)="presentConfirm(i)" large ion-button clear item-end color="secondary"><ion-icon large name="ios-trash"></ion-icon></button>
     </ion-item>
   </ion-card>
 

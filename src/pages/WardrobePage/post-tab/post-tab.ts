@@ -20,7 +20,7 @@ import { CameraPage } from '../../CameraPage/Camera/camera'
 export class PostTabPage implements OnInit{
   // user: object = {};
 
-  myPost: Array<object> = [];
+  myPost: Array<any> = [];
   postAlert:string="";
   date:Array<any> = [];
   check:boolean;
@@ -56,7 +56,49 @@ export class PostTabPage implements OnInit{
 
   }
   presentProfileModal(i) {
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost, postListIndex:'fit'+i,date:this.date},{leaveAnimation:'back'});
+
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost, postListIndex:i,date:this.date},{leaveAnimation:'back'});
+      profileModal.onDidDismiss((check)=>{
+        if(check === "check"){
+          this.myPost = [];
+          let loading = this.loadingCtrl.create({
+            showBackdrop: false, spinner: 'crescent',
+
+          });
+          this.storage.get('token').then((val) => {
+
+            var APIUrl_2 = '/post';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl_2 = 'http://54.162.160.91/api/post';
+            // }
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+
+
+            this.http.get(APIUrl_2 + '/myposts', {headers: headers})
+              .map(res => res.json())
+              .subscribe(data => {
+                for (var i = 0; i < data.posts.length; i++) {
+
+                  if (data.posts[i].isThisWeek === true) {
+                  }
+
+                  else {
+                    this.myPost.push(data.posts[i]);
+                    loading.dismiss();
+                  }
+
+                }
+
+              });
+          });
+
+        }
+
+
+
+      });
       profileModal.present();
 
   }

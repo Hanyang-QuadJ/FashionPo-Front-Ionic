@@ -70,7 +70,7 @@
         <p class="infoText">This Week's Fits</p>
 
 
-  <ion-slides class="image-slider" slidesPerView="3" loop="true">
+  <ion-slides class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost; let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>
