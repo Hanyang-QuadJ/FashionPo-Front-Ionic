@@ -30,6 +30,7 @@ export class VoteWardrobePage {
     loaded: boolean = false;
     button_loaded:boolean = true;
     posts: any = "";
+  weekCheck:boolean;
     thisWeekPost:any="";
     button:boolean = false;
     try:boolean = false;
@@ -57,6 +58,7 @@ export class VoteWardrobePage {
                 public loadingCtrl: LoadingController,
                 public modalCtrl: ModalController,
     ) {
+        this.weekCheck=false;
         this.usernameForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
 
@@ -117,6 +119,10 @@ export class VoteWardrobePage {
                                   this.date.push(data[i].writtenAt)
                                 }
                               }
+                              if(this.thisWeekPost.length===0){
+                                this.weekCheck = true;
+                              }
+
                               for(var h = 0; h<this.date.length; h++){
                                 this.year.push(this.date[h].substring(0,4));
                                 this.endDay.push(Number(this.date[h].substring(8,10)));

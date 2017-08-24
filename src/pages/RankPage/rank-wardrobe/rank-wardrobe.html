@@ -18,7 +18,7 @@
       </button>
     </ion-buttons>
     <ion-title>
-      peggy_gould
+      {{user.wardrobeName}}
     </ion-title>
   </ion-navbar>
 
@@ -42,8 +42,8 @@
           <!--<h5 class="userName">{{user.username}}</h5>-->
           <h5 class="userName">{{user.username}}</h5>
 
-          <p class="profileText">Model</p>
-          <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
+          <p class="profileText">{{user.introduce}}</p>
+
           <button class="add" ion-button small color="primary">Today {{user.viewCnt}}</button>
           <button class="add" ion-button small color="sub">Rank {{rankNumber}}</button>
         </div>

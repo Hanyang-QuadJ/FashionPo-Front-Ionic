@@ -74,6 +74,8 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
+      let date = new Date();
+      console.log(date);
 
 
     }

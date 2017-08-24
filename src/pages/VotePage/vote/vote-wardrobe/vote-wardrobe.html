@@ -14,7 +14,7 @@
             </button>
         </ion-buttons>
         <ion-title>
-            HanyangWardrobe
+            {{User.wardrobeName}}
         </ion-title>
         <ion-buttons end>
 
@@ -38,9 +38,8 @@
                         <!--<h5 class="userName">{{user.username}}</h5>-->
                         <h5 *ngIf="User" class="userName">{{User.username}}</h5>
 
-                        <p class="profileText">Student</p>
-                        <p class="profileText">He determined to drop his litigation with the monastry, and
-                            relinguish.</p>
+                        <p class="profileText">{{User.introduce}}</p>
+
                         <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                                 (click)="refreshViewCnt()">
                             <ion-spinner name="circles"></ion-spinner>
@@ -73,8 +72,18 @@
             </ion-row>
         </ion-grid>
         <hr>
+
+
         <p class="infoText">This Week's Fits</p>
-        <ion-slides class="image-slider" slidesPerView="3">
+
+        <ion-grid *ngIf="weekCheck">
+          <ion-row>
+            <ion-col text-center>
+              <h4 class="no">There are no fits</h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
           <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
             <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
           </ion-slide>
