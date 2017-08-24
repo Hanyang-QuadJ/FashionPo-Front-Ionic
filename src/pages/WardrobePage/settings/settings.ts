@@ -6,6 +6,7 @@ import {UsernamePage} from "./UsernameChangePage/username";
 import {UserProfileChange} from "./UserProfileChangePage/userprofile";
 import {PasswordChangePage} from "./PasswordChangePage/password";
 import {ChangeWardrobeNamePage} from "./WardrobeNameChangePage/wardrobename";
+import {IntroduceChangePage} from "./IntroduceChangePage/introduce";
 
 /**
  * Generated class for the SettingsPage page.
@@ -61,6 +62,11 @@ export class SettingsPage {
 
   presentWardrobeModal() {
     let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, { },{leaveAnimation:'back'});
+    profileModal.present();
+  }
+
+  presentIntroduceModal() {
+    let profileModal = this.modalCtrl.create(IntroduceChangePage, { },{leaveAnimation:'back'});
     profileModal.present();
   }
 }
