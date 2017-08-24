@@ -28,6 +28,7 @@ export class FavoriteUserPage implements OnInit{
   date2:Array<string>=[];
   dateFinal:Array<any>=[];
   dateFinal2:Array<any>=[];
+  weekCheck:boolean;
 
   year:Array<any>=[];
   year2:Array<any>=[];
@@ -44,6 +45,7 @@ export class FavoriteUserPage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController, public loadingCtrl:LoadingController,  private storage : Storage, public modalCtrl: ModalController,
               private http: Http, public platform: Platform,
               ) {
+    this.weekCheck=false;
   }
 
   ngOnInit(): void {
@@ -87,6 +89,10 @@ export class FavoriteUserPage implements OnInit{
 
             }
 
+
+          }
+          if(this.thisWeekPost.length===0){
+            this.weekCheck = true;
           }
           for(var h = 0; h<this.date.length; h++){
             this.year.push(this.date[h].substring(0,4));

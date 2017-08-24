@@ -33,6 +33,7 @@ page-favorite-user {
     margin-top: 3%;
     font-weight: 300;
     color: #4d4d4d;
+    white-space: pre-line;
 
   }
   .add{
@@ -147,6 +148,12 @@ page-favorite-user {
   }
   .image-slider{
     height:23%
+  }
+  .no{
+    padding-top: 15%;
+    padding-bottom: 15%;
+    color: #8c8c8c;
+    font-size: 14px;
   }
 
 }

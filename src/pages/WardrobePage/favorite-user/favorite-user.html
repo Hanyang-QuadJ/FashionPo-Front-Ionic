@@ -35,8 +35,8 @@
           <!--<h5 class="userName">{{user.username}}</h5>-->
           <h5 class="userName">{{favUser.username}}</h5>
 
-          <p class="profileText">Student</p>
-          <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
+          <p class="profileText">{{favUser.introduce}}</p>
+
           <button class="add" ion-button small color="primary">Today {{favUser.viewCnt}}</button>
         </div>
       </ion-col>
@@ -44,8 +44,15 @@
   </ion-grid>
   <hr>
   <p class="infoText">This Week's Fits</p>
+  <ion-grid *ngIf="weekCheck">
+    <ion-row>
+      <ion-col text-center>
+        <h4 class="no">There are no fits</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-slides class="image-slider" slidesPerView="3">
+  <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>

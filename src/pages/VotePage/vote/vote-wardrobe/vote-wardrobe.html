@@ -7,13 +7,13 @@
 
 
 <ion-header no-border>
-    <ion-navbar>
+    <ion-toolbar>
         <ion-buttons start>
             <button (click)="dismiss()" ion-button icon-only color="primary">
                 <ion-icon name="ios-arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>
+        <ion-title *ngIf="User">
             {{User.wardrobeName}}
         </ion-title>
         <ion-buttons end>
@@ -21,7 +21,7 @@
 
         </ion-buttons>
 
-    </ion-navbar>
+    </ion-toolbar>
 
 </ion-header>
 
@@ -38,7 +38,7 @@
                         <!--<h5 class="userName">{{user.username}}</h5>-->
                         <h5 *ngIf="User" class="userName">{{User.username}}</h5>
 
-                        <p class="profileText">{{User.introduce}}</p>
+                        <p *ngIf="User" class="profileText">{{User.introduce}}</p>
 
                         <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                                 (click)="refreshViewCnt()">
