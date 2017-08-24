@@ -38,7 +38,7 @@ export class UsernamePage {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/authed';
             if (this.platform.is('ios') == true){
-              APIUrl = 'http://54.162.160.91/api/user/authed';
+              APIUrl = 'http://107.23.122.155:3000/api/user/authed';
               // console.log('yes');
             }
             let headers = new Headers();
@@ -76,7 +76,7 @@ export class UsernamePage {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/update/username';
             if (this.platform.is('ios') == true){
-              APIUrl = 'http://54.162.160.91/api/user/update/username';
+              APIUrl = 'http://107.23.122.155:3000/api/user/update/username';
               // console.log('yes');
             }
             let headers = new Headers();

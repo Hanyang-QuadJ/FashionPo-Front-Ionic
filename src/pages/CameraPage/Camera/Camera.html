@@ -1,9 +1,9 @@
 <ion-header no-border>
   <ion-navbar>
-    <ion-buttons start>
+    <ion-buttons *ngIf="backButton" start>
 
-      <button (click)="post()" ion-button icon-end small color="primary">
-        Post
+      <button (click)="dismiss()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
       <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
       <!--<ion-icon name="md-list"></ion-icon>-->

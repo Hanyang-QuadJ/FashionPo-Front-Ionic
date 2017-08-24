@@ -3,7 +3,7 @@ import {Component, ViewChild, ViewChildren, QueryList, OnInit,} from '@angular/c
 
 import {
   ActionSheetController, LoadingController, NavController, NavParams, Platform,
-  ToastController,
+  ToastController,ViewController,
 } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {Http, Headers } from '@angular/http';
@@ -44,6 +44,7 @@ export class CameraPage implements OnInit{
               public platform: Platform,
               public navCtrl: NavController,
               public navParams: NavParams,
+              public viewCtrl: ViewController,
               public loadingCtrl: LoadingController)
   {
     if(this.navParams.get('fromWardrobe')==="check"){
@@ -120,7 +121,7 @@ export class CameraPage implements OnInit{
 
         // var APIUrl = '/post';
         // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/api/post';
+        //   APIUrl = 'http://107.23.122.155:3000/api/post';
         //   // console.log('yes');
         // }
         // this.storage.get('token').then((val) => {
@@ -207,7 +208,7 @@ export class CameraPage implements OnInit{
 
       var APIUrl = '/post';
       if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/post';
+        APIUrl = 'http://107.23.122.155:3000/api/post';
         // console.log('yes');
       }
       this.storage.get('token').then((val) => {
@@ -256,6 +257,9 @@ export class CameraPage implements OnInit{
   }
   switchTabs() {
     this.navCtrl.parent.select(2);
+  }
+  public dismiss(){
+    this.viewCtrl.dismiss();
   }
 
 

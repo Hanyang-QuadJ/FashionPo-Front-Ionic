@@ -104,7 +104,7 @@ export class HomePage implements OnInit {
           this.storage.get('token').then((val) => {
             var APIUrl = '/rank';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/rank';
+            //   APIUrl = 'http://107.23.122.155:3000/api/rank';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -124,7 +124,7 @@ export class HomePage implements OnInit {
                 this.storage.get('token').then((val) => {
                   let APIUrl = '/user';
                   // if (this.platform.is('ios') == true){
-                  //   APIUrl = 'http://54.162.160.91/api/user';
+                  //   APIUrl = 'http://107.23.122.155:3000/api/user';
                   //   // console.log('yes');
                   // }
                   for (let i = 0; i < data.posts.length; i++) {
@@ -156,7 +156,7 @@ export class HomePage implements OnInit {
                       this.storage.get('token').then((val) => {
                         let APIUrl = '/user/authed';
                         // if (this.platform.is('ios') == true){
-                        //   APIUrl = 'http://54.162.160.91/api/user/authed';
+                        //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
                         //   // console.log('yes');
                         // }
                         let headers = new Headers();
@@ -219,7 +219,7 @@ export class HomePage implements OnInit {
           this.storage.get('token').then((val) => {
             var APIUrl = '/user';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   APIUrl = 'http://107.23.122.155:3000/api/user';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -239,7 +239,7 @@ export class HomePage implements OnInit {
                 this.storage.get('token').then((val) => {
                   let APIUrl = '/user/authed';
                   // if (this.platform.is('ios') == true){
-                  //   APIUrl = 'http://54.162.160.91/api/user/authed';
+                  //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
                   //   // console.log('yes');
                   // }
                   let headers = new Headers();
@@ -324,7 +324,7 @@ export class HomePage implements OnInit {
       this.storage.get('token').then((val) => {
         var APIUrl = '/rank';
         // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/api/rank';
+        //   APIUrl = 'http://107.23.122.155:3000/api/rank';
         //   // console.log('yes');
         // }
         let headers = new Headers();
@@ -344,7 +344,7 @@ export class HomePage implements OnInit {
             this.storage.get('token').then((val) => {
               let APIUrl = '/user';
               // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://54.162.160.91/api/user';
+              //   APIUrl = 'http://107.23.122.155:3000/api/user';
               //   // console.log('yes');
               // }
               for (let i = 0; i < data.posts.length; i++) {
@@ -376,7 +376,7 @@ export class HomePage implements OnInit {
                   this.storage.get('token').then((val) => {
                     let APIUrl = '/user/authed';
                     // if (this.platform.is('ios') == true){
-                    //   APIUrl = 'http://54.162.160.91/api/user/authed';
+                    //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
                     //   // console.log('yes');
                     // }
                     let headers = new Headers();
@@ -444,7 +444,7 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+            //   APIUrl = 'http://107.23.122.155:3000/api/user/favorite';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -491,7 +491,7 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+            //   APIUrl = 'http://107.23.122.155:3000/api/user/favorite';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -545,7 +545,7 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/all';
+            //   APIUrl = 'http://107.23.122.155:3000/api/user/all';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -570,7 +570,7 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/all';
+            //   APIUrl = 'http://107.23.122.155:3000/api/user/all';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -579,7 +579,7 @@ export class HomePage implements OnInit {
 
             var APIUrl2 = '/search/searchTag';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
+            //   APIUrl2 = 'http://107.23.122.155:3000/api/search/searchTag';
             //   // console.log('yes');
             // }
 

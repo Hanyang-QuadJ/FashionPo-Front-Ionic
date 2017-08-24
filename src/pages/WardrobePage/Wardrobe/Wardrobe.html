@@ -42,8 +42,8 @@
           <!--<h5 class="userName">{{user.username}}</h5>-->
           <h5 (click)="presentThisWeekModal(1)" class="userName">{{user.username}}</h5>
 
-          <p class="profileText">Model</p>
-          <p class="profileText">He determined to drop his litigation with the monastry, and relinguish.</p>
+
+          <p class="profileText">{{user.introduce}}</p>
           <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">
             <ion-spinner  color="light" name="circles"></ion-spinner>

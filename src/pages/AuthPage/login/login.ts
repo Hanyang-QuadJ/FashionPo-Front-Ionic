@@ -71,7 +71,7 @@ export class LoginPage {
 
 
     if (this.platform.is('ios') == true){
-      APIUrl = 'http://54.162.160.91/api/auth';
+      APIUrl = 'http://107.23.122.155:3000/api/auth';
       // console.log('yes');
     }
     let headers = new Headers();
