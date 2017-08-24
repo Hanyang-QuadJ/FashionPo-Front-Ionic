@@ -143,9 +143,13 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'tag'">
-      <ion-item *ngFor="let item of allTags">
-        <h4>{{ item._id }}</h4>
-      </ion-item>
+      <ion-grid no-padding>
+        <ion-row wrap no-padding>
+          <ion-col col-4 *ngFor="let item of allTags; let i = index">
+            <button class="btn"><img  class="myFitImage" src={{allTags[i].picURL}}></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-list>
 
   </div>

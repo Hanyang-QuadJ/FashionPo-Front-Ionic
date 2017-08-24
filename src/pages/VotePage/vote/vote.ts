@@ -155,7 +155,8 @@ export class VotePage implements OnInit {
         let toast = this.toastCtrl.create({
             message: 'Liked!',
             duration: 200,
-            position: 'middle'
+            position: 'middle',
+            cssClass:'like'
         });
 
         toast.onDidDismiss(() => {

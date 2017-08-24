@@ -59,8 +59,8 @@ export class FavoriteUserPage implements OnInit{
       var APIUrl = '/post/userid';
       var APIUrl_1 = '/user'
       // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/post/userid'
-      //   APIUrl_1 = 'http://54.162.160.91/api/user'
+      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/userid'
+      //   APIUrl_1 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user'
       //   // console.log('yes');
       // }
       let headers = new Headers();

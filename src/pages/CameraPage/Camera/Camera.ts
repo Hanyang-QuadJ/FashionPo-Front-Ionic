@@ -121,7 +121,7 @@ export class CameraPage implements OnInit{
 
         // var APIUrl = '/post';
         // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://107.23.122.155:3000/api/post';
+        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
         //   // console.log('yes');
         // }
         // this.storage.get('token').then((val) => {
@@ -208,7 +208,7 @@ export class CameraPage implements OnInit{
 
       var APIUrl = '/post';
       if (this.platform.is('ios') == true){
-        APIUrl = 'http://107.23.122.155:3000/api/post';
+        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
         // console.log('yes');
       }
       this.storage.get('token').then((val) => {

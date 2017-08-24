@@ -534,6 +534,7 @@ export class HomePage implements OnInit {
       let searchModal = this.modalCtrl.create(RankWardrobePage,{user_id:this.allUsers[i]},{leaveAnimation:'back'});
       searchModal.present();
     }
+
     test2(i){
       console.log(this.allUsers[i])
     }

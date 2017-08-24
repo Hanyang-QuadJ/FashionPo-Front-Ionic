@@ -107,8 +107,8 @@ export class WardrobePage {
             var APIUrl = '/user';
             var APIUrl_2 = '/post';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://107.23.122.155:3000/api/user';
-            //   APIUrl_2 = 'http://107.23.122.155:3000/api/post';
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+            //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -310,8 +310,8 @@ export class WardrobePage {
               var APIUrl = '/user';
               var APIUrl_2 = '/post';
               // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://107.23.122.155:3000/api/user';
-              //   APIUrl_2 = 'http://107.23.122.155:3000/api/post';
+              //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+              //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
               // }
               let headers = new Headers();
               headers.append('Content-Type', 'application/json');
@@ -482,7 +482,7 @@ export class WardrobePage {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
             if (this.platform.is('ios') == true){
-              APIUrl = 'http://107.23.122.155:3000/api/user';
+              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
               // console.log('yes');
             }
             let headers = new Headers();

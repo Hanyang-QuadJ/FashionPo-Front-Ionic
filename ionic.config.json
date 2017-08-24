@@ -5,23 +5,23 @@
   "proxies": [
     {
       "path": "/post",
-      "proxyUrl": "http://107.23.122.155:3000/api/post"
+      "proxyUrl": "http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post"
     },
     {
       "path": "/auth",
-      "proxyUrl": "http://107.23.122.155:3000/api/auth"
+      "proxyUrl": "http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth"
     },
     {
       "path": "/rank",
-      "proxyUrl": "http://107.23.122.155:3000/api/rank"
+      "proxyUrl": "http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank"
     },
     {
       "path": "/user",
-      "proxyUrl": "http://107.23.122.155:3000/api/user"
+      "proxyUrl": "http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user"
     },
     {
       "path": "/search",
-      "proxyUrl": "http://107.23.122.155:3000/api/search"
+      "proxyUrl": "http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/search"
     }
   ],
   "integrations": {
