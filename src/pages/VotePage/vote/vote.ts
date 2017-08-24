@@ -93,6 +93,52 @@ export class VotePage implements OnInit {
 
     }
 
+    parsingDate(date) {
+        let month;
+        let year;
+        let day;
+        //m d, y
+        year = date.substring(0,4);
+        day = date.substring(8,10);
+        if(date.substring(5,7)==='01'){
+            month='Jan'
+        }
+        else if(date.substring(5,7)==='02'){
+            month='Feb'
+        }
+        else if(date.substring(5,7)==='03'){
+            month='Mar'
+        }
+        else if(date.substring(5,7)==='04'){
+            month='Apr'
+        }
+        else if(date.substring(5,7)==='05'){
+            month='May'
+        }
+        else if(date.substring(5,7)==='06'){
+            month='Jun'
+        }
+        else if(date.substring(5,7)==='07'){
+            month='Jul'
+        }
+        else if(date.substring(5,7)==='08'){
+            month='Aug'
+        }
+        else if(date.substring(5,7)==='09'){
+            month='Sep'
+        }
+        else if(date.substring(5,7)==='10'){
+            month='Oct'
+        }
+        else if(date.substring(5,7)==='11'){
+            month='Nov'
+        }
+        else if(date.substring(5,7)==='12'){
+            month='Dec'
+        }
+        return month+" "+day+", "+year;
+    }
+
     ngAfterViewInit() {
         // Either subscribe in controller or set in HTML
         this.swingStack.throwin.subscribe((event: DragEvent) => {
