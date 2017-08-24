@@ -5,23 +5,23 @@
   "proxies": [
     {
       "path": "/post",
-      "proxyUrl": "http://54.162.160.91/api/post"
+      "proxyUrl": "http://107.23.122.155:3000/api/post"
     },
     {
       "path": "/auth",
-      "proxyUrl": "http://54.162.160.91/api/auth"
+      "proxyUrl": "http://107.23.122.155:3000/api/auth"
     },
     {
       "path": "/rank",
-      "proxyUrl": "http://54.162.160.91/api/rank"
+      "proxyUrl": "http://107.23.122.155:3000/api/rank"
     },
     {
       "path": "/user",
-      "proxyUrl": "http://54.162.160.91/api/user"
+      "proxyUrl": "http://107.23.122.155:3000/api/user"
     },
     {
       "path": "/search",
-      "proxyUrl": "http://54.162.160.91/api/search"
+      "proxyUrl": "http://107.23.122.155:3000/api/search"
     }
   ],
   "integrations": {
