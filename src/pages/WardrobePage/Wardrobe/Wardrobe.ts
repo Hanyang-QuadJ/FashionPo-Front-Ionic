@@ -29,8 +29,10 @@ import {WardrobeThisWeekPage} from '../../WardrobePage/wardrobe-this-week/wardro
 
 export class WardrobePage {
     public toggled: boolean;
-
-    user: object = {};
+    min:Number=null;
+    checkRank:boolean;
+    user: any = "";
+    top:Array<any>=[];
     userIntro:any="";
     loaded: boolean;
     loadedd: boolean;
@@ -53,8 +55,6 @@ export class WardrobePage {
     view_cnt: any;
     button_loaded: boolean = false;
     today_disable: boolean = false;
-
-
     year: Array<any> = [];
     year2: Array<any> = [];
     startDay: Array<any> = [];
@@ -76,10 +76,7 @@ export class WardrobePage {
 
     }
 
-    toggleRank() {
-        this.toggled = this.toggled ? false : true;
 
-    }
 
     Settings() {
 
@@ -90,10 +87,11 @@ export class WardrobePage {
         console.log("11111111111");
 
         this.mypostlist = [];
+        this.checkRank = false;
         this.thisWeekPost = [];
         this.date = [];
         this.date2 = [];
-
+        this.top = [];
 
         this.loaded = false;
         this.loadedd = false;
@@ -108,14 +106,18 @@ export class WardrobePage {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
             var APIUrl_2 = '/post';
+            var APIUrl_3 ='/rank';
             // if (this.platform.is('ios') == true){
             //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
             //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
+            //    APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
             // console.log(val);
+
+
 
             this.http.get(APIUrl + '/authed', {headers: headers})
                 .map(res => res.json())
@@ -127,7 +129,31 @@ export class WardrobePage {
                     console.log(this.button_loaded);
                     console.log(this.today_disable);
                     console.log("@#################");
+                  this.http.get(APIUrl_3, {headers: headers})
+                    .map(res => res.json())
+                    .subscribe(data => {
+                      console.log('!!!!!rank!!!!');
+                      console.log(this.user._id);
+                      for(let i = 0; i<data.posts.length; i++){
+                        if(data.posts[i].writtenBy === this.user._id){
+                          this.top.push(i+1);
+                        }
+                      }
+                      if(this.top.length===0){
+                        this.checkRank = true;
+                      }
+                      else{
+                        console.log(this.top);
+                        this.min = Math.min(...this.top);
+                        console.log(this.min);
+                      }
+
+
+                    });
+
                 });
+
+
 
 
             this.http.get(APIUrl_2 + '/myposts', {headers: headers})

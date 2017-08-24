@@ -30,6 +30,7 @@ export class HomePage implements OnInit {
     rankDate:any="";
 
     ranks: Array<any> = [];
+    oriRank: Array<any> =[];
     users: Array<any> = [];
     buttons: Array<any> = [];
     picURL: string = "";
@@ -85,6 +86,7 @@ export class HomePage implements OnInit {
        this.modalCheck= false;
         this.users = [];
         this.ranks = [];
+        this.oriRank =[];
         this.writtenBys = [];
 
         this.search = "User";
@@ -117,8 +119,11 @@ export class HomePage implements OnInit {
             this.http.get(APIUrl, {headers: headers})
               .map(res => res.json())
               .subscribe(data => {
-                console.log("$$$$$")
-                console.log(data)
+                console.log("$$$$$");
+                console.log(data);
+                for(let d = 0; d < data.posts.length; d++){
+                  this.oriRank[d] = data.posts[d];
+                }
                 for (var i = 1; i < data.posts.length; i++) {
                   this.ranks[i - 1] = data.posts[i];
                 }
@@ -209,8 +214,8 @@ export class HomePage implements OnInit {
             this.ranks[i - 1] = this.historyRank[i];
 
           }
-          console.log('111111111')
-          console.log(this.ranks)
+          console.log('111111111');
+          console.log(this.ranks);
           this.firstPost = this.historyRank[0];
           for (let i = 0; i < this.historyRank.length; i++) {
             this.writtenBys.push(this.historyRank[i].writtenBy);
@@ -323,6 +328,10 @@ export class HomePage implements OnInit {
     }
 
     doRefresh(refresher) {
+      this.users = [];
+      this.ranks = [];
+      this.oriRank =[];
+      this.writtenBys = [];
       this.storage.get('token').then((val) => {
         var APIUrl = '/rank';
         // if (this.platform.is('ios') == true){
@@ -349,6 +358,9 @@ export class HomePage implements OnInit {
               //   APIUrl = 'http://107.23.122.155:3000/api/user';
               //   // console.log('yes');
               // }
+              for(let d = 0; d < data.posts.length; d++){
+                this.oriRank[d] = data.posts[d];
+              }
               for (let i = 0; i < data.posts.length; i++) {
                 this.writtenBys.push(data.posts[i].writtenBy);
               }
@@ -523,12 +535,12 @@ export class HomePage implements OnInit {
     }
 
     presentWardrobeModal(i) {
-        let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks: this.users[i], rankNumber:i+2}, {leaveAnimation: 'back'});
+        let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {ranks: this.users[i], rankNumber:i+2,rank:this.oriRank}, {leaveAnimation: 'back'});
         WardrobeModal.present();
     }
 
     presentFirstModal() {
-        let profileModal = this.modalCtrl.create(RankWardrobePage, {ranks: this.firstUser}, {leaveAnimation: 'back'});
+        let profileModal = this.modalCtrl.create(RankWardrobePage, {ranks: this.firstUser,rank:this.oriRank}, {leaveAnimation: 'back'});
         profileModal.present();
 
     }

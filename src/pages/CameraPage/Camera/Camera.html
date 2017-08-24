@@ -5,9 +5,7 @@
       <button (click)="dismiss()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
-      <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
-      <!--<ion-icon name="md-list"></ion-icon>-->
-      <!--</button>-->
+
     </ion-buttons>
     <ion-title>
       Upload
@@ -17,9 +15,7 @@
       <button (click)="post()" ion-button icon-end small color="primary">
         Post
       </button>
-      <!--<button (click)="presentCustomModal()" ion-button icon-only color="primary">-->
-      <!--<ion-icon name="md-list"></ion-icon>-->
-      <!--</button>-->
+
     </ion-buttons>
 
   </ion-navbar>
@@ -39,7 +35,6 @@
     <img id="camera-image" />
     <ion-card-content>
 
-        <p>Tag</p>
         <ion-textarea type="text" [(ngModel)]="tagsInput" placeholder="Enter your caption and tags"></ion-textarea>
 
     </ion-card-content>

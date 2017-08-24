@@ -40,10 +40,10 @@ export class HistoryListPage implements OnInit{
 
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank/save';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/rank/save';
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank/save';
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);

@@ -61,7 +61,7 @@
                   (click)="refreshViewCnt()">Today {{user.viewCnt}}
           </button>
 
-          <button class="add" ion-button small color="sub">Rank 34</button>
+          <button *ngIf="!checkRank" class="add" ion-button small color="sub">Rank {{min}}</button>
           </div>
       </ion-col>
     </ion-row>

@@ -26,7 +26,10 @@ export class RankWardrobePage {
   posts: Array<object> = [];
   thisWeekPost: Array<object> = [];
   user:any="";
+  min:Number=null;
+  rank:Array<any>=[];
   rankNumber:any="";
+  top:Array<any>=[];
   date: Array<string> = [];
   date2: Array<string> = [];
   dateFinal: Array<object> = [];
@@ -46,6 +49,7 @@ export class RankWardrobePage {
               public platform: Platform,) {
     this.user_id = this.navParams.get('user_id');
     this.ranks = this.navParams.get('ranks');
+    this.rank = this.navParams.get('rank');
     this.rankNumber = this.navParams.get('rankNumber');
     this.weekCheck = false;
 
@@ -53,11 +57,19 @@ export class RankWardrobePage {
       console.log("GoGoGo");
       this.date=[];
       this.date2=[];
+      this.top=[];
 
       this.posts=[];
       this.thisWeekPost=[];
       let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
       loading.present();
+
+      for(let i = 0; i<this.rank.length; i++){
+        if(this.rank[i].writtenBy === this.ranks._id){
+          this.top.push(i+1)
+        }
+      }
+      this.min = Math.min(...this.top);
       this.storage.get('token').then((val) => {
         var APIUrl = '/user';
         var APIUrl2 = '/post/userid';
@@ -204,12 +216,17 @@ export class RankWardrobePage {
     }
 
     else if(this.user_id!==undefined){
-      console.log("StopStopStop");
+
       this.date=[];
       this.date2=[];
-
       this.posts=[];
       this.thisWeekPost=[];
+      for(let i = 0; i<this.rank.length; i++){
+        if(this.rank[i].writtenBy === this.ranks._id){
+          this.top.push(i+1)
+        }
+      }
+      this.min = Math.min(...this.top);
       this.storage.get('token').then((val) => {
 
         var APIUrl = '/post/userid';
