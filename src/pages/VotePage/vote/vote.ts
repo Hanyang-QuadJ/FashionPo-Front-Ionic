@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, Content, ToastController, ModalController, App,} from 'ionic-angular';
+import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, ViewController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
@@ -46,6 +46,7 @@ export class VotePage implements OnInit {
                 public platform: Platform,
                 public navParams: NavParams,
                 private app: App,
+                public viewCtrl: ViewController,
                 public toastCtrl: ToastController,
                 public modalCtrl: ModalController,) {
 
@@ -105,7 +106,7 @@ export class VotePage implements OnInit {
     }
 
     Rank() {
-        this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'})
+      this.viewCtrl.dismiss();
     }
 
     showToast(position: string, message: string) {

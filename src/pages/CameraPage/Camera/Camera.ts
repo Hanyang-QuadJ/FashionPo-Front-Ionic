@@ -25,6 +25,7 @@ declare var cordova: any;
 
 export class CameraPage implements OnInit{
   public base64Image: any="";
+  backButton: any="";
 
   tags: any = [];
   uploadCheck:boolean=false;
@@ -42,8 +43,12 @@ export class CameraPage implements OnInit{
               public toastCtrl: ToastController,
               public platform: Platform,
               public navCtrl: NavController,
+              public navParams: NavParams,
               public loadingCtrl: LoadingController)
   {
+    if(this.navParams.get('fromWardrobe')==="check"){
+      this.backButton = true;
+    }
 
   }
   showToast(position: string) {

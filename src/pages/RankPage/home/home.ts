@@ -290,11 +290,11 @@ export class HomePage implements OnInit {
 
 
     Vote() {
-        this.navCtrl.parent.parent.setRoot(VotePage, {}, {
-            animate: true,
-            animation: 'ios-transition',
-            direction: 'back'
-        });
+
+        let voteModal = this.modalCtrl.create(VotePage,  {leaveAnimation: 'back'});
+        voteModal.present();
+
+
 
     }
 

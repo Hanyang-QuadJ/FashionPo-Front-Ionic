@@ -51,7 +51,7 @@ export class PostTabPage implements OnInit{
 
   }
   goToCamera(){
-    let cameraModal = this.modalCtrl.create(CameraPage)
+    let cameraModal = this.modalCtrl.create(CameraPage, {fromWardrobe:'check'});
     cameraModal.present();
 
 

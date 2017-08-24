@@ -58,11 +58,11 @@ export class FavoriteUserPage implements OnInit{
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
       var APIUrl_1 = '/user'
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/post/userid'
-        APIUrl_1 = 'http://54.162.160.91/api/user'
-        // console.log('yes');
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://54.162.160.91/api/post/userid'
+      //   APIUrl_1 = 'http://54.162.160.91/api/user'
+      //   // console.log('yes');
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
