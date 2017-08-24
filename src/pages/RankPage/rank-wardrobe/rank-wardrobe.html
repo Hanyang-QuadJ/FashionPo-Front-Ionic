@@ -53,7 +53,15 @@
   <hr>
   <p class="infoText">This Week's Fits</p>
 
-  <ion-slides class="image-slider" slidesPerView="3">
+  <ion-grid *ngIf="weekCheck">
+    <ion-row>
+      <ion-col text-center>
+        <h4 class="no">There are no fits</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>

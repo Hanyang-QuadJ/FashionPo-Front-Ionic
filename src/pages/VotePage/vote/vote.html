@@ -34,10 +34,10 @@
 
 
 
-    <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" id="card-stack">
+    <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)" (throwoutleft)="voteUp(false)" (throwoutup)="presentWardrobeModal(posts[0].writtenBy)" id="card-stack">
       <div *ngFor="let post of posts">
 
-        <ion-card #mycards1 swing-card style="position:absolute;z-index: 0">
+        <ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf=" user && post" src="{{ post.picURL }}">
 
 

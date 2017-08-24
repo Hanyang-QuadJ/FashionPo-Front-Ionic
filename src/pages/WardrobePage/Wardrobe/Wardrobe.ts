@@ -31,11 +31,12 @@ export class WardrobePage {
     public toggled: boolean;
 
     user: object = {};
+    userIntro:any="";
     loaded: boolean;
     loadedd: boolean;
     mypostlist: Array<object> = [];
     thisWeekPost: Array<object> = [];
-    thisWeekPostLength:any="";
+    thisWeekPostLength:boolean;
     option: string = "";
     myposts: string = "";
     favorites: Array<object> = [];
@@ -70,6 +71,7 @@ export class WardrobePage {
                 public modalCtrl: ModalController,
                 public loadingCtrl: LoadingController,
                 public platform: Platform) {
+      this.thisWeekPostLength=false;
 
 
     }
@@ -119,6 +121,7 @@ export class WardrobePage {
                 .map(res => res.json())
                 .subscribe(data => {
                     this.user = data.user[0];
+                    this.userIntro = data.user[0].introduce;
                     this.button_loaded = true;
                     console.log("@#################");
                     console.log(this.button_loaded);
@@ -138,9 +141,6 @@ export class WardrobePage {
                             this.date2.push(data.posts[i].writtenAt)
 
                         }
-
-
-
                         //모든 사진
                         else {
                             this.mypostlist.push(data.posts[i]);
@@ -149,7 +149,10 @@ export class WardrobePage {
                         }
 
                     }
-                    this.thisWeekPostLength = this.thisWeekPost.length;
+                    if(this.thisWeekPost.length === 0){
+                      this.thisWeekPostLength = true;
+                    }
+
                   this.loaded = true;
 
                   for(var h = 0; h<this.date.length; h++){

@@ -22,7 +22,7 @@ export class RankWardrobePage {
   ranks:any="";
 
   user_id:any="";
-
+  weekCheck:boolean;
   posts: Array<object> = [];
   thisWeekPost: Array<object> = [];
   user:any="";
@@ -47,6 +47,7 @@ export class RankWardrobePage {
     this.user_id = this.navParams.get('user_id');
     this.ranks = this.navParams.get('ranks');
     this.rankNumber = this.navParams.get('rankNumber');
+    this.weekCheck = false;
 
     if(this.user_id===undefined){
       console.log("GoGoGo");
@@ -61,11 +62,11 @@ export class RankWardrobePage {
         var APIUrl = '/user';
         var APIUrl2 = '/post/userid';
 
-        if (this.platform.is('ios') == true){
-          APIUrl = 'http://54.162.160.91/api/user';
-          APIUrl2 = 'http://54.162.160.91/api/post/userid';
-
-        }
+        // if (this.platform.is('ios') == true){
+        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+        //   APIUrl2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/userid';
+        //
+        // }
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -97,6 +98,9 @@ export class RankWardrobePage {
                 this.date.push(data[i].writtenAt)
               }
 
+            }
+            if(this.thisWeekPost.length===0){
+              this.weekCheck = true;
             }
             for(var h = 0; h<this.date.length; h++){
               this.year.push(this.date[h].substring(0,4));
@@ -211,10 +215,10 @@ export class RankWardrobePage {
         var APIUrl = '/post/userid';
         var APIUrl2 = '/user';
 
-        if (this.platform.is('ios') == true){
-          APIUrl = 'http://54.162.160.91/api/post/userid';
-          APIUrl2 = 'http://54.162.160.91/api/user';
-        }
+        // if (this.platform.is('ios') == true){
+        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/userid';
+        //   APIUrl2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+        // }
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -246,6 +250,9 @@ export class RankWardrobePage {
                 this.date.push(data[i].writtenAt)
               }
 
+            }
+            if(this.thisWeekPost.length===0){
+              this.weekCheck = true;
             }
             for (var h = 0; h < this.date.length; h++) {
               this.year.push(this.date[h].substring(0, 4));

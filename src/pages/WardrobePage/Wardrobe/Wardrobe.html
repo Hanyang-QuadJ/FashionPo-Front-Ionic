@@ -43,7 +43,7 @@
           <h5 (click)="presentThisWeekModal(1)" class="userName">{{user.username}}</h5>
 
 
-          <p class="profileText">{{user.introduce}}</p>
+          <p class="profileText">{{userIntro}}</p>
           <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                   (click)="refreshViewCnt()">
             <ion-spinner  color="light" name="circles"></ion-spinner>
@@ -66,11 +66,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <hr>
-        <p class="infoText">This Week's Fits</p>
+  <hr *ngIf="!thisWeekPostLength">
+        <p *ngIf="!thisWeekPostLength" class="infoText">This Week's Fits</p>
 
 
-  <ion-slides class="image-slider" slidesPerView="3">
+  <ion-slides *ngIf="!thisWeekPostLength" class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>
@@ -78,7 +78,7 @@
 
 
     <super-tabs *ngIf="loaded && loadedd" toolbarColor="primary" shortSwipeDuration="0">
-      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, date:dateFinal}" icon="md-apps"></super-tab>
+      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, date:dateFinal, week:thisWeekPost}" icon="md-apps"></super-tab>
       <super-tab [root]="tab2" [rootParams]="{favorite:favorites}" icon="md-star"></super-tab>
     </super-tabs>
 

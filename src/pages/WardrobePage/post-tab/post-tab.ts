@@ -21,6 +21,7 @@ export class PostTabPage implements OnInit{
   // user: object = {};
 
   myPost: Array<any> = [];
+  weeks: Array<any> = [];
   postAlert:string="";
   date:Array<any> = [];
   check:boolean;
@@ -38,9 +39,10 @@ export class PostTabPage implements OnInit{
     this.myPost = this.navParams.data.mypost;
     this.postAlert = this.navParams.data.postAlert;
     this.date = this.navParams.data.date;
+    this.weeks = this.navParams.data.week;
 
 
-    if(this.myPost.length == 0){
+    if(this.myPost.length == 0 && this.weeks.length == 0){
       this.check=true;
     }
   }

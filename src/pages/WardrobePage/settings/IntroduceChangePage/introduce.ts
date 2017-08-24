@@ -83,7 +83,7 @@ export class IntroduceChangePage {
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
             let body = {
-                introduce: this.usernameForm.value.username,
+                introduce: this.usernameForm.value.username
             };
             console.log(this.usernameForm.value.username);
             this.http.post(APIUrl, JSON.stringify(body), {headers: headers})

@@ -19,10 +19,10 @@
 
 <ion-content>
     <form [formGroup]="usernameForm" (ngSubmit)="usernameChange()" *ngIf="loaded">
-        <ion-item>
-            <ion-label floating>Introduce</ion-label>
-            <ion-input type="email" formControlName="username" placeholder="                    "></ion-input>
-        </ion-item>
+      <ion-item inset>
+        <ion-textarea type="text" formControlName="username" placeholder="                    "></ion-textarea>
+      </ion-item>
+
         <div padding>
             <button class="custom-button" ion-button type="submit" [disabled]="false" color="sub" block>Change Introduce</button>
         </div>

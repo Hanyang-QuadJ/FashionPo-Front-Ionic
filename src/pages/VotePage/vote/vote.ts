@@ -1,19 +1,19 @@
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, ViewController} from 'ionic-angular';
+import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, ViewController,} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {VoteWardrobePage} from './vote-wardrobe/vote-wardrobe';
 
 import {
-    StackConfig,
-    Stack,
-    Card,
-    ThrowEvent,
-    DragEvent,
-    SwingStackComponent,
-    SwingCardComponent
+  StackConfig,
+  Stack,
+  Card,
+  ThrowEvent,
+  DragEvent,
+  SwingStackComponent,
+  SwingCardComponent, Direction
 } from 'angular2-swing';
 import {HomePage} from "../../RankPage/home/home";
 import {TabsPage} from "../../tabs/tabs";
@@ -57,7 +57,7 @@ export class VotePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/post/random';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/post/random';
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/random';
             //   // console.log('yes');
             // }
             let headers = new Headers();
@@ -79,12 +79,16 @@ export class VotePage implements OnInit {
 
 
         this.stackConfig = {
+            allowedDirections:[Direction.LEFT,Direction.RIGHT],
+
             throwOutConfidence: (offsetX, offsetY, element) => {
-                return Math.min(Math.abs(offsetX) / (element.offsetWidth / 2), 1);
+              const xConfidence = Math.min(Math.abs(offsetX) / (element.offsetWidth/3), 1);
+              return xConfidence;
             },
             transform: (element, x, y, r) => {
                 this.onItemMove(element, x, y, r);
             },
+
             throwOutDistance: (d) => {
                 return 800;
             }
@@ -238,7 +242,7 @@ export class VotePage implements OnInit {
             this.storage.get('token').then((val) => {
                 var APIUrl = '/user';
                 // if (this.platform.is('ios') == true){
-                //   APIUrl = 'http://54.162.160.91/api/user';
+                //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
                 //   // console.log('yes');
                 // }
                 let headers = new Headers();

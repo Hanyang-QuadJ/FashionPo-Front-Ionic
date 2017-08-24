@@ -75,10 +75,10 @@ export class VoteWardrobePage {
         loading.present();
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://54.162.160.91/api/user';
-              // console.log('yes');
-            }
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://54.162.160.91/api/user';
+            //   // console.log('yes');
+            // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -94,10 +94,10 @@ export class VoteWardrobePage {
                     console.log("--------------------");
                     this.storage.get('token').then((val) => {
                         var APIUrl = '/post/userid';
-                        if (this.platform.is('ios') == true){
-                          APIUrl = 'http://54.162.160.91/api/post/userid';
-                          // console.log('yes');
-                        }
+                        // if (this.platform.is('ios') == true){
+                        //   APIUrl = 'http://54.162.160.91/api/post/userid';
+                        //   // console.log('yes');
+                        // }
                         let headers = new Headers();
                         headers.append('Content-Type', 'application/json');
                         headers.append('x-access-token', val);
@@ -204,10 +204,10 @@ export class VoteWardrobePage {
 
                                 this.storage.get('token').then((val) => {
                                     var APIUrl = '/post/view';
-                                    if (this.platform.is('ios') == true){
-                                      APIUrl = 'http://54.162.160.91/api/post/view';
-                                      // console.log('yes');
-                                    }
+                                    // if (this.platform.is('ios') == true){
+                                    //   APIUrl = 'http://54.162.160.91/api/post/view';
+                                    //   // console.log('yes');
+                                    // }
                                     let headers = new Headers();
                                     headers.append('Content-Type', 'application/json');
                                     headers.append('x-access-token', val);
@@ -220,10 +220,10 @@ export class VoteWardrobePage {
                                             console.log(data);
                                             this.storage.get('token').then((val) => {
                                                 let APIUrl = '/user/authed';
-                                                if (this.platform.is('ios') == true){
-                                                  APIUrl = 'http://54.162.160.91/api/user/authed';
-                                                  // console.log('yes');
-                                                }
+                                                // if (this.platform.is('ios') == true){
+                                                //   APIUrl = 'http://54.162.160.91/api/user/authed';
+                                                //   // console.log('yes');
+                                                // }
                                                 let headers = new Headers();
                                                 headers.append('Content-Type', 'application/json');
                                                 headers.append('x-access-token', val);
