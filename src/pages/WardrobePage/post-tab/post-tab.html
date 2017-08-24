@@ -8,7 +8,7 @@
 
   <ion-grid  *ngIf="!check" no-padding>
     <ion-row wrap no-padding>
-      <ion-col col-4 *ngFor="let post of myPost; let i = index">
+      <ion-col col-4 *ngFor="let post of myPost.slice().reverse(); let i = index">
         <button class="btn" (click)="presentProfileModal(i)"><img  class="myFitImage" src={{post.picURL}}></button>
       </ion-col>
     </ion-row>

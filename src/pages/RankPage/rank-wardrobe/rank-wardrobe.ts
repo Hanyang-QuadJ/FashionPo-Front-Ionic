@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ViewController,LoadingController,ModalController, } from 'ionic-angular';
+import { NavController, NavParams,ViewController,LoadingController,ModalController,Platform } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
@@ -20,9 +20,11 @@ import {RankThisWeekPage} from "./rank-this-week/rank-this-week";
 })
 export class RankWardrobePage {
   ranks:any="";
-  posts:any="";
+
   user_id:any="";
-  thisWeekPost:any="";
+
+  posts: Array<object> = [];
+  thisWeekPost: Array<object> = [];
   user:any="";
   rankNumber:any="";
   date: Array<string> = [];
@@ -40,43 +42,35 @@ export class RankWardrobePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl:ViewController,private http: Http, private storage:Storage,
               public loadingCtrl:LoadingController,
-              public modalCtrl:ModalController) {
+              public modalCtrl:ModalController,
+              public platform: Platform,) {
     this.user_id = this.navParams.get('user_id');
-    this.ranks = this.navParams.get('ranks')
+    this.ranks = this.navParams.get('ranks');
     this.rankNumber = this.navParams.get('rankNumber');
-    this.date=[];
-    this.date2=[];
 
-    this.posts=[];
-    this.thisWeekPost=[];
+    if(this.user_id===undefined){
+      console.log("GoGoGo");
+      this.date=[];
+      this.date2=[];
 
-
-
-
-
-
-
-
-
-
-  }
-  ionViewWillEnter(){
-    if(this.navParams.get('user_id')===undefined){
+      this.posts=[];
+      this.thisWeekPost=[];
       let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
       loading.present();
       this.storage.get('token').then((val) => {
         var APIUrl = '/user';
-        var APIUrl2 = '/post/userid'
+        var APIUrl2 = '/post/userid';
 
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/user';
-        //   APIUrl_2 = 'http://54.162.160.91/post/userid';
-        // }
+        if (this.platform.is('ios') == true){
+          APIUrl = 'http://54.162.160.91/api/user';
+          APIUrl2 = 'http://54.162.160.91/api/post/userid';
+
+        }
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', val);
-        const body = {users: [this.ranks._id]}
+        const body = {users: [this.ranks._id]};
 
         this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
           .map(res => res.json())
@@ -87,7 +81,7 @@ export class RankWardrobePage {
 
             });
 
-        const body2 = {_id:[this.ranks._id]}
+        const body2 = {_id:[this.ranks._id]};
 
         this.http.post(APIUrl2,JSON.stringify(body2), {headers: headers})
           .map(res => res.json())
@@ -95,11 +89,11 @@ export class RankWardrobePage {
             console.log(data)
             for(var i = 0; i<data.length;i++){
               if(data[i].isThisWeek===true){
-                this.thisWeekPost.push(data[i])
+                this.thisWeekPost.push(data[i]);
                 this.date2.push(data[i].writtenAt)
               }
               else{
-                this.posts.push(data[i])
+                this.posts.push(data[i]);
                 this.date.push(data[i].writtenAt)
               }
 
@@ -188,10 +182,10 @@ export class RankWardrobePage {
               this.dateFinal2.push({'eDay':this.endDay2[a],'mon':this.month2[a],'yr':this.year2[a]})
 
             }
-            console.log('!!!!!!!')
-            console.log(this.thisWeekPost)
-            console.log('???????')
-            console.log(this.posts)
+            console.log('!!!!!!!');
+            console.log(this.thisWeekPost);
+            console.log('???????');
+            console.log(this.posts);
 
 
 
@@ -205,21 +199,27 @@ export class RankWardrobePage {
 
     }
 
-    else if(this.navParams.get('user_id')!==undefined){
+    else if(this.user_id!==undefined){
+      console.log("StopStopStop");
+      this.date=[];
+      this.date2=[];
+
+      this.posts=[];
+      this.thisWeekPost=[];
       this.storage.get('token').then((val) => {
 
-        var APIUrl = '/post/userid'
-        var APIUrl2 = '/user'
+        var APIUrl = '/post/userid';
+        var APIUrl2 = '/user';
 
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://54.162.160.91/user';
-        //   APIUrl_2 = 'http://54.162.160.91/post/userid';
-        // }
+        if (this.platform.is('ios') == true){
+          APIUrl = 'http://54.162.160.91/api/post/userid';
+          APIUrl2 = 'http://54.162.160.91/api/user';
+        }
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('x-access-token', val);
-        const body = {users: [this.user_id]}
+        const body = {users: [this.user_id]};
 
         this.http.post(APIUrl2, JSON.stringify(body), {headers: headers})
           .map(res => res.json())
@@ -230,7 +230,7 @@ export class RankWardrobePage {
 
             });
 
-        const body2 = {_id: [this.user_id]}
+        const body2 = {_id: [this.user_id]};
 
         this.http.post(APIUrl, JSON.stringify(body2), {headers: headers})
           .map(res => res.json())
@@ -238,11 +238,11 @@ export class RankWardrobePage {
             console.log(data)
             for (var i = 0; i < data.length; i++) {
               if (data[i].isThisWeek === true) {
-                this.thisWeekPost.push(data[i])
+                this.thisWeekPost.push(data[i]);
                 this.date2.push(data[i].writtenAt)
               }
               else {
-                this.posts.push(data[i])
+                this.posts.push(data[i]);
                 this.date.push(data[i].writtenAt)
               }
 
@@ -336,15 +336,19 @@ export class RankWardrobePage {
               this.dateFinal2.push({'eDay': this.endDay2[a], 'mon': this.month2[a], 'yr': this.year2[a]})
 
             }
-            console.log('!!!!!!!')
-            console.log(this.thisWeekPost)
-            console.log('???????')
+            console.log('!!!!!!!');
+            console.log(this.thisWeekPost);
+            console.log('???????');
             console.log(this.posts)
           });
       });
 
 
     }
+  }
+  ionViewWillEnter(){
+
+
   }
 
 
@@ -361,13 +365,13 @@ export class RankWardrobePage {
   }
 
   presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(RankPhotoPage, { postList:this.posts,postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
+    let profileModal = this.modalCtrl.create(RankPhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
     profileModal.present();
 
   }
 
   presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(RankThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
+    let thisWeekModal = this.modalCtrl.create(RankThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
     thisWeekModal.present();
   }
 

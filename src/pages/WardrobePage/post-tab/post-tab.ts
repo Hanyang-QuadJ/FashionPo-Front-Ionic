@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController, NavParams,ModalController,LoadingController } from 'ionic-angular';
+import { NavController, NavParams,ModalController,LoadingController,Platform } from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
 import {WardrobePage} from '../wardrobe/wardrobe'
@@ -29,7 +29,8 @@ export class PostTabPage implements OnInit{
               private storage: Storage,
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
-              public http: Http) {
+              public http: Http,
+              public platform: Platform) {
 
   }
   ngOnInit(): void {
@@ -57,7 +58,7 @@ export class PostTabPage implements OnInit{
   }
   presentProfileModal(i) {
 
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost, postListIndex:i,date:this.date},{leaveAnimation:'back'});
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,date:this.date},{leaveAnimation:'back'});
       profileModal.onDidDismiss((check)=>{
         if(check === "check"){
           this.myPost = [];
@@ -68,9 +69,9 @@ export class PostTabPage implements OnInit{
           this.storage.get('token').then((val) => {
 
             var APIUrl_2 = '/post';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl_2 = 'http://54.162.160.91/api/post';
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl_2 = 'http://54.162.160.91/api/post';
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);

@@ -58,11 +58,11 @@ export class FavoriteUserPage implements OnInit{
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
       var APIUrl_1 = '/user'
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/api/post/userid'
-      //   APIUrl_1 = 'http://54.162.160.91/api/user'
-      //   // console.log('yes');
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/post/userid'
+        APIUrl_1 = 'http://54.162.160.91/api/user'
+        // console.log('yes');
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -193,12 +193,12 @@ export class FavoriteUserPage implements OnInit{
   }
 
   presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(FavoriteUserPostPage, { postList:this.posts,postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
+    let profileModal = this.modalCtrl.create(FavoriteUserPostPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
     profileModal.present();
 
   }
   presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(FavoriteUserThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
+    let thisWeekModal = this.modalCtrl.create(FavoriteUserThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
     thisWeekModal.present();
   }
 

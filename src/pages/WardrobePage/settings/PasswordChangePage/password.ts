@@ -38,10 +38,10 @@ export class PasswordChangePage {
     ngOnInit(): void {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/authed';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/authed';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/authed';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -73,10 +73,10 @@ export class PasswordChangePage {
     public usernameChange() {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/changepw';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/changepw';
-            //   // console.log('yes');
-            // }t
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/changepw';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Conten-Type', 'application/json');
             headers.append('x-access-token', val);

@@ -35,6 +35,7 @@ export class WardrobePage {
     loadedd: boolean;
     mypostlist: Array<object> = [];
     thisWeekPost: Array<object> = [];
+    thisWeekPostLength:any="";
     option: string = "";
     myposts: string = "";
     favorites: Array<object> = [];
@@ -130,11 +131,10 @@ export class WardrobePage {
                 .map(res => res.json())
                 .subscribe(data => {
 
-
                     for (var i = 0; i < data.posts.length; i++) {
                         //이번주 사진
                         if (data.posts[i].isThisWeek === true) {
-                            this.thisWeekPost.push(data.posts[i])
+                            this.thisWeekPost.push(data.posts[i]);
                             this.date2.push(data.posts[i].writtenAt)
 
                         }
@@ -149,6 +149,7 @@ export class WardrobePage {
                         }
 
                     }
+                    this.thisWeekPostLength = this.thisWeekPost.length;
                   this.loaded = true;
 
                   for(var h = 0; h<this.date.length; h++){
@@ -279,7 +280,7 @@ export class WardrobePage {
 
     presentThisWeekModal(i) {
         let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
-            thisWeekPost: this.thisWeekPost,
+            thisWeekPost: this.thisWeekPost.slice().reverse(),
             thisWeekPostIndex: i,
             date:this.dateFinal2
         }, {leaveAnimation: 'back'});
@@ -480,10 +481,10 @@ export class WardrobePage {
         this.button_loaded = false;
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);

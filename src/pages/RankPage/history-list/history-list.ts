@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController,ModalController, } from 'ionic-angular';
+import { NavController, NavParams,ViewController,ModalController,Platform,} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {HomePage} from '../../RankPage/home/home';
@@ -28,7 +28,7 @@ export class HistoryListPage implements OnInit{
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,private storage: Storage, public modalCtrl:ModalController,
-              private http: Http) {
+              private http: Http, public platform: Platform) {
   }
 
   ngOnInit(): void {
@@ -40,10 +40,10 @@ export class HistoryListPage implements OnInit{
 
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank/save';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://54.162.160.91/rank/save';
-      //   // console.log('yes');
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/rank/save';
+        // console.log('yes');
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -98,8 +98,8 @@ export class HistoryListPage implements OnInit{
 
               }
               else if(monthCheck==='03'){
-                this.startDay.push(28)
-                this.month.push('Feb')
+                this.startDay.push(28);
+                this.month.push('Feb');
                 this.endMonth.push('Mar')
               }
               else{

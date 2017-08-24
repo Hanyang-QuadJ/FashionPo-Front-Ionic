@@ -37,10 +37,10 @@ export class ChangeWardrobeNamePage {
     ngOnInit(): void {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/authed';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/authed';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/authed';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -75,10 +75,10 @@ export class ChangeWardrobeNamePage {
     public usernameChange() {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/update/wardrobe';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/update/wardrobe';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/update/wardrobe';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);

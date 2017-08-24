@@ -1,5 +1,5 @@
 
-import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
+import {Component, ViewChild, ViewChildren, QueryList, OnInit,} from '@angular/core';
 
 import {
   ActionSheetController, LoadingController, NavController, NavParams, Platform,
@@ -24,9 +24,10 @@ declare var cordova: any;
 })
 
 export class CameraPage implements OnInit{
-  public base64Image: any;
+  public base64Image: any="";
 
   tags: any = [];
+  uploadCheck:boolean=false;
 
   public tagsInput:any;
 
@@ -53,6 +54,15 @@ export class CameraPage implements OnInit{
     });
 
     toast.present(toast);
+  }
+
+  ionViewWillEnter(){
+    this.tags=[];
+    this.tagsInput="";
+    this.base64Image="";
+    this.uploadCheck = true;
+    let cameraImageSelector = document.getElementById('camera-image');
+    cameraImageSelector.setAttribute('src', '');
   }
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -160,61 +170,75 @@ export class CameraPage implements OnInit{
     console.log(this.tagsInput)
   }
   post(){
-    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
-    loading.present();
+    if(this.base64Image==""){
+      let toast = this.toastCtrl.create({
+        message: 'Please choose your picture',
+        duration: 2000
+      });
+      toast.present();
 
-    var jbSplit = this.tagsInput.split(' ',100);
-    var myArray = jbSplit.filter(v=>v!='');
-    var myArray2=[];
+    }
+    else if(this.base64Image!==""){
+      let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
+      loading.present();
 
-    for(var i = 0; i<myArray.length;i++){
+      var jbSplit = this.tagsInput.split(' ',100);
+      var myArray = jbSplit.filter(v=>v!='');
+      var myArray2=[];
 
-      if(myArray[i].includes('#')){
-        myArray2.push(myArray[i])
+      for(var i = 0; i<myArray.length;i++){
+
+        if(myArray[i].includes('#')){
+          myArray2.push(myArray[i])
+        }
       }
-    }
 
-    for(var j = 0; j<myArray2.length; j++){
-      this.tags.push({'tag':myArray2[j]})
-    }
-
+      for(var j = 0; j<myArray2.length; j++){
+        this.tags.push({'tag':myArray2[j]})
+      }
 
 
 
-    var APIUrl = '/post';
-    if (this.platform.is('ios') == true){
-      APIUrl = 'http://54.162.160.91/api/post';
-      // console.log('yes');
-    }
-    this.storage.get('token').then((val) => {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // console.log(val);
 
-      let body = {
-        base_64: this.base64Image,
-        tags:this.tags
+      var APIUrl = '/post';
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://54.162.160.91/api/post';
+        // console.log('yes');
+      }
+      this.storage.get('token').then((val) => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('x-access-token', val);
+        // console.log(val);
 
-      };
-      this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
-        .map(res => res.json())
-        .subscribe(
-          data => {
-            let toast = this.toastCtrl.create({
-              message: 'upload success',
-              duration: 2000
+        let body = {
+          base_64: this.base64Image,
+          tags:this.tags
+
+        };
+        this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
+          .map(res => res.json())
+          .subscribe(
+            data => {
+              this.uploadCheck = true;
+              let toast = this.toastCtrl.create({
+                message: 'upload success',
+                duration: 2000
+              });
+              loading.dismiss();
+              this.tags=[];
+              this.base64Image="";
+              toast.present(toast);
+            },
+            err => {
+
             });
-            loading.dismiss();
-            this.tags=[];
-            toast.present(toast);
-          },
-          err => {
+      }, (err) => {
+        console.log(err);
+      });
 
-          });
-    }, (err) => {
-      console.log(err);
-    });
+    }
+
 
 
 

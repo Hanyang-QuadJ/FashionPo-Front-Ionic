@@ -37,10 +37,10 @@ export class UsernamePage {
     ngOnInit(): void {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/authed';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/authed';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/authed';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -75,10 +75,10 @@ export class UsernamePage {
     public usernameChange() {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/update/username';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/update/username';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/update/username';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);

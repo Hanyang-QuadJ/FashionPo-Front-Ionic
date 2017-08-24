@@ -35,7 +35,7 @@
       <!--<h5 *ngIf="toggled"  class="rankCount">4</h5>-->
       <!--</ion-col>-->
       <ion-col col-5 text-center>
-        <img class="image" src="{{user.profile_img}}" imageViewer>
+        <img tappable class="image" src="{{user.profile_img}}" imageViewer>
       </ion-col>
       <ion-col col-7>
         <div class="padding">
@@ -53,8 +53,8 @@
   <hr>
   <p class="infoText">This Week's Fits</p>
 
-  <ion-slides class="image-slider" slidesPerView="3" loop="true">
-    <ion-slide *ngFor="let tWeek of thisWeekPost; let i = index">
+  <ion-slides class="image-slider" slidesPerView="3">
+    <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>
   </ion-slides>
@@ -63,7 +63,7 @@
   <p class="infoText">Fits</p>
   <ion-grid no-padding>
     <ion-row wrap no-padding>
-      <ion-col col-4 *ngFor="let post of posts; let i = index">
+      <ion-col col-4 *ngFor="let post of posts.slice().reverse(); let i = index">
         <img tappable (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
       </ion-col>
     </ion-row>

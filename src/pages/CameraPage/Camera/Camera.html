@@ -24,7 +24,7 @@
     <div *ngIf="!pictureTaken" style="display: none">
 
 
-      <img src="{{placeholderImage}}" />
+      <img *ngIf="!uploadCheck" src="{{placeholderImage}}" />
       <!--<img src="../../../assets/images/post4.png">-->
     </div>
     <img id="camera-image" />

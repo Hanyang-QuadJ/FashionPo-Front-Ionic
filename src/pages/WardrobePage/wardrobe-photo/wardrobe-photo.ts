@@ -1,5 +1,5 @@
 import { Component,ViewChild,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController,Content,AlertController } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,AlertController,Platform } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -23,7 +23,7 @@ export class WardrobePhotoPage implements OnInit{
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              public alertCtrl: AlertController, public storage: Storage, public http: Http, ) {
+              public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform ) {
     console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
@@ -81,10 +81,10 @@ export class WardrobePhotoPage implements OnInit{
               var APIUrl = '/post/delete';
 
 
-              // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://54.162.160.91/post/delete';
-              //
-              // }
+              if (this.platform.is('ios') == true){
+                APIUrl = 'http://54.162.160.91/api/post/delete';
+
+              }
 
               let headers = new Headers();
               headers.append('Content-Type', 'application/json');

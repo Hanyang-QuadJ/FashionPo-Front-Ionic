@@ -35,7 +35,7 @@ export class RankThisWeekPage {
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.thisWeekPostIndex).offsetTop;
-    console.log(yOffset)
+    console.log(yOffset);
     this.content.scrollTo(0,yOffset,0);
   }
   public dismiss(){

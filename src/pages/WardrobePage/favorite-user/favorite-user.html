@@ -46,7 +46,7 @@
   <p class="infoText">This Week's Fits</p>
 
   <ion-slides class="image-slider" slidesPerView="3">
-    <ion-slide *ngFor="let tWeek of thisWeekPost; let i = index">
+    <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>
   </ion-slides>
@@ -55,7 +55,7 @@
   <p class="infoText">Fits</p>
   <ion-grid no-padding>
     <ion-row wrap no-padding>
-      <ion-col col-4 *ngFor="let post of posts; let i = index">
+      <ion-col col-4 *ngFor="let post of posts.slice().reverse(); let i = index">
         <img tappable (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
       </ion-col>
     </ion-row>

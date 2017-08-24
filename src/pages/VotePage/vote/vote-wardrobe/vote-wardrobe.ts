@@ -75,10 +75,10 @@ export class VoteWardrobePage {
         loading.present();
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -94,10 +94,10 @@ export class VoteWardrobePage {
                     console.log("--------------------");
                     this.storage.get('token').then((val) => {
                         var APIUrl = '/post/userid';
-                        // if (this.platform.is('ios') == true){
-                        //   APIUrl = 'http://54.162.160.91/api/post/userid';
-                        //   // console.log('yes');
-                        // }
+                        if (this.platform.is('ios') == true){
+                          APIUrl = 'http://54.162.160.91/api/post/userid';
+                          // console.log('yes');
+                        }
                         let headers = new Headers();
                         headers.append('Content-Type', 'application/json');
                         headers.append('x-access-token', val);
@@ -109,11 +109,11 @@ export class VoteWardrobePage {
                             .subscribe(data => {
                               for(var i = 0; i<data.length;i++){
                                 if(data[i].isThisWeek===true){
-                                  this.thisWeekPost.push(data[i])
+                                  this.thisWeekPost.push(data[i]);
                                   this.date2.push(data[i].writtenAt)
                                 }
                                 else{
-                                  this.posts.push(data[i])
+                                  this.posts.push(data[i]);
                                   this.date.push(data[i].writtenAt)
                                 }
                               }
@@ -204,10 +204,10 @@ export class VoteWardrobePage {
 
                                 this.storage.get('token').then((val) => {
                                     var APIUrl = '/post/view';
-                                    // if (this.platform.is('ios') == true){
-                                    //   APIUrl = 'http://54.162.160.91/api/post/view';
-                                    //   // console.log('yes');
-                                    // }
+                                    if (this.platform.is('ios') == true){
+                                      APIUrl = 'http://54.162.160.91/api/post/view';
+                                      // console.log('yes');
+                                    }
                                     let headers = new Headers();
                                     headers.append('Content-Type', 'application/json');
                                     headers.append('x-access-token', val);
@@ -220,10 +220,10 @@ export class VoteWardrobePage {
                                             console.log(data);
                                             this.storage.get('token').then((val) => {
                                                 let APIUrl = '/user/authed';
-                                                // if (this.platform.is('ios') == true){
-                                                //   APIUrl = 'http://54.162.160.91/api/user/authed';
-                                                //   // console.log('yes');
-                                                // }
+                                                if (this.platform.is('ios') == true){
+                                                  APIUrl = 'http://54.162.160.91/api/user/authed';
+                                                  // console.log('yes');
+                                                }
                                                 let headers = new Headers();
                                                 headers.append('Content-Type', 'application/json');
                                                 headers.append('x-access-token', val);
@@ -266,10 +266,10 @@ export class VoteWardrobePage {
         this.try = true;
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/favorite';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -296,10 +296,10 @@ export class VoteWardrobePage {
         this.try = true;
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user/favorite';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user/favorite';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -327,10 +327,10 @@ export class VoteWardrobePage {
         this.User_id = this.navParams.get('user_id');
         this.storage.get('token').then((val) => {
             var APIUrl = '/user';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://54.162.160.91/api/user';
-            //   // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://54.162.160.91/api/user';
+              // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -352,13 +352,13 @@ export class VoteWardrobePage {
     }
 
   presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(VotePhotoPage, { postList:this.posts,postListIndex:'fit'+i,date:this.dateFinal},{leaveAnimation:'back'});
+    let profileModal = this.modalCtrl.create(VotePhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i,date:this.dateFinal},{leaveAnimation:'back'});
     profileModal.present();
 
   }
 
   presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage,{thisWeekPost:this.thisWeekPost,thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
+    let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
     thisWeekModal.present();
   }
 

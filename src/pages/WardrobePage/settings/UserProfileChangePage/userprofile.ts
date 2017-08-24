@@ -91,8 +91,7 @@ export class UserProfileChange {
   pictureTaken :boolean = false;
   public takePicture(sourceType){
     let options = {
-      targetWidth: 500,
-      targetHeight: 800,
+
       quality: 70,
       allowEdit: true,
       correctOrientation: false,
