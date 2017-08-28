@@ -20,10 +20,10 @@ import {FavoriteUserThisWeekPage} from '../favorite-user/favorite-user-this-week
   templateUrl: 'favorite-user.html',
 })
 export class FavoriteUserPage implements OnInit{
-  favUser:any=""
+  favUser:any="";
   posts:Array<any>=[];
   thisWeekPost:Array<any>=[];
-  favUsers:any=""
+  favUsers:any="";
   date:Array<string>=[];
   date2:Array<string>=[];
   dateFinal:Array<any>=[];
@@ -59,7 +59,7 @@ export class FavoriteUserPage implements OnInit{
     this.favUser = this.navParams.get('favList');
     this.storage.get('token').then((val) => {
       var APIUrl = '/post/userid';
-      var APIUrl_1 = '/user'
+      var APIUrl_1 = '/user';
       // if (this.platform.is('ios') == true){
       //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/userid'
       //   APIUrl_1 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user'
@@ -70,7 +70,7 @@ export class FavoriteUserPage implements OnInit{
       headers.append('x-access-token', val);
       let body = {
         _id:this.favUser._id
-      }
+      };
       this.http.post(APIUrl,JSON.stringify(body), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {

@@ -1,5 +1,6 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams,ViewController,Content } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,ModalController } from 'ionic-angular';
+import {TagPage} from "../../../tag/tag";
 
 /**
  * Generated class for the FavoriteUserThisWeekPage page.
@@ -17,7 +18,7 @@ export class FavoriteUserThisWeekPage {
   postList:"";
   postListIndex:"";
   date:"";
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
     this.postList = this.navParams.get('thisWeekPost');
     this.postListIndex = this.navParams.get('thisWeekPostIndex');
     this.date = this.navParams.get('date');
@@ -38,6 +39,16 @@ export class FavoriteUserThisWeekPage {
   }
   public dismiss(){
     this.viewCtrl.dismiss()
+  }
+  goToTag(tagName,i){
+    console.log(tagName);
+    let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.onDidDismiss((check)=> {
+      let yOffset = document.getElementById('fit'+i).offsetTop;
+      this.content.scrollTo(0, yOffset,0);
+    });
+    tagModal.present();
+
   }
 
 }

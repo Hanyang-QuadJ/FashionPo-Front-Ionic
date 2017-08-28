@@ -47,6 +47,9 @@ export class CameraPage implements OnInit{
               public viewCtrl: ViewController,
               public loadingCtrl: LoadingController)
   {
+    this.tags=[];
+    this.tagsInput="";
+    this.base64Image="";
     if(this.navParams.get('fromWardrobe')==="check"){
       this.backButton = true;
     }
@@ -185,6 +188,9 @@ export class CameraPage implements OnInit{
 
     }
     else if(this.base64Image!==""){
+      this.tags=[];
+      this.tagsInput="";
+      this.base64Image="";
       let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
       loading.present();
 

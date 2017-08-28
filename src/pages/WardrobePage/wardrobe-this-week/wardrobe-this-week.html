@@ -20,7 +20,6 @@
 
 <ion-content>
   <ion-card *ngFor=" let post of postList; let i =index" [id]="i">
-
     <img src="{{post.picURL}}">
 
     <button ion-button icon-left clear small>
@@ -29,7 +28,7 @@
     </button>
 
     <ion-card-content>
-      <span tappable  class="tag" *ngFor="let tag of post.tags  let j = index" (click)="goToTag(tag.tag)" > {{tag.tag}}</span>
+      <span tappable  class="tag" *ngFor="let tag of post.tags  let j = index" (click)="goToTag(tag.tag,i)" > {{tag.tag}}</span>
     </ion-card-content>
 
     <ion-item>

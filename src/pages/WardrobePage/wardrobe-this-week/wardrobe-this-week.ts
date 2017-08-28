@@ -1,5 +1,6 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
-import { NavController, NavParams,ViewController,Content,AlertController,Platform, ModalController } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,AlertController,Platform, ModalController,
+LoadingController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -22,14 +23,14 @@ export class WardrobeThisWeekPage implements OnInit{
   postListIndex:any="";
   date="";
   tags:any="";
-
   yOffset:any="";
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
   public alertCtrl: AlertController, public storage : Storage, public http: Http, public platform: Platform,
-  public modalCtrl: ModalController) {
+  public modalCtrl: ModalController,public loadingCtrl: LoadingController) {
+
 
 
 
@@ -40,7 +41,6 @@ export class WardrobeThisWeekPage implements OnInit{
     this.postList = this.navParams.get('thisWeekPost');
     this.postListIndex = this.navParams.get('thisWeekPostIndex');
     this.date = this.navParams.get('date');
-
     this.tags = this.postList
 
 
@@ -51,6 +51,7 @@ export class WardrobeThisWeekPage implements OnInit{
   ionViewWillEnter(){
     this.yOffset = document.getElementById(this.postListIndex).offsetTop;
     this.content.scrollTo(0,this.yOffset,0);
+    console.log(this.content.getContentDimensions())
   }
 
 
@@ -112,12 +113,15 @@ export class WardrobeThisWeekPage implements OnInit{
     alert.present();
   }
 
-  goToTag(tagName){
+
+  goToTag(tagName,i){
     console.log(tagName);
     let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.onDidDismiss((check)=> {
+        this.yOffset = document.getElementById(i).offsetTop;
+        this.content.scrollTo(0,this.yOffset,0);
+    });
     tagModal.present();
-
-
 
   }
 

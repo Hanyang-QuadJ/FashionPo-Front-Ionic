@@ -5,6 +5,7 @@ import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {VoteWardrobePage} from './vote-wardrobe/vote-wardrobe';
+import {TagPage} from "../../tag/tag";
 
 import {
   StackConfig,
@@ -284,6 +285,12 @@ export class VotePage implements OnInit {
         profileModal.present();
 
     }
+  goToTag(tagName){
+    console.log(tagName);
+    let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.present();
+
+  }
 
 
 

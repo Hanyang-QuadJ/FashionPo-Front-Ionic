@@ -1,8 +1,9 @@
 import { Component,ViewChild,OnInit } from '@angular/core';
-import { NavController, NavParams,ViewController,Content,AlertController,Platform } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,AlertController,Platform,ModalController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
+import {TagPage} from "../../tag/tag";
 
 /**
  * Generated class for the WardrobePhotoPage page.
@@ -23,7 +24,7 @@ export class WardrobePhotoPage implements OnInit{
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform ) {
+              public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform,public modalCtrl:ModalController, ) {
     console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
@@ -99,7 +100,7 @@ export class WardrobePhotoPage implements OnInit{
                 .subscribe(
                   data => {
                     console.log('deleted');
-                    let check = "check"
+                    let check = "check";
                     this.viewCtrl.dismiss(check);
 
 
@@ -116,5 +117,15 @@ export class WardrobePhotoPage implements OnInit{
   }
   public dismiss(){
     this.viewCtrl.dismiss()
+  }
+  goToTag(tagName,i){
+    console.log(tagName);
+    let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.onDidDismiss(()=> {
+      let yOffset = document.getElementById(i).offsetTop;
+      this.content.scrollTo(0, yOffset,0);
+    });
+    tagModal.present();
+
   }
 }

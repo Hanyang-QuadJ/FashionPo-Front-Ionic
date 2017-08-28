@@ -44,21 +44,10 @@
 
           <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
           <ion-card-content>
-
               <h2 tappable *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.username}}</h2>
               <p>{{parsingDate(post.writtenAt)}}</p>
-              <span class="tag" *ngFor="let tag of post.tags">{{tag.tag}} &nbsp;</span> <span class="tag">#와우</span>
-              <span class="tag">#와우</span>
-              <span class="tag">#정준언</span>
-              <span class="tag">#신현종</span>
-            <span class="tag">#와우</span>
-            <span class="tag">#정준언</span>
-
-
+              <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag)">{{tag.tag}}  </span>
           </ion-card-content>
-
-
-
         </ion-card>
 
           <!--<ion-card *ngIf="noNextCard">-->
@@ -77,7 +66,7 @@
           <ion-card-content>
             <h2 *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.username}}</h2>
             <p>{{parsingDate(nextPost.writtenAt)}}</p>
-            <span class="tag" *ngFor="let tag of nextPost.tags">{{tag.tag}} &nbsp;</span> <span class="tag">#와우</span>
+            <span tappable class="tag" *ngFor="let tag of nextPost.tags" (click)="goToTag(tag.tag)">{{tag.tag}} &nbsp;</span>
           </ion-card-content>
         </ion-card>
       </div>

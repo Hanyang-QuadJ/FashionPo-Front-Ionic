@@ -58,6 +58,7 @@ import {IonicImageViewerModule} from 'ionic-img-viewer';
 
 import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNameChangePage/wardrobename";
 import {TagPage} from '../pages/tag/tag'
+import {OrderModule} from "ngx-order-pipe";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -109,7 +110,7 @@ import {TagPage} from '../pages/tag/tag'
         HttpModule,
         SwingModule,
         IonicImageViewerModule,
-
+        OrderModule,
         SuperTabsModule.forRoot(),
     ],
     bootstrap: [IonicApp],

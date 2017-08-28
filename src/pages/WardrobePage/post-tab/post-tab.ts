@@ -98,9 +98,6 @@ export class PostTabPage implements OnInit{
           });
 
         }
-
-
-
       });
       profileModal.present();
 

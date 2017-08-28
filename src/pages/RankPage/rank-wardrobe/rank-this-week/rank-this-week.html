@@ -12,7 +12,8 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>This Week's Fits</ion-title>
+    <ion-title *ngIf="!tagPageCheck">This Week's Fits</ion-title>
+    <ion-title *ngIf="tagPageCheck">{{tagPageCheck}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -29,7 +30,10 @@
     </button>
 
     <ion-card-content>
-      <span class="tag" *ngFor="let tag of post.tags"> {{tag.tag}}</span>
+      <h2  color="dark" tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].wardrobeName}}</h2>
+      <p tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].username}}</p>
+
+      <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
     </ion-card-content>
 
     <ion-item>
