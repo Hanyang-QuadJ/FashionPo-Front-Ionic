@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewChildren, QueryList, OnInit} from '@angular/core';
 
-import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, ViewController,} from 'ionic-angular';
+import {NavController, NavParams, Platform, Content, ToastController, ModalController, App, ViewController,LoadingController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
@@ -46,6 +46,7 @@ export class VotePage implements OnInit {
                 public platform: Platform,
                 public navParams: NavParams,
                 private app: App,
+                public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController,
                 public toastCtrl: ToastController,
                 public modalCtrl: ModalController,) {
@@ -53,7 +54,8 @@ export class VotePage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.tabBarElement = document.querySelector('.tabbar.show-tabbar');
+      let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+      loading.present();
         this.storage.get('token').then((val) => {
             var APIUrl = '/post/random';
             // if (this.platform.is('ios') == true){
@@ -74,6 +76,7 @@ export class VotePage implements OnInit {
                     this.posts = [];
                     this.nextPost = this.cachedPost.pop();
                     this.addNewposts();
+                    loading.dismiss();
                 });
         });
 
@@ -203,8 +206,9 @@ export class VotePage implements OnInit {
 
     presentLikeToast() {
         let toast = this.toastCtrl.create({
-            message: 'Liked!',
-            duration: 200,
+            message: 'Like',
+            // duration:200,
+
             position: 'middle',
             cssClass:'like'
         });
@@ -280,6 +284,7 @@ export class VotePage implements OnInit {
         profileModal.present();
 
     }
+
 
 
 }

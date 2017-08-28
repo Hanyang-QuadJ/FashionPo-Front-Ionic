@@ -100,7 +100,7 @@ export class CameraPage implements OnInit{
   public takePicture(sourceType){
       let options = {
 
-        quality: 75,
+        quality: 20,
         allowEdit:true,
 
 

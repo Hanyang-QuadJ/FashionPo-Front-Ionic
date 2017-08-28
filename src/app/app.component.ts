@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/AuthPage/login/login';
 import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe'
 import {VotePage} from '../pages/VotePage/vote/vote'
+import {CameraPage} from '../pages/CameraPage/Camera/camera'
 
 
 @Component({

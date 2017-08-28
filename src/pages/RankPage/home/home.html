@@ -58,21 +58,12 @@
       pullingText=""
       refreshingSpinner="circles"
       refreshingText="">
-
     </ion-refresher-content>
   </ion-refresher>
   <div *ngIf="!searchToggled">
     <ion-card>
-
-
-
       <img tappable *ngIf="firstPost" src={{firstPost.picURL}} imageViewer>
-
-
-
-
       <ion-card-content no-padding>
-
         <ion-grid no-padding>
           <ion-row>
             <ion-col>
@@ -81,7 +72,6 @@
               <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&!firstCheck">{{firstUser.username}}</h3>
               <div class="text-center">
                 <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon name="md-heart"></ion-icon></span></h5>
-
                 <button *ngIf="!firstCheck&&firstUser&&!firstButton" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(firstPost);'>Add</button>
                 <button *ngIf="!firstCheck&&firstUser&&firstButton" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(firstPost);'>Added</button>
                 <!--<button *ngIf="firstCheck&&firstUser&&!firstButton" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(firstPost);'>Add</button>-->
@@ -118,8 +108,6 @@
             <div class="likeArea">
               <button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(rank);'>Add</button>
               <button *ngIf="user&&user._id!==ranks[i].writtenBy&&buttons[i]" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(rank);'>Added</button>
-
-
             </div>
           </div>
         </div>

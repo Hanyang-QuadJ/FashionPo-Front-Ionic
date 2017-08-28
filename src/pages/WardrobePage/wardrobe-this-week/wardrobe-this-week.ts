@@ -1,8 +1,9 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
-import { NavController, NavParams,ViewController,Content,AlertController,Platform } from 'ionic-angular';
+import { NavController, NavParams,ViewController,Content,AlertController,Platform, ModalController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
+import {TagPage} from "../../tag/tag";
 
 /**
  * Generated class for the WardrobeThisWeekPage page.
@@ -20,12 +21,15 @@ export class WardrobeThisWeekPage implements OnInit{
   postList:any="";
   postListIndex:any="";
   date="";
+  tags:any="";
+
   yOffset:any="";
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-  public alertCtrl: AlertController, public storage : Storage, public http: Http, public platform: Platform) {
+  public alertCtrl: AlertController, public storage : Storage, public http: Http, public platform: Platform,
+  public modalCtrl: ModalController) {
 
 
 
@@ -33,9 +37,12 @@ export class WardrobeThisWeekPage implements OnInit{
   }
 
   ngOnInit(): void {
-    this.postList = this.navParams.get('thisWeekPost')
-    this.postListIndex = this.navParams.get('thisWeekPostIndex')
-    this.date = this.navParams.get('date')
+    this.postList = this.navParams.get('thisWeekPost');
+    this.postListIndex = this.navParams.get('thisWeekPostIndex');
+    this.date = this.navParams.get('date');
+
+    this.tags = this.postList
+
 
 
 
@@ -74,12 +81,10 @@ export class WardrobeThisWeekPage implements OnInit{
             this.storage.get('token').then((val) => {
               var APIUrl = '/post/delete';
 
-
               // if (this.platform.is('ios') == true){
               //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/delete';
               //
               // }
-
               let headers = new Headers();
               headers.append('Content-Type', 'application/json');
               headers.append('x-access-token', val);
@@ -105,6 +110,15 @@ export class WardrobeThisWeekPage implements OnInit{
       ]
     });
     alert.present();
+  }
+
+  goToTag(tagName){
+    console.log(tagName);
+    let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.present();
+
+
+
   }
 
 }

@@ -57,6 +57,7 @@ import {IntroduceChangePage} from "../pages/WardrobePage/settings/IntroduceChang
 import {IonicImageViewerModule} from 'ionic-img-viewer';
 
 import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNameChangePage/wardrobename";
+import {TagPage} from '../pages/tag/tag'
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -75,6 +76,7 @@ import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNam
         TabsPage,
         WardrobeCameraPage,
         HistoryRankPage,
+        TagPage,
 
         SignupPage,
         PostTabPage,
@@ -145,6 +147,7 @@ import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNam
         PasswordChangePage,
         ChangeWardrobeNamePage,
         IntroduceChangePage,
+        TagPage,
     ],
     providers: [
         StatusBar,

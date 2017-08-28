@@ -6,23 +6,25 @@
 
 <ion-content>
 
-  <ion-list>
-    <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
-      <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="email" formControlName="email" placeholder="                    example@fitnyc.edu"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Password</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="                    At least 12 numbers"></ion-input>
-      </ion-item>
-      <div padding>
-        <button class="custom-button" ion-button type="submit" [disabled]="!loginForm.valid" color="danger" block>Sign In</button>
-      </div>
-    </form>
-    <button  ion-button (click)="goToSignup()"  color="danger" clear>Sign Up</button>
-    <button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>
+      <ion-list>
+        <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="email" formControlName="email" placeholder="                    example@fitnyc.edu"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" formControlName="password" placeholder="                    At least 12 numbers"></ion-input>
+          </ion-item>
+          <div padding>
+            <button class="custom-button" ion-button type="submit" [disabled]="!loginForm.valid" color="danger" block>Sign In</button>
+          </div>
+        </form>
+        <button  ion-button (click)="goToSignup()"  color="danger" clear>Sign Up</button>
+        <button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>
 
-  </ion-list>
+      </ion-list>
+
+
 
 </ion-content>

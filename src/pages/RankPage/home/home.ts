@@ -29,6 +29,7 @@ export class HomePage implements OnInit {
     modalCheck:boolean;
     rankDate:any="";
 
+
     ranks: Array<any> = [];
     oriRank: Array<any> =[];
     users: Array<any> = [];
@@ -74,48 +75,132 @@ export class HomePage implements OnInit {
         this.initializeItems();
     }
 
-    ngOnInit(): void {
-      let date = new Date();
-      console.log(date);
+  ngOnInit(): void {
+
+    this.fetchData();
+  }
+  doRefresh(refresher) {
+    this.storage.get('token').then((val) => {
+      var APIUrl = '/rank';
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+      //   // // console.log('yes');
+      // }
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('x-access-token', val);
+
+      this.http.get(APIUrl, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          // console.log("$$$$$");
+          // console.log(data);
+          for(let d = 0; d < data.posts.length; d++){
+            this.oriRank[d] = data.posts[d];
+          }
+          for (var i = 1; i < data.posts.length; i++) {
+            this.ranks[i - 1] = data.posts[i];
+          }
+          this.firstPost = data.posts[0];
+          this.storage.get('token').then((val) => {
+            let APIUrl = '/user';
+            // if (this.platform.is('ios') == true){
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+            //   // // console.log('yes');
+            // }
+            for (let i = 0; i < data.posts.length; i++) {
+              this.writtenBys.push(data.posts[i].writtenBy);
+            }
+
+            let body = {users: this.writtenBys};
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('x-access-token', val);
+
+
+            this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+              .map(res => res.json())
+              .subscribe(data => {
+                this.firstUser = data[0];
+                this.users = [];
+                for (let i = 1; i < data.length; i++) {
+                  this.users.push(data[i]);
+                }
+                this.storage.get('token').then((val) => {
+                  let APIUrl = '/user/authed';
+                  // if (this.platform.is('ios') == true){
+                  //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
+                  //   // // console.log('yes');
+                  // }
+                  let headers = new Headers();
+                  headers.append('Content-Type', 'application/json');
+                  headers.append('x-access-token', val);
+                  this.http.get(APIUrl, {headers: headers})
+                    .map(res => res.json())
+                    .subscribe(data => {
+                      this.user = data.user[0];
+                      // console.log("------------------");
+                      // console.log(this.firstUser._id);
+                      // console.log(this.user._id);
+                      // console.log("------------------");
+                      if (this.firstUser._id === this.user._id) {
+                        this.firstCheck = true;
+                        // console.log(this.firstCheck);
+                      }
+
+                      for (let i = 0; i < this.ranks.length; i++)
+                        this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
+                      this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1
+                      refresher.complete();
+                      // console.log("-------------------");
+                      // console.log(this.buttons);
+                      // console.log("-------------------");
+
+                    });
+                });
+
+              });
+          });
+        });
+    });
+
+
+
+  }
+
+
+    public fetchData(){
+      //initialize Arrays and Booleans
       this.firstCheck = false;
       this.modalCheck= false;
       this.users = [];
       this.ranks = [];
       this.oriRank =[];
       this.writtenBys = [];
-
       this.search = "User";
       this.pushPage = VotePage;
-
       this.toggled = false;
       this.searchToggled = false;
 
-
+      // This Week's Rank
       if(this.historyRank===undefined){
-        console.log("Yeahhh!!!");
-
         let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
         loading.present();
-
-
-
-
         this.storage.get('token').then((val) => {
           var APIUrl = '/rank';
           // if (this.platform.is('ios') == true){
-          //   APIUrl = 'http://107.23.122.155:3000/api/rank';
-          //   // console.log('yes');
+          //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+          //   // // console.log('yes');
           // }
           let headers = new Headers();
           headers.append('Content-Type', 'application/json');
           headers.append('x-access-token', val);
 
-
           this.http.get(APIUrl, {headers: headers})
             .map(res => res.json())
             .subscribe(data => {
-              console.log("$$$$$");
-              console.log(data);
+              // console.log("$$$$$");
+              // console.log(data);
               for(let d = 0; d < data.posts.length; d++){
                 this.oriRank[d] = data.posts[d];
               }
@@ -126,8 +211,8 @@ export class HomePage implements OnInit {
               this.storage.get('token').then((val) => {
                 let APIUrl = '/user';
                 // if (this.platform.is('ios') == true){
-                //   APIUrl = 'http://107.23.122.155:3000/api/user';
-                //   // console.log('yes');
+                //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+                //   // // console.log('yes');
                 // }
                 for (let i = 0; i < data.posts.length; i++) {
                   this.writtenBys.push(data.posts[i].writtenBy);
@@ -142,53 +227,41 @@ export class HomePage implements OnInit {
                 this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                   .map(res => res.json())
                   .subscribe(data => {
-
-
                     this.firstUser = data[0];
                     this.users = [];
                     for (let i = 1; i < data.length; i++) {
                       this.users.push(data[i]);
                     }
-
-
-                    // console.log(this.firstUser);
-                    // console.log(this.users[1]);
-                    // console.log(this.firstPost);
-                    // console.log(this.ranks);
                     this.storage.get('token').then((val) => {
                       let APIUrl = '/user/authed';
                       // if (this.platform.is('ios') == true){
-                      //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
-                      //   // console.log('yes');
+                      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
+                      //   // // console.log('yes');
                       // }
                       let headers = new Headers();
                       headers.append('Content-Type', 'application/json');
                       headers.append('x-access-token', val);
-
-
                       this.http.get(APIUrl, {headers: headers})
                         .map(res => res.json())
                         .subscribe(data => {
                           this.user = data.user[0];
-                          console.log("------------------");
-                          console.log(this.firstUser._id);
-                          console.log(this.user._id);
-                          console.log("------------------");
+                          // console.log("------------------");
+                          // console.log(this.firstUser._id);
+                          // console.log(this.user._id);
+                          // console.log("------------------");
                           if (this.firstUser._id === this.user._id) {
                             this.firstCheck = true;
-                            console.log(this.firstCheck);
+                            // console.log(this.firstCheck);
                           }
-
-
-
 
                           for (let i = 0; i < this.ranks.length; i++)
                             this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
                           this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1
-                          console.log("-------------------");
-                          console.log(this.buttons);
-                          console.log("-------------------");
+                          // console.log("-------------------");
+                          // console.log(this.buttons);
+                          // console.log("-------------------");
                           loading.dismiss();
+
 
                         });
                     });
@@ -200,11 +273,12 @@ export class HomePage implements OnInit {
 
 
       }
+      // History Rank
       else if(this.historyRank!==undefined){
+        let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+        loading.present();
         this.modalCheck=true;
         this.rankDate = this.navParams.get('rankDate');
-        let loading = this.loadingCtrl.create({showBackdrop: false, cssClass: 'loading', spinner: 'crescent'});
-        loading.present();
         for(let a = 0; a<this.historyRank.length; a++){
           this.oriRank[a] = this.historyRank[a];
         }
@@ -213,20 +287,20 @@ export class HomePage implements OnInit {
           this.ranks[i - 1] = this.historyRank[i];
 
         }
-        console.log('111111111');
-        console.log(this.ranks);
+        // console.log('111111111');
+        // console.log(this.ranks);
         this.firstPost = this.historyRank[0];
         for (let i = 0; i < this.historyRank.length; i++) {
           this.writtenBys.push(this.historyRank[i].writtenBy);
         }
-        console.log('222222222222')
-        console.log(this.writtenBys)
+        // console.log('222222222222')
+        // console.log(this.writtenBys)
 
         this.storage.get('token').then((val) => {
           var APIUrl = '/user';
           // if (this.platform.is('ios') == true){
-          //   APIUrl = 'http://107.23.122.155:3000/api/user';
-          //   // console.log('yes');
+          //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+          //   // // console.log('yes');
           // }
           let headers = new Headers();
           headers.append('Content-Type', 'application/json');
@@ -245,8 +319,8 @@ export class HomePage implements OnInit {
               this.storage.get('token').then((val) => {
                 let APIUrl = '/user/authed';
                 // if (this.platform.is('ios') == true){
-                //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
-                //   // console.log('yes');
+                //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
+                //   // // console.log('yes');
                 // }
                 let headers = new Headers();
                 headers.append('Content-Type', 'application/json');
@@ -259,7 +333,7 @@ export class HomePage implements OnInit {
                     this.user = data.user[0];
                     if (this.firstUser._id === this.user._id) {
                       this.firstCheck = true;
-                      console.log(this.firstCheck);
+                      // console.log(this.firstCheck);
                     }
 
                     for (let j = 0; j < this.ranks.length; j++) {
@@ -271,50 +345,25 @@ export class HomePage implements OnInit {
                     for (let i = 0; i < this.ranks.length; i++)
                       this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
                     this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1;
-                    console.log("-------------------");
-                    console.log(this.buttons);
-                    console.log("-------------------");
                     loading.dismiss();
-
                   });
               });
-
-
-            })
-
-
+            });
         });
-
       }
-
-
     }
 
-    ionViewWillEnter() {
 
-
-
-    }
-
-    test() {
-        console.log('Check!!Check!!')
-    }
 
 
     Vote() {
-
         let voteModal = this.modalCtrl.create(VotePage,  {leaveAnimation: 'back'});
         voteModal.present();
-
-
-
     }
 
     toggleSearch() {
-
         this.toggled = this.toggled ? false : true;
         this.searchToggled = true;
-
         this.content.resize();
     }
 
@@ -324,123 +373,15 @@ export class HomePage implements OnInit {
         this.content.resize();
     }
 
-    searchActive() {
-        this.searchToggled = true;
-    }
-
     scrollToTop() {
         this.content.scrollToTop();
     }
 
-    doRefresh(refresher) {
-      this.users = [];
-      this.ranks = [];
-      this.oriRank =[];
-      this.writtenBys = [];
-      this.storage.get('token').then((val) => {
-        var APIUrl = '/rank';
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://107.23.122.155:3000/api/rank';
-        //   // console.log('yes');
-        // }
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', val);
 
-
-        this.http.get(APIUrl, {headers: headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            console.log("$$$$$")
-            console.log(data)
-            for (var i = 1; i < data.posts.length; i++) {
-              this.ranks[i - 1] = data.posts[i];
-            }
-            this.firstPost = data.posts[0];
-            this.storage.get('token').then((val) => {
-              let APIUrl = '/user';
-              // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://107.23.122.155:3000/api/user';
-              //   // console.log('yes');
-              // }
-              for(let d = 0; d < data.posts.length; d++){
-                this.oriRank[d] = data.posts[d];
-              }
-              for (let i = 0; i < data.posts.length; i++) {
-                this.writtenBys.push(data.posts[i].writtenBy);
-              }
-
-              let body = {users: this.writtenBys};
-              let headers = new Headers();
-              headers.append('Content-Type', 'application/json');
-              headers.append('x-access-token', val);
-
-
-              this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-
-
-                  this.firstUser = data[0];
-                  this.users = [];
-                  for (let i = 1; i < data.length; i++) {
-                    this.users.push(data[i]);
-                  }
-
-
-                  // console.log(this.firstUser);
-                  // console.log(this.users[1]);
-                  // console.log(this.firstPost);
-                  // console.log(this.ranks);
-                  this.storage.get('token').then((val) => {
-                    let APIUrl = '/user/authed';
-                    // if (this.platform.is('ios') == true){
-                    //   APIUrl = 'http://107.23.122.155:3000/api/user/authed';
-                    //   // console.log('yes');
-                    // }
-                    let headers = new Headers();
-                    headers.append('Content-Type', 'application/json');
-                    headers.append('x-access-token', val);
-
-
-                    this.http.get(APIUrl, {headers: headers})
-                      .map(res => res.json())
-                      .subscribe(data => {
-                        this.user = data.user[0];
-                        console.log("------------------");
-                        console.log(this.firstUser._id);
-                        console.log(this.user._id);
-                        console.log("------------------");
-                        if (this.firstUser._id === this.user._id) {
-                          this.firstCheck = true;
-                          console.log(this.firstCheck);
-                        }
-
-
-
-
-                        for (let i = 0; i < this.ranks.length; i++)
-                          this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
-                        this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1
-                        console.log("-------------------");
-                        console.log(this.buttons);
-                        console.log("-------------------");
-                        refresher.complete();
-
-                      });
-                  });
-
-                });
-            });
-          });
-      });
-
-
-    }
 
     addFavorite(post) {
         this.try = true;
-        console.log(post);
+        // // console.log(post);
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i]._id === post.writtenBy) {
                 if (this.buttons[i] === true) {
@@ -457,14 +398,14 @@ export class HomePage implements OnInit {
             else
                 this.firstButton = true;
         }
-        console.log("----------------");
-        console.log(this.buttons);
-        console.log("----------------");
+        // console.log("----------------");
+        // console.log(this.buttons);
+        // console.log("----------------");
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://107.23.122.155:3000/api/user/favorite';
-            //   // console.log('yes');
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/favorite';
+            //   // // console.log('yes');
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -477,7 +418,7 @@ export class HomePage implements OnInit {
             this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log(data);
+                    // console.log(data);
                     this.try = false;
 
                 });
@@ -487,7 +428,7 @@ export class HomePage implements OnInit {
 
     removeFavorite(post) {
         this.try = true;
-        console.log(post);
+        // console.log(post);
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i]._id === post.writtenBy) {
                 if (this.buttons[i] === true) {
@@ -504,14 +445,14 @@ export class HomePage implements OnInit {
             else
                 this.firstButton = true;
         }
-        console.log("----------------");
-        console.log(this.buttons);
-        console.log("----------------");
+        // console.log("----------------");
+        // console.log(this.buttons);
+        // console.log("----------------");
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/favorite';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://107.23.122.155:3000/api/user/favorite';
-            //   // console.log('yes');
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/favorite';
+            //   // // console.log('yes');
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -527,7 +468,7 @@ export class HomePage implements OnInit {
             this.http.delete(APIUrl, options)
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log(data);
+                    // console.log(data);
                     this.try = false;
 
                 });
@@ -554,10 +495,7 @@ export class HomePage implements OnInit {
       searchModal.present();
     }
 
-    test2(i){
-      console.log(this.allUsers[i])
-    }
-
+    //Search
     allUsers;
     allTags;
 
@@ -565,8 +503,8 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://107.23.122.155:3000/api/user/all';
-            //   // console.log('yes');
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
+            //   // // console.log('yes');
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -590,8 +528,8 @@ export class HomePage implements OnInit {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
             // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://107.23.122.155:3000/api/user/all';
-            //   // console.log('yes');
+            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
+            //   // // console.log('yes');
             // }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -599,8 +537,8 @@ export class HomePage implements OnInit {
 
             var APIUrl2 = '/search/searchTag';
             // if (this.platform.is('ios') == true){
-            //   APIUrl2 = 'http://107.23.122.155:3000/api/search/searchTag';
-            //   // console.log('yes');
+            //   APIUrl2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/search/searchTag';
+            //   // // console.log('yes');
             // }
 
             let body = {
@@ -618,7 +556,6 @@ export class HomePage implements OnInit {
                 .subscribe(data => {
                     this.allUsers = data.usersList;
                     var val = ev.target.value;
-
                     // if the value is an empty string don't filter the items
                     if (val && val.trim() != '') {
                         this.allUsers = this.allUsers.filter((item) => {
