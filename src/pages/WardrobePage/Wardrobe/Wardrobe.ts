@@ -89,7 +89,7 @@ export class WardrobePage implements OnInit{
         let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
             thisWeekPost: this.thisWeekPost.slice().reverse(),
             thisWeekPostIndex: i,
-            date:this.dateFinal2
+            date:this.dateFinal2.slice().reverse(),
         }, {leaveAnimation: 'back'});
         thisWeekModal.onDidDismiss((renewedData)=> {
           if(renewedData==="renewed"){
@@ -117,11 +117,11 @@ export class WardrobePage implements OnInit{
       var APIUrl = '/user';
       var APIUrl_2 = '/post';
       var APIUrl_3 ='/rank';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-      //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
-      //    APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
-      // }
+      if (this.platform.is('ios') == true){
+        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+        APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
+         APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+      }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -164,7 +164,7 @@ export class WardrobePage implements OnInit{
                     //이번주 사진
                     if (data.posts[i].isThisWeek === true) {
                       this.thisWeekPost.push(data.posts[i]);
-                      this.date2.push(data.posts[i].writtenAt)
+                      this.date2.push(data.posts[i].writtenAt);
 
                     }
                     //모든 사진
@@ -175,6 +175,7 @@ export class WardrobePage implements OnInit{
                     }
 
                   }
+                  console.log(this.date2);
                   if(this.thisWeekPost.length === 0){
                     this.thisWeekPostLength = true;
                   }
@@ -265,6 +266,8 @@ export class WardrobePage implements OnInit{
                     this.dateFinal2.push({'eDay':this.endDay2[a],'mon':this.month2[a],'yr':this.year2[a]})
 
                   }
+
+                  console.log(this.dateFinal2);
                   this.http.get(APIUrl + '/favorite', {headers: headers})
                     .map(res => res.json())
                     .subscribe(data => {

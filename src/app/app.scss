@@ -96,6 +96,47 @@ image-viewer.ion-page {
   }
 
 }
+.like{
+  .toast-message {
+    font-size: 1.8rem;
+    color: #ff5733;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .toast-wrapper {
+    left: 10px;
+    right: 10px;
+    margin: auto;
+    border-radius: 0.65rem;
+    position: absolute;
+    z-index: 10;
+    display: block;
+    max-width: 30%;
+    background: rgba(255,255, 255, 0.9);
+  }
+}
+.skip{
+  .toast-message {
+    font-size: 1.8rem;
+    color: #709fb0;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .toast-wrapper {
+    left: 10px;
+    right: 10px;
+    margin: auto;
+    border-radius: 0.65rem;
+    position: absolute;
+    z-index: 10;
+    display: block;
+    max-width: 30%;
+    background: rgba(255,255, 255, 0.9);
+  }
+
+}
+
+
 
 
 

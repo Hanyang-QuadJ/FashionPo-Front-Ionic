@@ -207,11 +207,10 @@ export class VotePage implements OnInit {
 
     presentLikeToast() {
         let toast = this.toastCtrl.create({
-            message: 'Like',
-            // duration:200,
-
+            message: 'Liked!',
+            duration:200,
             position: 'middle',
-            cssClass:'like'
+            cssClass:'like',
         });
 
         toast.onDidDismiss(() => {
@@ -225,7 +224,8 @@ export class VotePage implements OnInit {
         let toast = this.toastCtrl.create({
             message: 'Skip!',
             duration: 200,
-            position: 'middle'
+            position: 'middle',
+            cssClass:'skip',
         });
 
         toast.onDidDismiss(() => {

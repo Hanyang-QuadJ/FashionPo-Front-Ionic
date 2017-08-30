@@ -132,7 +132,7 @@ export class TagPage {
                     .subscribe(
                       data => {
                         this.firstUser = data[0];
-                        console.log(this.firstUser);
+                        // console.log(this.firstUser);
                         loading.dismiss();
                       });
                 });
@@ -144,7 +144,7 @@ export class TagPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TagPage');
+    // console.log('ionViewDidLoad TagPage');
   }
   public dismiss(){
     let check = "check";

@@ -8,6 +8,7 @@ import {VotePage} from '../../VotePage/vote/vote'
 import {ToastController, ModalController, ViewController, Toast, Modal} from 'ionic-angular';
 import {HistoryListPage} from '../history-list/history-list'
 import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
+import {TagPage} from "../../tag/tag";
 
 /**
  * Generated class for the HomePage page.
@@ -35,6 +36,7 @@ export class HomePage implements OnInit {
     users: Array<any> = [];
     buttons: Array<any> = [];
     picURL: string = "";
+  order: string = 'tagCnt';
     writtenBys: Array<any> = [];
     @ViewChild(Content) content: Content;
 
@@ -69,7 +71,7 @@ export class HomePage implements OnInit {
                 public loadingCtrl: LoadingController,
                 public viewCtrl: ViewController) {
         this.search = "User";
-        this.historyRank = this.navParams.get('rankSheet')
+        this.historyRank = this.navParams.get('rankSheet');
 
 
         this.initializeItems();
@@ -188,10 +190,10 @@ export class HomePage implements OnInit {
         loading.present();
         this.storage.get('token').then((val) => {
           var APIUrl = '/rank';
-          // if (this.platform.is('ios') == true){
-          //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
-          //   // // console.log('yes');
-          // }
+          if (this.platform.is('ios') == true){
+            APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+            // // console.log('yes');
+          }
           let headers = new Headers();
           headers.append('Content-Type', 'application/json');
           headers.append('x-access-token', val);
@@ -210,10 +212,10 @@ export class HomePage implements OnInit {
               this.firstPost = data.posts[0];
               this.storage.get('token').then((val) => {
                 let APIUrl = '/user';
-                // if (this.platform.is('ios') == true){
-                //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-                //   // // console.log('yes');
-                // }
+                if (this.platform.is('ios') == true){
+                  APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+                  // // console.log('yes');
+                }
                 for (let i = 0; i < data.posts.length; i++) {
                   this.writtenBys.push(data.posts[i].writtenBy);
                 }
@@ -234,10 +236,10 @@ export class HomePage implements OnInit {
                     }
                     this.storage.get('token').then((val) => {
                       let APIUrl = '/user/authed';
-                      // if (this.platform.is('ios') == true){
-                      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
-                      //   // // console.log('yes');
-                      // }
+                      if (this.platform.is('ios') == true){
+                        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
+                        // // console.log('yes');
+                      }
                       let headers = new Headers();
                       headers.append('Content-Type', 'application/json');
                       headers.append('x-access-token', val);
@@ -502,10 +504,10 @@ export class HomePage implements OnInit {
     initializeItems() {
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
-            //   // // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
+              // // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
@@ -527,26 +529,21 @@ export class HomePage implements OnInit {
         // Reset items back to all of the items
         this.storage.get('token').then((val) => {
             var APIUrl = '/user/all';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
-            //   // // console.log('yes');
-            // }
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/all';
+              // // console.log('yes');
+            }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('x-access-token', val);
 
-            var APIUrl2 = '/search/searchTag';
-            // if (this.platform.is('ios') == true){
-            //   APIUrl2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/search/searchTag';
-            //   // // console.log('yes');
-            // }
+            var APIUrl2 = '/search/searchTag/'+ev.target.value;
+            if (this.platform.is('ios') == true){
+              APIUrl2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/search/searchTag/'+ev.target.value;
+              // // console.log('yes');
+            }
 
-            let body = {
-                searchParam: ev.target.value
-            };
-
-
-            this.http.post(APIUrl2, JSON.stringify(body), {headers: headers})
+            this.http.get(APIUrl2, {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
                     this.allTags = data.message;
@@ -568,5 +565,11 @@ export class HomePage implements OnInit {
         // set val to the value of the ev target
 
     }
+  goToTag(tagName){
+    console.log(tagName);
+    let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
+    tagModal.present();
+
+  }
 
 }

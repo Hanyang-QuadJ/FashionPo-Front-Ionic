@@ -60,7 +60,7 @@ export class PostTabPage implements OnInit{
   }
   presentProfileModal(i) {
 
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,date:this.date},{leaveAnimation:'back'});
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,date:this.date.slice().reverse()},{leaveAnimation:'back'});
       profileModal.onDidDismiss((check)=>{
         if(check === "check"){
           this.myPost = [];

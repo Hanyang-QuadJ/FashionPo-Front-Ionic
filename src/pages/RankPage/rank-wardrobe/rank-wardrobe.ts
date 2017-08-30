@@ -389,13 +389,13 @@ export class RankWardrobePage {
   }
 
   presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(RankPhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i, date:this.dateFinal},{leaveAnimation:'back'});
+    let profileModal = this.modalCtrl.create(RankPhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i, date:this.dateFinal.slice().reverse()},{leaveAnimation:'back'});
     profileModal.present();
 
   }
 
   presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(RankThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i,date:this.dateFinal2},{leaveAnimation:'back'});
+    let thisWeekModal = this.modalCtrl.create(RankThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i,date:this.dateFinal2.slice().reverse()},{leaveAnimation:'back'});
     thisWeekModal.present();
   }
 

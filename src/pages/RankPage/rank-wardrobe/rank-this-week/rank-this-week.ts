@@ -33,7 +33,7 @@ export class RankThisWeekPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FavoriteUserThisWeekPage');
+    // console.log('ionViewDidLoad FavoriteUserThisWeekPage');
   }
 
   ionViewWillEnter(){
@@ -50,12 +50,12 @@ export class RankThisWeekPage {
     this.viewCtrl.dismiss()
   }
   presentWardrobe(i){
-    console.log(this.users[i]._id);
+    // console.log(this.users[i]._id);
     let wardrobeModal = this.modalCtrl.create(FavoriteUserPage,{favList:this.users[i]});
     wardrobeModal.present();
   }
   goToTag(tagName,i){
-    console.log(tagName);
+    // console.log(tagName);
     let tagModal = this.modalCtrl.create(TagPage, {tagName:tagName});
     tagModal.onDidDismiss((check)=> {
       let yOffset = document.getElementById('fit'+i).offsetTop;

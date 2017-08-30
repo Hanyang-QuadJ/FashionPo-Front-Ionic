@@ -82,10 +82,10 @@ export class WardrobeThisWeekPage implements OnInit{
             this.storage.get('token').then((val) => {
               var APIUrl = '/post/delete';
 
-              // if (this.platform.is('ios') == true){
-              //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/delete';
-              //
-              // }
+              if (this.platform.is('ios') == true){
+                APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post/delete';
+
+              }
               let headers = new Headers();
               headers.append('Content-Type', 'application/json');
               headers.append('x-access-token', val);

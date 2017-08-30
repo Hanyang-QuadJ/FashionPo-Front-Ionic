@@ -16,7 +16,9 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title tappable *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">Flex<br><span class="history" (click)="presentHistoryModal()">Aug 1 ~ 7 <ion-icon style="padding-top: 5%" name="arrow-down"></ion-icon></span></ion-title>
+    <ion-title tappable *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()"><div class="title">Flex<p class="history" (click)="presentHistoryModal()">Aug 1 ~ 7 <ion-icon style="position: inherit;
+    margin-top: 1px;
+    margin-left: 1px;" name="arrow-down"></ion-icon></p></div></ion-title>
     <ion-title  *ngIf="modalCheck" (click)="scrollToTop()">{{rankDate.mon}} {{rankDate.sDay}} ~ {{rankDate.eDay}}  , {{rankDate.yr}}</ion-title>
 
 
@@ -130,14 +132,15 @@
       </button>
     </ion-list>
 
+
+
+
+
     <ion-list *ngSwitchCase="'tag'">
-      <ion-grid no-padding>
-        <ion-row wrap no-padding>
-          <ion-col col-4 *ngFor="let item of allTags; let i = index">
-            <button class="btn"><img  class="myFitImage" src={{allTags[i].picURL}}></button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <button (click)="goToTag(item.tagName)"  *ngFor="let item of allTags | orderBy:order; let i = index" ion-item>
+        <h4>{{item.tagName}}</h4>
+        <p>{{item.tagCnt}} Outfits</p>
+      </button>
     </ion-list>
 
   </div>

@@ -47,7 +47,7 @@ export class CameraPage implements OnInit{
               public viewCtrl: ViewController,
               public loadingCtrl: LoadingController)
   {
-    this.tags=[];
+
     this.tagsInput="";
     this.base64Image="";
     if(this.navParams.get('fromWardrobe')==="check"){
@@ -74,28 +74,7 @@ export class CameraPage implements OnInit{
     cameraImageSelector.setAttribute('src', '');
   }
   public presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
-      buttons: [
-        {
-          text: 'Load from Library',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'Use Camera',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-    actionSheet.present();
+    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   }
 
   pictureTaken :boolean = false;
@@ -103,7 +82,7 @@ export class CameraPage implements OnInit{
   public takePicture(sourceType){
       let options = {
 
-        quality: 20,
+        quality: 70,
         allowEdit:true,
 
 
@@ -120,58 +99,11 @@ export class CameraPage implements OnInit{
         this.base64Image = "data:image/jpeg;base64," + imageData;
         let cameraImageSelector = document.getElementById('camera-image');
         cameraImageSelector.setAttribute('src', this.base64Image);
-
-
-        // var APIUrl = '/post';
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
-        //   // console.log('yes');
-        // }
-        // this.storage.get('token').then((val) => {
-        //   let headers = new Headers();
-        //   headers.append('Content-Type', 'application/json');
-        //   headers.append('x-access-token', val);
-        //   // console.log(val);
-        //   let body = {
-        //     base_64: this.base64Image,
-        //     tags:[{'tag':'Selstagram'},{'tag':'Mukstagram'}]
-        //
-        //   };
-        //   this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
-        //     .map(res => res.json())
-        //     .subscribe(
-        //       data => {
-        //         let toast = this.toastCtrl.create({
-        //           message: 'upload success',
-        //           duration: 2000
-        //         });
-        //
-        //         toast.present(toast);
-        //       },
-        //       err => {
-        //
-        //       });
-        // }, (err) => {
-        //   console.log(err);
-        // });
-
       })
 
   }
 
   ngOnInit(): void {
-
-
-    // for(var i  = 0  ;i<this.tagsInput.length; i++){
-    //     while(this.tagsInput[i]!==''){
-    //       console.log(this.tagsInput[i])
-    //
-    //
-    //     }
-    //
-    //
-    // }
-
 
 
   }
@@ -188,9 +120,7 @@ export class CameraPage implements OnInit{
 
     }
     else if(this.base64Image!==""){
-      this.tags=[];
-      this.tagsInput="";
-      this.base64Image="";
+
       let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
       loading.present();
 
@@ -208,9 +138,6 @@ export class CameraPage implements OnInit{
       for(var j = 0; j<myArray2.length; j++){
         this.tags.push({'tag':myArray2[j]})
       }
-
-
-
 
       var APIUrl = '/post';
       if (this.platform.is('ios') == true){
@@ -238,8 +165,6 @@ export class CameraPage implements OnInit{
                 duration: 2000
               });
               loading.dismiss();
-              this.tags=[];
-              this.base64Image="";
               toast.present(toast);
             },
             err => {
