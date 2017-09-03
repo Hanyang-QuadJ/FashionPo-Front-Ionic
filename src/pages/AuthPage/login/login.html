@@ -1,27 +1,49 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Login to Flex</ion-title>
-  </ion-navbar>
-</ion-header>
 
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="goBackToWelcome()" ion-button icon-only color="light">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <div class="space"></div>
+        <img class="logo" src="images/logo_white.png">
+        <div class="space2"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
       <ion-list>
         <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
           <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="email" formControlName="email" placeholder="                    example@fitnyc.edu"></ion-input>
+            <ion-label class="label" stacked>Email</ion-label>
+            <ion-input type="email" class="text" formControlName="email" placeholder="example@fitnyc.edu"></ion-input>
           </ion-item>
+          <br>
           <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" formControlName="password" placeholder="                    At least 12 numbers"></ion-input>
+            <ion-label stacked>Password</ion-label>
+            <ion-input class="text" type="password" formControlName="password" placeholder="At least 12 numbers"></ion-input>
+
           </ion-item>
-          <div padding>
-            <button class="custom-button" ion-button type="submit" [disabled]="!loginForm.valid" color="danger" block>Sign In</button>
+          <p class="forgot"><ion-icon item-end name="ios-help-circle-outline"></ion-icon></p>
+
+          <div class="padding">
+            <button ion-button round type="submit" [disabled]="!loginForm.valid" color="light" block><span class="buttonText">Sign In</span></button>
           </div>
+
         </form>
-        <button  ion-button (click)="goToSignup()"  color="danger" clear>Sign Up</button>
-        <button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>
+        <div class="padding2">
+          <button (click)="goToSignup()"ion-button round outline color="light" block><span>Sign Up</span></button>
+        </div>
+
+        <!--<button  ion-button (click)="goToSignup()"  color="light" clear>Sign Up</button>-->
+        <!--<button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>-->
 
       </ion-list>
 

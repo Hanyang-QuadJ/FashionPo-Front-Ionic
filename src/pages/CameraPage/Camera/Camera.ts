@@ -84,8 +84,6 @@ export class CameraPage implements OnInit{
 
         quality: 70,
         allowEdit:true,
-
-
         correctOrientation: false,
         saveToPhotoAlbum: false,
         destinationType: this.camera.DestinationType.DATA_URL,
@@ -155,10 +153,13 @@ export class CameraPage implements OnInit{
           tags:this.tags
 
         };
+        console.log(this.base64Image);
         this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
           .map(res => res.json())
           .subscribe(
             data => {
+              console.log("BASE TEST!");
+              console.log(data);
               this.uploadCheck = true;
               let toast = this.toastCtrl.create({
                 message: 'upload success',
@@ -168,10 +169,12 @@ export class CameraPage implements OnInit{
               toast.present(toast);
             },
             err => {
-
+              console.log(err);
+              loading.dismiss();
             });
       }, (err) => {
         console.log(err);
+        loading.dismiss();
       });
 
     }

@@ -38,11 +38,10 @@ export class PostTabPage implements OnInit{
     this.check=false;
     this.myPost = this.navParams.data.mypost;
     this.postAlert = this.navParams.data.postAlert;
-    this.date = this.navParams.data.date;
     this.weeks = this.navParams.data.week;
 
 
-    if(this.myPost.length == 0 && this.weeks.length == 0){
+    if(this.myPost.length === 0){
       this.check=true;
     }
   }
@@ -56,11 +55,10 @@ export class PostTabPage implements OnInit{
     let cameraModal = this.modalCtrl.create(CameraPage, {fromWardrobe:'check'});
     cameraModal.present();
 
-
   }
   presentProfileModal(i) {
 
-      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,date:this.date.slice().reverse()},{leaveAnimation:'back'});
+      let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,},{leaveAnimation:'back'});
       profileModal.onDidDismiss((check)=>{
         if(check === "check"){
           this.myPost = [];
@@ -72,7 +70,7 @@ export class PostTabPage implements OnInit{
 
             var APIUrl_2 = '/post';
             if (this.platform.is('ios') == true){
-              APIUrl_2 = 'http://54.162.160.91/api/post';
+              APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
             }
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');

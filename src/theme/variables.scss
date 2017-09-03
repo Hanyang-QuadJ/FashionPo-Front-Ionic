@@ -39,7 +39,7 @@ $colors: (
   danger:     #f53d3d,
   light:      #ffffff,
   dark:       #323339,
-  sub:     #709fb0,
+  sub:     #70A3D6,
 );
 
 
@@ -91,6 +91,8 @@ $loading-ios-background:#ffffff;
 $loading-ios-spinner-ios-color:#ffffff;
 $loading-ios-spinner-crescent-color:#ff5733;
 
+//$text-input-placeholder-color:rgba(255,255,255,0.5);
+
 //$list-ios-header-border-bottom: 0.55px solid rgba(0,0,0,0.3);
 
 
@@ -102,3 +104,4 @@ $loading-ios-spinner-crescent-color:#ff5733;
 @import "noto-sans";
 @import "../pages/RankPage/home/home";
 @import "../pages/AuthPage/login/login";
+@import "../pages/welcome/welcome";

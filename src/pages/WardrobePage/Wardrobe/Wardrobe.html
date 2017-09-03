@@ -25,13 +25,7 @@
 <ion-content>
   <ion-grid>
     <ion-row justify-content-center align-items-center>
-      <!--<ion-col col-2 text-center>-->
-        <!--<p class="infoText">Today</p>-->
-        <!--<h5 class="todayCount">98</h5>-->
-        <!--<br>-->
-        <!--<p *ngIf="toggled" class="infoText">Rank</p>-->
-        <!--<h5 *ngIf="toggled"  class="rankCount">4</h5>-->
-      <!--</ion-col>-->
+
       <ion-col col-5 text-center>
 
           <img tappable class="image" src="{{user.profile_img}}" imageViewer>
@@ -66,19 +60,40 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <hr *ngIf="!thisWeekPostLength">
-        <p *ngIf="!thisWeekPostLength" class="infoText">This Week's Fits</p>
 
+  <hr>
+  <p *ngIf="!thisWeekPostLength" class="infoText">Outfits of the week</p>
+  <ion-grid *ngIf="noneCheck">
+    <br>
+    <ion-row>
+      <ion-col text-center>
+        <h4>Share your outfit of the day</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <p>Post your photos to be 1st!</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <br>
+        <button  (click)="test()" ion-button round outline large><ion-icon name="add"></ion-icon></button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <ion-slides *ngIf="!thisWeekPostLength" class="image-slider" slidesPerView="3">
+<div *ngIf="thisWeekPost">
+  <ion-slides class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
     </ion-slide>
   </ion-slides>
+</div>
 
 
     <super-tabs *ngIf="loaded && loadedd" toolbarColor="primary" shortSwipeDuration="0">
-      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, date:dateFinal, week:thisWeekPost}" icon="md-apps"></super-tab>
+      <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, week:thisWeekPost}" icon="md-apps"></super-tab>
       <super-tab [root]="tab2" [rootParams]="{favorite:favorites}" icon="md-star"></super-tab>
     </super-tabs>
 

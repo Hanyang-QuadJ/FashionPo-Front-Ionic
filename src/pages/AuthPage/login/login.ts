@@ -9,6 +9,8 @@ import { ToastController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {SignupPage} from "../signup/signup";
 import {FindPasswordPage} from "../FindPasswordPage/find";
+import {IntroPage} from "../../intro/intro";
+import {StatusBar} from "@ionic-native/status-bar";
 
 
 /**
@@ -30,15 +32,19 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private http: Http,
+              private statusBar: StatusBar,
               private storage: Storage,
               public platform: Platform,
               public toastCtrl: ToastController,
               public fb: FormBuilder) {
+    this.statusBar.styleLightContent();
+
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
       password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
     });
   }
+
 
   ngOnInit(): void {
     this.storage.get('token').then((val) => {
@@ -50,7 +56,10 @@ export class LoginPage {
     });
   }
   goToSignup() {
-    this.navCtrl.setRoot(SignupPage);
+    this.navCtrl.push(SignupPage);
+  }
+  goBackToWelcome(){
+    this.navCtrl.pop();
   }
   goToFind() {
     this.navCtrl.setRoot(FindPasswordPage);
@@ -70,10 +79,10 @@ export class LoginPage {
     var APIUrl = '/auth';
 
 
-    if (this.platform.is('ios') == true){
-      APIUrl = 'http://107.23.122.155:3000/api/auth';
-      // console.log('yes');
-    }
+    // if (this.platform.is('ios') == true){
+    //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth';
+    //   // console.log('yes');
+    // }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let body = {
@@ -84,8 +93,9 @@ export class LoginPage {
       .map(res => res.json())
       .subscribe(
         data => {
+
           this.storage.set('token', data.token);
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot(IntroPage);
         },
         err => {
           this.showToast("bottom");

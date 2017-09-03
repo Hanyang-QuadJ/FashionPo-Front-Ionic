@@ -34,7 +34,7 @@
     </ion-card-content>
 
     <ion-item>
-      <ion-note><p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p></ion-note>
+      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
 
       <button (click)="presentConfirm(i)" large ion-button clear item-end color="secondary"><ion-icon large name="ios-trash"></ion-icon></button>
     </ion-item>

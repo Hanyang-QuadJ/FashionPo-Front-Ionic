@@ -27,6 +27,46 @@ page-tag {
   .tag{
     color:#7094b0;
   }
+  .first{
+    width: 50%;
+    height: auto;
+  }
+  .image-slider{
+    height:23%
+  }
+  .infoText{
+    color: #4d4d4d;
+    font-size: 14px;
+    white-space: pre-line;
+    padding-left: 3%;
+    font-weight: 500;
+    padding-bottom: 2%;
+
+  }
+  .infoText2{
+    color: #4d4d4d;
+    font-size: 14px;
+    white-space: pre-line;
+    padding-left: 3%;
+    font-weight: 500;
+    padding-bottom: 3%;
+
+  }
+  .card-ios {
+    margin: 3px;
+    border-radius: 2px;
+    width: calc(100% - 6px);
+    font-size: 1.4rem;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .horiPic{
+
+    padding-right: 3px;
+
+
+  }
 
 
 }

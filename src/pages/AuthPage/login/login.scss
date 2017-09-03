@@ -1,6 +1,75 @@
 page-login {
+  .scroll-content {
+    overflow: hidden;
+  }
+  .content-ios {
+    color: #000;
+    background-color: #ff5733;
+  }
+  .toolbar-background {
+    background-color: #ff5733;
+  }
+  .logo{
+    width:35%;
+    height: auto;
+  }
+  .space{
+    padding:10%;
+  }
+  .space2{
+    padding:7%;
+  }
   .custom-button {
     background-color: #FF5733;
   }
-  
+  .label{
+
+  }
+  .forgot{
+    text-align: end;
+    padding-right: 4rem;
+    padding-top: 2%;
+    color: rgba(255,255,255,1);
+    font-size: 20px;
+  }
+  .text{
+    font-weight:600;
+  }
+
+  .item-ios {
+    color: #fff;
+    background-color: #ff5733;
+    padding-left: 4rem;
+    padding-right: 4rem;
+
+  }
+  .buttonText{
+    color: #ff5733;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+  .padding{
+    padding-top: 3.5rem;
+    padding-right: 4rem;
+    padding-left:4rem;
+  }
+  .padding2{
+    padding-top: 1rem;
+    padding-right: 4rem;
+    padding-left:4rem;
+  }
+  .text-input::-moz-placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .text-input:-ms-input-placeholder {
+    color: rgba(255,255,255,0.5);
+
+  }
+
+  .text-input::-webkit-input-placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+
+
 }

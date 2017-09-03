@@ -16,6 +16,7 @@ import {FavoriteUserPage} from '../favorite-user/favorite-user'
 })
 export class FavoriteTabPage implements OnInit{
   favorites: Array<object> = [];
+  check:boolean;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
@@ -24,6 +25,12 @@ export class FavoriteTabPage implements OnInit{
   }
   ngOnInit(): void {
     this.favorites = this.navParams.data.favorite;
+    if(this.favorites === [] || this.favorites.length === 0){
+      this.check = true;
+    }
+    else{
+      this.check = false;
+    }
 
   }
 

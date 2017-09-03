@@ -53,12 +53,15 @@ import {VoteThisWeekPage} from '../pages/VotePage/vote/vote-wardrobe/vote-this-w
 import {VotePhotoPage} from '../pages/VotePage/vote/vote-wardrobe/vote-photo/vote-photo';
 import {PasswordChangePage} from "../pages/WardrobePage/settings/PasswordChangePage/password";
 import {IntroduceChangePage} from "../pages/WardrobePage/settings/IntroduceChangePage/introduce";
-
+import {TagListPage} from "../pages/tag/tag-list/tag-list";
+import {IntroPage} from "../pages/intro/intro";
 import {IonicImageViewerModule} from 'ionic-img-viewer';
+import {WelcomePage} from '../pages/welcome/welcome';
 
 import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNameChangePage/wardrobename";
 import {TagPage} from '../pages/tag/tag'
 import {OrderModule} from "ngx-order-pipe";
+import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -78,6 +81,9 @@ import {OrderModule} from "ngx-order-pipe";
         WardrobeCameraPage,
         HistoryRankPage,
         TagPage,
+        TagListPage,
+        IntroPage,
+        WelcomePage,
 
         SignupPage,
         PostTabPage,
@@ -123,9 +129,10 @@ import {OrderModule} from "ngx-order-pipe";
         WardrobePage,
         HomePage,
         TabsPage,
-
+      TagListPage,
         SignupPage,
         PostTabPage,
+        IntroPage,
         FavoriteTabPage,
         SettingsPage,
         WardrobePhotoPage,
@@ -134,7 +141,8 @@ import {OrderModule} from "ngx-order-pipe";
         WardrobeCameraPage,
         VoteWardrobePage,
         HistoryListPage,
-        HistoryRankPage,
+      WelcomePage,
+      HistoryRankPage,
         UserProfileChange,
         FavoriteUserPostPage,
         WardrobeThisWeekPage,
@@ -159,6 +167,7 @@ import {OrderModule} from "ngx-order-pipe";
         Transfer,
         FilePath,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FetchDataProvider,
 
     ]
 

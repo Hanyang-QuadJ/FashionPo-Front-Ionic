@@ -5,7 +5,16 @@
   Ionic pages and navigation.
 -->
 <ion-content>
-  <ion-list inset>
+  <ion-grid *ngIf="check">
+    <br><br>
+    <ion-row>
+      <ion-col text-center>
+        <p>There are no favorite users.</p>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-list inset *ngIf="!check">
     <button (click)="presentFavModal(i)" *ngFor="let favorite of favorites; let i = index;" ion-item>
       <ion-avatar item-start>
         <img src="{{favorite.profile_img}}">

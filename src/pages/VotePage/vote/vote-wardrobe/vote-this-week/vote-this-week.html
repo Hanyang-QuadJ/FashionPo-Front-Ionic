@@ -12,7 +12,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>This Week's Fits</ion-title>
+    <ion-title>Outfits of the week</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -33,7 +33,7 @@
     </ion-card-content>
 
     <ion-item>
-      <ion-note><p>{{date[i].mon}} {{date[i].eDay}}, {{date[i].yr}}</p></ion-note>
+      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
 
 
     </ion-item>

@@ -34,6 +34,7 @@ export class WardrobePage implements OnInit{
     user: any = "";
     top:Array<any>=[];
     userIntro:any="";
+    noneCheck:boolean;
     loaded: boolean;
     loadedd: boolean;
     mypostlist: Array<object> = [];
@@ -48,20 +49,13 @@ export class WardrobePage implements OnInit{
     tab2: any = FavoriteTabPage;
     date: Array<string> = [];
     date2: Array<string> = [];
-    dateFinal: Array<object> = [];
-    dateFinal2: Array<object> = [];
+
     checkThis = 0;
     alertThis: boolean;
     view_cnt: any;
     button_loaded: boolean = false;
     today_disable: boolean = false;
-    year: Array<any> = [];
-    year2: Array<any> = [];
-    startDay: Array<any> = [];
-    endDay: Array<any> = [];
-    endDay2: Array<any> = [];
-    month: Array<any> = [];
-    month2: Array<any> = [];
+
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -79,32 +73,20 @@ export class WardrobePage implements OnInit{
     Settings() {
         this.navCtrl.push(SettingsPage, {users: this.user}, {});
     }
+    test(){
+      this.navCtrl.parent.select(1);
+    }
 
     ionViewWillEnter() {
       this.fetchData();
 
     }
 
-    presentThisWeekModal(i) {
-        let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
-            thisWeekPost: this.thisWeekPost.slice().reverse(),
-            thisWeekPostIndex: i,
-            date:this.dateFinal2.slice().reverse(),
-        }, {leaveAnimation: 'back'});
-        thisWeekModal.onDidDismiss((renewedData)=> {
-          if(renewedData==="renewed"){
-            this.fetchData();
-          }
-          });
-        thisWeekModal.present();
-    };
-
   public fetchData(){
     this.mypostlist = [];
     this.checkRank = false;
+    this.noneCheck = false;
     this.thisWeekPost = [];
-    this.date = [];
-    this.date2 = [];
     this.top = [];
     this.loaded = false;
     this.loadedd = false;
@@ -117,11 +99,11 @@ export class WardrobePage implements OnInit{
       var APIUrl = '/user';
       var APIUrl_2 = '/post';
       var APIUrl_3 ='/rank';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-        APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
-         APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
-      }
+      // if (this.platform.is('ios') == true){
+      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+      //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
+      //    APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+      // }
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('x-access-token', val);
@@ -159,115 +141,34 @@ export class WardrobePage implements OnInit{
               this.http.get(APIUrl_2 + '/myposts', {headers: headers})
                 .map(res => res.json())
                 .subscribe(data => {
+                  if(data.posts.length === 0){
+                    this.noneCheck = true;
+                  }
+
+
 
                   for (var i = 0; i < data.posts.length; i++) {
                     //이번주 사진
                     if (data.posts[i].isThisWeek === true) {
                       this.thisWeekPost.push(data.posts[i]);
-                      this.date2.push(data.posts[i].writtenAt);
-
                     }
                     //모든 사진
                     else {
                       this.mypostlist.push(data.posts[i]);
-                      this.date.push(data.posts[i].writtenAt)
-
                     }
 
                   }
-                  console.log(this.date2);
                   if(this.thisWeekPost.length === 0){
                     this.thisWeekPostLength = true;
                   }
+                  else{
+                    this.thisWeekPostLength = false;
+                  }
+
 
                   this.loaded = true;
 
-                  for(var h = 0; h<this.date.length; h++){
-                    this.year.push(this.date[h].substring(0,4));
-                    this.endDay.push(Number(this.date[h].substring(8,10)));
-                    if(this.date[h].substring(5,7)==='01'){
-                      this.month.push('Jan')
-                    }
-                    else if(this.date[h].substring(5,7)==='02'){
-                      this.month.push('Feb')
-                    }
-                    else if(this.date[h].substring(5,7)==='03'){
-                      this.month.push('Mar')
-                    }
-                    else if(this.date[h].substring(5,7)==='04'){
-                      this.month.push('Apr')
-                    }
-                    else if(this.date[h].substring(5,7)==='05'){
-                      this.month.push('May')
-                    }
-                    else if(this.date[h].substring(5,7)==='06'){
-                      this.month.push('Jun')
-                    }
-                    else if(this.date[h].substring(5,7)==='07'){
-                      this.month.push('Jul')
-                    }
-                    else if(this.date[h].substring(5,7)==='08'){
-                      this.month.push('Aug')
-                    }
-                    else if(this.date[h].substring(5,7)==='09'){
-                      this.month.push('Sep')
-                    }
-                    else if(this.date[h].substring(5,7)==='10'){
-                      this.month.push('Oct')
-                    }
-                    else if(this.date[h].substring(5,7)==='11'){
-                      this.month.push('Nov')
-                    }
-                    else if(this.date[h].substring(5,7)==='12'){
-                      this.month.push('Dec')
-                    }
-                    this.dateFinal.push({'sDay':this.startDay[h],'eDay':this.endDay[h],'mon':this.month[h],'yr':this.year[h]})
-                  }
 
-                  for(var a = 0; a<this.date2.length; a++){
-                    this.year2.push(this.date2[a].substring(0,4));
-                    this.endDay2.push(Number(this.date2[a].substring(8,10)));
-                    if(this.date2[a].substring(5,7)==='01'){
-                      this.month2.push('Jan')
-                    }
-                    else if(this.date2[a].substring(5,7)==='02'){
-                      this.month2.push('Feb')
-                    }
-                    else if(this.date2[a].substring(5,7)==='03'){
-                      this.month2.push('Mar')
-                    }
-                    else if(this.date2[a].substring(5,7)==='04'){
-                      this.month2.push('Apr')
-                    }
-                    else if(this.date2[a].substring(5,7)==='05'){
-                      this.month2.push('May')
-                    }
-                    else if(this.date2[a].substring(5,7)==='06'){
-                      this.month2.push('Jun')
-                    }
-                    else if(this.date2[a].substring(5,7)==='07'){
-                      this.month2.push('Jul')
-                    }
-                    else if(this.date2[a].substring(5,7)==='08'){
-                      this.month2.push('Aug')
-                    }
-                    else if(this.date2[a].substring(5,7)==='09'){
-                      this.month2.push('Sep')
-                    }
-                    else if(this.date2[a].substring(5,7)==='10'){
-                      this.month2.push('Oct')
-                    }
-                    else if(this.date2[a].substring(5,7)==='11'){
-                      this.month2.push('Nov')
-                    }
-                    else if(this.date2[a].substring(5,7)==='12'){
-                      this.month2.push('Dec')
-                    }
-                    this.dateFinal2.push({'eDay':this.endDay2[a],'mon':this.month2[a],'yr':this.year2[a]})
-
-                  }
-
-                  console.log(this.dateFinal2);
                   this.http.get(APIUrl + '/favorite', {headers: headers})
                     .map(res => res.json())
                     .subscribe(data => {
@@ -284,6 +185,7 @@ export class WardrobePage implements OnInit{
                           .subscribe(
                             data => {
                               this.favorites = data;
+
                               this.loadedd = true;
                               loading.dismiss();
                             });
@@ -297,6 +199,18 @@ export class WardrobePage implements OnInit{
 
 
   }
+  presentThisWeekModal(i) {
+    let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
+      thisWeekPost: this.thisWeekPost.slice().reverse(),
+      thisWeekPostIndex: i,
+    }, {leaveAnimation: 'back'});
+    thisWeekModal.onDidDismiss((renewedData)=> {
+      if(renewedData==="renewed"){
+        this.fetchData();
+      }
+    });
+    thisWeekModal.present();
+  };
 
     refreshViewCnt() {
         this.today_disable = true;

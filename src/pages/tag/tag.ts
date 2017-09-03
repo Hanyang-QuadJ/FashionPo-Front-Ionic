@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController,LoadingController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController,LoadingController, ModalController,Platform } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {RankThisWeekPage} from "../RankPage/rank-wardrobe/rank-this-week/rank-this-week";
+import {TagListPage} from "./tag-list/tag-list";
+import {FavoriteUserPage} from "../WardrobePage/favorite-user/favorite-user";
 
 /**
  * Generated class for the TagPage page.
@@ -29,12 +31,14 @@ export class TagPage {
   date = [];
   dateFinal: Array<object> = [];
   order: string = 'likeCnt';
+  orderDate:string = 'writtenAt';
   year: Array<any> = [];
   endDay: Array<any> = [];
   month: Array<any> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,
-              private storage:Storage, public http: Http,public loadingCtrl:LoadingController, public modalCtrl:ModalController,) {
+              private storage:Storage, public http: Http,public loadingCtrl:LoadingController, public modalCtrl:ModalController,
+              public platform:Platform) {
     this.tagName = this.navParams.get('tagName');
     let loading = this.loadingCtrl.create({
       showBackdrop: true, spinner: 'crescent',
@@ -151,9 +155,19 @@ export class TagPage {
     this.viewCtrl.dismiss(check);
   }
   presentList(i){
-    let listModal = this.modalCtrl.create(RankThisWeekPage,
-      {thisWeekPost:this.tagPics,thisWeekPostIndex:'fit'+i,date:this.dateFinal,pageCheck:this.tagName,user:this.tagUsers});
+    let listModal = this.modalCtrl.create(TagListPage,
+      {thisWeekPost:this.tagPics.slice().reverse() ,thisWeekPostIndex:'fit'+i, pageCheck:this.tagName,like:'like',user:this.tagUsers.slice().reverse()});
     listModal.present();
+  }
+
+  presentNormal(i){
+    let listModal = this.modalCtrl.create(TagListPage,
+      {thisWeekPost:this.tagPics.slice().reverse() ,thisWeekPostIndex:'fit'+i, pageCheck:this.tagName,user:this.tagUsers.slice().reverse()});
+    listModal.present();
+  }
+  presentFirstWardrobe(){
+    let firstModal = this.modalCtrl.create(FavoriteUserPage,{favList:this.firstUser});
+    firstModal.present()
   }
 
 }

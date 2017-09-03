@@ -9,6 +9,7 @@ import {ToastController, ModalController, ViewController, Toast, Modal} from 'io
 import {HistoryListPage} from '../history-list/history-list'
 import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
 import {TagPage} from "../../tag/tag";
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 
 /**
  * Generated class for the HomePage page.
@@ -64,6 +65,7 @@ export class HomePage implements OnInit {
                 public navParams: NavParams,
                 private storage: Storage,
                 private http: Http,
+                public fetchDatas: FetchDataProvider,
                 public platform: Platform,
                 private toastCtrl: ToastController,
                 public modalCtrl: ModalController,
@@ -74,13 +76,20 @@ export class HomePage implements OnInit {
         this.historyRank = this.navParams.get('rankSheet');
 
 
+
         this.initializeItems();
     }
 
   ngOnInit(): void {
+      console.log("Global Check!!");
+    this.fetchDatas.getData('/rank').then();
+
 
     this.fetchData();
+
+
   }
+
   doRefresh(refresher) {
     this.storage.get('token').then((val) => {
       var APIUrl = '/rank';
@@ -190,10 +199,10 @@ export class HomePage implements OnInit {
         loading.present();
         this.storage.get('token').then((val) => {
           var APIUrl = '/rank';
-          if (this.platform.is('ios') == true){
-            APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
-            // // console.log('yes');
-          }
+          // if (this.platform.is('ios') == true){
+          //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
+          //   // // console.log('yes');
+          // }
           let headers = new Headers();
           headers.append('Content-Type', 'application/json');
           headers.append('x-access-token', val);
@@ -212,10 +221,10 @@ export class HomePage implements OnInit {
               this.firstPost = data.posts[0];
               this.storage.get('token').then((val) => {
                 let APIUrl = '/user';
-                if (this.platform.is('ios') == true){
-                  APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-                  // // console.log('yes');
-                }
+                // if (this.platform.is('ios') == true){
+                //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
+                //   // // console.log('yes');
+                // }
                 for (let i = 0; i < data.posts.length; i++) {
                   this.writtenBys.push(data.posts[i].writtenBy);
                 }
@@ -236,10 +245,10 @@ export class HomePage implements OnInit {
                     }
                     this.storage.get('token').then((val) => {
                       let APIUrl = '/user/authed';
-                      if (this.platform.is('ios') == true){
-                        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
-                        // // console.log('yes');
-                      }
+                      // if (this.platform.is('ios') == true){
+                      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/authed';
+                      //   // // console.log('yes');
+                      // }
                       let headers = new Headers();
                       headers.append('Content-Type', 'application/json');
                       headers.append('x-access-token', val);
