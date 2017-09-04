@@ -23,7 +23,10 @@ export class FavoriteUserPage implements OnInit {
   posts: Array<any> = [];
   thisWeekPost: Array<any> = [];
   favUsers: any = "";
-
+  User_id: any;
+  User: any;
+  button:boolean = false;
+  try:boolean = false;
   weekCheck: boolean;
 
   checkPost: boolean;
@@ -46,6 +49,20 @@ export class FavoriteUserPage implements OnInit {
     this.checkPost = false;
     this.alertThis = false;
     this.favUser = this.navParams.get('favList');
+    this.User_id = this.navParams.get('user_id');
+
+    this.fetchDatas.postData('/user', {users: [this.favUser._id]}).then(data => {
+      this.User = data[0];
+      this.fetchDatas.getData('/user/authed').then(data => {
+        if (data.user[0].favorites.indexOf(this.User._id) !== -1) {
+          this.button = true;
+        }
+        else
+          this.button = false;
+
+
+      })
+    })
     this.fetchDatas.postData('/post/userid', {_id: this.favUser._id}).then(data => {
       for (var i = 0; i < data.length; i++) {
 
@@ -88,6 +105,27 @@ export class FavoriteUserPage implements OnInit {
       thisWeekPostIndex: 'fit' + i
     }, {leaveAnimation: 'back'});
     thisWeekModal.present();
+  }
+
+  addFavorite() {
+    this.button = true;
+    this.try = true;
+    this.fetchDatas.postData('/user/favorite',{_id: this.User._id}).then(data=>{
+      this.button = true;
+      this.try = false;
+    });
+
+  }
+
+  removeFavorite(post) {
+    this.button = false;
+    this.try = true;
+    this.fetchDatas.deleteData('/user/favorite',{_id: this.User._id}).then(data=>{
+          this.try = false;
+        },
+        err=>{
+        });
+
   }
 
 

@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams, ViewController, Content,} from 'ionic-angular';
 import {Platform, ModalController, LoadingController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
-import {Http, Headers,RequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions} from "@angular/http";
 import {ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {VoteThisWeekPage} from '../vote-wardrobe/vote-this-week/vote-this-week'
@@ -29,26 +29,27 @@ export class VoteWardrobePage {
     User_id: any;
     User: any;
     loaded: boolean = false;
-    button_loaded:boolean = true;
+    button_loaded: boolean = true;
     posts: any = "";
-  weekCheck:boolean;
-    thisWeekPost:any="";
-    button:boolean = false;
-    try:boolean = false;
+    weekCheck: boolean;
+    thisWeekPost: any = "";
+    button: boolean = false;
+    try: boolean = false;
     view_cnt: any;
-  date: Array<string> = [];
-  date2: Array<string> = [];
-  dateFinal: Array<object> = [];
-  dateFinal2: Array<object> = [];
-  year: Array<any> = [];
-  year2: Array<any> = [];
-  startDay: Array<any> = [];
-  endDay: Array<any> = [];
-  endDay2: Array<any> = [];
-  month: Array<any> = [];
-  month2: Array<any> = [];
+    date: Array<string> = [];
+    date2: Array<string> = [];
+    dateFinal: Array<object> = [];
+    dateFinal2: Array<object> = [];
+    year: Array<any> = [];
+    year2: Array<any> = [];
+    startDay: Array<any> = [];
+    endDay: Array<any> = [];
+    endDay2: Array<any> = [];
+    month: Array<any> = [];
+    month2: Array<any> = [];
 
     today_disable = false;
+
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
@@ -58,9 +59,8 @@ export class VoteWardrobePage {
                 public navParams: NavParams,
                 public loadingCtrl: LoadingController,
                 public modalCtrl: ModalController,
-                public fetchDatas: FetchDataProvider,
-    ) {
-        this.weekCheck=false;
+                public fetchDatas: FetchDataProvider,) {
+        this.weekCheck = false;
         this.usernameForm = this.fb.group({
             username: ['', Validators.compose([Validators.required])],
 
@@ -68,43 +68,43 @@ export class VoteWardrobePage {
     }
 
     ngOnInit(): void {
-        this.posts=[];
-        this.date=[];
-        this.date2=[];
+        this.posts = [];
+        this.date = [];
+        this.date2 = [];
 
-        this.thisWeekPost=[];
+        this.thisWeekPost = [];
         this.User_id = this.navParams.get('user_id');
-        let loading = this.loadingCtrl.create({showBackdrop:false,spinner:'crescent',
+        let loading = this.loadingCtrl.create({
+            showBackdrop: false, spinner: 'crescent',
         });
         loading.present();
-        this.fetchDatas.postData('/user',{users:[this.User_id]}).then(data=>{
-          this.User = data[0];
-          this.fetchDatas.postData('/post/userid',{_id:[this.User_id]}).then(data=>{
-            for(var i = 0; i<data.length;i++){
-              if(data[i].isThisWeek===true){
-                this.thisWeekPost.push(data[i]);
-              }
-              else{
-                this.posts.push(data[i]);
-              }
-            }
-            if(this.thisWeekPost.length===0){
-              this.weekCheck = true;
-            }
-            this.fetchDatas.postData('/post/view',{user_id:[this.User_id]}).then(data=>{
-              this.fetchDatas.getData('/user/authed').then(data=>{
-                if(data.user[0].favorites.indexOf(this.User._id)!==-1){
-                  this.button = true;
+        this.fetchDatas.postData('/user', {users: [this.User_id]}).then(data => {
+            this.User = data[0];
+            this.fetchDatas.postData('/post/userid', {_id: [this.User_id]}).then(data => {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].isThisWeek === true) {
+                        this.thisWeekPost.push(data[i]);
+                    }
+                    else {
+                        this.posts.push(data[i]);
+                    }
                 }
-                else
-                  this.button = false;
-                this.loaded = true;
-                loading.dismiss();
-              })
+                if (this.thisWeekPost.length === 0) {
+                    this.weekCheck = true;
+                }
+                this.fetchDatas.postData('/post/view', {user_id: [this.User_id]}).then(data => {
+                    this.fetchDatas.getData('/user/authed').then(data => {
+                        if (data.user[0].favorites.indexOf(this.User._id) !== -1) {
+                            this.button = true;
+                        }
+                        else
+                            this.button = false;
+                        this.loaded = true;
+                        loading.dismiss();
+                    })
+                })
             })
-          })
         });
-
 
 
     }
@@ -116,9 +116,9 @@ export class VoteWardrobePage {
     addFavorite() {
         this.button = true;
         this.try = true;
-        this.fetchDatas.postData('/user/favorite',{_id: this.User._id}).then(data=>{
-          this.button = true;
-          this.try = false;
+        this.fetchDatas.postData('/user/favorite', {_id: this.User._id}).then(data => {
+            this.button = true;
+            this.try = false;
         });
 
     }
@@ -126,37 +126,42 @@ export class VoteWardrobePage {
     removeFavorite(post) {
         this.button = false;
         this.try = true;
-        this.fetchDatas.deleteData('/user/favorite',{_id: this.User._id}).then(data=>{
-            this.try = false;
-        },
-          err=>{
-          });
+        this.fetchDatas.deleteData('/user/favorite', {_id: this.User._id}).then(data => {
+                this.try = false;
+            },
+            err => {
+            });
 
     }
 
-    refreshViewCnt(){
+    refreshViewCnt() {
         this.today_disable = true;
         this.button_loaded = false;
         this.User_id = this.navParams.get('user_id');
-        this.fetchDatas.postData('/user',{users: [this.User_id]}).then(data=>{
-          this.User = data[0];
-          this.view_cnt = data[0].viewCnt;
-          this.button_loaded = true;
-          this.today_disable = false;
+        this.fetchDatas.postData('/user', {users: [this.User_id]}).then(data => {
+            this.User = data[0];
+            this.view_cnt = data[0].viewCnt;
+            this.button_loaded = true;
+            this.today_disable = false;
         });
     }
 
-  presentFavModal(i) {
-    let profileModal = this.modalCtrl.create(VotePhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i},{leaveAnimation:'back'});
-    profileModal.present();
+    presentFavModal(i) {
+        let profileModal = this.modalCtrl.create(VotePhotoPage, {
+            postList: this.posts.slice().reverse(),
+            postListIndex: 'fit' + i
+        }, {leaveAnimation: 'back'});
+        profileModal.present();
 
-  }
+    }
 
-  presentThisWeekModal(i){
-    let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage,{thisWeekPost:this.thisWeekPost.slice().reverse(),thisWeekPostIndex:'fit'+i},{leaveAnimation:'back'});
-    thisWeekModal.present();
-  }
-
+    presentThisWeekModal(i) {
+        let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage, {
+            thisWeekPost: this.thisWeekPost.slice().reverse(),
+            thisWeekPostIndex: 'fit' + i
+        }, {leaveAnimation: 'back'});
+        thisWeekModal.present();
+    }
 
 
 }

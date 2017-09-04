@@ -38,6 +38,12 @@
           <p class="profileText">{{favUser.introduce}}</p>
 
           <button class="add" ion-button small color="primary">Today {{favUser.viewCnt}}</button>
+          <button *ngIf="!button" (click)="addFavorite()" class="add" [disabled]="try" ion-button small
+                  outline color="sub">add
+          </button>
+          <button *ngIf="button" (click)="removeFavorite()" class="add" [disabled]="try" ion-button small
+                  color="sub">added
+          </button>
         </div>
       </ion-col>
     </ion-row>
