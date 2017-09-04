@@ -34,9 +34,7 @@ export class TagListPage {
     this.users = this.navParams.get('user');
     this.like = this.navParams.get('like');
     this.like = false;
-    if(this.navParams.get('like')==='like'){
-      this.like = true;
-    }
+
   }
   ionViewWillEnter(){
     this.scrollToCard()

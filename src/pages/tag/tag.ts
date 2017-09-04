@@ -67,14 +67,15 @@ export class TagPage {
         this.tagUser.push(data[i].writtenBy);
       }
 
-      this.finalSelectedLike = this.selectedLike.sort(function (a, b) {
-        return a.likeCnt < b.likeCnt ? -1 : a.likeCnt > b.likeCnt ? 1 : 0;
-      });
 
       if (this.selectedLike === [] || this.selectedLike.length===0 ){
         this.isLike=true;
       }
       else{
+        this.finalSelectedLike = this.selectedLike.sort(function (a, b) {
+          return a.likeCnt < b.likeCnt ? -1 : a.likeCnt > b.likeCnt ? 1 : 0;
+        });
+        console.log("Check!!");
         for(let i = 0; i<this.selectedLike.length; i++){
           this.selectedUserId.push(this.finalSelectedLike[i].writtenBy)
         }
@@ -112,7 +113,7 @@ export class TagPage {
   }
   presentList(i){
     let listModal = this.modalCtrl.create(TagListPage,
-      {thisWeekPost:this.finalSelectedLike.reverse() ,thisWeekPostIndex:'fit'+i, pageCheck:this.tagName,like:'like',user:this.selectedUser.reverse()});
+      {thisWeekPost:this.finalSelectedLike.slice().reverse() ,thisWeekPostIndex:'fit'+i, pageCheck:this.tagName,like:'like',user:this.selectedUser.slice().reverse()});
     listModal.present();
   }
 

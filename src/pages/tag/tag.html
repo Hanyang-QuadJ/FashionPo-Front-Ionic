@@ -29,7 +29,7 @@
 
       <ion-grid no-padding>
         <ion-row wrap no-padding>
-          <ion-col no-padding col-4 align-self-center *ngFor="let post of finalSelectedLike.reverse() | slice:1; let i= index">
+          <ion-col no-padding col-4 align-self-center *ngFor="let post of finalSelectedLike.slice().reverse() | slice:1; let i= index">
             <img tappable (click)="presentList(i+1)"  class="myFitImage" src={{post.picURL}}>
           </ion-col>
         </ion-row>

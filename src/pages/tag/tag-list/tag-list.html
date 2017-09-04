@@ -1,4 +1,3 @@
-
 <ion-header no-border>
 
   <ion-navbar>
@@ -7,60 +6,58 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title >{{tagPageCheck}}</ion-title>
+    <ion-title>{{tagPageCheck}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <div *ngIf="like">
-  <ion-card  *ngFor=" let post of thisWeekPost; let i =index" [id]="'fit'+i">
 
-    <img src="{{post.picURL}}">
-    <button ion-button icon-left clear small>
-      <ion-icon name="heart"></ion-icon>
-      <div>{{post.likeCnt}} Likes</div>
-    </button>
+    <ion-card *ngFor=" let post of thisWeekPost; let i =index" [id]="'fit'+i">
 
-    <ion-card-content>
-      <h2  color="dark" tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].wardrobeName}}</h2>
-      <p tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].username}}</p>
+      <img src="{{post.picURL}}">
+      <button ion-button icon-left clear small>
+        <ion-icon name="heart"></ion-icon>
+        <div>{{post.likeCnt}} Likes</div>
+      </button>
 
-      <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
-    </ion-card-content>
+      <ion-card-content>
+        <h2 color="dark" tappable *ngIf="users" (click)="presentWardrobe(i)">{{users[i].wardrobeName}}</h2>
+        <p tappable *ngIf="users" (click)="presentWardrobe(i)">{{users[i].username}}</p>
 
-    <ion-item>
-      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+        <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
+      </ion-card-content>
 
+      <ion-item>
+        <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+      </ion-item>
+    </ion-card>
 
-    </ion-item>
-  </ion-card>
-  </div>
-  <div *ngIf="!like">
+  <!--<div *ngIf="!like">-->
 
-  <ion-card *ngFor=" let post of thisWeekPost | orderBy:orderDate:true;  let i =index" [id]="'fit'+i">
+    <!--<ion-card *ngFor=" let post of thisWeekPost | orderBy:orderDate:true;  let i =index" [id]="'fit'+i">-->
 
-    <img src="{{post.picURL}}">
-    <button ion-button icon-left clear small>
-      <ion-icon name="heart"></ion-icon>
-      <div>{{post.likeCnt}} Likes</div>
-    </button>
+      <!--<img src="{{post.picURL}}">-->
+      <!--<button ion-button icon-left clear small>-->
+        <!--<ion-icon name="heart"></ion-icon>-->
+        <!--<div>{{post.likeCnt}} Likes</div>-->
+      <!--</button>-->
 
-    <ion-card-content>
-      <h2  color="dark" tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].wardrobeName}}</h2>
-      <p tappable *ngIf="users" (click)="presentWardrobe(i)" >{{users[i].username}}</p>
+      <!--<ion-card-content>-->
+        <!--<h2 color="dark" tappable *ngIf="users" (click)="presentWardrobe(i)">{{users[i].wardrobeName}}</h2>-->
+        <!--<p tappable *ngIf="users" (click)="presentWardrobe(i)">{{users[i].username}}</p>-->
 
-      <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
-    </ion-card-content>
+        <!--<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>-->
+      <!--</ion-card-content>-->
 
-    <ion-item>
-      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+      <!--<ion-item>-->
+        <!--<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>-->
 
 
-    </ion-item>
-  </ion-card>
-  </div>
+      <!--</ion-item>-->
+    <!--</ion-card>-->
+  <!--</div>-->
 
 </ion-content>
 
