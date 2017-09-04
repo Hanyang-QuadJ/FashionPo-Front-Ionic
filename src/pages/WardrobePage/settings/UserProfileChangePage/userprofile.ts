@@ -6,6 +6,8 @@ import {Http, Headers} from "@angular/http";
 import {ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -30,34 +32,15 @@ export class UserProfileChange {
               private http: Http,
               public toastCtrl: ToastController,
               public camera: Camera,
+              public fetchDatas: FetchDataProvider,
               public actionSheetCtrl: ActionSheetController
   ) {
 
   }
 
   ngOnInit(): void {
-
-    this.storage.get('token').then((val) => {
-      var APIUrl_1 = '/user';
-      if (this.platform.is('ios') == true){
-        APIUrl_1 = 'http://54.162.160.91/api/user';
-      }
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // console.log(val);
-      let body = {
-        base_64: this.base64Image,
-
-
-      };
-
-      this.http.get(APIUrl_1 + '/authed', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.profile_img = data.user[0].profile_img;
-        });
-
+    this.fetchDatas.getData('/user/authed').then(data=>{
+      this.profile_img = data.user[0].profile_img;
     });
 
   }
@@ -91,7 +74,6 @@ export class UserProfileChange {
   pictureTaken :boolean = false;
   public takePicture(sourceType){
     let options = {
-
       quality: 70,
       allowEdit: true,
       correctOrientation: false,
@@ -102,60 +84,25 @@ export class UserProfileChange {
       sourceType: sourceType,
     };
     this.camera.getPicture(options).then((imageData) => {
-      this.pictureTaken = true;
       // imageData is a base64 encoded string
       this.base64Image = "data:image/jpeg;base64," + imageData;
+      this.pictureTaken = true;
       let cameraImageSelector = document.getElementById('camera-image');
       cameraImageSelector.setAttribute('src', this.base64Image);
-
     })
-
   }
   update() {
-
-    this.storage.get('token').then((val) => {
-      var APIUrl = '/user';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://54.162.160.91/api/user';
-      }
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // console.log(val);
-      this.http.get(APIUrl + '/authed', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.email = data.user[0].email;
-          this.storage.get('token').then((val) => {
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            // console.log(val);
-            let body = {
-              base_64: this.base64Image,
-              email: this.email
-            };
-            this.http.post(APIUrl + "/update/profile", JSON.stringify(body), {headers: headers})
-              .map(res => res.json())
-              .subscribe(
-                data => {
-                  let toast = this.toastCtrl.create({
-                    message: 'update success',
-                    duration: 2000
-                  });
-
-                  toast.present(toast);
-                },
-                err => {
-
-                });
-          }, (err) => {
-            console.log(err);
-          });
+    this.fetchDatas.getData('/user/authed').then(data=>{
+      this.email = data.user[0].email;
+      this.fetchDatas.postData('/user/update/profile',{base_64: this.base64Image, email: this.email}).then(data=>{
+        let toast = this.toastCtrl.create({
+          message: 'update success',
+          duration: 2000
         });
-
+        toast.present();
+      },err=>{
+        console.log(err)
+      })
     });
-
-
   }
 }

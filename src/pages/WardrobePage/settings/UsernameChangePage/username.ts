@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validator, Validators} from '@angular/forms';
 import {Http, Headers} from "@angular/http";
 import {ToastController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
+import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
 
 /**
  * Generated class for the SettingsPage page.
@@ -14,92 +15,57 @@ import {Storage} from '@ionic/storage';
  */
 
 @Component({
-    selector: 'username-settings',
-    templateUrl: 'username.html',
+  selector: 'username-settings',
+  templateUrl: 'username.html',
 })
 
 export class UsernamePage {
-    usernameForm: FormGroup;
-    loaded:boolean = false;
-    constructor(public viewCtrl: ViewController,
-                public fb: FormBuilder,
-                public platform: Platform,
-                private storage: Storage,
-                private http: Http,
-                public toastCtrl: ToastController,
-    ) {
-        this.usernameForm = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
+  usernameForm: FormGroup;
+  loaded: boolean = false;
 
-        });
-    }
+  constructor(public viewCtrl: ViewController,
+              public fb: FormBuilder,
+              public platform: Platform,
+              private storage: Storage,
+              private http: Http,
+              public fetchDatas: FetchDataProvider,
+              public toastCtrl: ToastController,) {
+    this.usernameForm = this.fb.group({
+      username: ['', Validators.compose([Validators.required])],
 
-    ngOnInit(): void {
-        this.storage.get('token').then((val) => {
-            var APIUrl = '/user/authed';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://107.23.122.155:3000/api/user/authed';
-              // console.log('yes');
-            }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            this.http.get(APIUrl, {headers: headers})
-                .map(res => res.json())
-                .subscribe(
-                    data => {
-                        console.log(data.user[0].username);
-                        this.usernameForm.value.username = data.user[0].username;
-                        this.usernameForm.setValue({username:data.user[0].username});
-                        this.loaded = true;
-                    });
+    });
+  }
 
+  ngOnInit(): void {
+    this.fetchDatas.getData('/user/authed').then(data => {
+      this.usernameForm.value.username = data.user[0].username;
+      this.usernameForm.setValue({username: data.user[0].username});
+      this.loaded = true;
+    });
+  }
 
-        });
-    }
+  public dismiss() {
+    this.viewCtrl.dismiss()
+  }
 
-    public dismiss() {
-        this.viewCtrl.dismiss()
-    }
+  showToast(position: string) {
+    let toast = this.toastCtrl.create({
+      message: 'this username is already used',
+      duration: 2000,
+      position: position
+    });
 
-    showToast(position: string) {
-        let toast = this.toastCtrl.create({
-            message: 'this username is already used',
-            duration: 2000,
-            position: position
-        });
+    toast.present(toast);
+  }
 
-        toast.present(toast);
-    }
-
-    public usernameChange() {
-        this.storage.get('token').then((val) => {
-            var APIUrl = '/user/update/username';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://107.23.122.155:3000/api/user/update/username';
-              // console.log('yes');
-            }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            let body = {
-                username: this.usernameForm.value.username,
-            }
-            console.log(this.usernameForm.value.username);
-            this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
-                .map(res => res.json())
-                .subscribe(
-                    data => {
-                        this.dismiss();
-                    },
-                    err => {
-                        this.showToast("bottom");
-                    });
-
-
-        });
-    }
-
+  public usernameChange() {
+    this.fetchDatas.postData('/user/update/username',{ username: this.usernameForm.value.username}).then(data=>{
+      this.dismiss();
+    },
+      err=>{
+        this.showToast("bottom");
+      })
+  }
 
 }
 

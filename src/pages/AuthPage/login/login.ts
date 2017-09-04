@@ -28,6 +28,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 export class LoginPage {
 
   loginForm : FormGroup;
+  check:any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -38,6 +39,8 @@ export class LoginPage {
               public toastCtrl: ToastController,
               public fb: FormBuilder) {
     this.statusBar.styleLightContent();
+    this.check = this.navParams.get('check');
+
 
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
@@ -47,13 +50,13 @@ export class LoginPage {
 
 
   ngOnInit(): void {
-    this.storage.get('token').then((val) => {
-      const token = val;
-      if (token != null && token != '') {
-
-        this.navCtrl.setRoot(TabsPage);
-      }
-    });
+    // this.storage.get('token').then((val) => {
+    //   const token = val;
+    //   if (token != null && token != '') {
+    //
+    //     this.navCtrl.setRoot(TabsPage);
+    //   }
+    // });
   }
   goToSignup() {
     this.navCtrl.push(SignupPage);
@@ -77,12 +80,10 @@ export class LoginPage {
 
   userLogin() {
     var APIUrl = '/auth';
-
-
-    // if (this.platform.is('ios') == true){
-    //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth';
-    //   // console.log('yes');
-    // }
+    if (this.platform.is('ios') == true){
+      APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth';
+      // console.log('yes');
+    }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let body = {
@@ -93,9 +94,15 @@ export class LoginPage {
       .map(res => res.json())
       .subscribe(
         data => {
-
           this.storage.set('token', data.token);
-          this.navCtrl.setRoot(IntroPage);
+          if(this.check==='logout'){
+            this.navCtrl.setRoot(TabsPage);
+
+          }
+          else{
+            this.navCtrl.setRoot(IntroPage);
+          }
+
         },
         err => {
           this.showToast("bottom");

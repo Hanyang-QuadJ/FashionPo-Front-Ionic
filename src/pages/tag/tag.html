@@ -14,26 +14,31 @@
     </ion-buttons>
     <ion-title>{{tagName}}</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 
 
 
 <ion-content>
-  <p class="infoText">Popular fits</p>
-  <ion-card>
-    <img tappable (click)="presentFirstWardrobe()" src="{{firstTag.picURL}}">
-  </ion-card>
-  <div>
-    <ion-slides class="image-slider" slidesPerView="3">
-      <ion-slide *ngFor="let post of tagPics.slice().reverse() | orderBy:order:true | slice:1:3; let i= index">
-        <img class="horiPic" (tap)="presentList(i)" src="{{post.picURL}}">
-      </ion-slide>
-    </ion-slides>
+  <div id="tagging"></div>
+  <div *ngIf="!isLike">
+    <p class="infoText">Popular fits</p>
+    <ion-card>
+      <img tappable (click)="presentList(0)" src="{{firstTag.picURL}}">
+    </ion-card>
+
+      <ion-grid no-padding>
+        <ion-row wrap no-padding>
+          <ion-col no-padding col-4 align-self-center *ngFor="let post of finalSelectedLike.reverse() | slice:1; let i= index">
+            <img tappable (click)="presentList(i+1)"  class="myFitImage" src={{post.picURL}}>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </div>
 
+
   <p class="infoText2">New fits</p>
+
 
   <ion-grid no-padding>
     <ion-row wrap no-padding>
@@ -42,6 +47,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
 
 
 

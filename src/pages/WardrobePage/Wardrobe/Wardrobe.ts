@@ -7,7 +7,7 @@ import {PostTabPage} from "../../WardrobePage/post-tab/post-tab";
 import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
 import {WardrobeThisWeekPage} from '../../WardrobePage/wardrobe-this-week/wardrobe-this-week'
-
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -61,6 +61,7 @@ export class WardrobePage implements OnInit{
                 public navParams: NavParams,
                 private storage: Storage,
                 private http: Http,
+                public fetchDatas: FetchDataProvider,
                 public modalCtrl: ModalController,
                 public loadingCtrl: LoadingController,
                 public platform: Platform) {
@@ -95,109 +96,61 @@ export class WardrobePage implements OnInit{
       showBackdrop: true, spinner: 'crescent',
     });
     loading.present();
-    this.storage.get('token').then((val) => {
-      var APIUrl = '/user';
-      var APIUrl_2 = '/post';
-      var APIUrl_3 ='/rank';
-      // if (this.platform.is('ios') == true){
-      //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-      //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
-      //    APIUrl_3 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/rank';
-      // }
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('x-access-token', val);
-      // // .log(val);
+    this.fetchDatas.getData('/user/authed').then(data=>{
+      this.user = data.user[0];
+      this.userIntro = data.user[0].introduce;
+      this.button_loaded = true;
+      this.fetchDatas.getData('/rank').then(data=>{
+        for(let i = 0; i<data.posts.length; i++){
+          if(data.posts[i].writtenBy === this.user._id){
+            this.top.push(i+1);
+          }
+        }
+        if(this.top.length===0){
+          this.checkRank = true;
+        }
+        else{
+          this.min = Math.min(...this.top);
+        }
+      });
+      this.fetchDatas.getData('/post/myposts').then(data=>{
+        if(data.posts.length === 0){
+          this.noneCheck = true;
+        }
+        for (var i = 0; i < data.posts.length; i++) {
+          //This week fits
+          if (data.posts[i].isThisWeek === true) {
+            this.thisWeekPost.push(data.posts[i]);
+          }
+          //Past fits
+          else {
+            this.mypostlist.push(data.posts[i]);
+          }
 
-      this.http.get(APIUrl + '/authed', {headers: headers})
-        .map(res => res.json())
-        .subscribe(data => {
-          this.user = data.user[0];
-          this.userIntro = data.user[0].introduce;
-          this.button_loaded = true;
-          // .log("@#################");
-          // .log(this.button_loaded);
-          // .log(this.today_disable);
-          // .log("@#################");
-          this.http.get(APIUrl_3, {headers: headers})
-            .map(res => res.json())
-            .subscribe(data => {
-              // .log('!!!!!rank!!!!');
-              // .log(this.user._id);
-              for(let i = 0; i<data.posts.length; i++){
-                if(data.posts[i].writtenBy === this.user._id){
-                  this.top.push(i+1);
-                }
-              }
-              if(this.top.length===0){
-                this.checkRank = true;
-              }
-              else{
-                // .log(this.top);
-                this.min = Math.min(...this.top);
-                // .log(this.min);
-              }
-
-              this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                  if(data.posts.length === 0){
-                    this.noneCheck = true;
-                  }
-
-
-
-                  for (var i = 0; i < data.posts.length; i++) {
-                    //이번주 사진
-                    if (data.posts[i].isThisWeek === true) {
-                      this.thisWeekPost.push(data.posts[i]);
-                    }
-                    //모든 사진
-                    else {
-                      this.mypostlist.push(data.posts[i]);
-                    }
-
-                  }
-                  if(this.thisWeekPost.length === 0){
-                    this.thisWeekPostLength = true;
-                  }
-                  else{
-                    this.thisWeekPostLength = false;
-                  }
-
-
-                  this.loaded = true;
-
-
-                  this.http.get(APIUrl + '/favorite', {headers: headers})
-                    .map(res => res.json())
-                    .subscribe(data => {
-                      if (data.favorites === undefined || data.favorites.length == 0) {
-                        this.favorites = [];
-                        this.loadedd = true;
-                        loading.dismiss();
-
-                      }
-                      else {
-                        const body = {users: data.favorites};
-                        this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
-                          .map(res => res.json())
-                          .subscribe(
-                            data => {
-                              this.favorites = data;
-
-                              this.loadedd = true;
-                              loading.dismiss();
-                            });
-                      }
-                    });
-                });
-            });
-        });
-
+        }
+        if(this.thisWeekPost.length === 0){
+          this.thisWeekPostLength = true;
+        }
+        else{
+          this.thisWeekPostLength = false;
+        }
+        this.loaded = true;
+      });
+      this.fetchDatas.getData('/user/favorite').then(data=>{
+        if (data.favorites === undefined || data.favorites.length == 0) {
+          this.favorites = [];
+          this.loadedd = true;
+          loading.dismiss();
+        }
+        else{
+          this.fetchDatas.postData('/user',{users:data.favorites}).then(data=>{
+            this.favorites = data;
+            this.loadedd = true;
+            loading.dismiss();
+          })
+        }
+      })
     });
-
-
   }
   presentThisWeekModal(i) {
     let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
@@ -213,29 +166,15 @@ export class WardrobePage implements OnInit{
   };
 
     refreshViewCnt() {
-        this.today_disable = true;
-        this.button_loaded = false;
-        this.storage.get('token').then((val) => {
-            var APIUrl = '/user';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user';
-              // // console.log('yes');
-            }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-            this.http.get(APIUrl + '/authed', {headers: headers})
-                .map(res => res.json())
-                .subscribe(data => {
-                    this.user = data.user[0];
-
-                    this.button_loaded = true;
-                    this.today_disable = false;
-
-
-                })
-        });
+      this.today_disable = true;
+      this.button_loaded = false;
+      this.fetchDatas.getData('/user/authed').then(data => {
+        this.user = data.user[0];
+        this.button_loaded = true;
+        this.today_disable = false;
+      });
     }
+
 
 }
 

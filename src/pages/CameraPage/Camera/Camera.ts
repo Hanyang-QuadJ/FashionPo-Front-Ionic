@@ -15,6 +15,7 @@ import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import {filter} from "rxjs/operator/filter";
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 
 declare var cordova: any;
 
@@ -43,6 +44,7 @@ export class CameraPage implements OnInit{
               public toastCtrl: ToastController,
               public platform: Platform,
               public navCtrl: NavController,
+              public fetchDatas: FetchDataProvider,
               public navParams: NavParams,
               public viewCtrl: ViewController,
               public loadingCtrl: LoadingController)
@@ -95,6 +97,7 @@ export class CameraPage implements OnInit{
         this.pictureTaken = true;
         // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
+
         let cameraImageSelector = document.getElementById('camera-image');
         cameraImageSelector.setAttribute('src', this.base64Image);
       })
@@ -136,58 +139,20 @@ export class CameraPage implements OnInit{
       for(var j = 0; j<myArray2.length; j++){
         this.tags.push({'tag':myArray2[j]})
       }
-
-      var APIUrl = '/post';
-      if (this.platform.is('ios') == true){
-        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
-        // console.log('yes');
-      }
-      this.storage.get('token').then((val) => {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', val);
-        // console.log(val);
-
-        let body = {
-          base_64: this.base64Image,
-          tags:this.tags
-
-        };
-        console.log(this.base64Image);
-        this.http.post(APIUrl + "/create", JSON.stringify(body), {headers: headers})
-          .map(res => res.json())
-          .subscribe(
-            data => {
-              console.log("BASE TEST!");
-              console.log(data);
-              this.uploadCheck = true;
-              let toast = this.toastCtrl.create({
-                message: 'upload success',
-                duration: 2000
-              });
-              loading.dismiss();
-              toast.present(toast);
-            },
-            err => {
-              console.log(err);
-              loading.dismiss();
-            });
-      }, (err) => {
+      this.fetchDatas.postData('/post/create',{base_64: this.base64Image, tags:this.tags}).then(data=>{
+        this.uploadCheck = true;
+        let toast = this.toastCtrl.create({
+          message: 'upload success',
+          duration: 2000
+        });
+        loading.dismiss();
+        toast.present(toast);
+      },err=>{
         console.log(err);
         loading.dismiss();
       });
 
     }
-
-
-
-
-
-
-
-
-
-
   }
   switchTabs() {
     this.navCtrl.parent.select(2);

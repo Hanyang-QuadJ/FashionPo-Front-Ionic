@@ -15,7 +15,7 @@
 
 <ion-content>
   <div *ngIf="like">
-  <ion-card  *ngFor=" let post of thisWeekPost | orderBy:order:true | slice:1:3 ; let i =index" [id]="'fit'+i">
+  <ion-card  *ngFor=" let post of thisWeekPost; let i =index" [id]="'fit'+i">
 
     <img src="{{post.picURL}}">
     <button ion-button icon-left clear small>

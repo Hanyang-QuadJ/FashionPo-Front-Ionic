@@ -19,14 +19,14 @@ export class RankThisWeekPage {
   @ViewChild(Content) content: Content;
   thisWeekPost:"";
   thisWeekPostIndex:"";
-  date:any="";
+
   tagPageCheck:any="";
   users:any="";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,) {
     this.thisWeekPost = this.navParams.get('thisWeekPost');
     this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
-    this.date = this.navParams.get('date');
+
     this.tagPageCheck = this.navParams.get('pageCheck');
     this.users = this.navParams.get('user');
 

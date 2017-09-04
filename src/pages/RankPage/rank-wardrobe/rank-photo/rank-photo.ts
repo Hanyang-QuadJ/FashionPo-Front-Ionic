@@ -17,12 +17,12 @@ export class RankPhotoPage {
   @ViewChild(Content) content: Content;
   postList:any="";
   postListIndex:any="";
-  date:any="";
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl:ViewController,public modalCtrl:ModalController) {
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
-    this.date = this.navParams.get('date');
+
   }
 
   ionViewDidLoad() {
@@ -39,7 +39,7 @@ export class RankPhotoPage {
 
   scrollToCard(){
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
-    console.log(yOffset)
+    console.log(yOffset);
     this.content.scrollTo(0,yOffset,0);
   }
   goToTag(tagName,i){

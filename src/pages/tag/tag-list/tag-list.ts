@@ -17,7 +17,8 @@ import {TagPage} from "../../tag/tag";
 })
 export class TagListPage {
   @ViewChild(Content) content: Content;
-  thisWeekPost:"";
+  thisWeekPost:any;
+  selectedPost:any;
   thisWeekPostIndex:"";
   date:any="";
   tagPageCheck:any="";
@@ -40,11 +41,9 @@ export class TagListPage {
   ionViewWillEnter(){
     this.scrollToCard()
 
-
   }
   scrollToCard(){
     let yOffset = document.getElementById(this.thisWeekPostIndex).offsetTop;
-
     this.content.scrollTo(0,yOffset,0);
   }
   public dismiss(){

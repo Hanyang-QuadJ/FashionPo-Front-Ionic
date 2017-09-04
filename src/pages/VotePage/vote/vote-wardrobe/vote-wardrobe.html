@@ -42,7 +42,7 @@
 
                         <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
                                 (click)="refreshViewCnt()">
-                            <ion-spinner name="circles"></ion-spinner>
+                            <ion-spinner color="light" name="circles"></ion-spinner>
                         </button>
 
                         <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="primary"

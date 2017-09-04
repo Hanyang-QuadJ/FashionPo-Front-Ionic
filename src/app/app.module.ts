@@ -20,7 +20,7 @@ import {WardrobeCameraPage} from '../pages/WardrobePage/wardrobe-camera/wardrobe
 import {SignupPage} from '../pages/AuthPage/signup/signup';
 import {VoteWardrobePage} from '../pages/VotePage/vote/vote-wardrobe/vote-wardrobe';
 import {HistoryListPage} from '../pages/RankPage/history-list/history-list';
-import {HistoryRankPage} from '../pages/RankPage/history-rank/history-rank';
+
 import {FindPasswordPage} from '../pages/AuthPage/FindPasswordPage/find';
 
 // import { HttpWithTokenProvider } from '../providers/http-with-token/http-with-token';
@@ -79,7 +79,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         HomePage,
         TabsPage,
         WardrobeCameraPage,
-        HistoryRankPage,
+
         TagPage,
         TagListPage,
         IntroPage,
@@ -141,8 +141,8 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         WardrobeCameraPage,
         VoteWardrobePage,
         HistoryListPage,
-      WelcomePage,
-      HistoryRankPage,
+        WelcomePage,
+
         UserProfileChange,
         FavoriteUserPostPage,
         WardrobeThisWeekPage,

@@ -4,7 +4,9 @@ import {Http, Headers} from "@angular/http";
 import {Storage} from '@ionic/storage';
 import {WardrobePage} from '../wardrobe/wardrobe'
 import { WardrobePhotoPage } from '../../WardrobePage/wardrobe-photo/wardrobe-photo'
-import { CameraPage } from '../../CameraPage/Camera/camera'
+import { CameraPage } from '../../CameraPage/Camera/camera';
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+
 /**
  * Generated class for the PostTabPage page.
  *
@@ -31,6 +33,7 @@ export class PostTabPage implements OnInit{
               public modalCtrl: ModalController,
               public loadingCtrl: LoadingController,
               public http: Http,
+              public fetchDatas: FetchDataProvider,
               public platform: Platform) {
 
   }
@@ -66,35 +69,16 @@ export class PostTabPage implements OnInit{
             showBackdrop: false, spinner: 'crescent',
 
           });
-          this.storage.get('token').then((val) => {
-
-            var APIUrl_2 = '/post';
-            if (this.platform.is('ios') == true){
-              APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/post';
+          this.fetchDatas.getData('/post/myposts').then(data=>{
+            for (var i = 0; i < data.posts.length; i++) {
+              if (data.posts[i].isThisWeek === true) {
+              }
+              else {
+                this.myPost.push(data.posts[i]);
+                loading.dismiss();
+              }
             }
-            let headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('x-access-token', val);
-
-
-            this.http.get(APIUrl_2 + '/myposts', {headers: headers})
-              .map(res => res.json())
-              .subscribe(data => {
-                for (var i = 0; i < data.posts.length; i++) {
-
-                  if (data.posts[i].isThisWeek === true) {
-                  }
-
-                  else {
-                    this.myPost.push(data.posts[i]);
-                    loading.dismiss();
-                  }
-
-                }
-
-              });
           });
-
         }
       });
       profileModal.present();

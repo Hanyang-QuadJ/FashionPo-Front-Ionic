@@ -27,17 +27,14 @@ export class SettingsPage {
               public modalCtrl: ModalController,
               private storage: Storage) {
     this.user = this.navParams.get('users');
-
-
-
   }
   logOut() {
     this.storage.set('token', null);
-    this.app.getRootNav().setRoot(LoginPage);
+    this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
-    console.log('@@#@#@#@#@')
+    console.log('@@#@#@#@#@');
     console.log(this.user)
   }
   itemSelected(item: string) {
