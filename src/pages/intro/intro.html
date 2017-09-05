@@ -10,17 +10,35 @@
 <ion-content>
   <ion-slides pager>
 
-    <ion-slide style="background-color: green">
-      <h2>Slide 1</h2>
+    <ion-slide>
+      <br>
+      <img class="rankIcon" src="images/trophy.png">
+
+      <p class="text">Each week, check the best dressed</p>
+      <p class="text"><span class="highLight">TOP10</span> at based on Likes.</p>
+
+      <img class="rankPic" src="images/rank.png">
     </ion-slide>
 
-    <ion-slide style="background-color: blue">
-      <h2>Slide 2</h2>
+    <ion-slide>
+      <br>
+      <img class="rankIcon" src="images/rankIcon.png">
+
+      <p class="text">You could either swipe <span class="highLight">right to like</span></p>
+      <p class="text">or <span class="highLight">left to see</span> the next outfit.</p>
+
+      <img class="votePic" src="images/votePic.png">
     </ion-slide>
 
-    <ion-slide style="background-color: red">
-      <h2>Slide 3</h2>
-      <button (click)="goToTab()" ion-button full color="light">Start</button>
+    <ion-slide>
+      <br>
+      <img class="rankIcon" src="images/wardrobeIcon.png">
+
+      <p class="text">Name your own wardrobe, share your</p>
+      <p class="text"><span class="highLight">outfit of the day</span> and start flexing.</p>
+
+      <img class="wardrobePic" src="images/wardrobePic.png">
+      <div class="padding"><button  (click)="goToTab()" ion-button round color="primary" block>START</button></div>
     </ion-slide>
 
   </ion-slides>

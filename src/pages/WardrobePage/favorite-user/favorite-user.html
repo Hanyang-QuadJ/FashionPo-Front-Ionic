@@ -7,7 +7,10 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons start>
-      <button (click)="dismiss()" ion-button icon-only color="primary">
+      <button *ngIf="backRefresh" (click)="dismissRefresh()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+      <button *ngIf="!backRefresh" (click)="dismiss()" ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>

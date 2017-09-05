@@ -76,6 +76,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  ionViewWillEnter(){
     this.firstCheck = false;
     this.modalCheck = false;
     this.users = [];

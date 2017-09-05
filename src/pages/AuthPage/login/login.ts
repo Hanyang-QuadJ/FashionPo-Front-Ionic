@@ -11,6 +11,7 @@ import {SignupPage} from "../signup/signup";
 import {FindPasswordPage} from "../FindPasswordPage/find";
 import {IntroPage} from "../../intro/intro";
 import {StatusBar} from "@ionic-native/status-bar";
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 
 
 /**
@@ -29,6 +30,7 @@ export class LoginPage {
 
   loginForm : FormGroup;
   check:any;
+  back:boolean=false;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -37,6 +39,7 @@ export class LoginPage {
               private storage: Storage,
               public platform: Platform,
               public toastCtrl: ToastController,
+              public fetchDatas: FetchDataProvider,
               public fb: FormBuilder) {
     this.statusBar.styleLightContent();
     this.check = this.navParams.get('check');
@@ -50,6 +53,13 @@ export class LoginPage {
 
 
   ngOnInit(): void {
+    this.back=false;
+    if(this.check==="logout"){
+      this.back=true;
+    }
+    else{
+      this.back=false;
+    }
     // this.storage.get('token').then((val) => {
     //   const token = val;
     //   if (token != null && token != '') {
@@ -94,14 +104,42 @@ export class LoginPage {
       .map(res => res.json())
       .subscribe(
         data => {
-          this.storage.set('token', data.token);
-          if(this.check==='logout'){
-            this.navCtrl.setRoot(TabsPage);
+          this.storage.set('token', data.token).then((val)=>{
+            let APIUrl_2 = 'user/tutorial/value';
+            if (this.platform.is('ios') == true){
+              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/tutorial/value';
+              // console.log('yes');
+            }
+            let headers2 = new Headers();
+            headers2.append('Content-Type', 'application/json');
+            headers2.append('x-access-token', val);
+            this.http.get(APIUrl_2,{headers:headers2})
+              .map(res=>res.json())
+              .subscribe(data=>{
+                if(data.tutorial === 1){
+                  this.navCtrl.setRoot(TabsPage);
+                }
+                else{
+                  this.navCtrl.setRoot(IntroPage);
+                }
+              })
+          });
+          // this.storage.get('token').then((val)=>{
+          //   let headers2 = new Headers();
+          //   headers2.append('Content-Type', 'application/json');
+          //   headers2.append('x-access-token', val);
+          //   this.http.get('/user/tutorial/value',{headers:headers2})
+          //     .map(res=>res.json())
+          //     .subscribe(data=>{
+          //       if(data.tutorial === 1){
+          //         this.navCtrl.setRoot(TabsPage);
+          //       }
+          //       else{
+          //         this.navCtrl.setRoot(IntroPage);
+          //       }
+          //     })
+          // });
 
-          }
-          else{
-            this.navCtrl.setRoot(IntroPage);
-          }
 
         },
         err => {
