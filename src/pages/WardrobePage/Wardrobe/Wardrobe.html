@@ -94,7 +94,7 @@
 
     <super-tabs *ngIf="loaded && loadedd" toolbarColor="primary" shortSwipeDuration="0">
       <super-tab [root]="tab1" [rootParams]="{mypost:mypostlist, week:thisWeekPost}" icon="md-apps"></super-tab>
-      <super-tab [root]="tab2" [rootParams]="{favorite:favorites}" icon="md-star"></super-tab>
+      <super-tab [root]="tab2" [rootParams]="{favorite:favorites,id:passId}" icon="md-star"></super-tab>
     </super-tabs>
 
 

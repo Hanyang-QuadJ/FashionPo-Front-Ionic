@@ -59,6 +59,8 @@ export class TagPage {
     this.tagUsers=[];
     this.fetchDatas.postData('/post/tag',{tag:this.tagName}).then(data=>{
       this.tagPics = data;
+      console.log("Check!!");
+      console.log(this.tagPics);
       for(let i = 0; i<data.length; i++){
         if(data[i].likeCnt > 20){
           this.selectedLike.push(data[i]);
@@ -66,8 +68,6 @@ export class TagPage {
         }
         this.tagUser.push(data[i].writtenBy);
       }
-
-
       if (this.selectedLike === [] || this.selectedLike.length===0 ){
         this.isLike=true;
       }
@@ -75,7 +75,7 @@ export class TagPage {
         this.finalSelectedLike = this.selectedLike.sort(function (a, b) {
           return a.likeCnt < b.likeCnt ? -1 : a.likeCnt > b.likeCnt ? 1 : 0;
         });
-        console.log("Check!!");
+
         for(let i = 0; i<this.selectedLike.length; i++){
           this.selectedUserId.push(this.finalSelectedLike[i].writtenBy)
         }
@@ -91,7 +91,6 @@ export class TagPage {
         for(let j = 0; j<data.length; j++){
           this.selectedUser.push(data[j]);
         }
-
       });
       this.fetchDatas.postData('/user',{users:this.tagUser}).then(data=>{
         for(let j = 0; j<data.length; j++){

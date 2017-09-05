@@ -2,7 +2,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons start>
-      <button (click)="goBackToWelcome()" ion-button icon-only color="light">
+      <button *ngIf="!back" (click)="goBackToWelcome()" ion-button icon-only color="light">
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>

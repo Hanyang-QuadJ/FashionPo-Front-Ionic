@@ -10,6 +10,7 @@ import {WelcomePage} from "../pages/welcome/welcome";
 import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe'
 import {VotePage} from '../pages/VotePage/vote/vote'
 import {CameraPage} from '../pages/CameraPage/Camera/camera'
+import {IntroPage} from "../pages/intro/intro";
 
 
 @Component({

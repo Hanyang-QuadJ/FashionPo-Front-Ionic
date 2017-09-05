@@ -1,3 +1,44 @@
 page-intro {
+  .rankIcon{
+    margin-top: 5%;
+    width: 20%;
+    height: auto;
+  }
+  .text{
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .highLight{
+    font-weight: 600;
+  }
+  .rankPic{
+    margin-top:6%;
+    width:70%;
+    height: auto;
+  }
+  .scroll-content{
+    overflow: hidden;
+  }
+  .swiper-slide {
+    align-items: start;
+    justify-content: center;
+
+  }
+  .votePic{
+    margin-left: 7%;
+    margin-top:5%;
+    width:75%;
+    height: auto;
+  }
+  .wardrobePic{
+    margin-top:5%;
+    width:70%;
+    height: auto;
+  }
+  .padding{
+    margin-bottom: 4%;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 
 }

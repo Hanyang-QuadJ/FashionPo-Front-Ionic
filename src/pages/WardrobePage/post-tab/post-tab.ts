@@ -67,7 +67,6 @@ export class PostTabPage implements OnInit{
           this.myPost = [];
           let loading = this.loadingCtrl.create({
             showBackdrop: false, spinner: 'crescent',
-
           });
           this.fetchDatas.getData('/post/myposts').then(data=>{
             for (var i = 0; i < data.posts.length; i++) {
@@ -75,6 +74,7 @@ export class PostTabPage implements OnInit{
               }
               else {
                 this.myPost.push(data.posts[i]);
+                this.check = true;
                 loading.dismiss();
               }
             }

@@ -40,6 +40,7 @@ export class WardrobePage implements OnInit{
     mypostlist: Array<object> = [];
     thisWeekPost: Array<object> = [];
     thisWeekPostLength:boolean;
+    passId:any="";
     option: string = "";
     myposts: string = "";
     favorites: Array<object> = [];
@@ -143,6 +144,7 @@ export class WardrobePage implements OnInit{
           loading.dismiss();
         }
         else{
+          this.passId = data.favorites;
           this.fetchDatas.postData('/user',{users:data.favorites}).then(data=>{
             this.favorites = data;
             this.loadedd = true;

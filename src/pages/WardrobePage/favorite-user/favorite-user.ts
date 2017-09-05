@@ -24,6 +24,7 @@ export class FavoriteUserPage implements OnInit {
   thisWeekPost: Array<any> = [];
   favUsers: any = "";
   User_id: any;
+  backRefresh:boolean;
   User: any;
   button:boolean = false;
   try:boolean = false;
@@ -47,6 +48,7 @@ export class FavoriteUserPage implements OnInit {
     loading.present();
     this.checkThis = 0;
     this.checkPost = false;
+    this.backRefresh = false;
     this.alertThis = false;
     this.favUser = this.navParams.get('favList');
     this.User_id = this.navParams.get('user_id');
@@ -62,10 +64,9 @@ export class FavoriteUserPage implements OnInit {
 
 
       })
-    })
+    });
     this.fetchDatas.postData('/post/userid', {_id: this.favUser._id}).then(data => {
       for (var i = 0; i < data.length; i++) {
-
         if (data[i].isThisWeek === true) {
           this.thisWeekPost.push(data[i]);
         }
@@ -87,7 +88,8 @@ export class FavoriteUserPage implements OnInit {
   }
 
   public dismiss() {
-    this.viewCtrl.dismiss()
+    let renewedData = "notRenewed";
+    this.viewCtrl.dismiss(renewedData);
   }
 
   presentFavModal(i) {
@@ -117,15 +119,20 @@ export class FavoriteUserPage implements OnInit {
 
   }
 
+  public dismissRefresh() {
+    let renewedData = "Renewed";
+    this.viewCtrl.dismiss(renewedData);
+  }
+
   removeFavorite(post) {
     this.button = false;
     this.try = true;
     this.fetchDatas.deleteData('/user/favorite',{_id: this.User._id}).then(data=>{
           this.try = false;
+          this.backRefresh = true;
         },
         err=>{
         });
-
   }
 
 

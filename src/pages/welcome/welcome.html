@@ -6,12 +6,35 @@
 -->
 
 
-
 <ion-content class="background">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-11 offset-1>
+        <h1 class="welcome">Welcome</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-11 offset-1>
+        <h1 class="line">-</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-11 offset-1>
+        <div class="line-height">
+          <p class="mainContent">Flex is an fashion trendsetting app</p>
+          <p class="mainContent">where you can find the best dressed</p>
+          <p class="mainContent">top 10 of the week.</p>
+          <p class="mainContent">you must need <span class="highlight">fitnyc.edu</span> address</p>
+          <p class="mainContent">to register.</p>
+        </div>
+      </ion-col>
+    </ion-row>
 
-    <button (click)="goToLogin()"  ion-button round>sign In</button>
-  <button (click)="goToSignUp()"  ion-button round>sign up</button>
-
+    <div class="buttonArea">
+      <button (click)="goToLogin()" ion-button round><span class="buttonText">Sign In</span></button>
+      <button (click)="goToSignUp()" ion-button round color="light"><span class="buttonText2">Sign Up</span></button>
+    </div>
+  </ion-grid>
 
 
 </ion-content>
