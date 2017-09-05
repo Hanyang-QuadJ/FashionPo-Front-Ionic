@@ -43,7 +43,8 @@ export class SignupPage {
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
       username: ['', Validators.compose([Validators.minLength(10), Validators.required])],
       wardrobename: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-      password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
+      password: ['', Validators.compose([Validators.minLength(12), Validators.required])],
+      password2: ['', Validators.compose([Validators.minLength(12), Validators.required])]
     });
   }
 
