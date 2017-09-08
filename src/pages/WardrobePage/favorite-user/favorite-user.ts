@@ -52,6 +52,8 @@ export class FavoriteUserPage implements OnInit {
     this.alertThis = false;
     this.favUser = this.navParams.get('favList');
     this.User_id = this.navParams.get('user_id');
+    this.fetchDatas.postData('/post/view',{user_id:[this.favUser._id]}).then(data=>{
+    });
 
     this.fetchDatas.postData('/user', {users: [this.favUser._id]}).then(data => {
       this.User = data[0];
@@ -79,6 +81,7 @@ export class FavoriteUserPage implements OnInit {
       }
       loading.dismiss();
     });
+
 
 
   }

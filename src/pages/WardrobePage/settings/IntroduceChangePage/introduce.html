@@ -24,7 +24,7 @@
       </ion-item>
 
         <div padding>
-            <button class="custom-button" ion-button type="submit" [disabled]="false" color="sub" block>Change Introduce</button>
+            <button class="custom-button" ion-button type="submit" [disabled]="!usernameForm.valid" color="sub" block>Change Introduce</button>
         </div>
     </form>
 </ion-content>

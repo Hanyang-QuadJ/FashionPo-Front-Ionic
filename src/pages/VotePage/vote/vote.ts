@@ -78,6 +78,10 @@ export class VotePage implements OnInit {
         this.nextPost = this.cachedPost.pop();
         this.addNewposts();
         loading.dismiss();
+      },err=>{
+        console.log(err);
+        this.noCard = true;
+        loading.dismiss();
       });
     });
 

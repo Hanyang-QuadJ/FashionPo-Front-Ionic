@@ -54,6 +54,7 @@
 
 
 <ion-content>
+
   <ion-refresher *ngIf="!searchToggled" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content *ngIf="!searchToggled"
       pullingIcon="arrow-dropdown"
@@ -63,15 +64,18 @@
     </ion-refresher-content>
   </ion-refresher>
   <div *ngIf="!searchToggled">
-    <ion-card>
+    <div *ngIf="rankEmpty" class="text-center">
+      <h4 class="notice">There are no posts yet</h4>
+    </div>
+    <ion-card *ngIf="!rankEmpty">
       <img tappable *ngIf="firstPost" src={{firstPost.picURL}} imageViewer>
       <ion-card-content no-padding>
         <ion-grid no-padding>
           <ion-row>
             <ion-col>
               <h2 class="text-center firstPlaceIcon"><ion-icon name="trophy"></ion-icon></h2>
-              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&firstCheck">{{firstUser.username}}</h3>
-              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&!firstCheck">{{firstUser.username}}</h3>
+              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&firstCheck">{{firstUser.wardrobeName}}</h3>
+              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&!firstCheck">{{firstUser.wardrobeName}}</h3>
               <div class="text-center">
                 <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon name="md-heart"></ion-icon></span></h5>
                 <button *ngIf="!firstCheck&&firstUser&&!firstButton" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(firstPost);'>Add</button>
@@ -99,7 +103,7 @@
         <div class="image"><img tappable src={{ranks[i].picURL}} imageViewer></div>
         <div class="name">
           <div class="nameArea" *ngIf="users[i]">
-            <p tappable (click)="presentWardrobeModal(i)">{{users[i].username}}</p>
+            <p tappable (click)="presentWardrobeModal(i)">{{users[i].wardrobeName}}</p>
             <div class="rankSub"><h5 class="likeNum">{{ranks[i].likeCnt}}<span class="likeText"> <ion-icon name="md-heart"></ion-icon></span></h5></div>
 
           </div>
@@ -131,8 +135,6 @@
         <h4>{{ item.username }}</h4>
       </button>
     </ion-list>
-
-
 
 
 

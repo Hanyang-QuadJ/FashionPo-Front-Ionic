@@ -60,7 +60,6 @@ export class PostTabPage implements OnInit{
 
   }
   presentProfileModal(i) {
-
       let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.myPost.slice().reverse(), postListIndex:i,},{leaveAnimation:'back'});
       profileModal.onDidDismiss((check)=>{
         if(check === "check"){
@@ -68,6 +67,7 @@ export class PostTabPage implements OnInit{
           let loading = this.loadingCtrl.create({
             showBackdrop: false, spinner: 'crescent',
           });
+          loading.present();
           this.fetchDatas.getData('/post/myposts').then(data=>{
             for (var i = 0; i < data.posts.length; i++) {
               if (data.posts[i].isThisWeek === true) {

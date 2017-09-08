@@ -31,13 +31,14 @@ export class ChangeWardrobeNamePage {
                 public fetchDatas: FetchDataProvider,
     ) {
         this.usernameForm = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
+            username: ['', Validators.compose([Validators.maxLength(15),Validators.minLength(2),Validators.required])],
 
         });
     }
 
     ngOnInit(): void {
       this.fetchDatas.getData('/user/authed').then(data=>{
+
         this.usernameForm.value.username = data.user[0].username;
         this.usernameForm.setValue({username:data.user[0].wardrobeName});
         this.loaded = true;

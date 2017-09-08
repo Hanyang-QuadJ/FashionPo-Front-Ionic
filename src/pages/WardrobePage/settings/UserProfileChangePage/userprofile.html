@@ -15,6 +15,7 @@
 </ion-header>
 
 
+
 <ion-content>
 <button ion-button icon-start outline (click)="presentActionSheet()" full><ion-icon name="camera"></ion-icon>Select Image</button>
 
@@ -22,8 +23,8 @@
   <ion-card *ngIf="!pictureTaken">
     <img src="{{profile_img}}" />
   </ion-card>
-  <ion-card>
-    <img id="camera-image" />
+  <ion-card> 
+    <img id="camera-image">
   </ion-card>
 
 </ion-content>

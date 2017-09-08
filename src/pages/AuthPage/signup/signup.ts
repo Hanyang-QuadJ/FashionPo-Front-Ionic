@@ -41,7 +41,7 @@ export class SignupPage {
               public fb: FormBuilder) {
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
-      username: ['', Validators.compose([Validators.minLength(10), Validators.required])],
+      username: ['', Validators.compose([Validators.minLength(2), Validators.required])],
       wardrobename: ['', Validators.compose([Validators.minLength(2), Validators.required])],
       password: ['', Validators.compose([Validators.minLength(12), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(12), Validators.required])]
@@ -58,6 +58,7 @@ export class SignupPage {
       duration: 2000,
       position: position
     });
+    toast.present();
   }
 
   userSignup() {
@@ -74,6 +75,7 @@ export class SignupPage {
       username: this.loginForm.value.username,
       wardrobeName: this.loginForm.value.wardrobename,
       password: this.loginForm.value.password,
+      password2: this.loginForm.value.password2,
 
     };
     this.http.post(APIUrl + "/register", JSON.stringify(body), {headers: headers})
@@ -81,9 +83,10 @@ export class SignupPage {
       .subscribe(
         data => {
           this.showToast("bottom", "User successfully created");
-          this.navCtrl.setRoot(LoginPage);
+          this.navCtrl.setRoot(LoginPage,{email:this.loginForm.value.email,password:this.loginForm.value.password});
         },
         err => {
+          console.log(err)
           this.showToast("bottom", "error occured");
         });
   }

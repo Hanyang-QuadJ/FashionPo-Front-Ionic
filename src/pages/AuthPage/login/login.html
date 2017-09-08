@@ -23,15 +23,16 @@
         <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
           <ion-item>
             <ion-label class="label" stacked>Email</ion-label>
-            <ion-input type="email" class="text" formControlName="email" placeholder="example@fitnyc.edu"></ion-input>
+            <ion-input type="email" class="text" formControlName="email" value="{{email}}" placeholder="example@fitnyc.edu"></ion-input>
           </ion-item>
           <br>
           <ion-item>
             <ion-label stacked>Password</ion-label>
-            <ion-input class="text" type="password" formControlName="password" placeholder="At least 12 numbers"></ion-input>
+            <ion-input class="text" type="password" formControlName="password" value="{{password}}" placeholder="At least 12 numbers"></ion-input>
 
           </ion-item>
           <p class="forgot"><ion-icon item-end name="ios-help-circle-outline"></ion-icon></p>
+
 
           <div class="padding">
             <button ion-button round type="submit" [disabled]="!loginForm.valid" color="light" block><span class="buttonText">Sign In</span></button>

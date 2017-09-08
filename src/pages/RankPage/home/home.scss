@@ -9,13 +9,17 @@ page-home {
     background-color: #ffffff;
 
   }
+  .notice{
+    margin-top: 60%;
+    font-weight: 300;
+  }
   .title{
     line-height: 130%;
   }
   .toolbar-title-ios {
     text-align: center;
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 900;
     color: #ff5733;
     pointer-events: auto;
   }
@@ -77,8 +81,9 @@ page-home {
     color:#FF5733;
   }
   .image {
-
+    display: flex;
     flex: 1;
+    align-items: center;
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
@@ -184,13 +189,15 @@ page-home {
     -ms-flex: 1;
     flex: 1;
     width: 0;
-    height: 3.2rem;
+
     border-width: 0px;
     border-style: solid;
     border-color: #ff5733;
     font-size: 1.3rem;
-    line-height: 3rem;
-    color: #ff5733;
+
+    height: 4.2rem;
+    line-height: 4.2rem;
+    color: #838383;
     background-color: transparent;
   }
   .segment-ios .segment-button:first-of-type {
@@ -208,6 +215,16 @@ page-home {
     margin-left: 0;
     border-left-width: 0;
   }
+  .segment-ios-primary .segment-button.segment-activated {
+    color: #ff5733;
+    font-weight: 900;
+    border-bottom: 2px solid;
+    background-color: white;
+  }
+  .segment-ios .segment-button {
+
+  }
+
   .myFitImage{
     width:100%;
     height:100%;

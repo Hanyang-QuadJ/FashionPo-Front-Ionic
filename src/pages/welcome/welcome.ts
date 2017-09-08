@@ -21,12 +21,12 @@ import {TabsPage} from "../tabs/tabs";
 export class WelcomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private statusBar: StatusBar,private storage:Storage) {
     this.statusBar.styleLightContent();
-    // this.storage.get('token').then((val) => {
-    //   const token = val;
-    //   if (token != null && token != '') {
-    //     this.navCtrl.setRoot(TabsPage);
-    //   }
-    // });
+    this.storage.get('token').then((val) => {
+      const token = val;
+      if (token != null && token != '') {
+        this.navCtrl.setRoot(TabsPage);
+      }
+    });
   }
 
   ionViewDidLoad() {

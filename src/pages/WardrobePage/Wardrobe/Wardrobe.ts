@@ -8,6 +8,8 @@ import {FavoriteTabPage} from "../../WardrobePage/favorite-tab/favorite-tab";
 import {SettingsPage} from "../../WardrobePage/settings/settings";
 import {WardrobeThisWeekPage} from '../../WardrobePage/wardrobe-this-week/wardrobe-this-week'
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
+import {FavoriteUserPage} from "../favorite-user/favorite-user";
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -49,6 +51,7 @@ export class WardrobePage implements OnInit{
     tab1: any = PostTabPage;
     tab2: any = FavoriteTabPage;
     date: Array<string> = [];
+    newTab:any;
     date2: Array<string> = [];
 
     checkThis = 0;
@@ -67,10 +70,12 @@ export class WardrobePage implements OnInit{
                 public loadingCtrl: LoadingController,
                 public platform: Platform) {
       this.thisWeekPostLength=false;
+      this.newTab = "fit";
 
 
     }
     ngOnInit(): void {
+
     }
     Settings() {
         this.navCtrl.push(SettingsPage, {users: this.user}, {});
@@ -135,7 +140,13 @@ export class WardrobePage implements OnInit{
         else{
           this.thisWeekPostLength = false;
         }
-        this.loaded = true;
+        if(this.mypostlist.length === 0 || this.mypostlist === undefined){
+          this.loaded = true;
+        }
+        else{
+          this.loaded = false;
+        }
+
       });
       this.fetchDatas.getData('/user/favorite').then(data=>{
         if (data.favorites === undefined || data.favorites.length == 0) {
@@ -147,7 +158,7 @@ export class WardrobePage implements OnInit{
           this.passId = data.favorites;
           this.fetchDatas.postData('/user',{users:data.favorites}).then(data=>{
             this.favorites = data;
-            this.loadedd = true;
+            this.loadedd = false;
             loading.dismiss();
           })
         }
@@ -166,6 +177,36 @@ export class WardrobePage implements OnInit{
     });
     thisWeekModal.present();
   };
+  presentProfileModal(i) {
+
+    let profileModal = this.modalCtrl.create(WardrobePhotoPage, { postList:this.mypostlist.slice().reverse(), postListIndex:i,},{leaveAnimation:'back'});
+    profileModal.onDidDismiss((check)=>{
+      if(check === "check"){
+        this.fetchData();
+      }
+    });
+    profileModal.present();
+
+  }
+  presentFavModal(i) {
+    let profileModal = this.modalCtrl.create(FavoriteUserPage, {favList: this.favorites[i]}, {leaveAnimation: 'back'});
+    profileModal.onDidDismiss((renewedData) => {
+      if (renewedData === "Renewed") {
+        console.log(renewedData);
+        let loading = this.loadingCtrl.create({
+          showBackdrop: false, spinner: 'crescent',
+        });
+        loading.present();
+        this.fetchData();
+
+      }
+      else if(renewedData === "notRenewed"){
+        console.log(renewedData);
+      }
+    });
+    profileModal.present();
+
+  }
 
     refreshViewCnt() {
       this.today_disable = true;

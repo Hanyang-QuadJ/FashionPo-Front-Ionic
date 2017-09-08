@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,App,ModalController } from 'ionic-angular';
+import { NavController, NavParams,App,ModalController,LoadingController,AlertController } from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPage} from "../../AuthPage/login/login";
 import {UsernamePage} from "./UsernameChangePage/username";
@@ -7,6 +7,9 @@ import {UserProfileChange} from "./UserProfileChangePage/userprofile";
 import {PasswordChangePage} from "./PasswordChangePage/password";
 import {ChangeWardrobeNamePage} from "./WardrobeNameChangePage/wardrobename";
 import {IntroduceChangePage} from "./IntroduceChangePage/introduce";
+import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+
+
 
 /**
  * Generated class for the SettingsPage page.
@@ -24,9 +27,38 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app: App,
+              public loadingCtrl: LoadingController,
               public modalCtrl: ModalController,
+              public fetchDatas : FetchDataProvider,
+              public alertCtrl : AlertController,
               private storage: Storage) {
-    this.user = this.navParams.get('users');
+
+    this.fetchDatas.getData('/user/authed').then(data=>{
+      this.user = data.user[0]
+    })
+
+  }
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm Delete',
+      message: 'Do you want to Sign Out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Sign Out',
+          handler: () => {
+            this.logOut();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
   logOut() {
     this.storage.set('token', null);
@@ -42,28 +74,88 @@ export class SettingsPage {
   }
   presentUsernameModal() {
     let profileModal = this.modalCtrl.create(UsernamePage, { },{leaveAnimation:'back'});
+    profileModal.onDidDismiss(()=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
+      this.fetchDatas.getData('/user/authed').then(data=>{
+        this.user = data.user[0];
+        loading.dismiss();
+      })
+
+
+    });
     profileModal.present();
 
   }
 
   presentUserProfileModal() {
     let profileModal = this.modalCtrl.create(UserProfileChange, { },{leaveAnimation:'back'});
+    profileModal.onDidDismiss(()=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
+      this.fetchDatas.getData('/user/authed').then(data=>{
+        this.user = data.user[0];
+        loading.dismiss();
+      })
+
+
+    });
     profileModal.present();
 
   }
 
   presentPasswordModal() {
     let profileModal = this.modalCtrl.create(PasswordChangePage, { },{leaveAnimation:'back'});
+    profileModal.onDidDismiss(()=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
+      this.fetchDatas.getData('/user/authed').then(data=>{
+        this.user = data.user[0];
+        loading.dismiss();
+      })
+
+
+    });
     profileModal.present();
   }
 
   presentWardrobeModal() {
     let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, { },{leaveAnimation:'back'});
+    profileModal.onDidDismiss(()=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
+      this.fetchDatas.getData('/user/authed').then(data=>{
+        this.user = data.user[0];
+        loading.dismiss();
+      })
+
+
+    });
     profileModal.present();
   }
 
   presentIntroduceModal() {
     let profileModal = this.modalCtrl.create(IntroduceChangePage, { },{leaveAnimation:'back'});
+    profileModal.onDidDismiss(()=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
+      this.fetchDatas.getData('/user/authed').then(data=>{
+        this.user = data.user[0];
+        loading.dismiss();
+      })
+
+
+    });
     profileModal.present();
   }
 }

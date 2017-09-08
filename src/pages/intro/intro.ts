@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {TagPage} from "../tag/tag";
 import {TabsPage} from "../tabs/tabs";
+import {StatusBar} from "@ionic-native/status-bar";
 import {FetchDataProvider} from "../../providers/fetch-data/fetch-data";
 
 /**
@@ -18,7 +19,8 @@ import {FetchDataProvider} from "../../providers/fetch-data/fetch-data";
 })
 export class IntroPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public fetchDatas: FetchDataProvider) {
+  constructor(public navCtrl: NavController, public statusBar: StatusBar,public navParams: NavParams, public fetchDatas: FetchDataProvider) {
+    this.statusBar.styleDefault;
   }
 
   ionViewDidLoad() {

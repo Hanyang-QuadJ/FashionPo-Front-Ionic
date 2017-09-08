@@ -57,6 +57,7 @@ export class HomePage implements OnInit {
   search: string = "";
   try: boolean = false;
   nameCheck: Array<any> = [];
+  rankEmpty:boolean;
 
   firstButton: boolean;
 
@@ -71,7 +72,7 @@ export class HomePage implements OnInit {
               private app: App,
               public loadingCtrl: LoadingController,
               public viewCtrl: ViewController) {
-    this.search = "User";
+    this.search = "user";
     this.historyRank = this.navParams.get('rankSheet');
   }
 
@@ -89,6 +90,7 @@ export class HomePage implements OnInit {
     this.search = "User";
     this.pushPage = VotePage;
     this.toggled = false;
+    this.rankEmpty = false;
     this.searchToggled = false;
     this.initializeItems();
     //Fetch Data Start!
@@ -96,6 +98,11 @@ export class HomePage implements OnInit {
       let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
       loading.present();
       this.fetchDatas.getData('/rank').then(data => {
+
+        if(data.posts === undefined || data.posts.length === 0){
+          this.rankEmpty = true;
+          loading.dismiss();
+        }
         for (let d = 0; d < data.posts.length; d++) {
           this.oriRank[d] = data.posts[d];
         }

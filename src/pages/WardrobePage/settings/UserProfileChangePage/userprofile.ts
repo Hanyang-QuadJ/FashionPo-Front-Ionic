@@ -32,6 +32,7 @@ export class UserProfileChange {
               private http: Http,
               public toastCtrl: ToastController,
               public camera: Camera,
+              public loadingCtrl: LoadingController,
               public fetchDatas: FetchDataProvider,
               public actionSheetCtrl: ActionSheetController
   ) {
@@ -48,28 +49,7 @@ export class UserProfileChange {
     this.viewCtrl.dismiss()
   }
   public presentActionSheet() {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Select Image Source',
-      buttons: [
-        {
-          text: 'Load from Library',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-          }
-        },
-        {
-          text: 'Use Camera',
-          handler: () => {
-            this.takePicture(this.camera.PictureSourceType.CAMERA);
-          }
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        }
-      ]
-    });
-    actionSheet.present();
+    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
   }
   pictureTaken :boolean = false;
   public takePicture(sourceType){
@@ -87,14 +67,21 @@ export class UserProfileChange {
       // imageData is a base64 encoded string
       this.base64Image = "data:image/jpeg;base64," + imageData;
       this.pictureTaken = true;
+
       let cameraImageSelector = document.getElementById('camera-image');
       cameraImageSelector.setAttribute('src', this.base64Image);
+
     })
   }
   update() {
     this.fetchDatas.getData('/user/authed').then(data=>{
+      let loading = this.loadingCtrl.create({
+        showBackdrop: true, spinner: 'crescent',
+      });
+      loading.present();
       this.email = data.user[0].email;
       this.fetchDatas.postData('/user/update/profile',{base_64: this.base64Image, email: this.email}).then(data=>{
+        loading.dismiss();
         let toast = this.toastCtrl.create({
           message: 'update success',
           duration: 2000

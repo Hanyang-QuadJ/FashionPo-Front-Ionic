@@ -90,6 +90,7 @@ $loading-ios-background:#ffffff;
 //$button-round-padding-top:100px;
 $loading-ios-spinner-ios-color:#ffffff;
 $loading-ios-spinner-crescent-color:#ff5733;
+$segment-button-ios-height: 4.2rem;
 
 //$text-input-placeholder-color:rgba(255,255,255,0.5);
 
@@ -99,9 +100,19 @@ $loading-ios-spinner-crescent-color:#ff5733;
 
   // Fonts
 // --------------------------------------------------
+@font-face {
+  font-family: "AppFont";
+  src: url("../assets/fonts/Gotham Light.otf");
+
+}
+$font-family-ios-base: "AppFont";
+$segment-button-ios-transition-hover:0ms;
+$segment-button-ios-opacity-hover:0;
+
 
 @import "roboto";
 @import "noto-sans";
+
 @import "../pages/RankPage/home/home";
 @import "../pages/AuthPage/login/login";
 @import "../pages/welcome/welcome";

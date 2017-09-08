@@ -31,6 +31,8 @@ export class LoginPage {
   loginForm : FormGroup;
   check:any;
   back:boolean=false;
+  email:any="";
+  password:any="";
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -43,6 +45,8 @@ export class LoginPage {
               public fb: FormBuilder) {
     this.statusBar.styleLightContent();
     this.check = this.navParams.get('check');
+    this.email = this.navParams.get('email');
+    this.password = this.navParams.get('password');
 
 
     this.loginForm = this.fb.group({
@@ -106,10 +110,10 @@ export class LoginPage {
         data => {
           this.storage.set('token', data.token).then((val)=>{
             let APIUrl_2 = 'user/tutorial/value';
-            if (this.platform.is('ios') == true){
-              APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/tutorial/value';
-              // console.log('yes');
-            }
+            // if (this.platform.is('ios') == true){
+            //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/tutorial/value';
+            //   // console.log('yes');
+            // }
             let headers2 = new Headers();
             headers2.append('Content-Type', 'application/json');
             headers2.append('x-access-token', val);

@@ -31,15 +31,23 @@ export class IntroduceChangePage {
               public toastCtrl: ToastController,
               public fetchDatas: FetchDataProvider,) {
     this.usernameForm = this.fb.group({
-      username: ['', Validators.compose([Validators.required])],
+      username: ['', Validators.compose([Validators.maxLength(100),Validators.required])],
 
     });
   }
 
   ngOnInit(): void {
     this.fetchDatas.getData('/user/authed').then(data => {
-      this.usernameForm.value.username = data.user[0].username;
-      this.usernameForm.setValue({username: data.user[0].introduce});
+
+      console.log(data.user[0].introduce);
+      if(!data.user[0].introduce){
+        console.log(data.user[0].introduce);
+        this.usernameForm.setValue({username:''});
+
+      }
+      else{
+        this.usernameForm.setValue({username: data.user[0].introduce});
+      }
       this.loaded = true;
     });
   }
