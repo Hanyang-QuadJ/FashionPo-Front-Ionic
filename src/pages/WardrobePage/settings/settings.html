@@ -77,7 +77,8 @@
     <ion-list-header>Settings</ion-list-header>
     <ion-item>
       <ion-label><h4>Show Favorites</h4></ion-label>
-      <ion-toggle checked="false" color="primary"></ion-toggle>
+      <ion-toggle [(ngModel)]="showFavorite" (ngModelChange)="toggleFavorite()" color="primary"></ion-toggle>
+
     </ion-item>
   </ion-list>
 

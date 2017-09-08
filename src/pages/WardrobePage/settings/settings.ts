@@ -23,7 +23,8 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
   templateUrl: 'settings.html',
 })
 export class SettingsPage {
-  user: object = {};
+  user: any = {};
+  showFavorite: Boolean;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private app: App,
@@ -34,10 +35,25 @@ export class SettingsPage {
               private storage: Storage) {
 
     this.fetchDatas.getData('/user/authed').then(data=>{
-      this.user = data.user[0]
+      this.user = data.user[0];
+      this.showFavorite = this.user.showFavorite;
+      console.log(this.user);
     })
 
   }
+  toggleFavorite() {
+    if (this.showFavorite) {
+      this.fetchDatas.getData('/user/favorite/show').then(data=> {
+        console.log(data);
+      })
+    }
+      else {
+          this.fetchDatas.getData('/user/favorite/hide').then(data=> {
+              console.log(data);
+          })
+      }
+  }
+
   presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Confirm Delete',
