@@ -153,7 +153,7 @@ page-register {
     -ms-flex: 1;
     flex: 1;
     width: 0;
-    height: 3.2rem;
+    height: 4.2rem;
     border-bottom: 0.55px rgba(0,0,0,0.1) solid;
     border-width: 0.55px;
     border-top: 0px;
@@ -162,7 +162,7 @@ page-register {
     border-style: solid;
 
     font-size: 1.3rem;
-    line-height: 3rem;
+    line-height: 5rem;
     color: #838383;
     background-color: transparent;
   }
@@ -187,10 +187,7 @@ page-register {
     border-bottom: 2px solid;
     background-color: white;
   }
-  .segment-ios .segment-button {
-    height: 4.2rem;
-    line-height: 4.5rem;
-  }
+
 
 
 }

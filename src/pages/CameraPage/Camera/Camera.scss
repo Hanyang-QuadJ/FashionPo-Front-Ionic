@@ -1,13 +1,33 @@
 page-camera {
-  textarea {
+  .comment{
     max-width: 100%;
     width: 100%;
-    height: 15vh;
-  },
+    height: 10vh;
+  }
+
+
 
   .toolbar-background {
     background-color: #ffffff;
 
+  }
+  .tag{
+    max-width: 100%;
+    width: 100%;
+    height: 5vh;
+
+    color: #70A3D6;
+    .text-input::-moz-placeholder {
+      color: #70A3D6;
+    }
+
+    .text-input:-ms-input-placeholder {
+      color: #70A3D6;
+    }
+
+    .text-input::-webkit-input-placeholder {
+      color: #70A3D6;
+    }
   }
   .toolbar-title-ios {
     text-align: center;

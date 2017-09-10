@@ -10,7 +10,7 @@
     <ion-title tappable (click)="presentWardrobeModal(posts[0].writtenBy)" *ngIf="user">{{user.wardrobeName}}</ion-title>
     <ion-buttons end>
       <button (click)="Rank()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-down"></ion-icon>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
@@ -40,12 +40,11 @@
         <ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
           <img  style="/*magic*/" (click)="blur($event)" *ngIf=" user && post" src="{{ post.picURL }}">
 
-
-
           <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
           <ion-card-content>
               <h2 tappable *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.username}}</h2>
               <p>{{parsingDate(post.writtenAt)}}</p>
+              <p>{{post.comment}}</p>
               <span  tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag)">{{tag.tag}}  </span>
           </ion-card-content>
         </ion-card>

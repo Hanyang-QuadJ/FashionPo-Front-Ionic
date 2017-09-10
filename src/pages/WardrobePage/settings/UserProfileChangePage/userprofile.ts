@@ -49,7 +49,33 @@ export class UserProfileChange {
     this.viewCtrl.dismiss()
   }
   public presentActionSheet() {
-    this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Profile Image',
+      buttons: [
+        {
+          text: 'Delete current image',
+          role: 'destructive',
+          handler: () => {
+            this.fetchDatas.postData('/user/remove/profile',{}).then(data=>{
+              this.viewCtrl.dismiss();
+            })
+          }
+        },{
+          text: 'Choose picture from library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
   pictureTaken :boolean = false;
   public takePicture(sourceType){

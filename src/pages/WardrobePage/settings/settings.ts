@@ -56,7 +56,7 @@ export class SettingsPage {
 
   presentConfirm() {
     let alert = this.alertCtrl.create({
-      title: 'Confirm Delete',
+      title: 'Sign Out',
       message: 'Do you want to Sign Out?',
       buttons: [
         {

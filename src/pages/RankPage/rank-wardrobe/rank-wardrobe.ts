@@ -6,6 +6,7 @@ import {Storage} from '@ionic/storage';
 import {RankPhotoPage} from "./rank-photo/rank-photo";
 import {RankThisWeekPage} from "./rank-this-week/rank-this-week";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {FavoriteUserPage} from "../../WardrobePage/favorite-user/favorite-user";
 
 
 /**
@@ -31,17 +32,13 @@ export class RankWardrobePage {
   rank:Array<any>=[];
   rankNumber:any="";
   top:Array<any>=[];
-  date: Array<string> = [];
-  date2: Array<string> = [];
-  dateFinal: Array<object> = [];
-  dateFinal2: Array<object> = [];
-  year: Array<any> = [];
-  year2: Array<any> = [];
-  startDay: Array<any> = [];
-  endDay: Array<any> = [];
-  endDay2: Array<any> = [];
-  month: Array<any> = [];
-  month2: Array<any> = [];
+  loaded:boolean;
+  loadedd:boolean;
+  favorites:any;
+  showFavorite:boolean;
+  newTab:any;
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl:ViewController,private http: Http, private storage:Storage,
@@ -52,13 +49,15 @@ export class RankWardrobePage {
     this.user_id = this.navParams.get('user_id');
     this.ranks = this.navParams.get('ranks');
     this.rank = this.navParams.get('rank');
+    this.newTab = 'fit';
+
+
     this.rankNumber = this.navParams.get('rankNumber');
     this.weekCheck = false;
     this.posts=[];
     this.thisWeekPost=[];
     if(this.user_id===undefined){
-      this.date=[];
-      this.date2=[];
+
       this.top=[];
       this.posts=[];
       this.thisWeekPost=[];
@@ -74,7 +73,7 @@ export class RankWardrobePage {
         this.user = data[0]
       });
       this.fetchDatas.postData('/post/userid',{_id:[this.ranks._id]}).then(data=>{
-        for(var i = 0; i<data.length;i++){
+        for(let i = 0; i<data.length;i++){
           if(data[i].isThisWeek===true){
             this.thisWeekPost.push(data[i]);
           }
@@ -84,6 +83,19 @@ export class RankWardrobePage {
         }
         if(this.thisWeekPost.length===0){
           this.weekCheck = true;
+        }
+        if(this.posts.length===0 || this.posts === undefined){
+          this.loaded = true;
+        }
+        if(this.ranks.favorites.length === 0 || this.ranks.favorites === undefined){
+          this.loadedd = true;
+        }
+        else{
+          console.log('favorite Check!');
+          this.fetchDatas.postData('/user',{users:this.ranks.favorites}).then(data=>{
+            this.favorites = data;
+          });
+
         }
         loading.dismiss();
 
@@ -92,30 +104,49 @@ export class RankWardrobePage {
     }
 
     else if(this.user_id!==undefined){
-      let loading = this.loadingCtrl.create({showBackdrop:false,cssClass:'loading',spinner:'crescent'});
+      console.log("YES");
+      console.log(this.user_id);
+      let loading = this.loadingCtrl.create({showBackdrop:true,cssClass:'loading',spinner:'crescent'});
       loading.present();
       this.posts=[];
       this.thisWeekPost=[];
 
       this.fetchDatas.postData('/user',{users: [this.user_id._id]}).then(data=>{
-        this.user = data[0]
-      });
-
-      this.fetchDatas.postData('/post/userid',{_id:this.user_id._id}).then(data=>{
-        for(var i = 0; i<data.length;i++){
-          if(data[i].isThisWeek===true){
-            this.thisWeekPost.push(data[i]);
+        this.user = data[0];
+        if(this.user.showFavorite === false){
+          this.showFavorite = true;
+        }
+        this.fetchDatas.postData('/post/userid',{_id:this.user._id}).then(data=>{
+          for(let i = 0; i<data.length;i++){
+            if(data[i].isThisWeek===true){
+              this.thisWeekPost.push(data[i]);
+            }
+            else{
+              this.posts.push(data[i]);
+            }
+          }
+          if(this.thisWeekPost.length===0){
+            this.weekCheck = true;
+          }
+          if(this.posts.length===0 || this.posts === undefined){
+            this.loaded = true;
+          }
+          if(this.user.favorites.length === 0 || this.user.favorites === undefined){
+            this.loadedd = true;
           }
           else{
-            this.posts.push(data[i]);
-          }
-        }
-        if(this.thisWeekPost.length===0){
-          this.weekCheck = true;
-        }
-        loading.dismiss();
+            console.log('favorite Check!');
+            console.log(this.user.favorites);
+            this.fetchDatas.postData('/user',{users:this.user.favorites}).then(data=>{
+              this.favorites = data;
+            });
 
+          }
+          loading.dismiss();
+        });
       });
+
+
 
 
 
@@ -144,6 +175,11 @@ export class RankWardrobePage {
     let profileModal = this.modalCtrl.create(RankPhotoPage, { postList:this.posts.slice().reverse(),postListIndex:'fit'+i},{leaveAnimation:'back'});
     profileModal.present();
 
+  }
+
+  presentUserModal(i){
+    let userModal = this.modalCtrl.create(FavoriteUserPage,{favList:this.favorites[i]},{leaveAnimation:'back'});
+    userModal.present();
   }
 
   presentThisWeekModal(i){

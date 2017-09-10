@@ -188,7 +188,7 @@ export class VotePage implements OnInit {
   }
 
   Rank() {
-    this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(TabsPage,{},{animate:true, direction:'forward'});
   }
 
   showToast(position: string, message: string) {

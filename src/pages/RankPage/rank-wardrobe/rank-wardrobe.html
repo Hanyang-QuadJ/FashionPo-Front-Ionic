@@ -11,7 +11,7 @@
   Ionic pages and navigation.
 -->
 <ion-header no-border>
-  <ion-navbar>
+  <ion-toolbar>
     <ion-buttons start>
       <button (click)="dismiss()"  ion-button icon-only color="primary">
         <ion-icon name="ios-arrow-back"></ion-icon>
@@ -20,7 +20,7 @@
     <ion-title>
       {{user.wardrobeName}}
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 
 </ion-header>
 
@@ -50,16 +50,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <hr>
-  <p class="infoText">Outfits of the week</p>
+  <hr *ngIf="!weekCheck">
+  <p *ngIf="!weekCheck" class="infoText">Outfits of the week</p>
 
-  <ion-grid *ngIf="weekCheck">
-    <ion-row>
-      <ion-col text-center>
-        <h4 class="no">There are no fits</h4>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
 
   <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
@@ -67,15 +61,66 @@
     </ion-slide>
   </ion-slides>
 
+  <ion-segment [(ngModel)]="newTab" color="primary" no-padding>
+    <ion-segment-button value="fit">
+      <ion-icon name="md-apps"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      <ion-icon name="md-star"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
 
-  <p class="infoText">Fits</p>
-  <ion-grid no-padding>
-    <ion-row wrap no-padding>
-      <ion-col col-4 col-4 align-self-center *ngFor="let post of posts.slice().reverse(); let i = index">
-        <img tappable (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div [ngSwitch]="newTab">
+    <div *ngSwitchCase="'fit'">
+      <ion-grid *ngIf="loaded">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>There are no past outfits.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid no-padding>
+        <ion-row wrap no-padding>
+          <ion-col col-4 align-self-center *ngFor="let post of posts.slice().reverse(); let i = index">
+            <button class="btn" (click)="presentFavModal(i)"><img class="myFitImage" src={{post.picURL}}></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'favorites'">
+      <ion-grid *ngIf="loadedd">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>There are no favorite users.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="showFavorite">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>Not opened</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-list *ngIf="!showFavorite" inset>
+        <button (click)="presentUserModal(i)" *ngFor="let favorite of favorites; let i = index;" ion-item>
+          <ion-avatar item-start>
+            <img src="{{favorite.profile_img}}">
+          </ion-avatar>
+          <h5>{{favorite.wardrobeName}}</h5>
+          <p>{{favorite.username}}</p>
+        </button>
+      </ion-list>
+    </div>
+  </div>
+
+
+
 
 
 

@@ -29,9 +29,11 @@ export class CameraPage implements OnInit{
   backButton: any="";
 
   tags: any = [];
+  comment: String;
   uploadCheck:boolean=false;
 
   public tagsInput:any;
+  public postText:any;
 
 
   constructor(private http: Http,
@@ -51,7 +53,9 @@ export class CameraPage implements OnInit{
   {
 
     this.tagsInput="";
+
     this.base64Image="";
+    this.comment="";
     if(this.navParams.get('fromWardrobe')==="check"){
       this.backButton = true;
     }
@@ -71,6 +75,7 @@ export class CameraPage implements OnInit{
     this.tags=[];
     this.tagsInput="";
     this.base64Image="";
+    this.comment="";
     this.uploadCheck = true;
     let cameraImageSelector = document.getElementById('camera-image');
     cameraImageSelector.setAttribute('src', '');
@@ -139,7 +144,7 @@ export class CameraPage implements OnInit{
       for(var j = 0; j<myArray2.length; j++){
         this.tags.push({'tag':myArray2[j]})
       }
-      this.fetchDatas.postData('/post/create',{base_64: this.base64Image, tags:this.tags}).then(data=>{
+      this.fetchDatas.postData('/post/create',{base_64: this.base64Image, tags:this.tags, comment:this.comment}).then(data=>{
         this.uploadCheck = true;
         let toast = this.toastCtrl.create({
           message: 'upload success',

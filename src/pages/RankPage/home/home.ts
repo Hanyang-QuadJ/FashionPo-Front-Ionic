@@ -338,8 +338,8 @@ export class HomePage implements OnInit {
   }
 
   Vote() {
-    let voteModal = this.modalCtrl.create(VotePage, {leaveAnimation: 'back'});
-    voteModal.present();
+    this.navCtrl.parent.parent.setRoot(VotePage,{},{animate:true,direction:'back'});
+
   }
 
   //Toggles & scrolls

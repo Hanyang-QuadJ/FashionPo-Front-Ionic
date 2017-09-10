@@ -7,96 +7,141 @@
 
 
 <ion-header no-border>
-    <ion-toolbar>
-        <ion-buttons start>
-            <button (click)="dismiss()" ion-button icon-only color="primary">
-                <ion-icon name="ios-arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
-        <ion-title *ngIf="User">
-            {{User.wardrobeName}}
-        </ion-title>
-        <ion-buttons end>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="dismiss()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title *ngIf="User">
+      {{User.wardrobeName}}
+    </ion-title>
+    <ion-buttons end>
 
 
-        </ion-buttons>
+    </ion-buttons>
 
-    </ion-toolbar>
+  </ion-toolbar>
 
 </ion-header>
 
 <ion-content>
 
-        <ion-grid>
-            <ion-row justify-content-center align-items-center>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center>
 
-                <ion-col col-5 text-center>
-                    <img tappable *ngIf="User" class="image" src="{{User.profile_img}}" imageViewer>
-                </ion-col>
-                <ion-col col-7>
-                    <div class="padding">
-                        <!--<h5 class="userName">{{user.username}}</h5>-->
-                        <h5 *ngIf="User" class="userName">{{User.username}}</h5>
+      <ion-col col-5 text-center>
+        <img tappable *ngIf="User" class="image" src="{{User.profile_img}}" imageViewer>
+      </ion-col>
+      <ion-col col-7>
+        <div class="padding">
+          <!--<h5 class="userName">{{user.username}}</h5>-->
+          <h5 *ngIf="User" class="userName">{{User.username}}</h5>
 
-                        <p *ngIf="User" class="profileText">{{User.introduce}}</p>
+          <p *ngIf="User" class="profileText">{{User.introduce}}</p>
 
-                        <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">
-                            <ion-spinner color="light" name="circles"></ion-spinner>
-                        </button>
+          <button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
+                  (click)="refreshViewCnt()">
+            <ion-spinner color="light" name="circles"></ion-spinner>
+          </button>
 
-                        <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">
-                            <ion-spinner name="circles"></ion-spinner>
-                        </button>
-                        <button *ngIf="button_loaded&&!view_cnt&&User&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">Today {{User.viewCnt}}
-                        </button>
-                        <button *ngIf="button_loaded&&view_cnt&&today_disable" [disabled]="true" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">Today {{view_cnt}}
-                        </button>
-                        <button *ngIf="button_loaded&&!view_cnt&&User&&!today_disable" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">Today {{User.viewCnt}}
-                        </button>
-                        <button *ngIf="button_loaded&&view_cnt&&!today_disable" class="add" ion-button small color="primary"
-                                (click)="refreshViewCnt()">Today {{view_cnt}}
-                        </button>
-                        <button *ngIf="!button" (click)="addFavorite()" class="add" [disabled]="try" ion-button small
-                                outline color="sub">add
-                        </button>
-                        <button *ngIf="button" (click)="removeFavorite()" class="add" [disabled]="try" ion-button small
-                                color="sub">added
-                        </button>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <hr>
+          <button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="primary"
+                  (click)="refreshViewCnt()">
+            <ion-spinner name="circles"></ion-spinner>
+          </button>
+          <button *ngIf="button_loaded&&!view_cnt&&User&&today_disable" [disabled]="true" class="add" ion-button small
+                  color="primary"
+                  (click)="refreshViewCnt()">Today {{User.viewCnt}}
+          </button>
+          <button *ngIf="button_loaded&&view_cnt&&today_disable" [disabled]="true" class="add" ion-button small
+                  color="primary"
+                  (click)="refreshViewCnt()">Today {{view_cnt}}
+          </button>
+          <button *ngIf="button_loaded&&!view_cnt&&User&&!today_disable" class="add" ion-button small color="primary"
+                  (click)="refreshViewCnt()">Today {{User.viewCnt}}
+          </button>
+          <button *ngIf="button_loaded&&view_cnt&&!today_disable" class="add" ion-button small color="primary"
+                  (click)="refreshViewCnt()">Today {{view_cnt}}
+          </button>
+          <button *ngIf="!button" (click)="addFavorite()" class="add" [disabled]="try" ion-button small
+                  outline color="sub">add
+          </button>
+          <button *ngIf="button" (click)="removeFavorite()" class="add" [disabled]="try" ion-button small
+                  color="sub">added
+          </button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <hr>
 
 
-        <p class="infoText">This Week's Fits</p>
+  <p *ngIf="!weekCheck" class="infoText">This Week's Fits</p>
 
-        <ion-grid *ngIf="weekCheck">
-          <ion-row>
-            <ion-col text-center>
-              <h4 class="no">There are no fits</h4>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-        <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
-          <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
-            <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" >
-          </ion-slide>
-        </ion-slides>
 
-        <p class="infoText">Fits</p>
-        <ion-grid no-padding>
-            <ion-row wrap no-padding>
-                <ion-col  col-4 align-self-center col-4 *ngFor="let post of posts.slice().reverse(); let i = index">
-                    <img (click)="presentFavModal(i)" class="myFitImage" src={{post.picURL}}>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+  <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
+    <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
+      <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}">
+    </ion-slide>
+  </ion-slides>
+
+  <ion-segment [(ngModel)]="newTab" color="primary" no-padding>
+    <ion-segment-button value="fit">
+      <ion-icon name="md-apps"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="favorites">
+      <ion-icon name="md-star"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="newTab">
+    <div *ngSwitchCase="'fit'">
+      <ion-grid *ngIf="loaded">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>There are no past outfits.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid no-padding>
+        <ion-row wrap no-padding>
+          <ion-col col-4 align-self-center *ngFor="let post of posts.slice().reverse(); let i = index">
+            <button class="btn" (click)="presentFavModal(i)"><img class="myFitImage" src={{post.picURL}}></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'favorites'">
+      <ion-grid *ngIf="loadedd">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>There are no favorite users.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="showFavorite">
+        <br><br>
+        <ion-row>
+          <ion-col text-center>
+            <p>Not opened</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-list *ngIf="!showFavorite" inset>
+        <button (click)="presentUserModal(i)" *ngFor="let favorite of favorites; let i = index;" ion-item>
+          <ion-avatar item-start>
+            <img src="{{favorite.profile_img}}">
+          </ion-avatar>
+          <h5>{{favorite.wardrobeName}}</h5>
+          <p>{{favorite.username}}</p>
+        </button>
+      </ion-list>
+    </div>
+  </div>
 
 </ion-content>
 

@@ -30,6 +30,8 @@
 
     <ion-card-content>
       <span class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
+      <p>{{post.comment}}</p>
+
     </ion-card-content>
 
     <ion-item>

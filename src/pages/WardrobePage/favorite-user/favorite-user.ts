@@ -5,6 +5,7 @@ import {Http, Headers} from '@angular/http';
 import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite-user-post'
 import {FavoriteUserThisWeekPage} from '../favorite-user/favorite-user-this-week/favorite-user-this-week';
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {RankWardrobePage} from "../../RankPage/rank-wardrobe/rank-wardrobe";
 
 
 /**
@@ -29,6 +30,11 @@ export class FavoriteUserPage implements OnInit {
   button:boolean = false;
   try:boolean = false;
   weekCheck: boolean;
+  showFavorite: boolean;
+  favorites: any;
+  newTab:any;
+  loaded:boolean;
+  loadedd:boolean;
 
   checkPost: boolean;
   checkThis: any = "";
@@ -42,6 +48,7 @@ export class FavoriteUserPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.newTab = 'fit';
     this.posts = [];
     this.thisWeekPost = [];
     let loading = this.loadingCtrl.create({showBackdrop: false, cssClass: 'loading', spinner: 'crescent'});
@@ -55,8 +62,22 @@ export class FavoriteUserPage implements OnInit {
     this.fetchDatas.postData('/post/view',{user_id:[this.favUser._id]}).then(data=>{
     });
 
+    if(this.favUser.favorites.length === 0 || this.favUser.favorites === undefined){
+      this.loadedd = true;
+    }
+    else{
+      this.fetchDatas.postData('/user',{users:this.favUser.favorites}).then(data=>{
+        this.favorites = data;
+      });
+    }
+
+
+
     this.fetchDatas.postData('/user', {users: [this.favUser._id]}).then(data => {
       this.User = data[0];
+      if(this.User.showFavorite === false){
+        this.showFavorite = true;
+      }
       this.fetchDatas.getData('/user/authed').then(data => {
         if (data.user[0].favorites.indexOf(this.User._id) !== -1) {
           this.button = true;
@@ -78,6 +99,9 @@ export class FavoriteUserPage implements OnInit {
       }
       if (this.thisWeekPost.length === 0) {
         this.weekCheck = true;
+      }
+      if(this.posts.length === 0 || this.posts === undefined){
+        this.loaded = true;
       }
       loading.dismiss();
     });
@@ -102,6 +126,10 @@ export class FavoriteUserPage implements OnInit {
     }, {leaveAnimation: 'back'});
     profileModal.present();
 
+  }
+  presentUserModal(i){
+    let userModal = this.modalCtrl.create(RankWardrobePage,{user_id:this.favorites[i]},{leaveAnimation:'back'});
+    userModal.present();
   }
 
   presentThisWeekModal(i) {

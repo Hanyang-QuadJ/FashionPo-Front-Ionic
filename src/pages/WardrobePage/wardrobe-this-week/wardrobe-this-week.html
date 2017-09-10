@@ -28,6 +28,7 @@
     </button>
 
     <ion-card-content>
+      <p>{{post.comment}}</p>
       <span tappable  class="tag" *ngFor="let tag of post.tags  let j = index" (click)="goToTag(tag.tag,i)" > {{tag.tag}}</span>
     </ion-card-content>
 

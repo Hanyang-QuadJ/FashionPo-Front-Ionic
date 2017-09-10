@@ -24,29 +24,24 @@
 <ion-content>
   <ion-card>
     <ion-item text-center>
-      <button ion-button icon-start clear small outline (click)="presentActionSheet()" ><ion-icon name="camera"></ion-icon>Select Image</button>
+      <button ion-button icon-start clear small outline (click)="presentActionSheet()">
+        <ion-icon name="camera"></ion-icon>
+        Select Image
+      </button>
     </ion-item>
     <div *ngIf="!pictureTaken" style="display: none">
 
 
-      <img *ngIf="!uploadCheck" src="{{placeholderImage}}" />
+      <img *ngIf="!uploadCheck" src="{{placeholderImage}}"/>
       <!--<img src="../../../assets/images/post4.png">-->
     </div>
-    <img id="camera-image" />
+    <img id="camera-image"/>
     <ion-card-content>
-
-        <ion-textarea type="text" [(ngModel)]="tagsInput" placeholder="Share your caption and tags"></ion-textarea>
-
+      <ion-textarea class="tag" type="text" [(ngModel)]="tagsInput" placeholder="Share your tags"></ion-textarea>
+      <hr>
+      <ion-textarea  class="comment" type="text" [(ngModel)]="comment" placeholder="Share your caption"></ion-textarea>
     </ion-card-content>
-
-
-
   </ion-card>
-
   <!--<ion-item *ngIf="!pictureTaken" style="display: none;">-->
   <!--</ion-item>-->
-
-
-
-
 </ion-content>

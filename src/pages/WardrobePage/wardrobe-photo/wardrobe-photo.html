@@ -12,7 +12,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Past Fits</ion-title>
+    <ion-title>Outfits</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -30,7 +30,9 @@
         </button>
 
     <ion-card-content>
+      <p>{{post.comment}}</p>
       <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
+
     </ion-card-content>
 
     <ion-item>
