@@ -57,11 +57,13 @@ import {TagListPage} from "../pages/tag/tag-list/tag-list";
 import {IntroPage} from "../pages/intro/intro";
 import {IonicImageViewerModule} from 'ionic-img-viewer';
 import {WelcomePage} from '../pages/welcome/welcome';
-
+import {SignupNamePage} from "../pages/AuthPage/signup/signup-name/signup-name";
+import {SignupPasswordPage} from "../pages/AuthPage/signup/signup-password/signup-password";
 import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNameChangePage/wardrobename";
 import {TagPage} from '../pages/tag/tag'
 import {OrderModule} from "ngx-order-pipe";
 import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
+
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -79,6 +81,8 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         HomePage,
         TabsPage,
         WardrobeCameraPage,
+        SignupNamePage,
+        SignupPasswordPage,
 
         TagPage,
         TagListPage,
@@ -157,6 +161,8 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         ChangeWardrobeNamePage,
         IntroduceChangePage,
         TagPage,
+        SignupNamePage,
+        SignupPasswordPage,
     ],
     providers: [
         StatusBar,
@@ -168,6 +174,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         FilePath,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
     FetchDataProvider,
+
 
     ]
 

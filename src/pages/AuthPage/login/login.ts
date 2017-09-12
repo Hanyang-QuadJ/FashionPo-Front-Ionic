@@ -51,7 +51,7 @@ export class LoginPage {
 
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
-      password: ['', Validators.compose([Validators.minLength(12), Validators.required])]
+      password: ['', Validators.compose([Validators.minLength(8), Validators.required])]
     });
   }
 

@@ -28,7 +28,7 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 export class WardrobePhotoPage implements OnInit {
   @ViewChild(Content) content: Content;
   postList: any = "";
-  postListIndex: any = null;
+  postListIndex: any="" ;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,

@@ -1,0 +1,70 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="goBackToSignin()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="space"></div>
+
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col text-center>
+        <img class="logo" src="images/logoOrange.png">
+      </ion-col>
+    </ion-row>
+    <!--<ion-row>-->
+    <!--<ion-col text-center>-->
+    <!--<img class="profile" src="images/profile.png">-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+  </ion-grid>
+  <div class="space"></div>
+
+  <ion-list>
+    <!--<div padding>-->
+    <!--<button ion-button icon-left (click)="presentActionSheet()" block>-->
+    <!--<ion-icon name="camera"></ion-icon>Select Image-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--<ion-item *ngIf="!pictureTaken" style="display: none;">-->
+    <!--<img src="{{placeholderImage}}" />-->
+    <!--</ion-item>-->
+    <!--<img id="camera-image" />-->
+    <!--<button (click)="redundancyCheck()" ion-button item-end small>Check</button>-->
+
+
+    <form [formGroup]="loginForm">
+      <!--<ion-item>-->
+      <!--<ion-label stacked>Email</ion-label>-->
+      <!--<ion-input class="text" type="email" formControlName="email" placeholder="example@fitnyc.edu"></ion-input>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+      <!--<ion-label stacked>Wardrobe name</ion-label>-->
+      <!--<ion-input class="text" type="text" formControlName="wardrobename" placeholder="At least 2 letters"></ion-input>-->
+      <!--</ion-item>-->
+      <ion-item>
+        <ion-label stacked>User name (Optional)</ion-label>
+        <ion-input class="text" type="text" formControlName="username" placeholder="Your name here"></ion-input>
+      </ion-item>
+      <!--<ion-item>-->
+      <!--<ion-label stacked>Password</ion-label>-->
+      <!--<ion-input class="text" type="password" formControlName="password" placeholder="At least 12 letters"></ion-input>-->
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+      <!--<ion-label stacked>Confirm Password</ion-label>-->
+      <!--<ion-input class="text" type="password" formControlName="password2" placeholder="At least 12 letters"></ion-input>-->
+      <!--</ion-item>-->
+      <div class="padding">
+        <button ion-button round type="submit" [disabled]="!loginForm.valid" color="primary" block (click)="goToPassword()"><span class="buttonText">Next</span>
+        </button>
+      </div>
+    </form>
+
+  </ion-list>
+
+</ion-content>

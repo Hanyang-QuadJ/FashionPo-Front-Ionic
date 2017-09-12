@@ -98,7 +98,7 @@
       <ion-grid no-padding>
         <ion-row wrap>
           <ion-col col-4 align-self-center *ngFor="let post of mypostlist.slice().reverse(); let i = index">
-            <img tappable (click)="presentProfileModal()" class="myFitImage" src={{post.picURL}}>
+            <img tappable (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
           </ion-col>
         </ion-row>
       </ion-grid>

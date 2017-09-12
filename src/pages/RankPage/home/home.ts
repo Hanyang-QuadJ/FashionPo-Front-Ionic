@@ -10,6 +10,9 @@ import {HistoryListPage} from '../history-list/history-list'
 import {RankWardrobePage} from "../rank-wardrobe/rank-wardrobe";
 import {TagPage} from "../../tag/tag";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import * as moment from 'moment';
+import 'moment-timezone';
+import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
 
 /**
  * Generated class for the HomePage page.
@@ -36,6 +39,7 @@ export class HomePage implements OnInit {
   users: Array<any> = [];
   buttons: Array<any> = [];
   picURL: string = "";
+  date: any;
 
   order: string = 'tagCnt';
   writtenBys: Array<any> = [];
@@ -51,6 +55,8 @@ export class HomePage implements OnInit {
   loading: any;
   historyRank: any;
   firstCheck: boolean;
+  startDate:any;
+  endDate:any;
 
   firstPost: any;
   firstUser: any;
@@ -77,7 +83,8 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.startDate = moment().tz("America/New_York").startOf('week').format();
+    this.endDate = moment().tz("America/New_York").endOf('week').format();
   }
 
   ionViewWillEnter(){
@@ -306,17 +313,16 @@ export class HomePage implements OnInit {
   }
 
   presentWardrobeModal(i) {
-    let WardrobeModal = this.modalCtrl.create(RankWardrobePage, {
-      ranks: this.users[i],
-      rankNumber: i + 2,
-      rank: this.oriRank
+    let WardrobeModal = this.modalCtrl.create(VoteWardrobePage, {
+      user_id: this.users[i],
+
     }, {leaveAnimation: 'back'});
     WardrobeModal.present();
   }
 
   presentFirstModal() {
-    let profileModal = this.modalCtrl.create(RankWardrobePage, {
-      ranks: this.firstUser,
+    let profileModal = this.modalCtrl.create(VoteWardrobePage, {
+      user_id: this.firstUser,
       rank: this.oriRank
     }, {leaveAnimation: 'back'});
     profileModal.present();
@@ -327,7 +333,7 @@ export class HomePage implements OnInit {
   }
 
   presentSearchModal(i) {
-    let searchModal = this.modalCtrl.create(RankWardrobePage, {user_id: this.allUsers[i]}, {leaveAnimation: 'back'});
+    let searchModal = this.modalCtrl.create(VoteWardrobePage, {user_id: this.allUsers[i]}, {leaveAnimation: 'back'});
     searchModal.present();
   }
 
@@ -358,5 +364,96 @@ export class HomePage implements OnInit {
 
   scrollToTop() {
     this.content.scrollToTop();
+  }
+
+  parsingDate(date) {
+    let month;
+    let year;
+    let day;
+    //m d, y
+    year = date.substring(0, 4);
+    day = date.substring(8, 10);
+    if (date.substring(5, 7) === '01') {
+      month = 'Jan'
+    }
+    else if (date.substring(5, 7) === '02') {
+      month = 'Feb'
+    }
+    else if (date.substring(5, 7) === '03') {
+      month = 'Mar'
+    }
+    else if (date.substring(5, 7) === '04') {
+      month = 'Apr'
+    }
+    else if (date.substring(5, 7) === '05') {
+      month = 'May'
+    }
+    else if (date.substring(5, 7) === '06') {
+      month = 'Jun'
+    }
+    else if (date.substring(5, 7) === '07') {
+      month = 'Jul'
+    }
+    else if (date.substring(5, 7) === '08') {
+      month = 'Aug'
+    }
+    else if (date.substring(5, 7) === '09') {
+      month = 'Sep'
+    }
+    else if (date.substring(5, 7) === '10') {
+      month = 'Oct'
+    }
+    else if (date.substring(5, 7) === '11') {
+      month = 'Nov'
+    }
+    else if (date.substring(5, 7) === '12') {
+      month = 'Dec'
+    }
+    return month + " " + day
+  }
+  parsingDate2(date) {
+    let month;
+    let year;
+    let day;
+    //m d, y
+    year = date.substring(0, 4);
+    day = date.substring(8, 10);
+    if (date.substring(5, 7) === '01') {
+      month = 'Jan'
+    }
+    else if (date.substring(5, 7) === '02') {
+      month = 'Feb'
+    }
+    else if (date.substring(5, 7) === '03') {
+      month = 'Mar'
+    }
+    else if (date.substring(5, 7) === '04') {
+      month = 'Apr'
+    }
+    else if (date.substring(5, 7) === '05') {
+      month = 'May'
+    }
+    else if (date.substring(5, 7) === '06') {
+      month = 'Jun'
+    }
+    else if (date.substring(5, 7) === '07') {
+      month = 'Jul'
+    }
+    else if (date.substring(5, 7) === '08') {
+      month = 'Aug'
+    }
+    else if (date.substring(5, 7) === '09') {
+      month = 'Sep'
+    }
+    else if (date.substring(5, 7) === '10') {
+      month = 'Oct'
+    }
+    else if (date.substring(5, 7) === '11') {
+      month = 'Nov'
+    }
+    else if (date.substring(5, 7) === '12') {
+      month = 'Dec'
+    }
+    return  day + ", " + year;
   }
 }

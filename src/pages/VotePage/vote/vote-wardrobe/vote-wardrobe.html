@@ -73,17 +73,17 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <hr>
+  <hr *ngIf="!weekCheck">
 
 
-  <p *ngIf="!weekCheck" class="infoText">This Week's Fits</p>
-
-
-  <ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
+  <p *ngIf="!weekCheck" class="infoText">Outfits of the week</p>
+  <div *ngIf="!weekCheck">
+  <ion-slides class="image-slider" slidesPerView="3">
     <ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
       <img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}">
     </ion-slide>
   </ion-slides>
+  </div>
 
   <ion-segment [(ngModel)]="newTab" color="primary" no-padding>
     <ion-segment-button value="fit">
