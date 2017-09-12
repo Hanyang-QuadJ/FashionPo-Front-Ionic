@@ -43,6 +43,8 @@
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-filepath": "^1.0.2",
+        "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
+        "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
         "cordova-plugin-http": "^1.2.0",
         "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-photo-library": "^2.0.4",

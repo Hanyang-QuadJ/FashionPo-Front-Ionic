@@ -24,7 +24,7 @@ export class WelcomePage {
     this.storage.get('token').then((val) => {
       const token = val;
       if (token != null && token != '') {
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.push(TabsPage);
       }
     });
   }

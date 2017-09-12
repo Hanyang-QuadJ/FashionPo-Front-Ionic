@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams, Platform, ModalController, LoadingController} from 'ionic-angular';
 import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
@@ -29,7 +29,7 @@ import {FavoriteUserPage} from "../favorite-user/favorite-user";
 })
 
 
-export class WardrobePage implements OnInit{
+export class WardrobePage{
     public toggled: boolean;
     min:Number=null;
     checkRank:boolean;
@@ -71,25 +71,19 @@ export class WardrobePage implements OnInit{
                 public platform: Platform) {
       this.thisWeekPostLength=false;
       this.newTab = "fit";
+      this.mypostlist = [];
+      this.thisWeekPost = [];
 
 
     }
-    ngOnInit(): void {
 
-    }
     Settings() {
         this.navCtrl.push(SettingsPage, {users: this.user}, {});
     }
     test(){
       this.navCtrl.parent.select(1);
     }
-
-    ionViewWillEnter() {
-      this.fetchData();
-
-    }
-
-  public fetchData(){
+  fetchData(){
     this.mypostlist = [];
     this.checkRank = false;
     this.noneCheck = false;
@@ -98,15 +92,20 @@ export class WardrobePage implements OnInit{
     this.loaded = false;
     this.loadedd = false;
     this.option = "favorites";
+    console.log('1');
+    console.log(this.thisWeekPost);
     let loading = this.loadingCtrl.create({
       showBackdrop: true, spinner: 'crescent',
     });
     loading.present();
     this.fetchDatas.getData('/user/authed').then(data=>{
+      console.log('1.5');
+      console.log(data);
       this.user = data.user[0];
       this.userIntro = data.user[0].introduce;
       this.button_loaded = true;
       this.fetchDatas.getData('/rank').then(data=>{
+
         for(let i = 0; i<data.posts.length; i++){
           if(data.posts[i].writtenBy === this.user._id){
             this.top.push(i+1);
@@ -118,8 +117,12 @@ export class WardrobePage implements OnInit{
         else{
           this.min = Math.min(...this.top);
         }
+      },err=>{
+        console.log(err);
       });
       this.fetchDatas.getData('/post/myposts').then(data=>{
+        this.mypostlist = [];
+        this.thisWeekPost = [];
         if(data.posts.length === 0){
           this.noneCheck = true;
         }
@@ -146,6 +149,8 @@ export class WardrobePage implements OnInit{
         else{
           this.loaded = false;
         }
+        console.log('2');
+        console.log(this.thisWeekPost);
 
       });
       this.fetchDatas.getData('/user/favorite').then(data=>{
@@ -165,6 +170,13 @@ export class WardrobePage implements OnInit{
       })
     });
   }
+
+    ionViewWillEnter() {
+      console.log("Check DATA FETCH");
+      this.fetchData();
+    }
+
+
   presentThisWeekModal(i) {
     let thisWeekModal = this.modalCtrl.create(WardrobeThisWeekPage, {
       thisWeekPost: this.thisWeekPost.slice().reverse(),
@@ -193,10 +205,6 @@ export class WardrobePage implements OnInit{
     profileModal.onDidDismiss((renewedData) => {
       if (renewedData === "Renewed") {
         console.log(renewedData);
-        let loading = this.loadingCtrl.create({
-          showBackdrop: false, spinner: 'crescent',
-        });
-        loading.present();
         this.fetchData();
 
       }

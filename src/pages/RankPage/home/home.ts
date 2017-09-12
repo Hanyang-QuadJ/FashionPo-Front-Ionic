@@ -81,6 +81,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    console.log('Rank Data Check');
     this.firstCheck = false;
     this.modalCheck = false;
     this.users = [];

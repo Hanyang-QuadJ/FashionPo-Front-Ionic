@@ -86,7 +86,7 @@ export class SignupPage {
           this.navCtrl.setRoot(LoginPage,{email:this.loginForm.value.email,password:this.loginForm.value.password});
         },
         err => {
-          console.log(err)
+          console.log(err);
           this.showToast("bottom", "error occured");
         });
   }
