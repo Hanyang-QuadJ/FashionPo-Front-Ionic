@@ -35,6 +35,8 @@
       <!--<img src="{{placeholderImage}}" />-->
     <!--</ion-item>-->
     <!--<img id="camera-image" />-->
+    <button (click)="redundancyCheck()" ion-button item-end small>Check</button>
+
 
     <form [formGroup]="loginForm" (ngSubmit)="userSignup()">
       <ion-item>

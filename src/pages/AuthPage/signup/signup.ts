@@ -60,6 +60,24 @@ export class SignupPage {
     });
     toast.present();
   }
+  redundancyCheck(){
+    let APIUrl='/auth/wardrobe/redundancy';
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let body = {
+      wardrobeName: this.loginForm.value.wardrobename,
+    };
+    this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        });
+
+  }
 
   userSignup() {
     var APIUrl = '/auth';

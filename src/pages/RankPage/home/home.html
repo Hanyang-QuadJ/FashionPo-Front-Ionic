@@ -18,7 +18,7 @@
     </ion-buttons>
     <ion-title tappable *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">
       <div class="title">Flex
-        <p class="history" (click)="presentHistoryModal()">Aug 1 ~ 7
+        <p class="history" (click)="presentHistoryModal()">{{parsingDate(startDate)}} ~ {{parsingDate2(endDate)}}
           <ion-icon style="position: inherit;
     margin-top: 1px;
     margin-left: 1px;" name="arrow-down"></ion-icon>
@@ -115,12 +115,12 @@
           <img tappable src={{ranks[i].picURL}} imageViewer>
         </ion-col>
         <ion-col *ngIf="users[i]" col-5 align-self-center>
-          <p class="rankWardrobe" tappable (click)="presentWardrobeModal(i)">{{users[i].wardrobeName}}1234123412312312312124124</p>
+          <p class="rankWardrobe" tappable (click)="presentWardrobeModal(i)">{{users[i].wardrobeName}}</p>
 
 
         </ion-col>
         <ion-col col-2 align-self-center text-center>
-          <h5 class="likeNum">{{ranks[i].likeCnt}}122<span class="likeText"> <ion-icon
+          <h5 class="likeNum">{{ranks[i].likeCnt}}<span class="likeText"> <ion-icon
             name="md-heart"></ion-icon></span></h5>
           <!--<button *ngIf="user&&user._id!==ranks[i].writtenBy&&!buttons[i]" [disabled]="try" ion-button outline small-->
                   <!--color="sub" (click)='addFavorite(rank);'> <span class="buttonText">Add</span>-->

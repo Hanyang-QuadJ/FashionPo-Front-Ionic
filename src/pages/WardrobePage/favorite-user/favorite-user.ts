@@ -6,6 +6,7 @@ import {FavoriteUserPostPage} from '../favorite-user/favorite-user-post/favorite
 import {FavoriteUserThisWeekPage} from '../favorite-user/favorite-user-this-week/favorite-user-this-week';
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {RankWardrobePage} from "../../RankPage/rank-wardrobe/rank-wardrobe";
+import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
 
 
 /**
@@ -51,7 +52,7 @@ export class FavoriteUserPage implements OnInit {
     this.newTab = 'fit';
     this.posts = [];
     this.thisWeekPost = [];
-    let loading = this.loadingCtrl.create({showBackdrop: false, cssClass: 'loading', spinner: 'crescent'});
+    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
     loading.present();
     this.checkThis = 0;
     this.checkPost = false;
@@ -128,7 +129,7 @@ export class FavoriteUserPage implements OnInit {
 
   }
   presentUserModal(i){
-    let userModal = this.modalCtrl.create(RankWardrobePage,{user_id:this.favorites[i]},{leaveAnimation:'back'});
+    let userModal = this.modalCtrl.create(VoteWardrobePage,{user_id:this.favorites[i]},{leaveAnimation:'back'});
     userModal.present();
   }
 

@@ -31,7 +31,7 @@ export class ChangeWardrobeNamePage {
                 public fetchDatas: FetchDataProvider,
     ) {
         this.usernameForm = this.fb.group({
-            username: ['', Validators.compose([Validators.maxLength(15),Validators.minLength(2),Validators.required])],
+            username: ['', Validators.compose([Validators.maxLength(70),Validators.minLength(2),Validators.required])],
 
         });
     }

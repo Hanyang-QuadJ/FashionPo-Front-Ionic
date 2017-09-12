@@ -64,6 +64,7 @@ import {OrderModule} from "ngx-order-pipe";
 import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
 
 
+
 // import { Camera } from '@ionic-native/camera';
 
 
@@ -168,6 +169,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         FilePath,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
     FetchDataProvider,
+
 
     ]
 
