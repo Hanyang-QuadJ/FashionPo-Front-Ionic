@@ -1,0 +1,54 @@
+page-signup-name {
+  .custom-button {
+    background-color: #FF5733;
+  }
+  .toolbar-background {
+    background-color: #fff;
+  }
+  .space{
+    padding: 3%;
+  }
+  .logo{
+    width:32%;
+    height:auto;
+  }
+  .text{
+    font-weight: 500;
+  }
+  .toolbar-title-ios {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff5733;
+    pointer-events: auto;
+  }
+  .profile{
+    width:27%;
+    height: auto;
+  }
+  .padding{
+    padding-top:2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  .text-input-ios {
+
+    color: black;
+
+  }
+  .buttonText{
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+  .item-ios {
+    color:rgba(0,0,0,0.4);
+    padding-left: 4rem;
+    padding-right: 4rem;
+
+  }
+  .scroll-content{
+    overflow: hidden;
+  }
+
+}

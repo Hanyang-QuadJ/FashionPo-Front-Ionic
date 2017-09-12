@@ -35,32 +35,17 @@
       <!--<img src="{{placeholderImage}}" />-->
     <!--</ion-item>-->
     <!--<img id="camera-image" />-->
-    <button (click)="redundancyCheck()" ion-button item-end small>Check</button>
+    <!--<button (click)="redundancyCheck()" ion-button item-end small>Check</button>-->
 
 
-    <form [formGroup]="loginForm" (ngSubmit)="userSignup()">
+    <form [formGroup]="loginForm">
       <ion-item>
-        <ion-label stacked>Email</ion-label>
-        <ion-input class="text" type="email" formControlName="email" placeholder="example@fitnyc.edu"></ion-input>
+        <ion-label stacked>Name Your Own Wardrobe</ion-label>
+        <ion-input class="text" type="text" formControlName="wardrobename" placeholder="between 2~70 letters"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label stacked>Wardrobe name</ion-label>
-        <ion-input class="text" type="text" formControlName="wardrobename" placeholder="At least 2 letters"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>User name</ion-label>
-        <ion-input class="text" type="text" formControlName="username" placeholder="At least 2 letters(Optional)"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Password</ion-label>
-        <ion-input class="text" type="password" formControlName="password" placeholder="At least 12 letters"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label stacked>Confirm Password</ion-label>
-        <ion-input class="text" type="password" formControlName="password2" placeholder="At least 12 letters"></ion-input>
-      </ion-item>
+
       <div class="padding">
-        <button ion-button round type="submit" [disabled]="!loginForm.valid" color="primary" block><span class="buttonText">Sign Up</span></button>
+        <button ion-button round type="submit" [disabled]="!loginForm.valid"  color="primary" block (click)="goToName()"><span class="buttonText">Next</span></button>
       </div>
     </form>
 
