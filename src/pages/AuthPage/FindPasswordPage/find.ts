@@ -42,9 +42,9 @@ export class FindPasswordPage {
         this.viewCtrl.dismiss()
     }
 
-    showToast(position: string) {
+    showToast(position: string,err: any) {
         let toast = this.toastCtrl.create({
-            message: 'this username is already used',
+            message: err,
             duration: 2000,
             position: position
         });
@@ -57,10 +57,10 @@ export class FindPasswordPage {
         var APIUrl = '/auth';
 
 
-        if (this.platform.is('ios') == true){
-            APIUrl = 'http://54.162.160.91/api/auth';
-            // console.log('yes');
-        }
+        // if (this.platform.is('ios') == true){
+        //     APIUrl = 'http://54.162.160.91/api/auth';
+        //     // console.log('yes');
+        // }
 
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -75,7 +75,8 @@ export class FindPasswordPage {
                     this.dismiss();
                 },
                 err => {
-                    this.showToast("bottom");
+                    console.log(err);
+                    this.showToast("bottom",err);
                 });
 
     }

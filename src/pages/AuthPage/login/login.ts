@@ -79,7 +79,7 @@ export class LoginPage {
     this.navCtrl.pop();
   }
   goToFind() {
-    this.navCtrl.setRoot(FindPasswordPage);
+    this.navCtrl.push(FindPasswordPage);
   }
   showToast(position: string) {
     let toast = this.toastCtrl.create({
