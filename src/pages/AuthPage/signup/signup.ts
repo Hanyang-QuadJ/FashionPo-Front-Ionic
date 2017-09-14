@@ -101,6 +101,10 @@ export class SignupPage {
   }
   goToName(){
     let APIUrl='/auth/wardrobe/redundancy';
+      if (this.platform.is('ios') == true) {
+        APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth/wardrobe/redundancy';
+        // console.log('yes');
+      }
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let body = {

@@ -130,9 +130,9 @@ export class CameraPage implements OnInit{
       let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',content:'Uploading'});
       loading.present();
 
-      var jbSplit = this.tagsInput.split(' ',100);
-      var myArray = jbSplit.filter(v=>v!='');
-      var myArray2=[];
+      let jbSplit = this.tagsInput.split(' ',100);
+      let myArray = jbSplit.filter(v=>v!='');
+      let myArray2=[];
 
       for(var i = 0; i<myArray.length;i++){
 
@@ -151,6 +151,9 @@ export class CameraPage implements OnInit{
           duration: 2000
         });
         loading.dismiss();
+        this.tagsInput="";
+        this.tags=[];
+        this.comment="";
         toast.present(toast);
       },err=>{
         console.log(err);

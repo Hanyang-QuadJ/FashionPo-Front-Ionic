@@ -38,3 +38,4 @@ src/app/app.module.ts
 src/pages/home/home.html
 
 .sourcemaps/main.js.map
+*.map

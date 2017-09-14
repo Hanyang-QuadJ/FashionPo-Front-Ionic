@@ -1,0 +1,35 @@
+<!--
+  Generated template for the LogPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+  <ion-toolbar>
+    <ion-buttons start>
+      <button  (click)="dismiss()" ion-button icon-only color="primary">
+        <ion-icon name="ios-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Log</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+
+  <ion-list>
+    <button *ngFor="let follower of followers; let i = index;" (click)="presentModal(i)" ion-item>
+      <ion-avatar item-start>
+        <img src="{{follower.profile_img}}">
+      </ion-avatar>
+      <p class="log"><span class="highlight">{{follower.wardrobeName}}</span> added you</p>
+    </button>
+  </ion-list>
+
+
+</ion-content>

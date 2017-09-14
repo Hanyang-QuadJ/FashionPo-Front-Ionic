@@ -14,6 +14,7 @@ import * as moment from 'moment';
 import 'moment-timezone';
 import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
 
+
 /**
  * Generated class for the HomePage page.
  *
@@ -67,6 +68,7 @@ export class HomePage implements OnInit {
 
   firstButton: boolean;
 
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private storage: Storage,
@@ -77,7 +79,8 @@ export class HomePage implements OnInit {
               public modalCtrl: ModalController,
               private app: App,
               public loadingCtrl: LoadingController,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController,
+              ) {
     this.search = "user";
     this.historyRank = this.navParams.get('rankSheet');
   }
@@ -87,7 +90,11 @@ export class HomePage implements OnInit {
     this.endDate = moment().tz("America/New_York").endOf('week').format();
   }
 
+
+
   ionViewWillEnter(){
+
+
     console.log('Rank Data Check');
     this.firstCheck = false;
     this.modalCheck = false;

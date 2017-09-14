@@ -1,5 +1,10 @@
 <ion-header no-border>
   <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="presentLogModal()" ion-button icon-only color="primary">
+        <ion-icon name="ios-list"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
       {{user.wardrobeName}}
     </ion-title>
@@ -91,7 +96,7 @@
         <br><br>
         <ion-row>
           <ion-col text-center>
-            <p>There are no past outfits.</p>
+            <p>There are no outfits.</p>
           </ion-col>
         </ion-row>
       </ion-grid>

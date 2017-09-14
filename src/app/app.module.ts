@@ -63,6 +63,7 @@ import {ChangeWardrobeNamePage} from "../pages/WardrobePage/settings/WardrobeNam
 import {TagPage} from '../pages/tag/tag'
 import {OrderModule} from "ngx-order-pipe";
 import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
+import {LogPage} from "../pages/WardrobePage/log/log";
 
 
 
@@ -111,6 +112,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         PasswordChangePage,
         ChangeWardrobeNamePage,
         IntroduceChangePage,
+        LogPage,
     ],
     imports: [
         BrowserModule,
@@ -163,6 +165,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         TagPage,
         SignupNamePage,
         SignupPasswordPage,
+      LogPage,
     ],
     providers: [
         StatusBar,
@@ -174,6 +177,7 @@ import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
         FilePath,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
     FetchDataProvider,
+
 
 
     ]

@@ -10,6 +10,7 @@ import {WardrobeThisWeekPage} from '../../WardrobePage/wardrobe-this-week/wardro
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
 import {FavoriteUserPage} from "../favorite-user/favorite-user";
+import {LogPage} from "../log/log";
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -198,6 +199,11 @@ export class WardrobePage{
       }
     });
     profileModal.present();
+
+  }
+  presentLogModal(){
+    let logModal = this.modalCtrl.create(LogPage)
+    logModal.present();
 
   }
   presentFavModal(i) {

@@ -7,7 +7,7 @@ import {RankThisWeekPage} from "../RankPage/rank-wardrobe/rank-this-week/rank-th
 import {TagListPage} from "./tag-list/tag-list";
 import {FavoriteUserPage} from "../WardrobePage/favorite-user/favorite-user";
 import {FetchDataProvider} from "../../providers/fetch-data/fetch-data";
-import {reverse} from "dns";
+
 
 /**
  * Generated class for the TagPage page.
