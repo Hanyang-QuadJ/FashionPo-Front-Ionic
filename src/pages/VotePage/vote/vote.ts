@@ -71,7 +71,6 @@ export class VotePage implements OnInit {
     let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
     loading.present();
 
-
     this.storage.get('token').then((val) => {
       this.fetchDatas.getData('/post/random').then(data=>{
         this.cachedPost = data.message;
@@ -227,7 +226,9 @@ export class VotePage implements OnInit {
     let removedCard = this.posts.pop();
     this.addNewposts();
     if (like) {
-      this.fetchDatas.postData('/post/fire',{post_id:})
+      this.fetchDatas.postData('/post/fire',{post_id:this.posts[0]._id, writtenBy:this.posts[0].writtenBy}).then(data=>{
+        console.log(data);
+      });
       this.presentLikeToast()
     } else {
       this.presentSkipToast()
