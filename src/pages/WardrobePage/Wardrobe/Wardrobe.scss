@@ -36,12 +36,13 @@ page-register {
   .profileText{
     margin-top: 3%;
     font-weight: 300;
+    margin-left: 1%;
     color: #4d4d4d;
     white-space: pre-line;
 
   }
   .add{
-    margin-top: 10px;
+
   }
   .infoText{
     color: #4d4d4d;
@@ -68,9 +69,9 @@ page-register {
   }
   .userName{
     text-align: left;
-
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 900;
+    font-size: 16px;
+    margin-left:1%;
     color: #4d4d4d;
   }
   .information{
@@ -180,6 +181,22 @@ page-register {
     font-weight: 900;
     border-bottom: 2px solid;
     background-color: white;
+  }
+  #notification-button {
+    position: relative;
+    width: 42px;
+    top:1px;
+    right: 1px;
+    overflow: visible!important;
+  }
+
+
+  #notifications-badge {
+    background-color: #70A3D6;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border-radius: 100%;
   }
 
 

@@ -7,6 +7,7 @@ import {UserProfileChange} from "./UserProfileChangePage/userprofile";
 import {PasswordChangePage} from "./PasswordChangePage/password";
 import {ChangeWardrobeNamePage} from "./WardrobeNameChangePage/wardrobename";
 import {IntroduceChangePage} from "./IntroduceChangePage/introduce";
+import {TermsPage} from "../../terms/terms";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 
 
@@ -156,6 +157,10 @@ export class SettingsPage {
 
     });
     profileModal.present();
+  }
+  presentTermsModal(){
+    let termsModal = this.modalCtrl.create(TermsPage);
+    termsModal.present();
   }
 
   presentIntroduceModal() {

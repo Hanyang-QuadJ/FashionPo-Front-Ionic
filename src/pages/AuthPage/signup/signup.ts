@@ -57,6 +57,7 @@ export class SignupPage {
   showToast(position: string, message: string) {
     let toast = this.toastCtrl.create({
       message: message,
+      cssClass:'general',
       duration: 2000,
       position: position
     });

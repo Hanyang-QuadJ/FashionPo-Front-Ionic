@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, ModalController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController, LoadingController, ModalController} from 'ionic-angular';
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {Storage} from '@ionic/storage';
 import {Http, Headers} from "@angular/http";
@@ -19,26 +19,55 @@ import {FavoriteUserPage} from "../favorite-user/favorite-user";
   templateUrl: 'log.html',
 })
 export class LogPage {
-  followers_id:any;
-  followers:any;
+  followers_id: any;
+  followers: any;
+  isNewAdd: Array<boolean>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController,
-              public fetchData : FetchDataProvider, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public fetchData: FetchDataProvider, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+    this.fetchNew();
+
+  }
+
+  fetchNew() {
     let loading = this.loadingCtrl.create({
       showBackdrop: true, spinner: 'crescent',
     });
     loading.present();
 
-    this.fetchData.getData('/user/favoriteme').then(data=>{
-      if(data.favoriteMe===[] || data.favoriteMe.length === 0){
+    this.fetchData.getData('/user/favoriteme').then(data => {
+      if (data.favoriteMe === [] || data.favoriteMe.length === 0) {
         loading.dismiss();
       }
-      else{
+      else {
         this.followers_id = data.favoriteMe;
-        console.log(this.followers_id);
-        this.fetchData.postData('/user',{users:this.followers_id}).then(data=>{
-          console.log(data);
+        this.fetchData.postData('/user', {users: this.followers_id}).then(data => {
           this.followers = data;
+          this.fetchData.getData('/user/authed').then(data => {
+            this.isNewAdd = [];
+            let user: Array<any> = data.user[0].addNews;
+            if (data.user[0].addNews === [] || data.user[0].addNews.length === 0) {
+
+              for (let i = 0; i < this.followers.length; i++) {
+                this.isNewAdd.push(false);
+              }
+            }
+            else {
+              for (let i = 0; i < this.followers.length; i++) {
+                if (user.indexOf(this.followers.slice().reverse()[i]._id) === -1) {
+                  this.isNewAdd.push(false)
+                }
+                else if (user.indexOf(this.followers.slice().reverse()[i]._id) > -1) {
+                  this.isNewAdd.push(true)
+                }
+              }
+            }
+
+
+          });
+
+
           loading.dismiss();
         })
       }
@@ -49,14 +78,26 @@ export class LogPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad LogPage');
   }
-  public dismiss(){
+
+  public dismiss() {
     this.viewCtrl.dismiss();
   }
-  presentModal(i){
-    // console.log(i,this.followers_id[0]);
-    // console.log(i,this.followers_id[1]);
-    let modal = this.modalCtrl.create(FavoriteUserPage,{favList:this.followers[i]});
-    modal.present();
+
+  presentModal(i) {
+    if (this.isNewAdd[i] === true) {
+      let modal = this.modalCtrl.create(FavoriteUserPage, {favList: this.followers.slice().reverse()[i], addDismiss: 'addDismiss'});
+      modal.onDidDismiss(() => {
+        this.fetchNew();
+      });
+      modal.present();
+
+    }
+    else {
+      let modal = this.modalCtrl.create(FavoriteUserPage, {favList: this.followers[i]});
+      modal.present();
+    }
+
+
   }
 
 }

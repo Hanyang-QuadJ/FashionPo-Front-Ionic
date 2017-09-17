@@ -56,7 +56,8 @@ export class UserProfileChange {
           text: 'Delete current image',
           role: 'destructive',
           handler: () => {
-            this.fetchDatas.postData('/user/remove/profile',{}).then(data=>{
+            this.fetchDatas.postData('/user/remove/profile',{something:"hello"}).then(data=>{
+              console.log("134234234");
               this.viewCtrl.dismiss();
             })
           }
@@ -108,11 +109,7 @@ export class UserProfileChange {
       this.email = data.user[0].email;
       this.fetchDatas.postData('/user/update/profile',{base_64: this.base64Image, email: this.email}).then(data=>{
         loading.dismiss();
-        let toast = this.toastCtrl.create({
-          message: 'update success',
-          duration: 2000
-        });
-        toast.present();
+        this.viewCtrl.dismiss();
       },err=>{
         console.log(err)
       })

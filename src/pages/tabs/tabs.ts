@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import {StatusBar} from "@ionic-native/status-bar";
+import {Content} from 'ionic-angular';
+
 
 
 // import { AboutPage } from '../about/about';
@@ -12,8 +14,7 @@ import { WardrobePage} from "../WardrobePage/wardrobe/wardrobe";
   selector: 'tabs'
 })
 export class TabsPage {
-
-
+  @ViewChild(Content) content: Content;
 
   tab1Root = HomePage;
   tab2Root = CameraPage;
@@ -21,4 +22,7 @@ export class TabsPage {
   constructor(public statusBar: StatusBar) {
     this.statusBar.styleDefault();
   }
+
+
+
 }

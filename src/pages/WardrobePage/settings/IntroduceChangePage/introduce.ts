@@ -31,7 +31,7 @@ export class IntroduceChangePage {
               public toastCtrl: ToastController,
               public fetchDatas: FetchDataProvider,) {
     this.usernameForm = this.fb.group({
-      username: ['', Validators.compose([Validators.maxLength(100),Validators.required])],
+      username: ['', Validators.compose([Validators.maxLength(100)])],
 
     });
   }

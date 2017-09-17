@@ -13,6 +13,7 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import * as moment from 'moment';
 import 'moment-timezone';
 import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
+import {IntroPage} from "../../intro/intro";
 
 
 /**
@@ -33,6 +34,8 @@ export class HomePage implements OnInit {
 
   modalCheck: boolean;
   rankDate: any = "";
+  allUsers: any;
+  allTags: any;
 
 
   ranks: Array<any> = [];
@@ -58,6 +61,8 @@ export class HomePage implements OnInit {
   firstCheck: boolean;
   startDate:any;
   endDate:any;
+  historyNew:boolean;
+  dismissHistory:any;
 
   firstPost: any;
   firstUser: any;
@@ -67,6 +72,7 @@ export class HomePage implements OnInit {
   rankEmpty:boolean;
 
   firstButton: boolean;
+
 
 
   constructor(public navCtrl: NavController,
@@ -83,11 +89,34 @@ export class HomePage implements OnInit {
               ) {
     this.search = "user";
     this.historyRank = this.navParams.get('rankSheet');
+    this.dismissHistory = this.navParams.get('dismiss');
   }
 
   ngOnInit(): void {
+    if(this.dismissHistory === 'dismiss'){
+      this.fetchDatas.postData('/user/setHistory',{}).then(data=>{
+        console.log(data);
+      });
+
+
+    }
+    this.initializeItems();
     this.startDate = moment().tz("America/New_York").startOf('week').format();
     this.endDate = moment().tz("America/New_York").endOf('week').format();
+    this.getHistoryNew();
+
+  }
+  public getHistoryNew(){
+    this.fetchDatas.getData('/user/authed').then(data=>{
+      console.log(data.user[0].isHistoryNew);
+
+      if(data.user[0].isHistoryNew === true){
+        this.historyNew = true;
+      }
+      else {
+        this.historyNew = false;
+      }
+    });
   }
 
 
@@ -107,8 +136,9 @@ export class HomePage implements OnInit {
     this.toggled = false;
     this.rankEmpty = false;
     this.searchToggled = false;
-    this.initializeItems();
+
     //Fetch Data Start!
+
     if (this.historyRank === undefined) {
       let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
       loading.present();
@@ -118,15 +148,63 @@ export class HomePage implements OnInit {
           this.rankEmpty = true;
           loading.dismiss();
         }
-        for (let d = 0; d < data.posts.length; d++) {
-          this.oriRank[d] = data.posts[d];
+        else{
+
+          for (let d = 0; d < data.posts.length; d++) {
+            this.oriRank[d] = data.posts[d];
+          }
+          for (var i = 1; i < data.posts.length; i++) {
+            this.ranks[i - 1] = data.posts[i];
+          }
+          this.firstPost = data.posts[0];
+          for (let i = 0; i < data.posts.length; i++) {
+            this.writtenBys.push(data.posts[i].writtenBy);
+          }
+          this.fetchDatas.postData('/user', {users: this.writtenBys}).then(data => {
+            this.firstUser = data[0];
+            this.users = [];
+            for (let i = 1; i < data.length; i++) {
+              this.users.push(data[i]);
+            }
+            this.fetchDatas.getData('/user/authed').then(data => {
+              this.user = data.user[0];
+              console.log(this.user);
+
+              if (this.firstUser._id === this.user._id) {
+                this.firstCheck = true;
+
+              }
+
+              for (let i = 0; i < this.ranks.length; i++)
+                this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
+              this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1;
+              loading.dismiss();
+            })
+          })
+
         }
-        for (var i = 1; i < data.posts.length; i++) {
-          this.ranks[i - 1] = data.posts[i];
+
+      });
+    }
+    //History Rank!
+    else if (this.historyRank !== undefined) {
+      let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+      loading.present();
+      this.modalCheck = true;
+      this.rankDate = this.navParams.get('rankDate');
+      if(this.historyRank===[] || this.historyRank.length === 0 || this.historyRank === undefined){
+        loading.dismiss();
+      }
+      else{
+        for (let a = 0; a < this.historyRank.length; a++) {
+          this.oriRank[a] = this.historyRank[a];
         }
-        this.firstPost = data.posts[0];
-        for (let i = 0; i < data.posts.length; i++) {
-          this.writtenBys.push(data.posts[i].writtenBy);
+        for (var i = 1; i < this.historyRank.length; i++) {
+          this.ranks[i - 1] = this.historyRank[i];
+        }
+        this.firstPost = this.historyRank[0];
+        for (let i = 0; i < this.historyRank.length; i++) {
+          this.writtenBys.push(this.historyRank[i].writtenBy);
         }
         this.fetchDatas.postData('/user', {users: this.writtenBys}).then(data => {
           this.firstUser = data[0];
@@ -138,7 +216,13 @@ export class HomePage implements OnInit {
             this.user = data.user[0];
             if (this.firstUser._id === this.user._id) {
               this.firstCheck = true;
-
+              // console.log(this.firstCheck);
+            }
+            for (let j = 0; j < this.ranks.length; j++) {
+              this.nameCheck[j] = false;
+              if (this.ranks[j].writtenBy === this.user._id) {
+                this.nameCheck[j] = true;
+              }
             }
             for (let i = 0; i < this.ranks.length; i++)
               this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
@@ -146,48 +230,8 @@ export class HomePage implements OnInit {
             loading.dismiss();
           })
         })
-      });
-    }
-    //History Rank!
-    else if (this.historyRank !== undefined) {
-      let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
-      loading.present();
-      this.modalCheck = true;
-      this.rankDate = this.navParams.get('rankDate');
-      for (let a = 0; a < this.historyRank.length; a++) {
-        this.oriRank[a] = this.historyRank[a];
       }
-      for (var i = 1; i < this.historyRank.length; i++) {
-        this.ranks[i - 1] = this.historyRank[i];
-      }
-      this.firstPost = this.historyRank[0];
-      for (let i = 0; i < this.historyRank.length; i++) {
-        this.writtenBys.push(this.historyRank[i].writtenBy);
-      }
-      this.fetchDatas.postData('/user', {users: this.writtenBys}).then(data => {
-        this.firstUser = data[0];
-        this.users = [];
-        for (let i = 1; i < data.length; i++) {
-          this.users.push(data[i]);
-        }
-        this.fetchDatas.getData('/user/authed').then(data => {
-          this.user = data.user[0];
-          if (this.firstUser._id === this.user._id) {
-            this.firstCheck = true;
-            // console.log(this.firstCheck);
-          }
-          for (let j = 0; j < this.ranks.length; j++) {
-            this.nameCheck[j] = false;
-            if (this.ranks[j].writtenBy === this.user._id) {
-              this.nameCheck[j] = true;
-            }
-          }
-          for (let i = 0; i < this.ranks.length; i++)
-            this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
-          this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1;
-          loading.dismiss();
-        })
-      })
+
     }
   }
 
@@ -286,37 +330,58 @@ export class HomePage implements OnInit {
 
   }
   //Search
-  allUsers;
-  allTags;
+
 
   initializeItems() {
+
     this.fetchDatas.getData('/user/all').then(data=>{
       this.allUsers = data.usersList;
+
     });
 
   }
 
   getItems(ev) {
-    this.fetchDatas.getData('/user/all').then(data=>{
-      this.allUsers = data.usersList;
-      var val = ev.target.value;
-      // if the value is an empty string don't filter the items
-      if (val && val.trim() != '') {
-        this.allUsers = this.allUsers.filter((item) => {
-          return (item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        })
-      }
-    });
+      this.fetchDatas.getData('/user/all').then(data=>{
+        this.allUsers = data.usersList;
+        let val = ev.target.value;
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+          this.allUsers = this.allUsers.filter((item) => {
+            return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase())>-1);
+          });
+
+
+        }
+      });
+
+
+
+
     this.fetchDatas.getData('/search/searchTag/'+ev.target.value).then(data=>{
       this.allTags = data.message;
+    },err=>{
+      if(err.status===404){
+
+      }
     })
 
   }
 
   //PresentModals
   presentHistoryModal() {
-    let historyModal = this.modalCtrl.create(HistoryListPage, {}, {leaveAnimation: 'back'});
-    historyModal.present();
+    if(this.historyNew === true){
+      let historyModal = this.modalCtrl.create(HistoryListPage, {}, {leaveAnimation: 'back'});
+      historyModal.onDidDismiss(()=>{
+        this.getHistoryNew();
+      });
+      historyModal.present();
+    }
+    else{
+      let historyModal = this.modalCtrl.create(HistoryListPage, {}, {leaveAnimation: 'back'});
+      historyModal.present();
+    }
+
   }
 
   presentWardrobeModal(i) {
@@ -368,10 +433,15 @@ export class HomePage implements OnInit {
     this.searchToggled = false;
     this.content.resize();
   }
-
-  scrollToTop() {
+  ionSelected(){
     this.content.scrollToTop();
   }
+  scrollToTop(){
+    this.content.scrollToTop();
+    // this.navCtrl.push(IntroPage);
+  }
+
+
 
   parsingDate(date) {
     let month;

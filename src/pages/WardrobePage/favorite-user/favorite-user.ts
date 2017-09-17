@@ -25,21 +25,24 @@ export class FavoriteUserPage implements OnInit {
   posts: Array<any> = [];
   thisWeekPost: Array<any> = [];
   favUsers: any = "";
-  User_id: any;
-  backRefresh:boolean;
+
+  backRefresh: boolean;
   User: any;
-  button:boolean = false;
-  try:boolean = false;
+  button: boolean = false;
+  try: boolean = false;
   weekCheck: boolean;
   showFavorite: boolean;
   favorites: any;
-  newTab:any;
-  loaded:boolean;
-  loadedd:boolean;
+  newTab: any;
+  loaded: boolean;
+  loadedd: boolean;
+  showAdd:boolean;
+  dismissNew:any;
 
   checkPost: boolean;
   checkThis: any = "";
   alertThis: boolean;
+  addDismiss:any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public loadingCtrl: LoadingController, private storage: Storage, public modalCtrl: ModalController,
@@ -58,28 +61,49 @@ export class FavoriteUserPage implements OnInit {
     this.checkPost = false;
     this.backRefresh = false;
     this.alertThis = false;
+    this.showAdd = false;
     this.favUser = this.navParams.get('favList');
-    this.User_id = this.navParams.get('user_id');
-    this.fetchDatas.postData('/post/view',{user_id:[this.favUser._id]}).then(data=>{
+    this.dismissNew = this.navParams.get('dismiss');
+    this.addDismiss = this.navParams.get('addDismiss');
+    if(this.dismissNew === 'dismiss'){
+      this.fetchDatas.postData('/user/news/delete',{id:this.favUser._id}).then(data=>{
+        console.log(data);
+      },err=>{
+        console.log(err)
+      });
+      console.log('dismissed');
+    }
+    if(this.addDismiss === "addDismiss"){
+
+      this.fetchDatas.postData('/user/addNews/delete',{id:this.favUser._id}).then(data=>{
+        console.log(data)
+      })
+
+    }
+
+    this.fetchDatas.postData('/post/view', {user_id: [this.favUser._id]}).then(data => {
     });
 
-    if(this.favUser.favorites.length === 0 || this.favUser.favorites === undefined){
+    if (this.favUser.favorites.length === 0 || this.favUser.favorites === undefined) {
       this.loadedd = true;
     }
-    else{
-      this.fetchDatas.postData('/user',{users:this.favUser.favorites}).then(data=>{
+    else {
+      this.fetchDatas.postData('/user', {users: this.favUser.favorites}).then(data => {
         this.favorites = data;
+
       });
     }
 
 
-
     this.fetchDatas.postData('/user', {users: [this.favUser._id]}).then(data => {
       this.User = data[0];
-      if(this.User.showFavorite === false){
+      if (this.User.showFavorite === false) {
         this.showFavorite = true;
       }
       this.fetchDatas.getData('/user/authed').then(data => {
+        if(data.user[0]._id===this.User._id){
+          this.showAdd = true;
+        }
         if (data.user[0].favorites.indexOf(this.User._id) !== -1) {
           this.button = true;
         }
@@ -101,12 +125,11 @@ export class FavoriteUserPage implements OnInit {
       if (this.thisWeekPost.length === 0) {
         this.weekCheck = true;
       }
-      if(this.posts.length === 0 || this.posts === undefined){
+      if (this.posts.length === 0 || this.posts === undefined) {
         this.loaded = true;
       }
       loading.dismiss();
     });
-
 
 
   }
@@ -128,8 +151,9 @@ export class FavoriteUserPage implements OnInit {
     profileModal.present();
 
   }
-  presentUserModal(i){
-    let userModal = this.modalCtrl.create(VoteWardrobePage,{user_id:this.favorites[i]},{leaveAnimation:'back'});
+
+  presentUserModal(i) {
+    let userModal = this.modalCtrl.create(VoteWardrobePage, {user_id: this.favorites[i]}, {leaveAnimation: 'back'});
     userModal.present();
   }
 
@@ -144,7 +168,7 @@ export class FavoriteUserPage implements OnInit {
   addFavorite() {
     this.button = true;
     this.try = true;
-    this.fetchDatas.postData('/user/favorite',{_id: this.User._id}).then(data=>{
+    this.fetchDatas.postData('/user/favorite', {_id: this.User._id}).then(data => {
       this.button = true;
       this.try = false;
     });
@@ -159,12 +183,12 @@ export class FavoriteUserPage implements OnInit {
   removeFavorite(post) {
     this.button = false;
     this.try = true;
-    this.fetchDatas.deleteData('/user/favorite',{_id: this.User._id}).then(data=>{
-          this.try = false;
-          this.backRefresh = true;
-        },
-        err=>{
-        });
+    this.fetchDatas.deleteData('/user/favorite', {_id: this.User._id}).then(data => {
+        this.try = false;
+        this.backRefresh = true;
+      },
+      err => {
+      });
   }
 
 

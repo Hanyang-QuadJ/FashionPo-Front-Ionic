@@ -31,7 +31,7 @@ export class ChangeWardrobeNamePage {
                 public fetchDatas: FetchDataProvider,
     ) {
         this.usernameForm = this.fb.group({
-            username: ['', Validators.compose([Validators.maxLength(70),Validators.minLength(2),Validators.required])],
+            username: ['', Validators.compose([Validators.maxLength(50),Validators.minLength(2),Validators.required])],
 
         });
     }
@@ -54,7 +54,8 @@ export class ChangeWardrobeNamePage {
         let toast = this.toastCtrl.create({
             message: 'this wardrobe name is already used',
             duration: 2000,
-            position: position
+            position: position,
+            cssClass:'general',
         });
 
         toast.present(toast);

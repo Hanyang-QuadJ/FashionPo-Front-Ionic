@@ -49,6 +49,7 @@ export class VotePage implements OnInit {
   overlayColor: string = 'transparent'; //Default Color
   user: any;
   noCard: boolean = false;
+  noPost: boolean = false;
   noNextCard: boolean = false;
   @ViewChild(Content) content: Content;
 
@@ -80,7 +81,7 @@ export class VotePage implements OnInit {
         loading.dismiss();
       },err=>{
         console.log(err);
-        this.noCard = true;
+        this.noPost = true;
         loading.dismiss();
       });
     });
@@ -226,6 +227,7 @@ export class VotePage implements OnInit {
     let removedCard = this.posts.pop();
     this.addNewposts();
     if (like) {
+      this.fetchDatas.postData('/post/fire',{post_id:})
       this.presentLikeToast()
     } else {
       this.presentSkipToast()

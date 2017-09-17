@@ -18,7 +18,7 @@
     </ion-buttons>
     <ion-title tappable *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">
       <div class="title">Flex
-        <p class="history" (click)="presentHistoryModal()">{{parsingDate(startDate)}} ~ {{parsingDate2(endDate)}}
+        <p class="history" (click)="presentHistoryModal()"><ion-badge *ngIf="historyNew" color="sub" item-end>N</ion-badge> {{parsingDate(startDate)}} ~ {{parsingDate2(endDate)}}
           <ion-icon style="position: inherit;
     margin-top: 1px;
     margin-left: 1px;" name="arrow-down"></ion-icon>
@@ -69,13 +69,23 @@
                            pullingIcon="arrow-dropdown"
                            pullingText=""
                            refreshingSpinner="circles"
-                           refreshingText="" pullMin="70">
+                           refreshingText="" pullMin="50">
     </ion-refresher-content>
   </ion-refresher>
   <div *ngIf="!searchToggled">
     <div *ngIf="rankEmpty" class="text-center">
-      <h4 class="notice">There are no posts yet</h4>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col col-10 text-center>
+            <img style="margin-top:35%; width: 30%; height: auto" class="rankIcon" src="images/trophy.png">
+            <h4 class="notice">Welcome to Flex!</h4>
+            <br>
+            <p>Check the best dressed outfits of the week here. Currently there are no outfits posted in this week.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
+
     <ion-card *ngIf="!rankEmpty">
       <img tappable *ngIf="firstPost" src={{firstPost.picURL}} imageViewer>
       <ion-card-content no-padding>
@@ -85,10 +95,10 @@
               <h2 class="text-center firstPlaceIcon">
                 <ion-icon name="trophy"></ion-icon>
               </h2>
-              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&firstCheck">
-                {{firstUser.wardrobeName}}</h3>
-              <h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&!firstCheck">
-                {{firstUser.wardrobeName}}</h3>
+              <div class="text-center"><h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&firstCheck">
+                {{firstUser.wardrobeName}}</h3></div>
+              <div class="text-center"><h3 tappable (click)="presentFirstModal()" class="text-center firstPlace" *ngIf="firstUser&&!firstCheck">
+                {{firstUser.wardrobeName}}</h3></div>
               <div class="text-center">
                 <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon
                   name="md-heart"></ion-icon></span></h5>
@@ -180,7 +190,8 @@
         <ion-avatar item-start>
           <img src="{{item.profile_img}}">
         </ion-avatar>
-        <h4>{{ item.username }}</h4>
+        <h4>{{ item.wardrobeName }}</h4>
+        <p>{{item.username}}</p>
       </button>
     </ion-list>
 

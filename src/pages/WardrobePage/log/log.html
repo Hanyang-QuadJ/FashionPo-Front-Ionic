@@ -21,15 +21,16 @@
 <ion-content>
 
 
-
-  <ion-list>
-    <button *ngFor="let follower of followers; let i = index;" (click)="presentModal(i)" ion-item>
+  <div>
+  <ion-list *ngIf="isNewAdd">
+    <button *ngFor="let follower of followers.slice().reverse(); let i = index;" (click)="presentModal(i)" ion-item>
       <ion-avatar item-start>
         <img src="{{follower.profile_img}}">
       </ion-avatar>
       <p class="log"><span class="highlight">{{follower.wardrobeName}}</span> added you</p>
+      <ion-badge *ngIf="isNewAdd[i]" item-end  color="sub">N</ion-badge>
     </button>
   </ion-list>
-
+  </div>
 
 </ion-content>

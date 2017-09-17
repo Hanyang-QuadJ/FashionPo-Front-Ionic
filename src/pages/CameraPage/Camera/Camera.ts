@@ -147,8 +147,9 @@ export class CameraPage implements OnInit{
       this.fetchDatas.postData('/post/create',{base_64: this.base64Image, tags:this.tags, comment:this.comment}).then(data=>{
         this.uploadCheck = true;
         let toast = this.toastCtrl.create({
-          message: 'upload success',
-          duration: 2000
+          message: 'Upload successfully. Check your wardrobe',
+          duration: 2000,
+          cssClass:'general',
         });
         loading.dismiss();
         this.tagsInput="";

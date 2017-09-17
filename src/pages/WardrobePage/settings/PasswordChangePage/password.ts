@@ -51,7 +51,8 @@ export class PasswordChangePage {
         let toast = this.toastCtrl.create({
             message: 'wrong password',
             duration: 2000,
-            position: position
+            position: position,
+            cssClass:'general',
         });
 
         toast.present(toast);

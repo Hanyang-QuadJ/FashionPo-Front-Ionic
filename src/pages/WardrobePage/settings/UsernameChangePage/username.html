@@ -20,11 +20,11 @@
 <ion-content>
     <form [formGroup]="usernameForm" (ngSubmit)="usernameChange()" *ngIf="loaded">
         <ion-item>
-            <ion-label floating>Username</ion-label>
-            <ion-input type="email" formControlName="username" placeholder="between 2~15 letters"></ion-input>
+            <ion-label stacked>Username</ion-label>
+            <ion-input type="email" formControlName="username" placeholder=""></ion-input>
         </ion-item>
         <div padding>
-            <button class="custom-button" ion-button type="submit" [disabled]="!usernameForm.valid" color="sub" block>Change Username</button>
+            <button class="custom-button" ion-button type="submit" [disabled]="!usernameForm.valid" color="sub" block>Update</button>
         </div>
     </form>
 </ion-content>

@@ -1,8 +1,10 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons start>
-      <button (click)="presentLogModal()" ion-button icon-only color="primary">
-        <ion-icon name="ios-list"></ion-icon>
+      <button id="notification-button" (click)="presentLogModal()" ion-button icon-only color="primary">
+        <ion-icon name="md-bulb">
+          <ion-badge *ngIf="isNewAdd" id="notifications-badge" color="danger">{{addCount}}</ion-badge>
+        </ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -51,22 +53,15 @@
   </ion-grid>
 
   <hr>
-  <p *ngIf="!thisWeekPostLength" class="infoText">Outfits of the week</p>
-  <ion-grid *ngIf="noneCheck">
-    <br>
-    <ion-row>
-      <ion-col text-center>
-        <h5>Share your outfit of the day</h5>
+  <p class="infoText">Outfits of the week</p>
+  <ion-grid *ngIf="thisWeekPostLength">
+    <ion-row justify-content-center>
+      <ion-col col-11 text-center>
+        <p>When you post your outfit of the day it will be shown here. </p>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        <p>Post your photos to be 1st!</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <br><br>
         <button (click)="test()" ion-button round outline large>
           <ion-icon name="add"></ion-icon>
         </button>
@@ -96,7 +91,7 @@
         <br><br>
         <ion-row>
           <ion-col text-center>
-            <p>There are no outfits.</p>
+            <p>Outfits from last week will be shown here. </p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -114,7 +109,7 @@
         <br><br>
         <ion-row>
           <ion-col text-center>
-            <p>There are no favorite users.</p>
+            <p>Wardrobe that you added will be shown here.</p>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -123,8 +118,9 @@
           <ion-avatar item-start>
             <img src="{{favorite.profile_img}}">
           </ion-avatar>
-          <h5>{{favorite.wardrobeName}}</h5>
+          <h4>{{favorite.wardrobeName}}</h4>
           <p>{{favorite.username}}</p>
+          <ion-badge *ngIf="isNewPost[i]" color="sub" item-end>N</ion-badge>
         </button>
       </ion-list>
     </div>

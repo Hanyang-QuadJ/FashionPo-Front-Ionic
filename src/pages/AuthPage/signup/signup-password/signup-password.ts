@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform,ToastController, ModalController } from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {LoginPage} from "../../login/login";
+import {TermsPage} from "../../../terms/terms";
 
 /**
  * Generated class for the SignupPasswordPage page.
@@ -24,7 +25,7 @@ export class SignupPasswordPage {
 
   constructor(public navCtrl: NavController, public http: Http,public navParams: NavParams,
               public fb: FormBuilder, public platform:Platform,
-              public toastCtrl:ToastController) {
+              public toastCtrl:ToastController, public modalCtrl:ModalController) {
     this.wardrobename = this.navParams.get('wardrobename');
     this.username = this.navParams.get('username');
     this.loginForm = this.fb.group({
@@ -45,10 +46,16 @@ export class SignupPasswordPage {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 2000,
-      position: position
+      position: position,
+      cssClass:'general',
     });
     toast.present();
   }
+  goToTerms(){
+    let modal = this.modalCtrl.create(TermsPage);
+    modal.present();
+  }
+
   userSignup() {
     if(this.loginForm.value.password2 === this.loginForm.value.password){
       let APIUrl = '/auth';
@@ -76,7 +83,7 @@ export class SignupPasswordPage {
           },
           err => {
             console.log(err);
-            this.showToast("bottom", "error occured");
+            this.showToast("bottom", "Email exists!");
           });
 
     }

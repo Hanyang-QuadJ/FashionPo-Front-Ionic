@@ -11,7 +11,7 @@
                 <ion-icon name="ios-arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title>Change Introduce</ion-title>
+        <ion-title>Change bio</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -20,11 +20,11 @@
 <ion-content>
     <form [formGroup]="usernameForm" (ngSubmit)="usernameChange()" *ngIf="loaded">
       <ion-item inset>
-        <ion-textarea type="text" formControlName="username" placeholder="                    "></ion-textarea>
+        <ion-textarea type="text" formControlName="username" placeholder="Major,Job,etc."></ion-textarea>
       </ion-item>
 
         <div padding>
-            <button class="custom-button" ion-button type="submit" [disabled]="!usernameForm.valid" color="sub" block>Change Introduce</button>
+            <button class="custom-button" ion-button type="submit" [disabled]="!usernameForm.valid" color="sub" block>Update</button>
         </div>
     </form>
 </ion-content>

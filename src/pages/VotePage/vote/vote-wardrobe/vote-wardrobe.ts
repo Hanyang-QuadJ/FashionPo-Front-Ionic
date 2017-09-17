@@ -40,6 +40,7 @@ export class VoteWardrobePage {
   try: boolean = false;
   view_cnt: any;
   showFavorite:boolean;
+  showAdd:boolean;
   newTab:any;
 
 
@@ -56,6 +57,7 @@ export class VoteWardrobePage {
               public modalCtrl: ModalController,
               public fetchDatas: FetchDataProvider,) {
     this.weekCheck = false;
+    this.showAdd = false;
     this.usernameForm = this.fb.group({
       username: ['', Validators.compose([Validators.required])],
 
@@ -75,6 +77,8 @@ export class VoteWardrobePage {
     loading.present();
     this.fetchDatas.postData('/user', {users: [this.User_id]}).then(data => {
       this.User = data[0];
+      console.log("Wowwww");
+      console.log(this.User._id);
       if(this.User.showFavorite === false){
         this.showFavorite = true;
       }
@@ -103,6 +107,9 @@ export class VoteWardrobePage {
         }
         this.fetchDatas.postData('/post/view', {user_id: [this.User_id]}).then(data => {
           this.fetchDatas.getData('/user/authed').then(data => {
+            if(data.user[0]._id===this.User._id){
+              this.showAdd = true;
+            }
             if (data.user[0].favorites.indexOf(this.User._id) !== -1) {
               this.button = true;
             }

@@ -64,7 +64,7 @@ import {TagPage} from '../pages/tag/tag'
 import {OrderModule} from "ngx-order-pipe";
 import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
 import {LogPage} from "../pages/WardrobePage/log/log";
-
+import {TermsPage} from "../pages/terms/terms";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -89,6 +89,7 @@ import {LogPage} from "../pages/WardrobePage/log/log";
         TagListPage,
         IntroPage,
         WelcomePage,
+        TermsPage,
 
         SignupPage,
         PostTabPage,
@@ -166,6 +167,7 @@ import {LogPage} from "../pages/WardrobePage/log/log";
         SignupNamePage,
         SignupPasswordPage,
       LogPage,
+      TermsPage,
     ],
     providers: [
         StatusBar,

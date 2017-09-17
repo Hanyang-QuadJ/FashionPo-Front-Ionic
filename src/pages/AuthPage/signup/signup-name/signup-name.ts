@@ -27,7 +27,7 @@ export class SignupNamePage {
               public toastCtrl: ToastController) {
     this.wardrobename = this.navParams.get('wardrobename');
     this.loginForm = this.fb.group({
-      username: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+      username: ['', Validators.compose([Validators.minLength(1), Validators.required])],
     });
   }
 
@@ -42,7 +42,8 @@ export class SignupNamePage {
     let toast = this.toastCtrl.create({
       message: message,
       duration: 2000,
-      position: position
+      position: position,
+      cssClass:'general',
     });
     toast.present();
   }
