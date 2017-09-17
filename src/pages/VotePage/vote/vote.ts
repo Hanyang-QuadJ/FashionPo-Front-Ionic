@@ -71,21 +71,18 @@ export class VotePage implements OnInit {
     let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
     loading.present();
 
-    this.storage.get('token').then((val) => {
-      this.fetchDatas.getData('/post/random').then(data=>{
-        this.cachedPost = data.message;
-        this.posts = [];
-        this.nextPost = this.cachedPost.pop();
-        this.addNewposts();
-        loading.dismiss();
-      },err=>{
-        console.log(err);
-        this.noPost = true;
-        loading.dismiss();
-      });
+
+    this.fetchDatas.getData('/post/random').then(data => {
+      this.cachedPost = data.message;
+      this.posts = [];
+      this.nextPost = this.cachedPost.pop();
+      this.addNewposts();
+      loading.dismiss();
+    }, err => {
+      console.log(err);
+      this.noPost = true;
+      loading.dismiss();
     });
-
-
 
 
     this.stackConfig = {
@@ -106,19 +103,31 @@ export class VotePage implements OnInit {
 
 
   }
+
   addNewposts() {
+    console.log('---add-----');
+    console.log(this.posts[0]);
+    // console.log(this.nextPost);
+    // console.log(this.cachedPost);
+    console.log('--------');
     if (this.nextPost === undefined) {
       this.noCard = true;
       console.log("no more cards")
     }
     else {
+
       this.posts.push(this.nextPost);
+      console.log('@@@@@@@@@@@')
+      console.log(this.posts[0]);
+      console.log('@@@@@@@@@@@')
+
       this.fetchDatas.postData('/user', {users: [this.posts[0].writtenBy]}).then(data => {
         this.user = data[0];
       });
       if (this.cachedPost.length !== 0)
         this.nextPost = this.cachedPost.pop();
       else {
+        // this.posts.push(this.nextPost);
         this.noNextCard = true;
         this.nextPost = undefined;
         console.log("no more nextCard");
@@ -188,7 +197,7 @@ export class VotePage implements OnInit {
   }
 
   Rank() {
-    this.navCtrl.setRoot(TabsPage,{},{animate:true, direction:'forward'});
+    this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
   }
 
   showToast(position: string, message: string) {
@@ -223,17 +232,24 @@ export class VotePage implements OnInit {
 
 // Connected through HTML
   voteUp(like: boolean) {
-    let removedCard = this.posts.pop();
-    this.addNewposts();
     if (like) {
+      console.log('----Check-------------');
+      console.log(this.posts[0]);
+      console.log('-----------------------')
       this.fetchDatas.postData('/post/fire',{post_id:this.posts[0]._id, writtenBy:this.posts[0].writtenBy}).then(data=>{
         console.log(data);
       });
       this.presentLikeToast()
     } else {
+      this.fetchDatas.postData('/post/dislike',{post_id:this.posts[0]._id}).then(data=>{
+        console.log(data);
+      });
       this.presentSkipToast()
     }
+    let removedCard = this.posts.pop();
+    this.addNewposts();
     this.content.resize()
+
   }
 
   presentLikeToast() {
@@ -265,7 +281,6 @@ export class VotePage implements OnInit {
 
     toast.present();
   }
-
 
 
   presentWardrobeModal(user) {

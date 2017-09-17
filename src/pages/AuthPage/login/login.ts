@@ -111,10 +111,10 @@ export class LoginPage {
         data => {
           this.storage.set('token', data.token).then((val)=>{
             let APIUrl_2 = 'user/tutorial/value';
-            if (this.platform.is('ios') == true){
-              APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/tutorial/value';
-              // console.log('yes');
-            }
+            // if (this.platform.is('ios') == true){
+            //   APIUrl_2 = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/user/tutorial/value';
+            //   // console.log('yes');
+            // }
             let headers2 = new Headers();
             headers2.append('Content-Type', 'application/json');
             headers2.append('x-access-token', val);
