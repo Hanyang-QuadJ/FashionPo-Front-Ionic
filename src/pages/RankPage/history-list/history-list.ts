@@ -40,7 +40,7 @@ export class HistoryListPage implements OnInit {
   }
   public getHistoryNew(){
     this.fetchDatas.getData('/user/authed').then(data=>{
-      console.log(data.user[0].isHistoryNew);
+      // // console.log(data.user[0].isHistoryNew);
       if(data.user[0].isHistoryNew === true){
         this.historyNew = true;
       }
@@ -52,7 +52,7 @@ export class HistoryListPage implements OnInit {
 
   ngOnInit(): void {
     this.isRank = false;
-    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',enableBackdropDismiss:true});
     loading.present();
     this.fetchDatas.getData('/rank/save').then(data => {
       if(data.ranks === [] || data.ranks.length === 0){
@@ -60,7 +60,7 @@ export class HistoryListPage implements OnInit {
         loading.dismiss();
       }
       else{
-        console.log(data.ranks);
+        // // console.log(data.ranks);
 
         this.rankList = data.ranks;
 
@@ -72,7 +72,7 @@ export class HistoryListPage implements OnInit {
           this.ranksheet.push(data.ranks[j].rankSheet)
         }
         this.ranksheetLength = this.ranksheet.length;
-        console.log(this.ranksheet);
+        // // console.log(this.ranksheet);
 
 
         for (var h = 0; h < this.date.length; h++) {
@@ -482,7 +482,7 @@ export class HistoryListPage implements OnInit {
 
       }
 
-      console.log(this.dateFinal);
+      // // console.log(this.dateFinal);
 
 
     });
@@ -492,7 +492,7 @@ export class HistoryListPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HistoryListPage');
+    // // console.log('ionViewDidLoad HistoryListPage');
 
 
   }

@@ -116,7 +116,7 @@ export class WardrobeThisWeekPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -138,7 +138,7 @@ export class WardrobeThisWeekPage implements OnInit {
 
 
   goToTag(tagName, i) {
-    console.log(tagName);
+    // console.log(tagName);
     let tagModal = this.modalCtrl.create(TagPage, {tagName: tagName});
     tagModal.onDidDismiss((check) => {
       this.yOffset = document.getElementById(i).offsetTop;

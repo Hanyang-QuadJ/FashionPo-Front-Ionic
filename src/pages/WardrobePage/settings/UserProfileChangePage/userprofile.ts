@@ -81,7 +81,7 @@ export class UserProfileChange {
   pictureTaken :boolean = false;
   public takePicture(sourceType){
     let options = {
-      quality: 70,
+      quality: 50,
       allowEdit: true,
       correctOrientation: false,
       saveToPhotoAlbum: false,

@@ -19,7 +19,13 @@
 
 
 <ion-content>
-
+  <ion-grid *ngIf="isAdd">
+    <ion-row justify-content-center>
+      <ion-col col-10 text-center>
+        <p style="margin-top: 35%">Check the people who added your wardrobe here.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div>
   <ion-list *ngIf="isNewAdd">

@@ -34,7 +34,7 @@ export class WardrobePhotoPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform, public modalCtrl: ModalController,
               public fetchDatas: FetchDataProvider) {
-    console.log(navParams.get('postListIndex'));
+    // console.log(navParams.get('postListIndex'));
     this.postList = navParams.get('postList');
     this.postListIndex = navParams.get('postListIndex');
 
@@ -94,7 +94,7 @@ export class WardrobePhotoPage implements OnInit {
 
   scrollToCard() {
     let yOffset = document.getElementById(this.postListIndex).offsetTop;
-    console.log(yOffset);
+    // console.log(yOffset);
     this.content.scrollTo(0, yOffset, 0);
   }
 
@@ -105,10 +105,10 @@ export class WardrobePhotoPage implements OnInit {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WardrobePhotoPage');
-    console.log(this.postList);
-    console.log(this.postList[this.postListIndex]._id);
-    console.log(this.postList[this.postListIndex].writtenBy);
+    // console.log('ionViewDidLoad WardrobePhotoPage');
+    // console.log(this.postList);
+    // console.log(this.postList[this.postListIndex]._id);
+    // console.log(this.postList[this.postListIndex].writtenBy);
 
 
   }
@@ -122,7 +122,7 @@ export class WardrobePhotoPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {
@@ -147,7 +147,7 @@ export class WardrobePhotoPage implements OnInit {
   }
 
   goToTag(tagName, i) {
-    console.log(tagName);
+    // console.log(tagName);
     let tagModal = this.modalCtrl.create(TagPage, {tagName: tagName});
     tagModal.onDidDismiss(() => {
       let yOffset = document.getElementById(i).offsetTop;

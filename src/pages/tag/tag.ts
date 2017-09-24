@@ -46,7 +46,7 @@ export class TagPage {
               public platform:Platform) {
     this.tagName = this.navParams.get('tagName');
     let loading = this.loadingCtrl.create({
-      showBackdrop: true, spinner: 'crescent',
+      showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
     });
 
 
@@ -59,10 +59,10 @@ export class TagPage {
     this.tagUsers=[];
     this.fetchDatas.postData('/post/tag',{tag:this.tagName}).then(data=>{
       this.tagPics = data;
-      console.log("Check!!");
-      console.log(this.tagPics);
+      // console.log("Check!!");
+      // console.log(this.tagPics);
       for(let i = 0; i<data.length; i++){
-        if(data[i].likeCnt > 20){
+        if(data[i].likeCnt > 50){
           this.selectedLike.push(data[i]);
           this.likeCntArray.push(data[i].likeCnt);
         }
@@ -104,7 +104,7 @@ export class TagPage {
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad TagPage');
+    // // console.log('ionViewDidLoad TagPage');
   }
   public dismiss(){
     let check = "check";

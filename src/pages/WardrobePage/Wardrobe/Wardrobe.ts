@@ -98,10 +98,10 @@ export class WardrobePage {
     this.loaded = false;
     this.loadedd = false;
     this.option = "favorites";
-    console.log('1');
-    console.log(this.thisWeekPost);
+    // console.log('1');
+    // console.log(this.thisWeekPost);
     let loading = this.loadingCtrl.create({
-      showBackdrop: true, spinner: 'crescent',
+      showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
     });
     loading.present();
     this.fetchDatas.getData('/user/authed').then(data => {
@@ -129,7 +129,7 @@ export class WardrobePage {
           this.min = Math.min(...this.top);
         }
       }, err => {
-        console.log(err);
+        // console.log(err);
       });
       this.fetchDatas.getData('/post/myposts').then(data => {
         this.mypostlist = [];
@@ -160,8 +160,8 @@ export class WardrobePage {
         else {
           this.loaded = false;
         }
-        console.log('2');
-        console.log(this.thisWeekPost);
+        // console.log('2');
+        // console.log(this.thisWeekPost);
 
       });
       this.fetchDatas.getData('/user/favorite').then(data => {
@@ -185,11 +185,11 @@ export class WardrobePage {
               }
               else{
                 let user: Array<any> = data.user[0].news;
-                console.log("Check!");
-                console.log(this.favorites);
-                console.log(user);
+                // console.log("Check!");
+                // console.log(this.favorites);
+                // console.log(user);
                 for (let i = 0; i < this.favorites.length; i++) {
-                  console.log(user.indexOf(this.favorites[i]._id));
+                  // console.log(user.indexOf(this.favorites[i]._id));
                   if (user.indexOf(this.favorites[i]._id) === -1) {
                     this.isNewPost.push(false)
                   }
@@ -198,7 +198,7 @@ export class WardrobePage {
                   }
                 }
                 loading.dismiss();
-                console.log(this.isNewPost);
+                // console.log(this.isNewPost);
               }
 
             });
@@ -209,7 +209,7 @@ export class WardrobePage {
   }
 
   ionViewWillEnter() {
-    console.log("Check DATA FETCH");
+    // console.log("Check DATA FETCH");
     this.fetchData();
   }
   favNewCheck(){
@@ -263,7 +263,7 @@ export class WardrobePage {
   }
 
   presentFavModal(i) {
-    console.log(this.isNewPost[i]);
+    // console.log(this.isNewPost[i]);
     if (this.isNewPost[i] === true) {
 
       let dismiss = 'dismiss';
@@ -273,7 +273,7 @@ export class WardrobePage {
       }, {leaveAnimation: 'back'});
       profileModal.onDidDismiss(() => {
         let loading = this.loadingCtrl.create({
-          showBackdrop: true, spinner: 'crescent',
+          showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
         });
         loading.present();
         this.fetchDatas.getData('/user/favorite').then(data => {
@@ -299,11 +299,11 @@ export class WardrobePage {
                 }
                 else{
                   let user: Array<any> = data.user[0].news;
-                  console.log("Check!");
-                  console.log(this.favorites);
-                  console.log(user);
+                  // console.log("Check!");
+                  // console.log(this.favorites);
+                  // console.log(user);
                   for (let i = 0; i < this.favorites.length; i++) {
-                    console.log(user.indexOf(this.favorites[i]._id));
+                    // console.log(user.indexOf(this.favorites[i]._id));
                     if (user.indexOf(this.favorites[i]._id) === -1) {
                       this.isNewPost.push(false)
                     }
@@ -329,11 +329,11 @@ export class WardrobePage {
       let profileModal = this.modalCtrl.create(FavoriteUserPage, {favList: this.favorites[i]}, {leaveAnimation: 'back'});
       profileModal.onDidDismiss((renewedData) => {
         if (renewedData === "Renewed") {
-          console.log(renewedData);
+          // console.log(renewedData);
           this.fetchData();
         }
         else if (renewedData === "notRenewed") {
-          console.log(renewedData);
+          // console.log(renewedData);
         }
       });
       profileModal.present();

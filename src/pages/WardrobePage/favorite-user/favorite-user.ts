@@ -55,7 +55,7 @@ export class FavoriteUserPage implements OnInit {
     this.newTab = 'fit';
     this.posts = [];
     this.thisWeekPost = [];
-    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',enableBackdropDismiss:true});
     loading.present();
     this.checkThis = 0;
     this.checkPost = false;
@@ -67,16 +67,16 @@ export class FavoriteUserPage implements OnInit {
     this.addDismiss = this.navParams.get('addDismiss');
     if(this.dismissNew === 'dismiss'){
       this.fetchDatas.postData('/user/news/delete',{id:this.favUser._id}).then(data=>{
-        console.log(data);
+        // console.log(data);
       },err=>{
-        console.log(err)
+        // console.log(err)
       });
-      console.log('dismissed');
+      // console.log('dismissed');
     }
     if(this.addDismiss === "addDismiss"){
 
       this.fetchDatas.postData('/user/addNews/delete',{id:this.favUser._id}).then(data=>{
-        console.log(data)
+        // console.log(data)
       })
 
     }
@@ -135,7 +135,7 @@ export class FavoriteUserPage implements OnInit {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FavoriteUserPage');
+    // console.log('ionViewDidLoad FavoriteUserPage');
   }
 
   public dismiss() {

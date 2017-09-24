@@ -25,7 +25,7 @@ export class FetchDataProvider {
 
 
               ) {
-    console.log('Hello FetchDataProvider Provider');
+    // console.log('Hello FetchDataProvider Provider');
 
   }
 
@@ -51,6 +51,8 @@ export class FetchDataProvider {
               if(err.status===410){
                 // let nav = this.app.getActiveNav();
                 this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
+              }
+              else if(err.status===500){
               }
 
               reject(err)
@@ -119,8 +121,6 @@ export class FetchDataProvider {
             err=>{
               if(err.status===410){
                 this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
-
-
               }
             reject(err)
             });

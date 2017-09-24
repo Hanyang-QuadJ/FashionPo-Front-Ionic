@@ -19,28 +19,35 @@
 
 
 <ion-content no-padding>
-  <ion-grid *ngIf="noPost">
+  <ion-grid *ngIf="noOnePosted">
     <ion-row justify-content-center>
       <ion-col col-10 text-center>
-        <img style="width:35%; margin-top: 30%; height:auto" src="images/rankIcon.png">
+        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
         <br>
         <p text-center>You could either swipe right to like or left to see the next outfits here.</p>
         <p text-center>Currently there are no outfits posted in this week.</p>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card *ngIf="noCard">
-    <ion-card-content>
-      <img src="images/nomore.jpg">
+  <ion-grid *ngIf="noPost || noCard">
+    <ion-row justify-content-center>
+      <ion-col col-10 text-center>
+        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
+        <br>
+        <p text-center>No more outfits are posted in this week.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="endForToday">
+    <ion-row justify-content-center>
+      <ion-col col-10 text-center>
+        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
+        <br>
+        <p text-center>No more swipes are left for today.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    </ion-card-content>
-    <ion-item>
-      <h3 text-center>No More Cards For Today</h3>
-      <br>
-      <p text-center>Thank You</p>
-
-    </ion-item>
-  </ion-card>
 
 
   <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)"

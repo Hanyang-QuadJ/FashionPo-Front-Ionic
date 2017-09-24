@@ -22,6 +22,7 @@ export class LogPage {
   followers_id: any;
   followers: any;
   isNewAdd: Array<boolean>;
+  isAdd:boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
@@ -32,13 +33,15 @@ export class LogPage {
 
   fetchNew() {
     let loading = this.loadingCtrl.create({
-      showBackdrop: true, spinner: 'crescent',
+      showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
+
     });
     loading.present();
 
     this.fetchData.getData('/user/favoriteme').then(data => {
       if (data.favoriteMe === [] || data.favoriteMe.length === 0) {
         loading.dismiss();
+        this.isAdd = true;
       }
       else {
         this.followers_id = data.favoriteMe;
@@ -76,7 +79,7 @@ export class LogPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LogPage');
+    // console.log('ionViewDidLoad LogPage');
   }
 
   public dismiss() {
@@ -93,7 +96,7 @@ export class LogPage {
 
     }
     else {
-      let modal = this.modalCtrl.create(FavoriteUserPage, {favList: this.followers[i]});
+      let modal = this.modalCtrl.create(FavoriteUserPage, {favList: this.followers.slice().reverse()[i]});
       modal.present();
     }
 

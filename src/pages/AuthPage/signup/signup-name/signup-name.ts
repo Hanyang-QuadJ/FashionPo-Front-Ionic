@@ -71,7 +71,7 @@ export class SignupNamePage {
             this.navCtrl.push(SignupPasswordPage, {username: this.loginForm.value.username, wardrobename: this.wardrobename});
           },
           err => {
-            this.showToast('bottom', 'username exits!')
+            this.showToast('bottom', 'username exists!')
           });
     }
   }

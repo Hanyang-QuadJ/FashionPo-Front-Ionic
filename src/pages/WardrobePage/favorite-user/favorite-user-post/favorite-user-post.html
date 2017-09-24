@@ -6,39 +6,40 @@
 -->
 <ion-header no-border>
 
-  <ion-navbar>
-    <ion-buttons start>
-      <button (click)="dismiss()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Outfits</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-buttons start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>Outfits</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
+	<ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
 
-    <img src="{{post.picURL}}">
+		<img src="{{post.picURL}}">
 
-    <button ion-button icon-left clear small>
-      <ion-icon name="heart"></ion-icon>
-      <div>{{post.likeCnt}} Likes</div>
-    </button>
+		<button ion-button icon-left clear small>
+			<ion-icon name="heart"></ion-icon>
+			<div>{{post.likeCnt}} Likes</div>
+		</button>
 
-    <ion-card-content>
-      <span class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
-      <p>{{post.comment}}</p>
+		<ion-card-content>
+			<span class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
+			<p>{{post.comment}}</p>
 
-    </ion-card-content>
+		</ion-card-content>
 
-    <ion-item>
-      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
-
-
-    </ion-item>
-  </ion-card>
+		<ion-item>
+			<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+			<button ion-button item-end clear color="dark">
+				<ion-icon name="ios-more" (click)="showRadio(i)"></ion-icon>
+			</button>
+		</ion-item>
+	</ion-card>
 
 </ion-content>

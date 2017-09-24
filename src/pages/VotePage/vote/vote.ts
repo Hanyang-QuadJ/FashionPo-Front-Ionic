@@ -51,6 +51,8 @@ export class VotePage implements OnInit {
   noCard: boolean = false;
   noPost: boolean = false;
   noNextCard: boolean = false;
+  noOnePosted:boolean = false;
+  endForToday:boolean = false;
   @ViewChild(Content) content: Content;
 
   constructor(private http: Http,
@@ -68,7 +70,7 @@ export class VotePage implements OnInit {
   }
 
   ngOnInit(): void {
-    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent'});
+    let loading = this.loadingCtrl.create({showBackdrop: true, cssClass: 'loading', spinner: 'crescent',enableBackdropDismiss:true});
     loading.present();
 
 
@@ -79,8 +81,18 @@ export class VotePage implements OnInit {
       this.addNewposts();
       loading.dismiss();
     }, err => {
-      console.log(err);
-      this.noPost = true;
+      if(err.status===405){
+        // console.log(err);
+        this.endForToday = true;
+      }
+      else if(err.status===400){
+        // console.log(err);
+        this.noOnePosted = true;
+      }
+      else if(err.status===404){
+        // console.log(err);
+        this.noPost = true;
+      }
       loading.dismiss();
     });
 
@@ -105,21 +117,21 @@ export class VotePage implements OnInit {
   }
 
   addNewposts() {
-    console.log('---add-----');
-    console.log(this.posts[0]);
-    // console.log(this.nextPost);
-    // console.log(this.cachedPost);
-    console.log('--------');
+    // console.log('---add-----');
+    // console.log(this.posts[0]);
+    // // console.log(this.nextPost);
+    // // console.log(this.cachedPost);
+    // console.log('--------');
     if (this.nextPost === undefined) {
       this.noCard = true;
-      console.log("no more cards")
+      // console.log("no more cards")
     }
     else {
 
       this.posts.push(this.nextPost);
-      console.log('@@@@@@@@@@@')
-      console.log(this.posts[0]);
-      console.log('@@@@@@@@@@@')
+      // console.log('@@@@@@@@@@@')
+      // console.log(this.posts[0]);
+      // console.log('@@@@@@@@@@@')
 
       this.fetchDatas.postData('/user', {users: [this.posts[0].writtenBy]}).then(data => {
         this.user = data[0];
@@ -130,9 +142,9 @@ export class VotePage implements OnInit {
         // this.posts.push(this.nextPost);
         this.noNextCard = true;
         this.nextPost = undefined;
-        console.log("no more nextCard");
-        console.log(this.nextPost);
-        console.log(this.posts);
+        // console.log("no more nextCard");
+        // console.log(this.nextPost);
+        // console.log(this.posts);
 
       }
     }
@@ -233,16 +245,16 @@ export class VotePage implements OnInit {
 // Connected through HTML
   voteUp(like: boolean) {
     if (like) {
-      console.log('----Check-------------');
-      console.log(this.posts[0]);
-      console.log('-----------------------')
+      // console.log('----Check-------------');
+      // console.log(this.posts[0]);
+      // console.log('-----------------------');
       this.fetchDatas.postData('/post/fire',{post_id:this.posts[0]._id, writtenBy:this.posts[0].writtenBy}).then(data=>{
-        console.log(data);
+        // console.log(data);
       });
       this.presentLikeToast()
     } else {
       this.fetchDatas.postData('/post/dislike',{post_id:this.posts[0]._id}).then(data=>{
-        console.log(data);
+        // console.log(data);
       });
       this.presentSkipToast()
     }
@@ -261,7 +273,7 @@ export class VotePage implements OnInit {
     });
 
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
+      // console.log('Dismissed toast');
     });
 
     toast.present();
@@ -276,7 +288,7 @@ export class VotePage implements OnInit {
     });
 
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
+      // console.log('Dismissed toast');
     });
 
     toast.present();
@@ -290,7 +302,7 @@ export class VotePage implements OnInit {
   }
 
   goToTag(tagName) {
-    console.log(tagName);
+    // console.log(tagName);
     let tagModal = this.modalCtrl.create(TagPage, {tagName: tagName});
     tagModal.present();
 

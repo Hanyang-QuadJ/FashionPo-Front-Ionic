@@ -132,11 +132,14 @@ image-viewer.ion-page {
 }
 .general{
   .toast-message {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #ff5733;
     font-weight: 900;
     text-align: center;
     padding: 1.5rem;
+  }
+  .toast-button{
+    color:#ff5733;
   }
   .toast-wrapper {
     left: 10px;

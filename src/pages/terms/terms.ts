@@ -19,7 +19,7 @@ export class TermsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TermsPage');
+    // console.log('ionViewDidLoad TermsPage');
   }
   public dismiss() {
     this.viewCtrl.dismiss()

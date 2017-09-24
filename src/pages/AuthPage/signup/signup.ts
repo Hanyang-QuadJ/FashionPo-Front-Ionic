@@ -119,7 +119,7 @@ export class SignupPage {
           this.navCtrl.push(SignupNamePage,{wardrobename:this.loginForm.value.wardrobename});
         },
         err => {
-          this.showToast('bottom','Wardrobe exits!')
+          this.showToast('bottom','Wardrobe exists!')
         });
   }
 

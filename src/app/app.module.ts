@@ -65,6 +65,8 @@ import {OrderModule} from "ngx-order-pipe";
 import { FetchDataProvider } from '../providers/fetch-data/fetch-data';
 import {LogPage} from "../pages/WardrobePage/log/log";
 import {TermsPage} from "../pages/terms/terms";
+import {Network} from "@ionic-native/network";
+import {ReportPage} from "../pages/report/report";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -84,6 +86,7 @@ import {TermsPage} from "../pages/terms/terms";
         WardrobeCameraPage,
         SignupNamePage,
         SignupPasswordPage,
+	    ReportPage,
 
         TagPage,
         TagListPage,
@@ -149,6 +152,7 @@ import {TermsPage} from "../pages/terms/terms";
         VoteWardrobePage,
         HistoryListPage,
         WelcomePage,
+	    ReportPage,
 
         UserProfileChange,
         FavoriteUserPostPage,
@@ -177,6 +181,7 @@ import {TermsPage} from "../pages/terms/terms";
         File,
         Transfer,
         FilePath,
+        Network,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
     FetchDataProvider,
 

@@ -24,11 +24,11 @@ export class IntroPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IntroPage');
+    // console.log('ionViewDidLoad IntroPage');
   }
   goToTab(){
     this.fetchDatas.getData('/user/tutorial').then(data=>{
-      console.log(data)
+      // console.log(data)
     });
     this.navCtrl.setRoot(TabsPage);
   }

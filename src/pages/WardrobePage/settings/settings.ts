@@ -93,7 +93,7 @@ export class SettingsPage {
     let profileModal = this.modalCtrl.create(UsernamePage, { },{leaveAnimation:'back'});
     profileModal.onDidDismiss(()=>{
       let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',
+        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
       });
       loading.present();
       this.fetchDatas.getData('/user/authed').then(data=>{
@@ -111,7 +111,7 @@ export class SettingsPage {
     let profileModal = this.modalCtrl.create(UserProfileChange, { },{leaveAnimation:'back'});
     profileModal.onDidDismiss(()=>{
       let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',
+        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
       });
       loading.present();
       this.fetchDatas.getData('/user/authed').then(data=>{
@@ -129,7 +129,7 @@ export class SettingsPage {
     let profileModal = this.modalCtrl.create(PasswordChangePage, { },{leaveAnimation:'back'});
     profileModal.onDidDismiss(()=>{
       let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',
+        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
       });
       loading.present();
       this.fetchDatas.getData('/user/authed').then(data=>{
@@ -146,7 +146,7 @@ export class SettingsPage {
     let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, { },{leaveAnimation:'back'});
     profileModal.onDidDismiss(()=>{
       let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',
+        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
       });
       loading.present();
       this.fetchDatas.getData('/user/authed').then(data=>{
@@ -167,7 +167,7 @@ export class SettingsPage {
     let profileModal = this.modalCtrl.create(IntroduceChangePage, { },{leaveAnimation:'back'});
     profileModal.onDidDismiss(()=>{
       let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',
+        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
       });
       loading.present();
       this.fetchDatas.getData('/user/authed').then(data=>{

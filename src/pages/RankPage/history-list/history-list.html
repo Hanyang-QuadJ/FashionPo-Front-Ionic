@@ -19,6 +19,13 @@
 
 
 <ion-content>
+  <ion-grid *ngIf="isRank">
+    <ion-row justify-content-center>
+      <ion-col col-10 text-center>
+        <p style="margin-top: 35%">Check the result and history of the best dressed top 10 here.</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list inset>
     <button *ngIf="!isRank" (click)="goToPageWithDismiss(ranksheetLength-1)" ion-item>
       <ion-thumbnail item-start>

@@ -78,7 +78,7 @@
         <ion-row justify-content-center>
           <ion-col col-10 text-center>
             <img style="margin-top:35%; width: 30%; height: auto" class="rankIcon" src="images/trophy.png">
-            <h4 class="notice">Welcome to Flex!</h4>
+            <h4 class="notice">Welcome to Flex</h4>
             <br>
             <p>Check the best dressed outfits of the week here. Currently there are no outfits posted in this week.</p>
           </ion-col>
@@ -102,12 +102,7 @@
               <div class="text-center">
                 <h5 *ngIf="firstPost" class="likeNum2">{{firstPost.likeCnt}}<span class="likeText2"> <ion-icon
                   name="md-heart"></ion-icon></span></h5>
-                <button *ngIf="!firstCheck&&firstUser&&!firstButton" [disabled]="try" ion-button outline small
-                        color="sub" (click)='addFavorite(firstPost);'>Add
-                </button>
-                <button *ngIf="!firstCheck&&firstUser&&firstButton" [disabled]="try" ion-button small color="sub"
-                        (click)='removeFavorite(firstPost);'>Added
-                </button>
+
                 <!--<button *ngIf="firstCheck&&firstUser&&!firstButton" [disabled]="try" ion-button outline small color="sub" (click)='addFavorite(firstPost);'>Add</button>-->
                 <!--<button *ngIf="firstCheck&&firstUser&&firstButton" [disabled]="try" ion-button small color="sub" (click)='removeFavorite(firstPost);'>Added</button>-->
               </div>
