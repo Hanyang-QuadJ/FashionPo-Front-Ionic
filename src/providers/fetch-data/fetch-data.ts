@@ -1,8 +1,9 @@
-import { Injectable, Injector } from '@angular/core';
-import { Http,Headers, RequestOptions, } from '@angular/http';
+import {Injectable, Injector} from '@angular/core';
+import {Http, Headers, RequestOptions,} from '@angular/http';
 import {Storage} from '@ionic/storage';
-import {Platform,App} from 'ionic-angular';
+import {Platform, App} from 'ionic-angular';
 import {LoginPage} from "../../pages/AuthPage/login/login";
+
 
 
 import 'rxjs/add/operator/map';
@@ -16,118 +17,115 @@ import {Observable} from "rxjs/Observable";
 */
 @Injectable()
 export class FetchDataProvider {
-  token: any;
-  constructor(public http: Http,
-              public storage: Storage,
-              public platform: Platform,
+	token: any;
 
-              public app: App,
+	constructor(public http: Http,
+	            public storage: Storage,
+	            public platform: Platform,
+	            public app: App,) {
+		// console.log('Hello FetchDataProvider Provider');
 
-
-              ) {
-    // console.log('Hello FetchDataProvider Provider');
-
-  }
+	}
 
 
+	public getData(type) {
+		return new Promise<any>((resolve, reject) => {
+			this.storage.get('token').then((val) => {
+				let APIUrl = type;
+				if (this.platform.is('ios') == true){
+				  APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
+				  // // console.log('yes');
+				}
+				let headers = new Headers();
+				headers.append('Content-Type', 'application/json');
+				headers.append('x-access-token', val);
+				this.http.get(APIUrl, {headers: headers})
+					.map(res => res.json())
+					.subscribe(data => {
+							resolve(data);
+						},
+						err => {
+							if (err.status === 410) {
+								// let nav = this.app.getActiveNav();
+								this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
+							}
+							else if (err.status === 500) {
+							}
 
-  public getData(type){
-      return new Promise<any>((resolve,reject) => {
-        this.storage.get('token').then((val)=>{
-          let APIUrl = type;
-          // if (this.platform.is('ios') == true){
-          //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
-          //   // // console.log('yes');
-          // }
-          let headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('x-access-token', val);
-          this.http.get(APIUrl,{headers:headers})
-            .map(res => res.json())
-            .subscribe(data => {
-              resolve(data);
-            },
-              err=>{
-              if(err.status===410){
-                // let nav = this.app.getActiveNav();
-                this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
-              }
-              else if(err.status===500){
-              }
+							reject(err)
 
-              reject(err)
-
-              });
-        },err=>{
-          if(err.status===410){
-            this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
-
-
-          }
-
-          reject(err)
-        });
-      });
-  }
-  public postData(type,content:any){
-    return new Promise<any>((resolve,reject) => {
-      this.storage.get('token').then((val)=>{
-        let APIUrl = type;
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
-        //   // // console.log('yes');
-        // }
-        let body = content;
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', val);
-        this.http.post(APIUrl,JSON.stringify(body),{headers:headers})
-          .map(res => res.json())
-          .subscribe(data => {
-            resolve(data);
-          },err=>{
-            if(err.status===410){
-              this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
+						});
+			}, err => {
+				if (err.status === 410) {
+					this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
 
 
-            }
-            reject(err);
-          });
-      });
-    });
-  }
+				}
 
-  public deleteData(type,content:any){
-    return new Promise<any>((resolve,reject) => {
-      this.storage.get('token').then((val)=>{
-        let APIUrl = type;
-        // if (this.platform.is('ios') == true){
-        //   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
-        //   // // console.log('yes');
-        // }
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('x-access-token', val);
-        let body = content;
-        let options = new RequestOptions({
-          headers:headers,
-          body:body
-        });
-        this.http.delete(APIUrl,options)
-          .map(res => res.json())
-          .subscribe(data => {
-            resolve(data);
-          },
-            err=>{
-              if(err.status===410){
-                this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
-              }
-            reject(err)
-            });
-      });
-    });
+				reject(err)
+			});
+		});
+	}
 
-  }
+	public postData(type, content: any) {
+		return new Promise<any>((resolve, reject) => {
+			this.storage.get('token').then((val) => {
+				let APIUrl = type;
+				if (this.platform.is('ios') == true) {
+					APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
+					// // console.log('yes');
+				}
+				let body = content;
+				let headers = new Headers();
+				headers.append('Content-Type', 'application/json');
+				headers.append('x-access-token', val);
+				this.http.post(APIUrl, JSON.stringify(body), {headers: headers})
+					.map(res => res.json())
+					.subscribe(data => {
+						resolve(data);
+					}, err => {
+						if (err.status === 410) {
+							this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
+
+
+						}
+						reject(err);
+					});
+			});
+		});
+	}
+
+	public deleteData(type, content: any) {
+		return new Promise<any>((resolve, reject) => {
+			this.storage.get('token').then((val) => {
+				let APIUrl = type;
+				if (this.platform.is('ios') == true) {
+					APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
+					// // console.log('yes');
+				}
+				let headers = new Headers();
+				headers.append('Content-Type', 'application/json');
+				headers.append('x-access-token', val);
+				let body = content;
+				let options = new RequestOptions({
+					headers: headers,
+					body: body
+				});
+				this.http.delete(APIUrl, options)
+					.map(res => res.json())
+					.subscribe(data => {
+							resolve(data);
+						},
+						err => {
+							if (err.status === 410) {
+								this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
+							}
+							reject(err)
+						});
+			});
+		});
+
+	}
 
 
 }

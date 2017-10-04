@@ -55,7 +55,7 @@
     <div *ngFor="let post of posts">
 
       <ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
-        <img style="/*magic*/" (click)="blur($event)" *ngIf=" user && post" src="{{ post.picURL }}">
+	      <img-loader  *ngIf=" user && post" src="{{ post.picURL }}" useImg></img-loader>
 
         <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
         <ion-card-content>
@@ -81,7 +81,7 @@
       <!--</ion-card>-->
 
       <ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
-        <img style="/*magic*/" (click)="blur($event)" *ngIf="user && post" src="{{ nextPost.picURL }}">
+        <img style="/*magic*/"  *ngIf="user && post" src="{{ nextPost.picURL }}">
         <ion-card-content>
           <h2 *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.wardrobeName}}</h2>
           <p class="comment">{{post.comment}}</p>

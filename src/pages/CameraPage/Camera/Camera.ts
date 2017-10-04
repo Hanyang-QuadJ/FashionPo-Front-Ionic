@@ -28,7 +28,7 @@ export class CameraPage implements OnInit {
 	backButton: any = "";
 
 	tags: any = [];
-	allTags:any;
+	allTags: any;
 	comment: String;
 	uploadCheck: boolean = false;
 
@@ -65,7 +65,8 @@ export class CameraPage implements OnInit {
 		let toast = this.toastCtrl.create({
 			message: 'invalid user info',
 			duration: 2000,
-			position: position
+			position: position,
+			cssClass: 'general'
 		});
 
 		toast.present(toast);
@@ -89,8 +90,7 @@ export class CameraPage implements OnInit {
 
 	public takePicture(sourceType) {
 		let options = {
-
-			quality: 50,
+			quality: 25,
 			allowEdit: true,
 			correctOrientation: false,
 			saveToPhotoAlbum: false,
@@ -159,7 +159,7 @@ export class CameraPage implements OnInit {
 			}).then(data => {
 				this.uploadCheck = true;
 				let toast = this.toastCtrl.create({
-					message: 'Upload successfully. Check your wardrobe',
+					message: 'Upload successfully',
 					duration: 2000,
 					cssClass: 'general',
 				});
@@ -167,7 +167,9 @@ export class CameraPage implements OnInit {
 				this.tagsInput = "";
 				this.tags = [];
 				this.comment = "";
+				this.navCtrl.parent().select(2);
 				toast.present(toast);
+
 			}, err => {
 				console.log(err);
 				loading.dismiss();
@@ -177,7 +179,7 @@ export class CameraPage implements OnInit {
 	}
 
 	switchTabs() {
-		this.navCtrl.parent.select(2);
+		this.navCtrl.parent().select(2);
 	}
 
 	public dismiss() {

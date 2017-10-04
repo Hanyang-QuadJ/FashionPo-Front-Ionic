@@ -22,7 +22,7 @@
     <!--<img src="https://s3.amazonaws.com/fashionpoimagebucket/{{postList.picURL}}">-->
   <ion-card *ngFor=" let post of postList; let i =index" [id]="i">
 
-    <img src="{{post.picURL}}">
+	  <img-loader src="{{post.picURL}}" useImg></img-loader>
 
         <button ion-button icon-left clear small>
           <ion-icon name="heart"></ion-icon>

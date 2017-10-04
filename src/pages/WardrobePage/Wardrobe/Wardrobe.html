@@ -1,5 +1,12 @@
 <ion-header no-border>
 	<ion-toolbar>
+		<ion-buttons start *ngIf="otherPage">
+			<button  (click)="dismiss()" ion-button icon-only color="primary">
+				<div>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
 		<ion-buttons start>
 			<button id="notification-button" (click)="presentLogModal()" ion-button icon-only color="primary">
 				<ion-icon name="md-bulb">
@@ -19,37 +26,32 @@
 </ion-header>
 <ion-content>
 	<ion-grid>
-		<ion-row justify-content-center align-items-center>
+		<ion-row justify-content-center>
 			<ion-col col-5 text-center>
-				<img tappable class="image" src="{{user.profile_img}}" imageViewer>
+				<div class="profileImage">
+					<img-loader tappable  src="{{user.profile_img}}" useImg></img-loader>
+				</div>
 			</ion-col>
 			<ion-col col-7>
 				<div class="padding">
-					<!--<h5 class="userName">{{user.username}}</h5>-->
-
-					<h5 (click)="presentThisWeekModal(1)" class="userName">{{user.username}}</h5>
-
-					<p class="profileText">{{userIntro}}</p>
-					<button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button small
+					<button *ngIf="!button_loaded&&today_disable" [disabled]="true" class="add" ion-button outline small
 					        color="primary"
 					        (click)="refreshViewCnt()">
-						<ion-spinner color="light" name="circles"></ion-spinner>
+						<ion-spinner color="primary" name="circles"></ion-spinner>
 					</button>
-
 					<button *ngIf="!button_loaded&&!today_disable" class="add" ion-button small color="primary"
 					        (click)="refreshViewCnt()">
-						<ion-spinner color="light" name="circles"></ion-spinner>
+						<ion-spinner color="primary" name="circles"></ion-spinner>
 					</button>
-					<button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" class="add" ion-button small
+					<button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" ion-button small outline
 					        color="primary"
-					        (click)="refreshViewCnt()">Today {{user.viewCnt}}
+					        (click)="refreshViewCnt()"><span class="highlight">Today {{user.viewCnt}}</span>
 					</button>
-
-					<button *ngIf="button_loaded&&user&&!today_disable" class="add" ion-button small color="primary"
-					        (click)="refreshViewCnt()">Today {{user.viewCnt}}
+					<button *ngIf="button_loaded&&user&&!today_disable" ion-button small outline color="primary"
+					        (click)="refreshViewCnt()"><span class="highlight">Today {{user.viewCnt}}</span>
 					</button>
-
-					<button *ngIf="!checkRank" class="add" ion-button small color="sub">Rank {{min}}</button>
+					<h5 class="userName">{{user.username}}</h5>
+					<p class="profileText">{{userIntro}}</p>
 
 				</div>
 			</ion-col>
@@ -74,8 +76,10 @@
 	</ion-grid>
 	<div *ngIf="thisWeekPost">
 		<ion-slides class="image-slider" slidesPerView="3">
-			<ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
-				<img class="horiPic" (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}">
+			<ion-slide (tap)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
+				<div >
+					<img-loader src="{{tWeek.picURL}}" useImg></img-loader>
+				</div>
 			</ion-slide>
 		</ion-slides>
 	</div>
@@ -84,7 +88,7 @@
 		<ion-segment-button value="fit">
 			<ion-icon name="md-apps"></ion-icon>
 		</ion-segment-button>
-		<ion-segment-button value="favorites">
+		<ion-segment-button value="favorites" (click)="refresh()">
 			<ion-icon name="md-star"></ion-icon>
 		</ion-segment-button>
 	</ion-segment>
@@ -100,9 +104,11 @@
 				</ion-row>
 			</ion-grid>
 			<ion-grid no-padding>
-				<ion-row wrap>
-					<ion-col col-4 align-self-center *ngFor="let post of mypostlist.slice().reverse(); let i = index">
-						<img tappable (click)="presentProfileModal(i)" class="myFitImage" src={{post.picURL}}>
+				<ion-row>
+					<ion-col tappable (click)="presentProfileModal(i)" col-4 align-self-center *ngFor="let post of mypostlist.slice().reverse(); let i = index">
+						<div class="pastFits">
+							<img-loader src={{post.picURL}} useImg></img-loader>
+						</div>
 					</ion-col>
 				</ion-row>
 			</ion-grid>
@@ -120,7 +126,7 @@
 			<ion-list inset>
 				<button (click)="presentFavModal(i)" *ngFor="let favorite of favorites; let i = index;" ion-item>
 					<ion-avatar item-start>
-						<img src="{{favorite.profile_img}}">
+						<img-loader src="{{favorite.profile_img}}" useImg></img-loader>
 					</ion-avatar>
 					<h4>{{favorite.wardrobeName}}</h4>
 					<p>{{favorite.username}}</p>

@@ -22,6 +22,9 @@ export class TabsPage {
   constructor(public statusBar: StatusBar) {
     this.statusBar.styleDefault();
   }
+  test(){
+  	console.log("test");
+  }
 
 
 

@@ -29,7 +29,7 @@ export class SignupPasswordPage {
     this.wardrobename = this.navParams.get('wardrobename');
     this.username = this.navParams.get('username');
     this.loginForm = this.fb.group({
-      email: ['', Validators.compose([Validators.minLength(12),Validators.pattern("[a-zA-Z0-9]+@fitnyc.edu"),Validators.required])],
+      email: ['', Validators.compose([Validators.minLength(12),Validators.pattern("[a-zA-Z0-9_#$%^&*()!?]+@fitnyc.edu"),Validators.required])],
       password: ['', Validators.compose([Validators.minLength(8), Validators.required])],
       password2: ['', Validators.compose([Validators.minLength(8), Validators.required])]
     });
@@ -79,7 +79,7 @@ export class SignupPasswordPage {
         .subscribe(
           data => {
             this.showToast("bottom", "User successfully created");
-            this.navCtrl.setRoot(LoginPage,{email:this.loginForm.value.email,password:this.loginForm.value.password});
+            this.navCtrl.setRoot(LoginPage,{email:this.loginForm.value.email,password:this.loginForm.value.password,check:"logout"});
           },
           err => {
             console.log(err);

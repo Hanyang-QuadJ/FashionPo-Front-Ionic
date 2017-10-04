@@ -1,192 +1,216 @@
-vote-wardrobe{
-  h2{
-    margin-bottom: 0px;
-  }
-  h4{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  h5{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  p{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  .toolbar-background {
-    background-color: #ffffff;
+vote-wardrobe {
+	h2 {
+		margin-bottom: 0px;
+	}
+	h4 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	h5 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	p {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	.toolbar-background {
+		background-color: #ffffff;
 
-  }
-  .toolbar-title-ios {
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ff5733;
-    pointer-events: auto;
-  }
-  .padding{
-    padding-top: 5%;
+	}
+	.profileImage{
+		img{
+			width: 80%;
+			height: auto;
+			border-radius: 10%;
+			margin-top: 1%;
+		}
+	}
+	.pastFits{
+		img{
+			margin-bottom:-3px;
+			padding-right:1px
+		}
+	}
+	.swiper-slide img {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 100%;
+		padding-right: 1px;
+	}
+	.toolbar-title-ios {
+		text-align: center;
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #ff5733;
+		pointer-events: auto;
+	}
+	.highlight{
+		color:#ff5733;
+		font-weight: 900;
+	}
+	.padding {
 
-  }
-  .profileText{
-    margin-top: 3%;
-    font-weight: 300;
-    color: #4d4d4d;
-    white-space: pre-line;
-    margin-left: 2%;
+	}
+	.profileText {
 
-  }
-  .add{
+		font-weight: 300;
+		color: #4d4d4d;
+		white-space: pre-line;
+		margin-left: 2%;
 
-  }
-  .infoText{
-    color: #4d4d4d;
-    font-size: 14px;
-    padding-left: 3%;
-    padding-top:1%;
-    font-weight: 500;
-    padding-bottom: 3%;
-  }
-  .container{
-    background-color: #fff2f1;
-  }
+	}
+	.add {
 
-  .image{
-    width: 80%;
-    height: auto;
-    border-radius: 5%;
-  }
-  .imageArea{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .userName{
-    text-align: left;
-    font-weight: 900;
-    font-size: 16px;
-    margin-left:3%;
-    color: #4d4d4d;
-  }
-  .information{
-    display: flex;
-    flex-direction: row;
-  }
-  .today{
-    flex:1;
+	}
+	.infoText {
+		color: #4d4d4d;
+		font-size: 14px;
+		padding-left: 3%;
+		padding-top: 1%;
+		font-weight: 500;
+		padding-bottom: 3%;
+	}
+	.container {
+		background-color: #fff2f1;
+	}
 
+	.image {
+		width: 80%;
+		height: auto;
+		border-radius: 5%;
+		margin-top: 1%;
 
+	}
+	.imageArea {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.userName {
+		text-align: left;
+		font-weight: 900;
+		font-size: 14px;
+		margin-left: 2%;
+		color: #4d4d4d;
+	}
+	.information {
+		display: flex;
+		flex-direction: row;
+	}
+	.today {
+		flex: 1;
 
-  }
-
-  .todayCount{
-    font-weight: 600;
-    margin-bottom: 0px;
-    color: #4d4d4d;
-    font-size:30px;
-  }
-  .totalCount{
-    color:#00AAA0;
-    font-size:30px;
-    font-weight: 600;
-    margin-bottom: 0px;
-  }
-  .todayText{
-    font-size:15px;
-    font-weight: 400;
-    color: #898989;
-
-  }
-  .rankCount{
-
-    color:#ff5733;
-    font-size:30px;
-    font-weight: 600;
-    margin-bottom: 0px;
-  }
-  .my-rank{
-    flex:1;
-
-  }
-  .horiPic{
-
-    padding-right: 3px;
+	}
 
 
-  }
-  .small{
-    font-size: 8px;
-  }
-  .twPic{
+	.todayCount {
+		font-weight: 600;
+		margin-bottom: 0px;
+		color: #4d4d4d;
+		font-size: 30px;
+	}
+	.totalCount {
+		color: #00AAA0;
+		font-size: 30px;
+		font-weight: 600;
+		margin-bottom: 0px;
+	}
+	.todayText {
+		font-size: 15px;
+		font-weight: 400;
+		color: #898989;
 
-    height: 23%;
+	}
+	.rankCount {
 
-  }
-  ion-scroll{
-    overflow: scroll;
-    white-space: nowrap;
-  }
+		color: #ff5733;
+		font-size: 30px;
+		font-weight: 600;
+		margin-bottom: 0px;
+	}
+	.my-rank {
+		flex: 1;
 
-  .myFitImage{
-    width:100%;
-    height:100%;
-    padding-right: 2px;
+	}
+	.horiPic {
 
-  }
-  .image-slider{
-    height: 23%;
-  }
-  .no{
-    padding-top: 15%;
-    padding-bottom: 15%;
-    color: #8c8c8c;
-    font-size: 14px;
-  }
-  .segment-ios .segment-button {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    width: 0;
-    height: 4.2rem;
-    border-bottom: 0.55px rgba(0,0,0,0.1) solid;
-    border-width: 0.55px;
-    border-top: 0px;
-    border-left: 0px;
-    border-right:0px;
-    border-style: solid;
+		padding-right: 3px;
 
-    font-size: 1.3rem;
-    line-height: 5rem;
-    color: #838383;
-    background-color: transparent;
-  }
-  .segment-ios .segment-button:first-of-type {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0px;
-    margin-right: 0;
-  }
-  .segment-ios .segment-button:last-of-type {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0;
-    margin-left: 0;
-    border-left-width: 0;
-  }
-  .segment-ios-primary .segment-button.segment-activated {
-    color: #ff5733;
-    font-weight: 900;
-    border-bottom: 2px solid;
-    background-color: white;
-  }
-  .btn{
-    background-color: transparent;
-    padding: 0;
-    margin:0;
-  }
+	}
+	.small {
+		font-size: 8px;
+	}
+	.twPic {
+
+		height: 23%;
+
+	}
+	ion-scroll {
+		overflow: scroll;
+		white-space: nowrap;
+	}
+
+	.myFitImage {
+		width: 100%;
+		height: 100%;
+		padding-right: 2px;
+
+	}
+	.image-slider {
+		height: 23%;
+	}
+	.no {
+		padding-top: 15%;
+		padding-bottom: 15%;
+		color: #8c8c8c;
+		font-size: 14px;
+	}
+	.segment-ios .segment-button {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		width: 0;
+		height: 4.2rem;
+		border-bottom: 0.55px rgba(0, 0, 0, 0.1) solid;
+		border-width: 0.55px;
+		border-top: 0px;
+		border-left: 0px;
+		border-right: 0px;
+		border-style: solid;
+
+		font-size: 1.3rem;
+		line-height: 5rem;
+		color: #838383;
+		background-color: transparent;
+	}
+	.segment-ios .segment-button:first-of-type {
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0px;
+		margin-right: 0;
+	}
+	.segment-ios .segment-button:last-of-type {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-bottom-left-radius: 0;
+		margin-left: 0;
+		border-left-width: 0;
+	}
+	.segment-ios-primary .segment-button.segment-activated {
+		color: #ff5733;
+		font-weight: 900;
+		border-bottom: 2px solid;
+		background-color: white;
+	}
+	.btn {
+		background-color: transparent;
+		padding: 0;
+		margin: 0;
+	}
 
 }

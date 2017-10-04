@@ -6,37 +6,38 @@
 -->
 <ion-header no-border>
 
-  <ion-toolbar>
-    <ion-buttons start>
-      <button  (click)="dismiss()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Log</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>Log</ion-title>
+	</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-grid *ngIf="isAdd">
-    <ion-row justify-content-center>
-      <ion-col col-10 text-center>
-        <p style="margin-top: 35%">Check the people who added your wardrobe here.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+	<ion-grid *ngIf="isAdd">
+		<ion-row justify-content-center>
+			<ion-col col-10 text-center>
+				<p style="margin-top: 35%">Check the people who added your wardrobe here.</p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 
-  <div>
-  <ion-list *ngIf="isNewAdd">
-    <button *ngFor="let follower of followers.slice().reverse(); let i = index;" (click)="presentModal(i)" ion-item>
-      <ion-avatar item-start>
-        <img src="{{follower.profile_img}}">
-      </ion-avatar>
-      <p class="log"><span class="highlight">{{follower.wardrobeName}}</span> added you</p>
-      <ion-badge *ngIf="isNewAdd[i]" item-end  color="sub">N</ion-badge>
-    </button>
-  </ion-list>
-  </div>
+	<div>
+		<ion-list *ngIf="isNewAdd">
+			<button *ngFor="let follower of followers.slice().reverse(); let i = index;" (click)="presentModal(i)"
+			        ion-item>
+				<ion-avatar item-start>
+					<img-loader src="{{follower.profile_img}}" useImg></img-loader>
+				</ion-avatar>
+				<p class="log"><span class="highlight">{{follower.wardrobeName}}</span> added you</p>
+				<ion-badge *ngIf="isNewAdd[i]" item-end color="sub">N</ion-badge>
+			</button>
+		</ion-list>
+	</div>
 
 </ion-content>

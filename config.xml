@@ -2,7 +2,7 @@
 <widget id="flex9638" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Flex</name>
     <description>Fashion trend setting app.</description>
-    <author email="junjeong9728@gmail.com" href="https://yoonjeewoo.github.io">Jun Eon Jeong</author>
+    <author email="junjeong9728@gmail.com" href="https://hanyang-quadj.github.io/labs">Jun Eon Jeong</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="*" />
@@ -23,11 +23,11 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
-    <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="FadeSplashScreenDuration" value="0" />
+    <preference name="FadeSplashScreen" value="false" />
     <preference name="ShowSplashScreen" value="false" />
-    <preference name="SplashShowOnlyFirstTime" value="true" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="SplashScreenDelay" value="0" />
     <preference name="orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -83,7 +83,10 @@
         <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
+        <icon height="1024" src="resources/ios/icon/icon-1024.png" width="1024" />
+        <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <preference name="SplashShowOnlyFirstTime" value="false" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />

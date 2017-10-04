@@ -6,97 +6,98 @@
 -->
 <ion-header no-border>
 
-  <ion-navbar>
-    <ion-title>Settings</ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title>Settings</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col col-5 text-center>
-          <img tappable (click)="presentUserProfileModal()" class="profileImage" src="{{user.profile_img}}">
-        </ion-col>
-    </ion-row>
-  </ion-grid>
-  <!--<ion-list>-->
-    <!--<ion-list-header>User information</ion-list-header>-->
-    <!--<ion-item (click)="presentUserProfileModal()">Change Profile Image</ion-item>-->
-    <!--<ion-item (click)="presentUsernameModal()">Change Username</ion-item>-->
-  <!--</ion-list>-->
+	<ion-grid>
+		<ion-row justify-content-center>
+			<ion-col col-5 text-center>
+				<img tappable (click)="presentUserProfileModal()" class="profileImage" src="{{user.profile_img}}">
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<!--<ion-list>-->
+	<!--<ion-list-header>User information</ion-list-header>-->
+	<!--<ion-item (click)="presentUserProfileModal()">Change Profile Image</ion-item>-->
+	<!--<ion-item (click)="presentUsernameModal()">Change Username</ion-item>-->
+	<!--</ion-list>-->
 
-  <!--<ion-list>-->
-    <!--<ion-list-header>Action</ion-list-header>-->
-    <!--<ion-item>-->
-      <!--<ion-label> Sam</ion-label>-->
-      <!--<ion-toggle disabled checked="false"></ion-toggle>-->
-    <!--</ion-item>-->
-    <!--<ion-item>The Empire Strikes Back</ion-item>-->
-    <!--<ion-item>Blade Runner</ion-item>-->
-  <!--</ion-list>-->
+	<!--<ion-list>-->
+	<!--<ion-list-header>Action</ion-list-header>-->
+	<!--<ion-item>-->
+	<!--<ion-label> Sam</ion-label>-->
+	<!--<ion-toggle disabled checked="false"></ion-toggle>-->
+	<!--</ion-item>-->
+	<!--<ion-item>The Empire Strikes Back</ion-item>-->
+	<!--<ion-item>Blade Runner</ion-item>-->
+	<!--</ion-list>-->
 
-  <!--<ion-list>-->
-    <!--<ion-list-header></ion-list-header>-->
+	<!--<ion-list>-->
+	<!--<ion-list-header></ion-list-header>-->
 
-  <!--</ion-list>-->
-  <ion-list>
-    <ion-list-header>Edit Account</ion-list-header>
-    <button (click)="presentUserProfileModal()" ion-item>
-      <ion-icon name="ios-image-outline" color="primary" item-start></ion-icon>
-      <h4>Profile Image</h4>
-    </button>
+	<!--</ion-list>-->
+	<ion-list>
+		<ion-list-header>Edit Account</ion-list-header>
+		<button (click)="presentUserProfileModal()" ion-item>
+			<ion-icon name="ios-image-outline" color="primary" item-start></ion-icon>
+			<h4>Profile Image</h4>
+		</button>
 
-    <button (click)="presentUsernameModal()" ion-item>
-      <ion-icon name="ios-person-outline"color="primary" item-start></ion-icon>
-      <h4>User Name</h4>
-      <p item-end>{{user.username}}</p>
-    </button>
+		<button (click)="presentUsernameModal()" ion-item>
+			<ion-icon name="ios-person-outline" color="primary" item-start></ion-icon>
+			<h4>User Name</h4>
+			<p item-end>{{user.username}}</p>
+		</button>
 
-    <button ion-item (click)="presentWardrobeModal()">
-      <ion-icon name="ios-shirt-outline" color="primary"item-start></ion-icon>
-      <h4>Wardrobe Name</h4>
-      <p item-end>{{user.wardrobeName}}</p>
-    </button>
+		<button ion-item (click)="presentWardrobeModal()">
+			<ion-icon name="ios-shirt-outline" color="primary" item-start></ion-icon>
+			<h4>Wardrobe Name</h4>
+			<p item-end>{{user.wardrobeName}}</p>
+		</button>
 
-    <button ion-item (click)="presentIntroduceModal()">
-      <ion-icon name="ios-list-outline" color="primary"item-start></ion-icon>
-      <h4>Bio</h4>
-
-
-    </button>
-    <button ion-item (click)="presentPasswordModal()">
-      <ion-icon name="ios-key-outline"color="primary" item-start></ion-icon>
-      <h4>Password</h4>
-    </button>
+		<button ion-item (click)="presentIntroduceModal()">
+			<ion-icon name="ios-list-outline" color="primary" item-start></ion-icon>
+			<h4>Bio</h4>
 
 
-  </ion-list>
-  <ion-list>
-    <ion-list-header>Settings</ion-list-header>
-    <ion-item>
-      <ion-label><h4>Show Favorites</h4></ion-label>
-      <ion-toggle [(ngModel)]="showFavorite" (ngModelChange)="toggleFavorite()" color="primary"></ion-toggle>
-    </ion-item>
-  </ion-list>
-
-    <ion-list>
-      <ion-list-header>Information</ion-list-header>
-      <button ion-item (click)="presentTermsModal()">
-        <h4>Terms & Conditions</h4>
-      </button>
-
-    </ion-list>
-    <ion-list>
-
-    <button ion-item (click)="presentConfirm()">
-      <ion-icon name="ios-log-out"color="primary" item-start></ion-icon>
-      <h4>Log out</h4>
-    </button>
-  </ion-list>
+		</button>
+		<button ion-item (click)="presentPasswordModal()">
+			<ion-icon name="ios-key-outline" color="primary" item-start></ion-icon>
+			<h4>Password</h4>
+		</button>
 
 
+	</ion-list>
+	<ion-list>
+		<ion-list-header>Settings</ion-list-header>
+		<ion-item>
+			<ion-label><h4>Show Favorites</h4></ion-label>
+			<ion-toggle [(ngModel)]="showFavorite" (ngModelChange)="toggleFavorite()" color="primary"></ion-toggle>
+		</ion-item>
+
+	</ion-list>
+
+	<ion-list>
+		<ion-list-header>Information</ion-list-header>
+		<button ion-item (click)="presentTermsModal()">
+			<h4>Terms & Conditions</h4>
+		</button>
+		<button ion-item (click)="presentLicense()">
+			<h4>Open sources</h4>
+		</button>
+	</ion-list>
+	<ion-list>
+
+		<button ion-item (click)="presentConfirm()">
+			<ion-icon name="ios-log-out" color="primary" item-start></ion-icon>
+			<h4>Log out</h4>
+		</button>
+	</ion-list>
 
 
 </ion-content>

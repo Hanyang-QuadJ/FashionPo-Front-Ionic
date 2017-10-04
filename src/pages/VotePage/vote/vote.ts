@@ -296,8 +296,8 @@ export class VotePage implements OnInit {
 
 
   presentWardrobeModal(user) {
-    let profileModal = this.modalCtrl.create(VoteWardrobePage, {user_id: user}, {leaveAnimation: 'back'});
-    profileModal.present();
+   this.navCtrl.push(VoteWardrobePage, {user_id: user});
+
 
   }
 

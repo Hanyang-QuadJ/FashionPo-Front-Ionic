@@ -6,14 +6,14 @@
 -->
 <ion-header no-border>
 
-	<ion-navbar>
+	<ion-toolbar>
 		<ion-buttons start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
 				<ion-icon name="ios-arrow-back"></ion-icon>
 			</button>
 		</ion-buttons>
 		<ion-title>Outfits</ion-title>
-	</ion-navbar>
+	</ion-toolbar>
 
 </ion-header>
 
@@ -21,7 +21,7 @@
 <ion-content>
 	<ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
 
-		<img src="{{post.picURL}}">
+		<img-loader src="{{post.picURL}}" useImg></img-loader>
 
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>

@@ -1,251 +1,248 @@
 page-home {
-  $tabs-ios-tab-padding-top:20px;
+	$tabs-ios-tab-padding-top: 20px;
 
-  p{
-    margin-top:0px;
-    margin-bottom: 0px;
+	p {
+		margin-top: 0px;
+		margin-bottom: 0px;
 
-  }
-  .toolbar-background {
-    background-color: #ffffff;
+	}
+	.toolbar-background {
+		background-color: #ffffff;
 
-  }
-  .notice{
-    margin-top: 5%;
-    font-weight: 300;
-  }
-  .title{
-    line-height: 130%;
-  }
-  .toolbar-title-ios {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: #ff5733;
-    pointer-events: auto;
-  }
+	}
+	.notice {
+		margin-top: 5%;
+		font-weight: 300;
+	}
+	.title {
+		line-height: 130%;
+	}
+	.toolbar-title-ios {
+		text-align: center;
+		font-size: 1.6rem;
+		font-weight: 900;
+		color: #ff5733;
+		pointer-events: auto;
+	}
 
-  .toolbar{
-    box-shadow: 0px 0.05rem 1rem rgba(0,0,0,0.1) ! important;
-  }
-  .firstPlace{
-    font-size: 18px;
-    color: #6a6a6a;
-    letter-spacing: 1px;
-    display: inline;
-  }
-  .firstPlaceIcon{
-    font-size: 25px;
-    color: #ff5733;
-  }
-  .card-header-ios {
-    padding: 5px;
-  }
-  .card-content-ios {
-    padding: 10px 10px 20px;
+	.toolbar {
+		box-shadow: 0px 0.05rem 1rem rgba(0, 0, 0, 0.1) ! important;
+	}
+	.firstPlace {
+		font-size: 18px;
+		color: #6a6a6a;
+		letter-spacing: 1px;
+		display: inline;
+	}
+	.firstPlaceIcon {
+		font-size: 25px;
+		color: #ff5733;
+	}
+	.card-header-ios {
+		padding: 5px;
+	}
+	.card-content-ios {
+		padding: 10px 10px 20px;
 
-  }
-  .box{
+	}
+	.box {
 
-    display: flex;
-  },
-  .numbering {
-    display: flex;
-    flex:0.2;
-  -webkit-box-flex: 0.2;
-  -webkit-flex: 0.2;
-  -ms-flex: 0.2;
-    //margin-top: 20px;
-    //margin-bottom: 20px;
-  }
-  .numberingArea{
-    background-color: white;
-    display:flex;
-    flex:1;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    justify-content: center;
-    align-items: center;
-    margin-top: 80%;
-    margin-bottom: 80%;
-  }
-  .rankNumber{
-    font-size: 20px;
-    font-weight: 600;
-    color:#FF5733;
-  }
-  .image {
-    display: flex;
-    flex: 0.5;
-    align-items: center;
-    -webkit-box-flex: 0.5;
-    -webkit-flex: 0.5;
-    -ms-flex: 0.5;
+		display: flex;
+	}
 
-  }
-  .buttonText{
-    font-size: 12px;
-  }
-  ion-segment{
-    align-items: start;
-  }
-  .history{
-    margin-top: 0;
-    padding-top: 0;
-    font-weight: 400;
-    color: #6a6a6a;
-    font-size: 13px;
+	.numbering {
+		display: flex;
+		flex: 0.2;
+		-webkit-box-flex: 0.2;
+		-webkit-flex: 0.2;
+		-ms-flex: 0.2;
+		//margin-top: 20px;
+		//margin-bottom: 20px;
+	}
+	.numberingArea {
+		background-color: white;
+		display: flex;
+		flex: 1;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		justify-content: center;
+		align-items: center;
+		margin-top: 80%;
+		margin-bottom: 80%;
+	}
+	.rankNumber {
+		font-size: 20px;
+		font-weight: 600;
+		color: #FF5733;
+	}
+	.image {
+		display: flex;
+		flex: 0.5;
+		align-items: center;
+		-webkit-box-flex: 0.5;
+		-webkit-flex: 0.5;
+		-ms-flex: 0.5;
 
-  }
-  .name {
-    display:flex;
-    flex: 1;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    justify-content: space-between;
-    align-items: center;
+	}
+	.buttonText {
+		font-size: 12px;
+	}
+	ion-segment {
+		align-items: start;
+	}
+	.history {
+		margin-top: 0;
+		padding-top: 0;
+		font-weight: 400;
+		color: #6a6a6a;
+		font-size: 13px;
 
+	}
+	.name {
+		display: flex;
+		flex: 1;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		justify-content: space-between;
+		align-items: center;
 
-  }
-  .nameArea{
-    display: flex;
-    justify-content: flex-start;
-    flex:0.5;
-    -webkit-box-flex: 0.5;
-    -webkit-flex: 0.5;
-    -ms-flex: 0.5;
-    margin-left: 5%;
-    flex-direction: column;
+	}
+	.nameArea {
+		display: flex;
+		justify-content: flex-start;
+		flex: 0.5;
+		-webkit-box-flex: 0.5;
+		-webkit-flex: 0.5;
+		-ms-flex: 0.5;
+		margin-left: 5%;
+		flex-direction: column;
 
+	}
+	.buttonArea {
+		display: flex;
+		flex: 1;
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		justify-content: flex-end;
+		padding-right: 3%;
 
-  }
-  .buttonArea{
-    display: flex;
-    flex:1;
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    justify-content: flex-end;
-    padding-right: 3%;
+	}
 
-  }
+	.firstLike {
+		text-align: end;
+		margin-right: 2%;
+		margin-top: 2%;
+		margin-bottom: 2%;
+	}
+	.likeNum {
+		color: #ff5733;
+		font-weight: 400;
+		font-size: 1.5rem;
+		letter-spacing: 0px;
 
-  .firstLike{
-    text-align: end;
-    margin-right: 2%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-  }
-  .likeNum{
-    color:#ff5733;
-    font-weight: 400;
-    font-size: 1.5rem;
-    letter-spacing: 0px;
+	}
+	.likeNumm {
+		color: #ff5733;
+		font-weight: 500;
+		font-size: 1.6rem;
 
-  }
-  .likeNumm{
-    color:#ff5733;
-    font-weight: 500;
-    font-size: 1.6rem;
+	}
+	.likeText {
+		color: #ff5733;
+		font-size: 1.1rem;
+		font-weight: 400;
+		letter-spacing: 1px;
+	}
+	.rankSub {
 
-  }
-  .likeText{
-    color: #ff5733;
-    font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-  }
-  .rankSub{
+	}
+	.likeText2 {
+		color: #ff5733;
+		font-size: 1.2rem;
+		font-weight: 400;
+		letter-spacing: 1px;
+	}
+	.likeNum2 {
+		color: #ff5733;
+		font-weight: 500;
+		font-size: 1.6rem;
 
+	}
+	.likeArea {
+		display: flex;
 
-  }
-  .likeText2{
-    color: #ff5733;
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-  }
-  .likeNum2{
-    color:#ff5733;
-    font-weight: 500;
-    font-size: 1.6rem;
+		flex-direction: column;
+		align-items: center;
 
-  }
-  .likeArea{
-    display: flex;
+	}
+	.segment-ios .segment-button {
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		width: 0;
 
-    flex-direction: column;
-    align-items: center;
+		border-width: 0px;
+		border-style: solid;
+		border-color: #ff5733;
+		font-size: 1.3rem;
 
-  }
-  .segment-ios .segment-button {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    width: 0;
+		height: 4.2rem;
+		line-height: 4.2rem;
+		color: #838383;
+		background-color: transparent;
+	}
+	.segment-ios .segment-button:first-of-type {
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0px;
+		margin-right: 0;
+	}
+	.segment-ios .segment-button:last-of-type {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		border-bottom-left-radius: 0;
+		margin-left: 0;
+		border-left-width: 0;
+	}
+	.segment-ios-primary .segment-button.segment-activated {
+		color: #ff5733;
+		font-weight: 900;
+		border-bottom: 2px solid;
+		background-color: white;
+	}
+	.segment-ios .segment-button {
 
-    border-width: 0px;
-    border-style: solid;
-    border-color: #ff5733;
-    font-size: 1.3rem;
+	}
 
-    height: 4.2rem;
-    line-height: 4.2rem;
-    color: #838383;
-    background-color: transparent;
-  }
-  .segment-ios .segment-button:first-of-type {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0px;
-    margin-right: 0;
-  }
-  .segment-ios .segment-button:last-of-type {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0;
-    margin-left: 0;
-    border-left-width: 0;
-  }
-  .segment-ios-primary .segment-button.segment-activated {
-    color: #ff5733;
-    font-weight: 900;
-    border-bottom: 2px solid;
-    background-color: white;
-  }
-  .segment-ios .segment-button {
+	.myFitImage {
+		width: 100%;
+		height: 100%;
+		padding-right: 2px;
 
-  }
-
-  .myFitImage{
-    width:100%;
-    height:100%;
-    padding-right: 2px;
-
-  }
-  .btn{
-    background-color: transparent;
-    padding: 0;
-    margin:0;
-  }
-  .card-ios {
-    margin: 12px;
-    border-radius: 2px;
-    width: calc(100% - 24px);
-    font-size: 1.5rem;
-    background: #fff;
-    box-shadow: 0rem 0px 5px rgba(0,0,0,0.1);
-  }
-  .rankWardrobe{
-    white-space: pre-wrap;
-  }
-
-
+	}
+	.btn {
+		background-color: transparent;
+		padding: 0;
+		margin: 0;
+	}
+	.card-ios {
+		margin: 12px;
+		border-radius: 2px;
+		width: calc(100% - 24px);
+		font-size: 1.5rem;
+		background: #fff;
+		box-shadow: 0rem 0px 5px rgba(0, 0, 0, 0.1);
+	}
+	.rankWardrobe {
+		white-space: pre-wrap;
+		margin-left: 7%;
+	}
 
 }
 

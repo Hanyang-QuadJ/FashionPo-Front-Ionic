@@ -12,6 +12,8 @@ import {VoteThisWeekPage} from '../vote-wardrobe/vote-this-week/vote-this-week'
 import {VotePhotoPage} from '../vote-wardrobe/vote-photo/vote-photo'
 import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
 import {FavoriteUserPage} from "../../../WardrobePage/favorite-user/favorite-user";
+import {HomePage} from "../../../RankPage/home/home";
+import {TabsPage} from "../../../tabs/tabs";
 
 /**
  * Generated class for the SettingsPage page.
@@ -57,6 +59,7 @@ export class VoteWardrobePage {
 	            public loadingCtrl: LoadingController,
 	            public modalCtrl: ModalController,
 	            public alertCtrl: AlertController,
+	            public navCtrl: NavController,
 	            public fetchDatas: FetchDataProvider,) {
 		this.weekCheck = false;
 		this.showAdd = false;
@@ -73,10 +76,6 @@ export class VoteWardrobePage {
 
 		this.thisWeekPost = [];
 		this.User_id = this.navParams.get('user_id');
-		let loading = this.loadingCtrl.create({
-			showBackdrop: true, spinner: 'crescent', enableBackdropDismiss: true
-		});
-		loading.present();
 		this.fetchDatas.postData('/user', {users: [this.User_id]}).then(data => {
 			this.User = data[0];
 			// console.log("Wowwww");
@@ -118,12 +117,11 @@ export class VoteWardrobePage {
 						else
 							this.button = false;
 
-						loading.dismiss();
+
 					})
 				})
 			})
 		});
-
 
 	}
 
@@ -142,7 +140,6 @@ export class VoteWardrobePage {
 	}
 
 
-
 	removeFavorite(post) {
 		this.button = false;
 		this.try = true;
@@ -153,14 +150,28 @@ export class VoteWardrobePage {
 			});
 
 	}
+
 	presentActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
-			title: 'Modify your album',
+			title: 'Block',
 			buttons: [
 				{
 					text: 'Block this user',
 					role: 'destructive',
 					handler: () => {
+						this.fetchDatas.postData('/user/blacklist', {user_id: this.User_id}).then(data => {
+							if (this.button === true) {
+								this.fetchDatas.deleteData('/user/favorite', {_id: this.User._id}).then(data => {
+										this.navCtrl.setRoot(TabsPage, {}, {direction: 'back'});
+									},
+									err => {
+									});
+							}
+							else{
+								this.navCtrl.setRoot(TabsPage, {}, {direction: 'back'});
+							}
+							console.log(data);
+						});
 						console.log('Destructive clicked');
 					}
 				},
@@ -183,20 +194,18 @@ export class VoteWardrobePage {
 	}
 
 	presentFavModal(i) {
-		let profileModal = this.modalCtrl.create(VotePhotoPage, {
+		this.navCtrl.push(VotePhotoPage, {
 			postList: this.posts.slice().reverse(),
 			postListIndex: 'fit' + i
-		}, {leaveAnimation: 'back'});
-		profileModal.present();
+		});
 
 	}
 
 	presentThisWeekModal(i) {
-		let thisWeekModal = this.modalCtrl.create(VoteThisWeekPage, {
+		this.navCtrl.push(VoteThisWeekPage, {
 			thisWeekPost: this.thisWeekPost.slice().reverse(),
 			thisWeekPostIndex: 'fit' + i
-		}, {leaveAnimation: 'back'});
-		thisWeekModal.present();
+		});
 	}
 
 	presentUserModal(i) {

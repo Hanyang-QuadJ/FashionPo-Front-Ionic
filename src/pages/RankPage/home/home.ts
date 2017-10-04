@@ -15,6 +15,7 @@ import 'moment-timezone';
 import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
 import {IntroPage} from "../../intro/intro";
 import {Network} from "@ionic-native/network";
+import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 
 
 /**
@@ -67,10 +68,12 @@ export class HomePage implements OnInit {
 
 	firstPost: any;
 	firstUser: any;
-	search: string = "";
+	search: any;
 	try: boolean = false;
 	nameCheck: Array<any> = [];
 	rankEmpty: boolean;
+	renewed:any;
+	index:any;
 
 	firstButton: boolean;
 
@@ -87,17 +90,13 @@ export class HomePage implements OnInit {
 	            public loadingCtrl: LoadingController,
 	            public viewCtrl: ViewController,
 	            private network: Network,) {
-		this.search = "user";
+
 		this.historyRank = this.navParams.get('rankSheet');
 		this.dismissHistory = this.navParams.get('dismiss');
+		this.search = "user";
 	}
 
 	ngOnInit(): void {
-		this.network.onDisconnect().subscribe(() => {
-			// console.log('network was disconnected :-(');
-			this.presentToast();
-		});
-
 
 		if (this.dismissHistory === 'dismiss') {
 			this.fetchDatas.postData('/user/setHistory', {}).then(data => {
@@ -116,7 +115,6 @@ export class HomePage implements OnInit {
 	public getHistoryNew() {
 		this.fetchDatas.getData('/user/authed').then(data => {
 			// console.log(data.user[0].isHistoryNew);
-
 			if (data.user[0].isHistoryNew === true) {
 				this.historyNew = true;
 			}
@@ -128,6 +126,7 @@ export class HomePage implements OnInit {
 
 
 	ionViewWillEnter() {
+		this.content.resize();
 
 
 		// console.log('Rank Data Check');
@@ -137,7 +136,7 @@ export class HomePage implements OnInit {
 		this.ranks = [];
 		this.oriRank = [];
 		this.writtenBys = [];
-		this.search = "User";
+
 		this.pushPage = VotePage;
 		this.toggled = false;
 		this.rankEmpty = false;
@@ -146,18 +145,11 @@ export class HomePage implements OnInit {
 		//Fetch Data Start!
 
 		if (this.historyRank === undefined) {
-			let loading = this.loadingCtrl.create({
-				showBackdrop: true,
-				cssClass: 'loading',
-				spinner: 'crescent',
-				enableBackdropDismiss: true
-			});
-			loading.present();
 			this.fetchDatas.getData('/rank').then(data => {
 
 				if (data.posts === undefined || data.posts.length === 0) {
 					this.rankEmpty = true;
-					loading.dismiss();
+
 				}
 				else {
 
@@ -189,7 +181,7 @@ export class HomePage implements OnInit {
 							for (let i = 0; i < this.ranks.length; i++)
 								this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
 							this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1;
-							loading.dismiss();
+
 						})
 					})
 
@@ -199,17 +191,11 @@ export class HomePage implements OnInit {
 		}
 		//History Rank!
 		else if (this.historyRank !== undefined) {
-			let loading = this.loadingCtrl.create({
-				showBackdrop: true,
-				cssClass: 'loading',
-				spinner: 'crescent',
-				enableBackdropDismiss: true
-			});
-			loading.present();
+
 			this.modalCheck = true;
 			this.rankDate = this.navParams.get('rankDate');
 			if (this.historyRank === [] || this.historyRank.length === 0 || this.historyRank === undefined) {
-				loading.dismiss();
+
 			}
 			else {
 				for (let a = 0; a < this.historyRank.length; a++) {
@@ -243,7 +229,7 @@ export class HomePage implements OnInit {
 						for (let i = 0; i < this.ranks.length; i++)
 							this.buttons[i] = this.user.favorites.indexOf(this.ranks[i].writtenBy) !== -1
 						this.firstButton = this.user.favorites.indexOf(this.firstPost.writtenBy) !== -1;
-						loading.dismiss();
+
 					})
 				})
 			}
@@ -259,12 +245,17 @@ export class HomePage implements OnInit {
 		this.ranks = [];
 		this.oriRank = [];
 		this.writtenBys = [];
-		this.search = "User";
+
 		this.pushPage = VotePage;
 		this.toggled = false;
+		this.allUsers = [];
 		this.searchToggled = false;
 		this.initializeItems();
 		this.fetchDatas.getData('/rank').then(data => {
+			if (data.posts === undefined || data.posts.length === 0) {
+				this.rankEmpty = true;
+				refresher.complete();
+			}
 			for (let d = 0; d < data.posts.length; d++) {
 				this.oriRank[d] = data.posts[d];
 			}
@@ -351,27 +342,68 @@ export class HomePage implements OnInit {
 
 
 	initializeItems() {
-
-		this.fetchDatas.getData('/user/all').then(data => {
-			this.allUsers = data.usersList;
+		this.allUsers = [];
+		this.fetchDatas.getData('/user/authed').then(data => {
+			this.user = data.user[0];
+			this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
+				let blackUser: any = data.blackList;
+				console.log("haha");
+				console.log(blackUser);
+				this.fetchDatas.getData('/user/all').then(data => {
+					for (let i = 0; i < data.usersList.length; i++) {
+						if (blackUser.indexOf(data.usersList[i]._id) === -1) {
+							this.allUsers.push(data.usersList[i]);
+						}
+					}
+				});
+			});
 
 		});
+
 
 	}
 
 	getItems(ev) {
-		this.fetchDatas.getData('/user/all').then(data => {
-			this.allUsers = data.usersList;
-			let val = ev.target.value;
-			// if the value is an empty string don't filter the items
-			if (val && val.trim() != '') {
-				this.allUsers = this.allUsers.filter((item) => {
-					return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+
+		this.fetchDatas.getData('/user/authed').then(data => {
+			this.user = data.user[0];
+			this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
+				let blackUser: any = data.blackList;
+				console.log("haha");
+				console.log(blackUser);
+				this.fetchDatas.getData('/user/all').then(data => {
+
+					this.allUsers = [];
+					for (let i = 0; i < data.usersList.length; i++) {
+						if (blackUser.indexOf(data.usersList[i]._id) === -1) {
+							this.allUsers.push(data.usersList[i]);
+						}
+					}
+					let val = ev.target.value;
+					// if the value is an empty string don't filter the items
+					if (val && val.trim() != '') {
+
+						this.allUsers = this.allUsers.filter((item) => {
+							return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+						});
+
+					}
 				});
+			});
 
-
-			}
 		});
+		// this.fetchDatas.getData('/user/all').then(data => {
+		// 	this.allUsers = data.usersList;
+		// 	let val = ev.target.value;
+		// 	// if the value is an empty string don't filter the items
+		// 	if (val && val.trim() != '') {
+		// 		this.allUsers = this.allUsers.filter((item) => {
+		// 			return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+		// 		});
+		//
+		//
+		// 	}
+		// });
 
 
 		this.fetchDatas.getData('/search/searchTag/' + ev.target.value).then(data => {
@@ -422,21 +454,31 @@ export class HomePage implements OnInit {
 	}
 
 	presentWardrobeModal(i) {
-		let WardrobeModal = this.modalCtrl.create(VoteWardrobePage, {
-			user_id: this.users[i],
+		if (this.users[i]._id === this.user._id) {
+			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+		}
+		else {
+			this.navCtrl.push(VoteWardrobePage, {
+				user_id: this.users[i],
+			});
 
-		}, {leaveAnimation: 'back'});
-		WardrobeModal.present();
+		}
+
+
 	}
 
 	presentFirstModal() {
-		let profileModal = this.modalCtrl.create(VoteWardrobePage, {
-			user_id: this.firstUser,
-			rank: this.oriRank
-		}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
-		})
-		profileModal.present();
+		if (this.firstUser._id === this.user._id) {
+			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+		}
+		else {
+			this.navCtrl.push(VoteWardrobePage, {
+				user_id: this.firstUser,
+				rank: this.oriRank
+			});
+
+		}
+
 
 	}
 
@@ -445,15 +487,30 @@ export class HomePage implements OnInit {
 	}
 
 	presentSearchModal(i) {
-		let searchModal = this.modalCtrl.create(VoteWardrobePage, {user_id: this.allUsers[i]}, {leaveAnimation: 'back'});
-		searchModal.present();
+		if (this.allUsers[i]._id !== this.user._id) {
+			let searchModal = this.modalCtrl.create(VoteWardrobePage, {user_id: this.allUsers[i]}, {leaveAnimation: 'back'});
+			searchModal.present();
+		}
+		else {
+			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+
+			// this.navCtrl.parent().select(2);
+
+		}
+
 	}
+	myCallbackFunction = (_params,_params2) => {
+		return new Promise((resolve, reject) => {
+
+			resolve();
+		});
+	};
+
+
 
 	goToTag(tagName) {
-		// console.log(tagName);
-		let tagModal = this.modalCtrl.create(TagPage, {tagName: tagName});
-		tagModal.present();
-
+		console.log(tagName);
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'});
 	}
 
 	Vote() {
@@ -481,6 +538,11 @@ export class HomePage implements OnInit {
 	scrollToTop() {
 		this.content.scrollToTop();
 		// this.navCtrl.push(IntroPage);
+	}
+
+	ionViewWillLeave(){
+		this.renewed = "";
+		this.index ="";
 	}
 
 

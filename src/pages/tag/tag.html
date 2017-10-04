@@ -6,49 +6,52 @@
 -->
 <ion-header no-border>
 
-  <ion-toolbar>
-    <ion-buttons start>
-      <button (click)="dismiss()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>{{tagName}}</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>{{tagName}}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 
-
-
 <ion-content>
-  <div id="tagging"></div>
-  <div *ngIf="!isLike">
-    <p class="infoText">Popular fits</p>
-    <ion-card>
-      <img tappable (click)="presentList(0)" src="{{firstTag.picURL}}">
-    </ion-card>
+	<div id="tagging"></div>
+	<div *ngIf="!isLike">
+		<p class="infoText">Popular fits</p>
+		<ion-card *ngIf="selectedUser[0]">
+			<img-loader tappable (click)="presentList(0)" src="{{firstTag.picURL}}" useImg></img-loader>
+		</ion-card>
 
-      <ion-grid no-padding>
-        <ion-row wrap no-padding>
-          <ion-col no-padding col-4 align-self-center *ngFor="let post of finalSelectedLike.slice().reverse() | slice:1; let i= index">
-            <img tappable (click)="presentList(i+1)"  class="myFitImage" src={{post.picURL}}>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  </div>
-
-
-  <p class="infoText2">New fits</p>
-
-
-  <ion-grid no-padding>
-    <ion-row wrap no-padding>
-      <ion-col no-padding col-4 align-self-center *ngFor="let post of tagPics.slice().reverse() | orderBy:orderDate:true; let i = index">
-        <img tappable (click)="presentNormal(i)"  class="myFitImage" src={{post.picURL}}>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+		<ion-grid no-padding>
+			<ion-row wrap no-padding>
+				<ion-col no-padding col-4 align-self-center
+				         *ngFor="let post of finalSelectedLike.slice().reverse() | slice:1; let i= index">
+					<div class="pastFits" *ngIf="selectedUser[i+1]">
+						<img-loader tappable (click)="presentList(i+1)" src={{post.picURL}} useImg></img-loader>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
 
 
+	<p class="infoText2">New fits</p>
+
+
+	<ion-grid no-padding>
+		<ion-row wrap no-padding>
+			<ion-col no-padding col-4 align-self-center
+			         *ngFor="let post of tagPics.slice().reverse() | orderBy:orderDate:true; let i = index">
+				<div class="pastFits" *ngIf="tagUsers[i]">
+					<img-loader tappable (click)="presentNormal(i)" src={{post.picURL}}
+					            useImg></img-loader>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 
 
 </ion-content>

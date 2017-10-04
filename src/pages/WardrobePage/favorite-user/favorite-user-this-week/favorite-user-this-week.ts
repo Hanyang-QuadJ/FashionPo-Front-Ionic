@@ -27,6 +27,8 @@ export class FavoriteUserThisWeekPage {
 	postList: any;
 	postListIndex: "";
 	date: "";
+	renewed:any;
+	index:any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public toastCtrl: ToastController, public alertCtrl: AlertController, public fetchData:FetchDataProvider) {
 		this.postList = this.navParams.get('thisWeekPost');
@@ -39,8 +41,25 @@ export class FavoriteUserThisWeekPage {
 	}
 
 	ionViewWillEnter() {
-		this.scrollToCard()
+		if(this.renewed === "hello"){
+			let yOffset = document.getElementById(this.index).offsetTop;
+			this.content.scrollTo(0, yOffset, 0);
+		}
+		else{
+			this.scrollToCard();
+		}
 
+	}
+	myCallbackFunction = (_params,_params2) => {
+		return new Promise((resolve, reject) => {
+			this.renewed = _params;
+			this.index = _params2;
+			resolve();
+		});
+	};
+	goToTag(tagName, i) {
+		console.log(tagName);
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
 	}
 
 	scrollToCard() {
@@ -53,16 +72,7 @@ export class FavoriteUserThisWeekPage {
 		this.viewCtrl.dismiss()
 	}
 
-	goToTag(tagName, i) {
-		console.log(tagName);
-		let tagModal = this.modalCtrl.create(TagPage, {tagName: tagName});
-		tagModal.onDidDismiss((check) => {
-			let yOffset = document.getElementById('fit' + i).offsetTop;
-			this.content.scrollTo(0, yOffset, 0);
-		});
-		tagModal.present();
 
-	}
 
 	parsingDate(date) {
 		let month;

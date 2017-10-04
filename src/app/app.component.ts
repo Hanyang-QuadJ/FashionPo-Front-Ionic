@@ -11,6 +11,9 @@ import {WardrobePage} from '../pages/WardrobePage/wardrobe/wardrobe'
 import {VotePage} from '../pages/VotePage/vote/vote'
 import {CameraPage} from '../pages/CameraPage/Camera/camera'
 import {IntroPage} from "../pages/intro/intro";
+import {Storage} from "@ionic/storage";
+
+import {TabsPage} from "../pages/tabs/tabs";
 
 
 @Component({
@@ -20,13 +23,13 @@ import {IntroPage} from "../pages/intro/intro";
 export class MyApp {
   rootPage:any = WelcomePage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar,) {
     platform.ready().then(() => {
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      splashScreen.hide();
+
     });
   }
 }

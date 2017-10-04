@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams,App,ModalController,LoadingController,AlertController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams, App, ModalController, LoadingController, AlertController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {LoginPage} from "../../AuthPage/login/login";
 import {UsernamePage} from "./UsernameChangePage/username";
@@ -9,7 +9,7 @@ import {ChangeWardrobeNamePage} from "./WardrobeNameChangePage/wardrobename";
 import {IntroduceChangePage} from "./IntroduceChangePage/introduce";
 import {TermsPage} from "../../terms/terms";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
-
+import {LicensePage} from "../../license/license";
 
 
 /**
@@ -20,163 +20,163 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
  */
 
 @Component({
-  selector: 'page-settings',
-  templateUrl: 'settings.html',
+	selector: 'page-settings',
+	templateUrl: 'settings.html',
 })
 export class SettingsPage {
-  user: any = {};
-  showFavorite: Boolean;
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private app: App,
-              public loadingCtrl: LoadingController,
-              public modalCtrl: ModalController,
-              public fetchDatas : FetchDataProvider,
-              public alertCtrl : AlertController,
-              private storage: Storage) {
+	user: any = {};
+	showFavorite: Boolean;
 
-    this.fetchDatas.getData('/user/authed').then(data=>{
-      this.user = data.user[0];
-      this.showFavorite = this.user.showFavorite;
-      console.log(this.user);
-    })
+	constructor(public navCtrl: NavController,
+	            public navParams: NavParams,
+	            private app: App,
+	            public loadingCtrl: LoadingController,
+	            public modalCtrl: ModalController,
+	            public fetchDatas: FetchDataProvider,
+	            public alertCtrl: AlertController,
+	            private storage: Storage) {
 
-  }
-  toggleFavorite() {
-    if (this.showFavorite) {
-      this.fetchDatas.getData('/user/favorite/show').then(data=> {
-        console.log(data);
-      })
-    }
-      else {
-          this.fetchDatas.getData('/user/favorite/hide').then(data=> {
-              console.log(data);
-          })
-      }
-  }
+		this.fetchDatas.getData('/user/authed').then(data => {
+			this.user = data.user[0];
+			this.showFavorite = this.user.showFavorite;
+			console.log(this.user);
+		})
 
-  presentConfirm() {
-    let alert = this.alertCtrl.create({
-      title: 'Sign Out',
-      message: 'Do you want to Sign Out?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Sign Out',
-          handler: () => {
-            this.logOut();
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-  logOut() {
-    this.storage.set('token', null);
-    this.app.getRootNav().setRoot(LoginPage,{check:'logout'});
-  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
-    console.log('@@#@#@#@#@');
-    console.log(this.user)
-  }
-  itemSelected(item: string) {
-    console.log("Selected Item", item);
-  }
-  presentUsernameModal() {
-    let profileModal = this.modalCtrl.create(UsernamePage, { },{leaveAnimation:'back'});
-    profileModal.onDidDismiss(()=>{
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
-      });
-      loading.present();
-      this.fetchDatas.getData('/user/authed').then(data=>{
-        this.user = data.user[0];
-        loading.dismiss();
-      })
+	}
 
+	toggleFavorite() {
+		if (this.showFavorite) {
+			this.fetchDatas.getData('/user/favorite/show').then(data => {
+				console.log(data);
+			})
+		}
+		else {
+			this.fetchDatas.getData('/user/favorite/hide').then(data => {
+				console.log(data);
+			})
+		}
+	}
 
-    });
-    profileModal.present();
+	presentConfirm() {
+		let alert = this.alertCtrl.create({
+			title: 'Sign Out',
+			message: 'Do you want to Sign Out?',
+			buttons: [
+				{
+					text: 'Cancel',
+					role: 'cancel',
+					handler: () => {
+						console.log('Cancel clicked');
+					}
+				},
+				{
+					text: 'Sign Out',
+					handler: () => {
+						this.logOut();
+					}
+				}
+			]
+		});
+		alert.present();
+	}
 
-  }
+	logOut() {
+		this.storage.set('token', null);
+		this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
+	}
 
-  presentUserProfileModal() {
-    let profileModal = this.modalCtrl.create(UserProfileChange, { },{leaveAnimation:'back'});
-    profileModal.onDidDismiss(()=>{
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
-      });
-      loading.present();
-      this.fetchDatas.getData('/user/authed').then(data=>{
-        this.user = data.user[0];
-        loading.dismiss();
-      })
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad SettingsPage');
+		console.log('@@#@#@#@#@');
+		console.log(this.user)
+	}
+
+	itemSelected(item: string) {
+		console.log("Selected Item", item);
+	}
+
+	presentUsernameModal() {
+		let profileModal = this.modalCtrl.create(UsernamePage, {}, {leaveAnimation: 'back'});
+		profileModal.onDidDismiss(() => {
+
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+
+			})
 
 
-    });
-    profileModal.present();
+		});
+		profileModal.present();
 
-  }
+	}
 
-  presentPasswordModal() {
-    let profileModal = this.modalCtrl.create(PasswordChangePage, { },{leaveAnimation:'back'});
-    profileModal.onDidDismiss(()=>{
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
-      });
-      loading.present();
-      this.fetchDatas.getData('/user/authed').then(data=>{
-        this.user = data.user[0];
-        loading.dismiss();
-      })
+	presentUserProfileModal() {
+		let profileModal = this.modalCtrl.create(UserProfileChange, {}, {leaveAnimation: 'back'});
+		profileModal.onDidDismiss(() => {
 
 
-    });
-    profileModal.present();
-  }
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
 
-  presentWardrobeModal() {
-    let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, { },{leaveAnimation:'back'});
-    profileModal.onDidDismiss(()=>{
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
-      });
-      loading.present();
-      this.fetchDatas.getData('/user/authed').then(data=>{
-        this.user = data.user[0];
-        loading.dismiss();
-      })
+			})
 
 
-    });
-    profileModal.present();
-  }
-  presentTermsModal(){
-    let termsModal = this.modalCtrl.create(TermsPage);
-    termsModal.present();
-  }
+		});
+		profileModal.present();
 
-  presentIntroduceModal() {
-    let profileModal = this.modalCtrl.create(IntroduceChangePage, { },{leaveAnimation:'back'});
-    profileModal.onDidDismiss(()=>{
-      let loading = this.loadingCtrl.create({
-        showBackdrop: true, spinner: 'crescent',enableBackdropDismiss:true
-      });
-      loading.present();
-      this.fetchDatas.getData('/user/authed').then(data=>{
-        this.user = data.user[0];
-        loading.dismiss();
-      })
+	}
+
+	presentPasswordModal() {
+		let profileModal = this.modalCtrl.create(PasswordChangePage, {}, {leaveAnimation: 'back'});
+		profileModal.onDidDismiss(() => {
 
 
-    });
-    profileModal.present();
-  }
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+
+			})
+
+
+		});
+		profileModal.present();
+	}
+
+	presentWardrobeModal() {
+		let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, {}, {leaveAnimation: 'back'});
+		profileModal.onDidDismiss(() => {
+
+
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+
+			})
+
+
+		});
+		profileModal.present();
+	}
+
+	presentTermsModal() {
+		let termsModal = this.modalCtrl.create(TermsPage);
+		termsModal.present();
+	}
+
+	presentLicense() {
+		let license = this.modalCtrl.create(LicensePage);
+		license.present();
+	}
+
+	presentIntroduceModal() {
+		let profileModal = this.modalCtrl.create(IntroduceChangePage, {}, {leaveAnimation: 'back'});
+		profileModal.onDidDismiss(() => {
+
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+
+			})
+
+
+		});
+		profileModal.present();
+	}
 }
