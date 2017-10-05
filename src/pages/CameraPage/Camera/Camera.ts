@@ -144,7 +144,7 @@ export class CameraPage implements OnInit {
 			let myArray = jbSplit.filter(v => v != '');
 			let myArray2 = [];
 
-			for (var i = 0; i < myArray.length; i++) {
+			for (let i = 0; i < myArray.length; i++) {
 
 				if (myArray[i].includes('#')) {
 					myArray2.push(myArray[i])
@@ -189,16 +189,43 @@ export class CameraPage implements OnInit {
 	}
 
 	paste(input){
-		if(this.tagsInput.includes("#")){
-			this.tagsInput = this.tagsInput+" "+input+" "
+		let jbSplit = this.tagsInput.split(' ', 100);
+		let myArray = jbSplit.filter(v => v != '');
+		let final =[];
+		let pasteFinal="";
+
+		for(let i = 0; i<myArray.length; i++){
+			if(myArray[i].includes("#")){
+				final.push(myArray[i]);
+			}
 		}
-		else{
-			this.tagsInput=input+" ";
+		for(let i = 0; i<final.length; i++){
+			pasteFinal = pasteFinal+" "+final[i].toString()
 		}
+		this.tagsInput = pasteFinal+" "+input+" "
+		// if(this.tagsInput.includes("#")){
+		// 	this.tagsInput = this.tagsInput+" "+input+" "
+		// }
+		// else{
+		// 	this.tagsInput=input+" ";
+		// }
 	}
 
 	getItems(ev) {
-		this.fetchDatas.getData('/search/searchTag/' + ev.target.value).then(data => {
+		let jbSplit = ev.target.value.split(' ', 100);
+		let myArray = jbSplit.filter(v => v != '');
+		let final = [];
+		let searchString;
+		for(let i = 0; i<myArray.length; i++){
+			if(myArray[i].includes("#")){
+			}
+			else{
+				final.push(myArray[i]);
+			}
+		}
+		searchString = final.toString();
+		console.log(searchString);
+		this.fetchDatas.getData('/search/searchTag/' + searchString).then(data => {
 			this.allTags = data.message;
 		}, err => {
 			if (err.status === 404) {
