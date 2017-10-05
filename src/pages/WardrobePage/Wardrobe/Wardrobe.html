@@ -7,6 +7,13 @@
 				</div>
 			</button>
 		</ion-buttons>
+		<ion-buttons start *ngIf="otherPage2">
+			<button  (click)="popToRoot()" ion-button icon-only color="primary">
+				<div>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
 		<ion-buttons start>
 			<button id="notification-button" (click)="presentLogModal()" ion-button icon-only color="primary">
 				<ion-icon name="md-bulb">
@@ -77,7 +84,7 @@
 	<div *ngIf="thisWeekPost">
 		<ion-slides class="image-slider" slidesPerView="3">
 			<ion-slide (tap)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
-				<div >
+				<div>
 					<img-loader src="{{tWeek.picURL}}" useImg></img-loader>
 				</div>
 			</ion-slide>

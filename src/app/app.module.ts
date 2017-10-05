@@ -69,6 +69,8 @@ import {Network} from "@ionic-native/network";
 import {ReportPage} from "../pages/report/report";
 import {LicensePage} from "../pages/license/license";
 import {IonicImageLoader} from "ionic-image-loader";
+import {Config} from "ionic-angular";
+import {IosCustomTransitions} from "../config/ios-custom-transitions";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -195,5 +197,8 @@ import {IonicImageLoader} from "ionic-image-loader";
 
 })
 export class AppModule {
+	constructor(config:Config){
+		config.setTransition('ios-transition',IosCustomTransitions);
+	}
 
 }

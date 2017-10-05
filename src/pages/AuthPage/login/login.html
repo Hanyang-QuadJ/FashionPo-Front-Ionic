@@ -3,7 +3,9 @@
   <ion-toolbar>
     <ion-buttons start>
       <button *ngIf="!back" (click)="goBackToWelcome()" ion-button icon-only color="light">
-        <ion-icon name="ios-arrow-back"></ion-icon>
+	      <div class="padding-right">
+		      <ion-icon name="ios-arrow-back"></ion-icon>
+	      </div>
       </button>
     </ion-buttons>
   </ion-toolbar>

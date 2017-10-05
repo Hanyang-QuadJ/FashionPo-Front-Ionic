@@ -1,5 +1,5 @@
 <ion-tabs #myTabs class="tabs-icon" >
   <ion-tab [root]="tab1Root" tabIcon="trophy" ></ion-tab>
-  <ion-tab [root]="tab2Root" tabIcon="camera" (click)="test()"></ion-tab>
+  <ion-tab [root]="tab2Root" tabIcon="camera" (ionSelect)="test()"></ion-tab>
   <ion-tab [root]="tab3Root" tabIcon="shirt"></ion-tab>
 </ion-tabs>

@@ -1,52 +1,56 @@
 <ion-header no-border>
-  <ion-navbar>
-    <ion-buttons *ngIf="backButton" start>
+	<ion-navbar>
+		<ion-buttons *ngIf="backButton" start>
 
-      <button (click)="dismiss()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-back"></ion-icon>
-      </button>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<ion-icon name="ios-arrow-back"></ion-icon>
+			</button>
 
-    </ion-buttons>
-    <ion-title>
-      Upload
-    </ion-title>
-    <ion-buttons end>
+		</ion-buttons>
+		<ion-title>
+			Upload
+		</ion-title>
+		<ion-buttons end>
 
-      <button (click)="post()" ion-button icon-end small color="primary">
-        Post
-      </button>
+			<button (click)="post()" ion-button icon-end small color="primary">
+				Post
+			</button>
 
-    </ion-buttons>
+		</ion-buttons>
 
-  </ion-navbar>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-item text-center>
-      <button ion-button icon-start clear small outline (click)="presentActionSheet()">
-        <ion-icon name="camera"></ion-icon>
-        Select Image
-      </button>
-    </ion-item>
-    <div *ngIf="!pictureTaken" style="display: none">
+	<ion-card>
+		<ion-item text-center>
+			<button ion-button icon-start clear small outline (click)="presentActionSheet()">
+				<ion-icon name="camera"></ion-icon>
+				Select Image
+			</button>
+		</ion-item>
+		<div *ngIf="!pictureTaken" style="display: none">
 
 
-      <img *ngIf="!uploadCheck" src="{{placeholderImage}}"/>
-      <!--<img src="../../../assets/images/post4.png">-->
-    </div>
-    <img id="camera-image"/>
-    <ion-card-content>
-      <ion-textarea  class="comment" type="text" [(ngModel)]="comment" placeholder="Share your caption"></ion-textarea>
-      <hr>
-      <ion-textarea class="tag" type="text" [(ngModel)]="tagsInput" placeholder="Share your tags"></ion-textarea>
-	    <ion-list>
-		    <ion-item *ngFor="let item of allTags">
-			    <h4>{{item.tagName}}</h4>
-		    </ion-item>
-	    </ion-list>
-    </ion-card-content>
-  </ion-card>
-  <!--<ion-item *ngIf="!pictureTaken" style="display: none;">-->
-  <!--</ion-item>-->
+			<img *ngIf="!uploadCheck" src="{{placeholderImage}}"/>
+			<!--<img src="../../../assets/images/post4.png">-->
+		</div>
+		<img id="camera-image"/>
+	</ion-card>
+	<div class="padding">
+		<ion-input class="comment" type="text" [(ngModel)]="comment" placeholder="Share your caption"></ion-input>
+		<hr>
+		<!--<ion-textarea class="tag" type="text" [(ngModel)]="tagsInput" placeholder="Share your tags"></ion-textarea>-->
+		<ion-searchbar [autocomplete]="on" class="tag" placeholder="Share your tags" [(ngModel)]="tagsInput" (ionInput)="getItems($event)"></ion-searchbar>
+
+		<ion-list>
+			<button (click)="paste(item.tagName)" *ngFor="let item of allTags" ion-item>
+				<h4>{{item.tagName}}</h4>
+				<p item-end>{{item.tagCnt}} Outfits</p>
+			</button>
+		</ion-list>
+	</div>
+
+	<!--<ion-item *ngIf="!pictureTaken" style="display: none;">-->
+	<!--</ion-item>-->
 </ion-content>

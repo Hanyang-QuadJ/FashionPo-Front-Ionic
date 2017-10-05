@@ -15,6 +15,7 @@ import {FilePath} from '@ionic-native/file-path';
 import {Camera} from '@ionic-native/camera';
 import {filter} from "rxjs/operator/filter";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 
 declare var cordova: any;
 
@@ -50,9 +51,7 @@ export class CameraPage implements OnInit {
 	            public navParams: NavParams,
 	            public viewCtrl: ViewController,
 	            public loadingCtrl: LoadingController) {
-
 		this.tagsInput = "";
-
 		this.base64Image = "";
 		this.comment = "";
 		if (this.navParams.get('fromWardrobe') === "check") {
@@ -60,6 +59,7 @@ export class CameraPage implements OnInit {
 		}
 
 	}
+
 
 	showToast(position: string) {
 		let toast = this.toastCtrl.create({
@@ -80,6 +80,8 @@ export class CameraPage implements OnInit {
 		this.uploadCheck = true;
 		let cameraImageSelector = document.getElementById('camera-image');
 		cameraImageSelector.setAttribute('src', '');
+		this.presentActionSheet();
+
 	}
 
 	public presentActionSheet() {
@@ -167,8 +169,7 @@ export class CameraPage implements OnInit {
 				this.tagsInput = "";
 				this.tags = [];
 				this.comment = "";
-				this.navCtrl.parent().select(2);
-				toast.present(toast);
+				this.navCtrl.push(WardrobePage,{check:"otherPage2"});
 
 			}, err => {
 				console.log(err);
@@ -179,11 +180,21 @@ export class CameraPage implements OnInit {
 	}
 
 	switchTabs() {
-		this.navCtrl.parent().select(2);
+		this.navCtrl.push(WardrobePage,{check:"otherPage2"});
+
 	}
 
 	public dismiss() {
 		this.viewCtrl.dismiss();
+	}
+
+	paste(input){
+		if(this.tagsInput.includes("#")){
+			this.tagsInput = this.tagsInput+" "+input+" "
+		}
+		else{
+			this.tagsInput=input+" ";
+		}
 	}
 
 	getItems(ev) {

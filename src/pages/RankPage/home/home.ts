@@ -39,7 +39,6 @@ export class HomePage implements OnInit {
 	allUsers: any;
 	allTags: any;
 
-
 	ranks: Array<any> = [];
 	oriRank: Array<any> = [];
 	users: Array<any> = [];
@@ -127,8 +126,7 @@ export class HomePage implements OnInit {
 
 	ionViewWillEnter() {
 		this.content.resize();
-
-
+		this.getHistoryNew();
 		// console.log('Rank Data Check');
 		this.firstCheck = false;
 		this.modalCheck = false;
@@ -437,21 +435,20 @@ export class HomePage implements OnInit {
 
 	}
 
+
 	//PresentModals
 	presentHistoryModal() {
 		if (this.historyNew === true) {
-			let historyModal = this.modalCtrl.create(HistoryListPage, {}, {leaveAnimation: 'back'});
-			historyModal.onDidDismiss(() => {
-				this.getHistoryNew();
-			});
-			historyModal.present();
+			this.navCtrl.push(HistoryListPage, {callback:this.myCallbackFunction.bind(this)});
+
 		}
 		else {
-			let historyModal = this.modalCtrl.create(HistoryListPage, {}, {leaveAnimation: 'back'});
-			historyModal.present();
+			this.navCtrl.push(HistoryListPage);
+
 		}
 
 	}
+
 
 	presentWardrobeModal(i) {
 		if (this.users[i]._id === this.user._id) {
@@ -499,8 +496,9 @@ export class HomePage implements OnInit {
 		}
 
 	}
-	myCallbackFunction = (_params,_params2) => {
+	myCallbackFunction = (_params) => {
 		return new Promise((resolve, reject) => {
+
 
 			resolve();
 		});

@@ -8,10 +8,14 @@
 	<ion-toolbar>
 		<ion-buttons start>
 			<button *ngIf="backRefresh" (click)="dismissRefresh()" ion-button icon-only color="primary">
-				<ion-icon name="ios-arrow-back"></ion-icon>
+				<div class="padding-right">
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
 			</button>
 			<button *ngIf="!backRefresh" (click)="dismiss()" ion-button icon-only color="primary">
-				<ion-icon name="ios-arrow-back"></ion-icon>
+				<div class="padding-right">
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
 			</button>
 		</ion-buttons>
 		<ion-title>
@@ -31,9 +35,10 @@
 <ion-content>
 	<ion-grid>
 		<ion-row justify-content-center>
-
 			<ion-col col-5 text-center>
-				<img class="image" src="{{favUser.profile_img}}" imageViewer>
+				<div class="profileImage">
+					<img-loader src="{{favUser.profile_img}}" useImg></img-loader>
+				</div>
 			</ion-col>
 			<ion-col col-7>
 				<div class="padding">

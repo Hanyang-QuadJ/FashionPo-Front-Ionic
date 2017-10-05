@@ -77,7 +77,8 @@ export class FavoriteUserPage implements OnInit {
 		this.callback = this.navParams.get('callback');
 		if (this.dismissNew === 'dismiss') {
 			this.fetchDatas.postData('/user/news/delete', {id: this.favUser._id}).then(data => {
-				// console.log(data);
+				this.backRefresh = true;
+				console.log(data);
 			}, err => {
 				// console.log(err)
 			});
@@ -86,6 +87,7 @@ export class FavoriteUserPage implements OnInit {
 		if (this.addDismiss === "addDismiss") {
 
 			this.fetchDatas.postData('/user/addNews/delete', {id: this.favUser._id}).then(data => {
+				this.backRefresh = true;
 				// console.log(data)
 			})
 
@@ -165,6 +167,7 @@ export class FavoriteUserPage implements OnInit {
 		this.navCtrl.push(VoteWardrobePage, {user_id: this.favorites[i]});
 
 	}
+
 
 	presentThisWeekModal(i) {
 		this.navCtrl.push(FavoriteUserThisWeekPage, {

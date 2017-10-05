@@ -55,7 +55,7 @@
     <div *ngFor="let post of posts">
 
       <ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
-	      <img-loader  *ngIf=" user && post" src="{{ post.picURL }}" useImg></img-loader>
+	      <img *ngIf=" user && post" src="{{ post.picURL }}">
 
         <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
         <ion-card-content>

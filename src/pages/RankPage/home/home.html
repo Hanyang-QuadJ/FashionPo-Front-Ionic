@@ -83,7 +83,7 @@
 			<button (click)="goToTag(item.tagName)" *ngFor="let item of allTags | orderBy:order; let i = index"
 			        ion-item>
 				<h4>{{item.tagName}}</h4>
-				<p>{{item.tagCnt}} Outfits</p>
+				<p item-end>{{item.tagCnt}} Outfits</p>
 			</button>
 		</ion-list>
 

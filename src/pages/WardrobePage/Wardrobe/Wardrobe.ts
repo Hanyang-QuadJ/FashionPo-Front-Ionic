@@ -11,6 +11,7 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
 import {FavoriteUserPage} from "../favorite-user/favorite-user";
 import {LogPage} from "../log/log";
+import {TabsPage} from "../../tabs/tabs";
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -40,6 +41,7 @@ export class WardrobePage {
 	noneCheck: boolean;
 	loaded: boolean;
 	loadedd: boolean;
+	weekPast: any;
 	mypostlist: Array<object> = [];
 	thisWeekPost: Array<object> = [];
 	thisWeekPostLength: boolean;
@@ -57,6 +59,7 @@ export class WardrobePage {
 	date: Array<string> = [];
 	newTab: any;
 	otherPage: any;
+	otherPage2: any;
 
 	isNewPost: Array<boolean>;
 	isNewAdd: boolean = false;
@@ -84,8 +87,15 @@ export class WardrobePage {
 		if (this.navParams.get("check") === "otherPage") {
 			this.otherPage = true;
 		}
+		else if (this.navParams.get("check") === "otherPage2") {
+			this.otherPage2 = true;
+		}
 
 
+	}
+
+	popToRoot() {
+		this.navCtrl.parent.parent.setRoot(TabsPage);
 	}
 
 	Settings() {
@@ -110,6 +120,7 @@ export class WardrobePage {
 		// console.log(this.thisWeekPost);
 
 		this.fetchDatas.getData('/user/authed').then(data => {
+			this.weekPast = data.user[0].isHistoryNew;
 			if (data.user[0].addNews.length !== 0) {
 				this.isNewAdd = true;
 				this.addCount = data.user[0].addNews.length;
@@ -212,7 +223,8 @@ export class WardrobePage {
 			});
 		});
 	}
-	refresh(){
+
+	refresh() {
 		this.fetchDatas.getData('/user/favorite').then(data => {
 			if (data.favorites === undefined || data.favorites.length === 0) {
 				this.favorites = [];
@@ -258,11 +270,24 @@ export class WardrobePage {
 	}
 
 	ionViewWillEnter() {
+		if (this.weekPast === true) {
+			this.fetchData();
+		}
 
 		if (this.renewed === "hello") {
 			console.log("what");
 			this.fetchData();
 		}
+		this.fetchDatas.getData('/user/authed').then(data => {
+			if (data.user[0].addNews.length !== 0) {
+				this.isNewAdd = true;
+				this.addCount = data.user[0].addNews.length;
+			}
+			else {
+				this.isNewAdd = false;
+			}
+		})
+
 		// console.log("Check DATA FETCH");
 	}
 
@@ -307,20 +332,7 @@ export class WardrobePage {
 	}
 
 	presentLogModal() {
-		let logModal = this.modalCtrl.create(LogPage);
-		logModal.onDidDismiss(() => {
-			this.fetchDatas.getData('/user/authed').then(data => {
-				if (data.user[0].addNews.length !== 0) {
-					this.isNewAdd = true;
-					this.addCount = data.user[0].addNews.length;
-				}
-				else {
-					this.isNewAdd = false;
-				}
-			})
-		});
-		logModal.present();
-
+		this.navCtrl.push(LogPage, {callback: this.myCallbackFunction.bind(this)});
 	}
 
 	dismiss() {
@@ -333,7 +345,7 @@ export class WardrobePage {
 
 			let dismiss = 'dismiss';
 			this.navCtrl.push(FavoriteUserPage, {
-				callback:this.myCallbackFunction.bind(this),
+				callback: this.myCallbackFunction.bind(this),
 				favList: this.favorites[i],
 				dismiss: dismiss,
 			});
@@ -341,7 +353,10 @@ export class WardrobePage {
 
 		}
 		else if (this.isNewPost[i] === false) {
-			this.navCtrl.push(FavoriteUserPage, { callback:this.myCallbackFunction.bind(this),favList: this.favorites[i]});
+			this.navCtrl.push(FavoriteUserPage, {
+				callback: this.myCallbackFunction.bind(this),
+				favList: this.favorites[i]
+			});
 			// profileModal.onDidDismiss((renewedData) => {
 			// 	if (renewedData === "Renewed") {
 			// 		// console.log(renewedData);
@@ -367,7 +382,8 @@ export class WardrobePage {
 			this.today_disable = false;
 		});
 	}
-	ionViewWillLeave(){
+
+	ionViewWillLeave() {
 		this.renewed = "";
 	}
 
