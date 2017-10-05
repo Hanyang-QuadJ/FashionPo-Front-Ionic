@@ -65,6 +65,7 @@
 
 
 <ion-content>
+	<button ion-button full (click)="broswer()">naver</button>
 	<div *ngIf="searchToggled" [ngSwitch]="search">
 		<div *ngSwitchCase="'user'">
 			<ion-list inset>

@@ -73,6 +73,7 @@ import {Config} from "ionic-angular";
 import {IosCustomTransitions} from "../config/ios-custom-transitions";
 import {RankNewPage} from "../pages/rank-new/rank-new";
 import {TagInputPage} from "../pages/tag-input/tag-input";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -195,6 +196,7 @@ import {TagInputPage} from "../pages/tag-input/tag-input";
 		Transfer,
 		FilePath,
 		Network,
+		InAppBrowser,
 		{provide: ErrorHandler, useClass: IonicErrorHandler},
 		FetchDataProvider,
 

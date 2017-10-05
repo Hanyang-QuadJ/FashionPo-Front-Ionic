@@ -17,6 +17,7 @@ import {IntroPage} from "../../intro/intro";
 import {Network} from "@ionic-native/network";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 import {RankNewPage} from "../../rank-new/rank-new";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 /**
@@ -89,11 +90,15 @@ export class HomePage implements OnInit {
 	            private app: App,
 	            public loadingCtrl: LoadingController,
 	            public viewCtrl: ViewController,
-	            private network: Network,) {
+	            private network: Network,
+	            private iab:InAppBrowser) {
 
 		this.historyRank = this.navParams.get('rankSheet');
 		this.dismissHistory = this.navParams.get('dismiss');
 		this.search = "user";
+	}
+	broswer(){
+		this.iab.create('https://www.naver.com');
 	}
 
 	ngOnInit(): void {
