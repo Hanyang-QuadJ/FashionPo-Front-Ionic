@@ -43,7 +43,7 @@
 			<ion-col col-7>
 				<div class="padding">
 					<!--<h5 class="userName">{{user.username}}</h5>-->
-					<button class="add" ion-button outline small color="primary"><span class="highlight">Today {{favUser.viewCnt}}</span>
+					<button class="add" ion-button outline small color="primary"><span class="highlight">Visits {{favUser.viewCnt}}</span>
 					</button>
 					<button *ngIf="!button && !showAdd" (click)="addFavorite()" class="add" [disabled]="try" ion-button
 					        small

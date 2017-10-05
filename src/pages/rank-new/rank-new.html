@@ -1,0 +1,61 @@
+<!--
+  Generated template for the RankNewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-border>
+
+	<ion-toolbar>
+		<ion-buttons start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<div class="padding-right">
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+		<ion-title>{{parsingDate3(startDate)}} ~ {{parsingDate2(endDate)}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-card [id]="'fit'+0">
+		<img-loader src="{{firstPost.picURL}}" useImg></img-loader>
+		<button ion-button icon-left clear small>
+			<ion-icon name="heart"></ion-icon>
+			<div>{{firstPost.likeCnt}} Likes</div>
+		</button>
+
+		<ion-card-content>
+			<h2 color="dark" tappable (click)="presentFirstWardrobe()">{{firstUser.wardrobeName}}</h2>
+			<p tappable (click)="presentFirstWardrobe()">{{firstUser.username}}</p>
+
+			<span tappable class="tag" *ngFor="let tag of firstPost.tags" (click)="goToTag(tag.tag,0)"> {{tag.tag}}</span>
+		</ion-card-content>
+
+		<ion-item>
+			<ion-note><p>{{parsingDate(firstPost.writtenAt)}}</p></ion-note>
+		</ion-item>
+	</ion-card>
+
+	<ion-card *ngFor=" let post of rank; let i =index" [id]="'fit'+(i+1)">
+
+		<img-loader src="{{post.picURL}}" useImg></img-loader>
+		<button ion-button icon-left clear small>
+			<ion-icon name="heart"></ion-icon>
+			<div>{{post.likeCnt}} Likes</div>
+		</button>
+
+		<ion-card-content>
+			<h2 color="dark" tappable (click)="presentWardrobe(i)">{{user[i].wardrobeName}}</h2>
+			<p tappable (click)="presentWardrobe(i)">{{user[i].username}}</p>
+
+			<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i+1)"> {{tag.tag}}</span>
+		</ion-card-content>
+
+		<ion-item>
+			<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+		</ion-item>
+	</ion-card>
+</ion-content>

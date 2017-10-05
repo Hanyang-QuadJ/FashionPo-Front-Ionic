@@ -16,6 +16,7 @@ import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe"
 import {IntroPage} from "../../intro/intro";
 import {Network} from "@ionic-native/network";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
+import {RankNewPage} from "../../rank-new/rank-new";
 
 
 /**
@@ -101,33 +102,11 @@ export class HomePage implements OnInit {
 			this.fetchDatas.postData('/user/setHistory', {}).then(data => {
 				// console.log(data);
 			});
-
-
 		}
 		this.initializeItems();
 		this.startDate = moment().tz("America/New_York").startOf('week').format();
 		this.endDate = moment().tz("America/New_York").endOf('week').format();
 		this.getHistoryNew();
-
-	}
-
-	public getHistoryNew() {
-		this.fetchDatas.getData('/user/authed').then(data => {
-			// console.log(data.user[0].isHistoryNew);
-			if (data.user[0].isHistoryNew === true) {
-				this.historyNew = true;
-			}
-			else {
-				this.historyNew = false;
-			}
-		});
-	}
-
-
-	ionViewWillEnter() {
-		this.content.resize();
-		this.getHistoryNew();
-		// console.log('Rank Data Check');
 		this.firstCheck = false;
 		this.modalCheck = false;
 		this.users = [];
@@ -189,7 +168,6 @@ export class HomePage implements OnInit {
 		}
 		//History Rank!
 		else if (this.historyRank !== undefined) {
-
 			this.modalCheck = true;
 			this.rankDate = this.navParams.get('rankDate');
 			if (this.historyRank === [] || this.historyRank.length === 0 || this.historyRank === undefined) {
@@ -233,6 +211,29 @@ export class HomePage implements OnInit {
 			}
 
 		}
+
+
+
+	}
+
+	public getHistoryNew() {
+		this.fetchDatas.getData('/user/authed').then(data => {
+			// console.log(data.user[0].isHistoryNew);
+			if (data.user[0].isHistoryNew === true) {
+				this.historyNew = true;
+			}
+			else {
+				this.historyNew = false;
+			}
+		});
+	}
+
+
+	ionViewWillEnter() {
+		this.content.resize();
+		this.getHistoryNew();
+		// console.log('Rank Data Check');
+
 	}
 
 	//Refresher
@@ -405,7 +406,9 @@ export class HomePage implements OnInit {
 
 
 		this.fetchDatas.getData('/search/searchTag/' + ev.target.value).then(data => {
-			this.allTags = data.message;
+			this.allTags = data.message.sort(function (a, b) {
+				return a.tagCnt > b.tagCnt ? -1 : a.tagCnt < b.tagCnt ? 1 : 0;
+			});
 		}, err => {
 			if (err.status === 404) {
 
@@ -485,17 +488,19 @@ export class HomePage implements OnInit {
 
 	presentSearchModal(i) {
 		if (this.allUsers[i]._id !== this.user._id) {
-			let searchModal = this.modalCtrl.create(VoteWardrobePage, {user_id: this.allUsers[i]}, {leaveAnimation: 'back'});
-			searchModal.present();
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.allUsers[i]});
 		}
 		else {
 			this.navCtrl.push(WardrobePage, {check: "otherPage"});
 
 			// this.navCtrl.parent().select(2);
-
 		}
 
 	}
+	presentRank(i){
+		this.navCtrl.push(RankNewPage,{rank:this.ranks,firstPost:this.firstPost,firstUser:this.firstUser,users:this.users,index:'fit'+i,startDate:this.startDate,endDate:this.endDate})
+	}
+
 	myCallbackFunction = (_params) => {
 		return new Promise((resolve, reject) => {
 

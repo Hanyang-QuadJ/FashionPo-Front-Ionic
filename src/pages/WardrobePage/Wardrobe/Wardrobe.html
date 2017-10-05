@@ -52,10 +52,10 @@
 					</button>
 					<button *ngIf="button_loaded&&user&&today_disable" [disabled]="true" ion-button small outline
 					        color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{user.viewCnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{user.viewCnt}}</span>
 					</button>
 					<button *ngIf="button_loaded&&user&&!today_disable" ion-button small outline color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{user.viewCnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{user.viewCnt}}</span>
 					</button>
 					<h5 class="userName">{{user.username}}</h5>
 					<p class="profileText">{{userIntro}}</p>

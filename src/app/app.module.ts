@@ -71,6 +71,8 @@ import {LicensePage} from "../pages/license/license";
 import {IonicImageLoader} from "ionic-image-loader";
 import {Config} from "ionic-angular";
 import {IosCustomTransitions} from "../config/ios-custom-transitions";
+import {RankNewPage} from "../pages/rank-new/rank-new";
+import {TagInputPage} from "../pages/tag-input/tag-input";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -123,6 +125,8 @@ import {IosCustomTransitions} from "../config/ios-custom-transitions";
 		IntroduceChangePage,
 		LogPage,
 		LicensePage,
+		RankNewPage,
+		TagInputPage
 	],
 	imports: [
 		BrowserModule,
@@ -179,6 +183,8 @@ import {IosCustomTransitions} from "../config/ios-custom-transitions";
 		SignupPasswordPage,
 		LogPage,
 		TermsPage,
+		RankNewPage,
+		TagInputPage
 	],
 	providers: [
 		StatusBar,

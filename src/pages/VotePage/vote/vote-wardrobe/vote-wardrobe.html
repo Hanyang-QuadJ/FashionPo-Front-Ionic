@@ -56,20 +56,20 @@
 					<button *ngIf="button_loaded&&!view_cnt&&User&&today_disable" [disabled]="true" class="add"
 					        ion-button small outline
 					        color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{User.viewCnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{User.viewCnt}}</span>
 					</button>
 					<button *ngIf="button_loaded&&view_cnt&&today_disable" [disabled]="true" class="add" ion-button
 					        outline small
 					        color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{view_cnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{view_cnt}}</span>
 					</button>
 					<button *ngIf="button_loaded&&!view_cnt&&User&&!today_disable" class="add" ion-button small outline
 					        color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{User.viewCnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{User.viewCnt}}</span>
 					</button>
 					<button *ngIf="button_loaded&&view_cnt&&!today_disable" class="add" ion-button small outline
 					        color="primary"
-					        (click)="refreshViewCnt()"><span class="highlight">Today {{view_cnt}}</span>
+					        (click)="refreshViewCnt()"><span class="highlight">Visits {{view_cnt}}</span>
 					</button>
 					<button *ngIf="!button && !showAdd" (click)="addFavorite()" class="add" [disabled]="try" ion-button
 					        small

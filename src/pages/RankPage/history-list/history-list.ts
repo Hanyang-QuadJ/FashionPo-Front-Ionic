@@ -541,12 +541,10 @@ export class HistoryListPage implements OnInit {
 	}
 
 	goToPage(i) {
-		let historyRankModal = this.modalCtrl.create(HomePage, {
+		this.navCtrl.push(HomePage, {
 			rankSheet: this.ranksheet.slice().reverse()[i],
 			rankDate: this.dateFinal.slice().reverse()[i]
-		}, {leaveAnimation: 'back'});
-		historyRankModal.present();
-
+		});
 	}
 
 }

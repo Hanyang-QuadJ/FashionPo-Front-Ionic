@@ -16,6 +16,7 @@ import {Camera} from '@ionic-native/camera';
 import {filter} from "rxjs/operator/filter";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
+import {TagInputPage} from "../../tag-input/tag-input";
 
 declare var cordova: any;
 
@@ -30,7 +31,7 @@ export class CameraPage implements OnInit {
 
 	tags: any = [];
 	allTags: any;
-	comment: String;
+	comment: any;
 	uploadCheck: boolean = false;
 
 	public tagsInput: any;
@@ -123,10 +124,14 @@ export class CameraPage implements OnInit {
 
 	post() {
 		if (this.base64Image == "") {
+
+
 			let toast = this.toastCtrl.create({
 				message: 'Please choose your picture',
-				duration: 2000
+				duration: 2000,
+				cssClass: 'general'
 			});
+
 			toast.present();
 
 		}
@@ -139,20 +144,19 @@ export class CameraPage implements OnInit {
 				content: 'Uploading'
 			});
 			loading.present();
-
-			let jbSplit = this.tagsInput.split(' ', 100);
+			let jbSplit = this.tagsInput.split('#', 100);
 			let myArray = jbSplit.filter(v => v != '');
 			let myArray2 = [];
-
+			let Tag = [];
 			for (let i = 0; i < myArray.length; i++) {
-
-				if (myArray[i].includes('#')) {
-					myArray2.push(myArray[i])
-				}
+				myArray2[i] =  myArray[i].trim();
 			}
-
-			for (var j = 0; j < myArray2.length; j++) {
-				this.tags.push({'tag': myArray2[j]})
+			let finalTag = myArray2.filter(v=>v!='');
+			for (let i = 0; i < finalTag.length; i++) {
+				Tag[i] =  "#"+finalTag[i];
+			}
+			for (let j = 0; j < Tag.length; j++) {
+				this.tags.push({'tag': Tag[j]})
 			}
 			this.fetchDatas.postData('/post/create', {
 				base_64: this.base64Image,
@@ -169,7 +173,7 @@ export class CameraPage implements OnInit {
 				this.tagsInput = "";
 				this.tags = [];
 				this.comment = "";
-				this.navCtrl.push(WardrobePage,{check:"otherPage2"});
+				this.navCtrl.push(WardrobePage, {check: "otherPage2"});
 
 			}, err => {
 				console.log(err);
@@ -179,30 +183,30 @@ export class CameraPage implements OnInit {
 		}
 	}
 
-	switchTabs() {
-		this.navCtrl.push(WardrobePage,{check:"otherPage2"});
-
-	}
-
 	public dismiss() {
 		this.viewCtrl.dismiss();
 	}
 
-	paste(input){
-		let jbSplit = this.tagsInput.split(' ', 100);
+	paste(input) {
+		let jbSplit = this.tagsInput.split('#', 100);
 		let myArray = jbSplit.filter(v => v != '');
-		let final =[];
-		let pasteFinal="";
+		let trimmedArray=[];
+		for (let i = 0; i < myArray.length; i++) {
+			trimmedArray[i] = myArray[i].trim();
+		}
+		let sArray = trimmedArray.filter(v => v!= '');
+		let final = [];
+		let pasteFinal = "";
 
-		for(let i = 0; i<myArray.length; i++){
-			if(myArray[i].includes("#")){
-				final.push(myArray[i]);
-			}
+		for (let i = 0; i < sArray.length - 1; i++) {
+			final[i] =("#" + sArray[i]);
 		}
-		for(let i = 0; i<final.length; i++){
-			pasteFinal = pasteFinal+" "+final[i].toString()
+
+		for (let i = 0; i < final.length; i++) {
+			pasteFinal = pasteFinal + " " + final[i].toString()
 		}
-		this.tagsInput = pasteFinal+" "+input+" "
+		this.tagsInput = pasteFinal + " " + input + " "
+
 		// if(this.tagsInput.includes("#")){
 		// 	this.tagsInput = this.tagsInput+" "+input+" "
 		// }
@@ -212,26 +216,26 @@ export class CameraPage implements OnInit {
 	}
 
 	getItems(ev) {
-		let jbSplit = ev.target.value.split(' ', 100);
+		let jbSplit = ev.target.value.split('#', 100);
 		let myArray = jbSplit.filter(v => v != '');
-		let final = [];
-		let searchString;
-		for(let i = 0; i<myArray.length; i++){
-			if(myArray[i].includes("#")){
-			}
-			else{
-				final.push(myArray[i]);
-			}
-		}
-		searchString = final.toString();
-		console.log(searchString);
-		this.fetchDatas.getData('/search/searchTag/' + searchString).then(data => {
-			this.allTags = data.message;
-		}, err => {
-			if (err.status === 404) {
+		if (myArray === [] || myArray === undefined || myArray.length === 0) {
 
-			}
-		})
+		}
+		else {
+			let searchString;
+			searchString = myArray[myArray.length - 1].toString();
+			console.log(searchString);
+			this.fetchDatas.getData('/search/searchTag/' + searchString).then(data => {
+				this.allTags = data.message.sort(function (a, b) {
+					return a.tagCnt > b.tagCnt ? -1 : a.tagCnt < b.tagCnt ? 1 : 0;
+				});
+			}, err => {
+				if (err.status === 404) {
+
+				}
+			})
+		}
+
 
 	}
 

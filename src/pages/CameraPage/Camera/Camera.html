@@ -38,10 +38,13 @@
 		<img id="camera-image"/>
 	</ion-card>
 	<div class="padding">
-		<ion-input class="comment" type="text" [(ngModel)]="comment" placeholder="Share your caption"></ion-input>
-		<hr>
+		<ion-searchbar type="text" [(ngModel)]="comment" placeholder="Share your caption"></ion-searchbar>
+
+
 		<!--<ion-textarea class="tag" type="text" [(ngModel)]="tagsInput" placeholder="Share your tags"></ion-textarea>-->
-		<ion-searchbar [autocomplete]="on" class="tag" placeholder="Share your tags" [(ngModel)]="tagsInput" (ionInput)="getItems($event)"></ion-searchbar>
+		<div class="tag"><ion-searchbar [autocomplete]="on"  placeholder="Share your tags" [(ngModel)]="tagsInput"
+		                                        (ionInput)="getItems($event)"></ion-searchbar></div>
+
 
 		<ion-list>
 			<button (click)="paste(item.tagName)" *ngFor="let item of allTags" ion-item>

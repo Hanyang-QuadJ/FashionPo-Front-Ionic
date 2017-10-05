@@ -80,7 +80,7 @@
 
 
 		<ion-list *ngSwitchCase="'tag'">
-			<button (click)="goToTag(item.tagName)" *ngFor="let item of allTags | orderBy:order; let i = index"
+			<button (click)="goToTag(item.tagName)" *ngFor="let item of allTags; let i = index"
 			        ion-item>
 				<h4>{{item.tagName}}</h4>
 				<p item-end>{{item.tagCnt}} Outfits</p>
@@ -89,7 +89,7 @@
 
 	</div>
 
-	<ion-refresher *ngIf="!searchToggled" (ionRefresh)="doRefresh($event)">
+	<ion-refresher *ngIf="!searchToggled && !modalCheck" (ionRefresh)="doRefresh($event)">
 		<ion-refresher-content *ngIf="!searchToggled"
 		                       pullingIcon="arrow-dropdown"
 		                       pullingText=""
@@ -113,7 +113,7 @@
 		</div>
 
 		<ion-card *ngIf="!rankEmpty">
-			<img-loader tappable *ngIf="firstPost" src={{firstPost.picURL}} useImg></img-loader>
+			<img-loader *ngIf="users[0]" tappable (click)="presentRank(0)" src={{firstPost.picURL}} useImg></img-loader>
 			<ion-card-content no-padding>
 				<ion-grid no-padding>
 					<ion-row>
@@ -146,7 +146,7 @@
 						<p class="rankNumber">{{i+2}}</p>
 					</ion-col>
 					<ion-col col-4 no-padding align-self-center>
-						<img-loader tappable src={{ranks[i].picURL}} useImg></img-loader>
+						<img-loader *ngIf="users[i]" (click)="presentRank(i+1)" tappable src={{ranks[i].picURL}} useImg></img-loader>
 					</ion-col>
 					<ion-col *ngIf="users[i]" col-5 align-self-center>
 						<p class="rankWardrobe" tappable (click)="presentWardrobeModal(i)">{{users[i].wardrobeName}}</p>

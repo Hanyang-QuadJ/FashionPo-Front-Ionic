@@ -1,8 +1,5 @@
 page-camera {
-	.comment {
-		max-width: 100%;
-		width: 100%;
-	}
+
 	.padding {
 		padding-left: 5%;
 		padding-right: 5%;
@@ -26,10 +23,13 @@ page-camera {
 		background-color: white;
 
 	}
-	.searchbar-ios .searchbar-input {
 
-		color: #70A3D6;
+	.tag{
+		.searchbar-ios .searchbar-input {
 
+			color: #70A3D6;
+
+		}
 	}
 
 

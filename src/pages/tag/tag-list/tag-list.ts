@@ -56,7 +56,14 @@ export class TagListPage {
 	}
 
 	ionViewWillEnter() {
-		this.scrollToCard()
+		if(this.renewed === "hello"){
+			let yOffset = document.getElementById(this.index).offsetTop;
+			this.content.scrollTo(0, yOffset, 0);
+		}
+		else{
+			this.scrollToCard();
+		}
+
 	}
 
 	scrollToCard() {
