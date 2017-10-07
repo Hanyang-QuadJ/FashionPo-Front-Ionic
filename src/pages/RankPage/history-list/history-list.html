@@ -9,7 +9,7 @@
   <ion-toolbar>
     <ion-buttons start>
       <button (click)="dismiss()" ion-button icon-only color="primary">
-	      <div class="padding-right">
+	      <div class="padding-right" tappable>
 		      <ion-icon name="ios-arrow-back"></ion-icon>
 	      </div>
       </button>
@@ -45,7 +45,7 @@
     <div *ngFor="let dates of dateFinal.slice().reverse() | slice:2 ; let even = even; let i = index">
       <button *ngIf="even" (click)="goToPage(i+2)" ion-item>
         <ion-thumbnail item-start>
-	        <img-loader *ngIf="ranksheet[i][0]" src="{{ranksheet[i][0].picURL}}" useImg></img-loader>
+	        <img-loader *ngIf="ranksheet[i+1][0]" src="{{ranksheet[i+1][0].picURL}}" useImg></img-loader>
         </ion-thumbnail>
         <h4>{{dates.mon}} {{dates.sDay}} ~ {{dates.endMon}} {{dates.eDay}} , {{dates.yr}}</h4>
       </button>

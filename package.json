@@ -26,6 +26,7 @@
         "@ionic-native/file-path": "^4.1.0",
         "@ionic-native/file-transfer": "^4.3.0",
         "@ionic-native/in-app-browser": "^4.1.0",
+        "@ionic-native/keyboard": "^4.3.1",
         "@ionic-native/native-storage": "^4.1.0",
         "@ionic-native/network": "^4.2.1",
         "@ionic-native/photo-library": "^4.1.0",

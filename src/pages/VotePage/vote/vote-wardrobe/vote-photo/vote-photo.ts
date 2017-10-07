@@ -149,7 +149,7 @@ export class VotePhotoPage {
 
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 	showToast() {

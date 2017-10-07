@@ -22,19 +22,25 @@ import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
 export class IntroduceChangePage {
   usernameForm: FormGroup;
   loaded: boolean = false;
+	callback: any;
 
-  constructor(public viewCtrl: ViewController,
+
+	constructor(public viewCtrl: ViewController,
               public fb: FormBuilder,
               public platform: Platform,
               private storage: Storage,
               private http: Http,
               public toastCtrl: ToastController,
+                public navCtrl: NavController,
+                public navParams: NavParams,
               public fetchDatas: FetchDataProvider,) {
     this.usernameForm = this.fb.group({
       username: ['', Validators.compose([Validators.maxLength(100)])],
 
     });
-  }
+		this.callback = this.navParams.get('callback');
+
+	}
 
   ngOnInit(): void {
     this.fetchDatas.getData('/user/authed').then(data => {
@@ -68,7 +74,9 @@ export class IntroduceChangePage {
 
   public usernameChange() {
     this.fetchDatas.postData('/user/update/introduce', {introduce: this.usernameForm.value.username}).then(data => {
-      this.dismiss();
+	    this.callback("hello").then(() => {
+		    this.navCtrl.pop();
+	    });
     }, err => {
       this.showToast("bottom");
     });

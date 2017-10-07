@@ -16,6 +16,8 @@ import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {RankWardrobePage} from "../../RankPage/rank-wardrobe/rank-wardrobe";
 import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
 import {TabsPage} from "../../tabs/tabs";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {ImageLoader} from "ionic-image-loader";
 
 
 /**
@@ -52,10 +54,11 @@ export class FavoriteUserPage implements OnInit {
 	checkThis: any = "";
 	alertThis: boolean;
 	addDismiss: any;
+	link:any;
 
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public loadingCtrl: LoadingController, private storage: Storage, public modalCtrl: ModalController,
-	            private http: Http, public platform: Platform,
+	            private http: Http, public platform: Platform, public iab : InAppBrowser,public imgLoader:ImageLoader,
 	            public fetchDatas: FetchDataProvider, public actionSheetCtrl: ActionSheetController) {
 		this.weekCheck = false;
 
@@ -102,13 +105,18 @@ export class FavoriteUserPage implements OnInit {
 		else {
 			this.fetchDatas.postData('/user', {users: this.favUser.favorites}).then(data => {
 				this.favorites = data;
-
+				for(let i = 0; i<this.favorites.length;i++){
+					this.imgLoader.preload(this.favorites[i].profile_img);
+				};
 			});
 		}
 
 
 		this.fetchDatas.postData('/user', {users: [this.favUser._id]}).then(data => {
 			this.User = data[0];
+			this.imgLoader.preload(this.User.profile_img);
+
+			this.link = this.User.link;
 			if (this.User.showFavorite === false) {
 				this.showFavorite = true;
 			}
@@ -134,6 +142,12 @@ export class FavoriteUserPage implements OnInit {
 					this.posts.push(data[i]);
 				}
 			}
+			for(let i = 0; i<this.thisWeekPost.length; i++){
+				this.imgLoader.preload(this.thisWeekPost[i].picURL)
+			}
+			for(let i = 0; i<this.posts.length; i++){
+				this.imgLoader.preload(this.posts[i].picURL)
+			}
 			if (this.thisWeekPost.length === 0) {
 				this.weekCheck = true;
 			}
@@ -157,7 +171,7 @@ export class FavoriteUserPage implements OnInit {
 	presentFavModal(i) {
 		this.navCtrl.push(FavoriteUserPostPage, {
 			postList: this.posts.slice().reverse(),
-			postListIndex: 'fit' + i
+			postListIndex:i
 		});
 
 
@@ -165,14 +179,14 @@ export class FavoriteUserPage implements OnInit {
 
 	presentUserModal(i) {
 		this.navCtrl.push(VoteWardrobePage, {user_id: this.favorites[i]});
-
 	}
 
 
 	presentThisWeekModal(i) {
+
 		this.navCtrl.push(FavoriteUserThisWeekPage, {
 			thisWeekPost: this.thisWeekPost.slice().reverse(),
-			thisWeekPostIndex: 'fit' + i
+			thisWeekPostIndex:i
 		});
 
 	}
@@ -202,6 +216,14 @@ export class FavoriteUserPage implements OnInit {
 			},
 			err => {
 			});
+	}
+	goToLink(){
+		if(this.link.includes("https://") || this.link.includes("http://")){
+			this.iab.create(this.link);
+		}
+		else{
+			this.iab.create("https://"+this.link);
+		}
 	}
 
 	presentActionSheet() {

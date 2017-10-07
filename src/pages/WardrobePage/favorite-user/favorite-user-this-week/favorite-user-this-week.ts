@@ -10,6 +10,7 @@ import {
 } from 'ionic-angular';
 import {TagPage} from "../../../tag/tag";
 import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the FavoriteUserThisWeekPage page.
@@ -30,10 +31,15 @@ export class FavoriteUserThisWeekPage {
 	renewed:any;
 	index:any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public toastCtrl: ToastController, public alertCtrl: AlertController, public fetchData:FetchDataProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public toastCtrl: ToastController, public alertCtrl: AlertController, public fetchData:FetchDataProvider,public imgLoader:ImageLoader) {
 		this.postList = this.navParams.get('thisWeekPost');
 		this.postListIndex = this.navParams.get('thisWeekPostIndex');
+		console.log("*****");
+		console.log(this.postListIndex);
 		this.date = this.navParams.get('date');
+		for(let i = 0; i<this.postList.length; i++){
+			this.imgLoader.preload(this.postList[i].picURL)
+		}
 	}
 
 	ionViewDidLoad() {
@@ -41,11 +47,14 @@ export class FavoriteUserThisWeekPage {
 	}
 
 	ionViewWillEnter() {
+		console.log(this.index);
+
 		if(this.renewed === "hello"){
 			let yOffset = document.getElementById(this.index).offsetTop;
 			this.content.scrollTo(0, yOffset, 0);
 		}
 		else{
+			console.log("Wow");
 			this.scrollToCard();
 		}
 
@@ -59,12 +68,12 @@ export class FavoriteUserThisWeekPage {
 	};
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 	scrollToCard() {
 		let yOffset = document.getElementById(this.postListIndex).offsetTop;
-		console.log(yOffset)
+		console.log(yOffset);
 		this.content.scrollTo(0, yOffset, 0);
 	}
 
@@ -160,6 +169,9 @@ export class FavoriteUserThisWeekPage {
 		});
 
 		toast.present();
+	}
+	ionViewWillLeave(){
+		this.renewed ="";
 	}
 
 }

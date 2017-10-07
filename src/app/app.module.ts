@@ -74,6 +74,7 @@ import {IosCustomTransitions} from "../config/ios-custom-transitions";
 import {RankNewPage} from "../pages/rank-new/rank-new";
 import {TagInputPage} from "../pages/tag-input/tag-input";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {LinkPage} from "../pages/link/link";
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -127,7 +128,9 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 		LogPage,
 		LicensePage,
 		RankNewPage,
-		TagInputPage
+		TagInputPage,
+		LinkPage,
+
 	],
 	imports: [
 		BrowserModule,
@@ -185,7 +188,9 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 		LogPage,
 		TermsPage,
 		RankNewPage,
-		TagInputPage
+		TagInputPage,
+		LinkPage,
+
 	],
 	providers: [
 		StatusBar,

@@ -6,9 +6,23 @@
 -->
 <ion-header no-border>
 
-	<ion-navbar>
+	<ion-toolbar>
+		<ion-buttons *ngIf="refreshed" start>
+			<button (click)="refreshdismiss()" ion-button icon-only color="primary">
+				<div class="padding-right">
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+		<ion-buttons *ngIf="!refreshed" start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
 		<ion-title>Settings</ion-title>
-	</ion-navbar>
+	</ion-toolbar>
 
 </ion-header>
 
@@ -17,7 +31,10 @@
 	<ion-grid>
 		<ion-row justify-content-center>
 			<ion-col col-5 text-center>
-				<img tappable (click)="presentUserProfileModal()" class="profileImage" src="{{user.profile_img}}">
+				<div class="profileImage">
+					<img-loader tappable (click)="presentUserProfileModal()" src="{{user.profile_img}}"
+					            useImg></img-loader>
+				</div>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
@@ -63,7 +80,11 @@
 		<button ion-item (click)="presentIntroduceModal()">
 			<ion-icon name="ios-list-outline" color="primary" item-start></ion-icon>
 			<h4>Bio</h4>
-
+		</button>
+		<button ion-item (click)="presentWebsiteModal()">
+			<ion-icon name="ios-link" color="primary" item-start></ion-icon>
+			<h4>Website</h4>
+			<p item-end>{{user.link}}</p>
 
 		</button>
 		<button ion-item (click)="presentPasswordModal()">

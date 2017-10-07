@@ -8,12 +8,12 @@
 	<ion-toolbar>
 		<ion-buttons start>
 			<button *ngIf="backRefresh" (click)="dismissRefresh()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
 			<button *ngIf="!backRefresh" (click)="dismiss()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
@@ -56,6 +56,7 @@
 
 					<h5 class="userName">{{favUser.username}}</h5>
 					<p class="profileText">{{favUser.introduce}}</p>
+					<p tappable class="website" (click)="goToLink()">{{link}}</p>
 
 				</div>
 			</ion-col>
@@ -67,9 +68,9 @@
 
 	<ion-slides *ngIf="!weekCheck" class="image-slider" slidesPerView="3">
 		<ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
-
-			<img-loader (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" useImg></img-loader>
-
+			<div (tap)="presentThisWeekModal(tWeek._id)">
+				<img-loader  src="{{tWeek.picURL}}" useImg></img-loader>
+			</div>
 		</ion-slide>
 	</ion-slides>
 
@@ -96,7 +97,7 @@
 			<ion-grid no-padding>
 				<ion-row wrap no-padding>
 					<ion-col col-4 align-self-center *ngFor="let post of posts.slice().reverse(); let i = index">
-						<button class="btn" (click)="presentFavModal(i)">
+						<button class="btn" (click)="presentFavModal(post._id)">
 							<div class="pastFits">
 								<img-loader src={{post.picURL}} useImg></img-loader>
 							</div>

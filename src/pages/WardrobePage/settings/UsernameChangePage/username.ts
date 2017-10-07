@@ -15,58 +15,65 @@ import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
  */
 
 @Component({
-  selector: 'username-settings',
-  templateUrl: 'username.html',
+	selector: 'username-settings',
+	templateUrl: 'username.html',
 })
 
 export class UsernamePage {
-  usernameForm: FormGroup;
-  loaded: boolean = false;
+	usernameForm: FormGroup;
+	loaded: boolean = false;
+	callback: any;
 
-  constructor(public viewCtrl: ViewController,
-              public fb: FormBuilder,
-              public platform: Platform,
-              private storage: Storage,
-              private http: Http,
-              public fetchDatas: FetchDataProvider,
-              public toastCtrl: ToastController,) {
-    this.usernameForm = this.fb.group({
-      username: ['', Validators.compose([Validators.maxLength(50),Validators.required])],
+	constructor(public viewCtrl: ViewController,
+	            public fb: FormBuilder,
+	            public platform: Platform,
+	            private storage: Storage,
+	            private http: Http,
+	            public navParams: NavParams,
+	            public navCtrl:NavController,
+	            public fetchDatas: FetchDataProvider,
+	            public toastCtrl: ToastController,) {
+		this.usernameForm = this.fb.group({
+			username: ['', Validators.compose([Validators.maxLength(50), Validators.required])],
 
-    });
-  }
+		});
+		this.callback = this.navParams.get('callback');
 
-  ngOnInit(): void {
-    this.fetchDatas.getData('/user/authed').then(data => {
-      this.usernameForm.value.username = data.user[0].username;
-      this.usernameForm.setValue({username: data.user[0].username});
-      this.loaded = true;
-    });
-  }
+	}
 
-  public dismiss() {
-    this.viewCtrl.dismiss()
-  }
+	ngOnInit(): void {
+		this.fetchDatas.getData('/user/authed').then(data => {
+			this.usernameForm.value.username = data.user[0].username;
+			this.usernameForm.setValue({username: data.user[0].username});
+			this.loaded = true;
+		});
+	}
 
-  showToast(position: string) {
-    let toast = this.toastCtrl.create({
-      message: 'this username is already used',
-      duration: 2000,
-      position: position,
-      cssClass: 'general',
-    });
+	public dismiss() {
+		this.viewCtrl.dismiss()
+	}
 
-    toast.present(toast);
-  }
+	showToast(position: string) {
+		let toast = this.toastCtrl.create({
+			message: 'this username is already used',
+			duration: 2000,
+			position: position,
+			cssClass: 'general',
+		});
 
-  public usernameChange() {
-    this.fetchDatas.postData('/user/update/username',{ username: this.usernameForm.value.username}).then(data=>{
-      this.dismiss();
-    },
-      err=>{
-        this.showToast("bottom");
-      })
-  }
+		toast.present(toast);
+	}
+
+	public usernameChange() {
+		this.fetchDatas.postData('/user/update/username', {username: this.usernameForm.value.username}).then(data => {
+				this.callback("hello").then(() => {
+					this.navCtrl.pop();
+				});
+			},
+			err => {
+				this.showToast("bottom");
+			})
+	}
 
 }
 

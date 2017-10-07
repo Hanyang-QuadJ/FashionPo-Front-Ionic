@@ -14,6 +14,8 @@ import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
 import {FavoriteUserPage} from "../../../WardrobePage/favorite-user/favorite-user";
 import {HomePage} from "../../../RankPage/home/home";
 import {TabsPage} from "../../../tabs/tabs";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the SettingsPage page.
@@ -31,6 +33,7 @@ export class VoteWardrobePage {
 	usernameForm: FormGroup;
 	User_id: any;
 	User: any;
+	back:any;
 	loaded: boolean;
 	loadedd: boolean;
 	button_loaded: boolean = true;
@@ -44,6 +47,11 @@ export class VoteWardrobePage {
 	showFavorite: boolean;
 	showAdd: boolean;
 	newTab: any;
+	renewed:any;
+	index:any;
+	callback:any;
+	link:any;
+
 
 
 	today_disable = false;
@@ -60,13 +68,19 @@ export class VoteWardrobePage {
 	            public modalCtrl: ModalController,
 	            public alertCtrl: AlertController,
 	            public navCtrl: NavController,
-	            public fetchDatas: FetchDataProvider,) {
+	            public fetchDatas: FetchDataProvider,
+	            public imgLoader:ImageLoader,
+	            public iab:InAppBrowser) {
 		this.weekCheck = false;
 		this.showAdd = false;
+		this.callback = this.navParams.get('callback');
+		this.index = this.navParams.get('index');
 		this.usernameForm = this.fb.group({
 			username: ['', Validators.compose([Validators.required])],
-
 		});
+		if(this.navParams.get('fromSpeed')==="speed"){
+			this.back = true;
+		}
 	}
 
 	ngOnInit(): void {
@@ -78,6 +92,9 @@ export class VoteWardrobePage {
 		this.User_id = this.navParams.get('user_id');
 		this.fetchDatas.postData('/user', {users: [this.User_id]}).then(data => {
 			this.User = data[0];
+			this.imgLoader.preload(this.User.profile_img);
+
+			this.link = this.User.link;
 			// console.log("Wowwww");
 			// console.log(this.User._id);
 			if (this.User.showFavorite === false) {
@@ -89,6 +106,9 @@ export class VoteWardrobePage {
 			else {
 				this.fetchDatas.postData('/user', {users: this.User.favorites}).then(data => {
 					this.favorites = data;
+					for(let i = 0; i<this.favorites.length;i++){
+						this.imgLoader.preload(this.favorites[i].profile_img);
+					}
 				});
 			}
 			this.fetchDatas.postData('/post/userid', {_id: [this.User_id]}).then(data => {
@@ -100,11 +120,18 @@ export class VoteWardrobePage {
 						this.posts.push(data[i]);
 					}
 				}
+
 				if (this.thisWeekPost.length === 0) {
 					this.weekCheck = true;
 				}
 				if (this.posts.length === 0 || this.posts === undefined) {
 					this.loaded = true;
+				}
+				for(let i = 0; i<this.thisWeekPost.length; i++){
+					this.imgLoader.preload(this.thisWeekPost[i].picURL)
+				}
+				for(let i = 0; i<this.posts.length; i++){
+					this.imgLoader.preload(this.posts[i].picURL)
 				}
 				this.fetchDatas.postData('/post/view', {user_id: [this.User_id]}).then(data => {
 					this.fetchDatas.getData('/user/authed').then(data => {
@@ -138,6 +165,14 @@ export class VoteWardrobePage {
 		});
 
 	}
+	goToLink(){
+		if(this.link.includes("https://") || this.link.includes("http://")){
+			this.iab.create(this.link);
+		}
+		else{
+			this.iab.create("https://"+this.link);
+		}
+	}
 
 
 	removeFavorite(post) {
@@ -149,6 +184,11 @@ export class VoteWardrobePage {
 			err => {
 			});
 
+	}
+	dismissRefresh(){
+		this.callback("hello",this.index).then(() => {
+			this.navCtrl.pop();
+		});
 	}
 
 	presentActionSheet() {
@@ -196,7 +236,7 @@ export class VoteWardrobePage {
 	presentFavModal(i) {
 		this.navCtrl.push(VotePhotoPage, {
 			postList: this.posts.slice().reverse(),
-			postListIndex: 'fit' + i
+			postListIndex: i
 		});
 
 	}
@@ -204,14 +244,11 @@ export class VoteWardrobePage {
 	presentThisWeekModal(i) {
 		this.navCtrl.push(VoteThisWeekPage, {
 			thisWeekPost: this.thisWeekPost.slice().reverse(),
-			thisWeekPostIndex: 'fit' + i
+			thisWeekPostIndex:i
 		});
 	}
 
 	presentUserModal(i) {
-		let userModal = this.modalCtrl.create(FavoriteUserPage, {favList: this.favorites[i]}, {leaveAnimation: 'back'});
-		userModal.present();
+		this.navCtrl.push(FavoriteUserPage, {favList: this.favorites[i]});
 	}
-
-
 }

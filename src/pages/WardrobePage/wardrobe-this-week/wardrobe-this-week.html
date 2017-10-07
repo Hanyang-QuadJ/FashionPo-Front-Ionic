@@ -9,7 +9,7 @@
 	<ion-toolbar>
 		<ion-buttons start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
@@ -21,9 +21,9 @@
 
 
 <ion-content>
-	<ion-card *ngFor=" let post of postList; let i =index" [id]="i">
-		<img-loader src="{{post.picURL}}" useImg></img-loader>
-
+	<ion-card *ngFor=" let post of postList; let i =index">
+		<div [id]="post._id">
+			<img-loader src="{{post.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
 			<div>{{post.likeCnt}} Likes</div>
@@ -31,7 +31,7 @@
 
 		<ion-card-content>
 			<p>{{post.comment}}</p>
-			<span tappable class="tag" *ngFor="let tag of post.tags  let j = index" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
+			<span tappable class="tag" *ngFor="let tag of post.tags  let j = index" (click)="goToTag(tag.tag,post._id)"> {{tag.tag}}</span>
 		</ion-card-content>
 
 		<ion-item>
@@ -42,6 +42,7 @@
 
 
 		</ion-item>
+		</div>
 	</ion-card>
 
 </ion-content>

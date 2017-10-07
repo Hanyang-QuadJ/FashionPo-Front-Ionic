@@ -1,5 +1,12 @@
 <ion-header no-border>
 	<ion-toolbar>
+		<ion-buttons start *ngIf="otherPage3">
+			<button  (click)="dismissRefresh()" ion-button icon-only color="primary">
+				<div>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
 		<ion-buttons start *ngIf="otherPage">
 			<button  (click)="dismiss()" ion-button icon-only color="primary">
 				<div>
@@ -59,6 +66,7 @@
 					</button>
 					<h5 class="userName">{{user.username}}</h5>
 					<p class="profileText">{{userIntro}}</p>
+					<p  tappable class="website" (click)="goToLink()">{{link}}</p>
 
 				</div>
 			</ion-col>
@@ -83,8 +91,8 @@
 	</ion-grid>
 	<div *ngIf="thisWeekPost">
 		<ion-slides class="image-slider" slidesPerView="3">
-			<ion-slide (tap)="presentThisWeekModal(i)" *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
-				<div>
+			<ion-slide  *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i= index">
+				<div (tap)="presentThisWeekModal(tWeek._id)">
 					<img-loader src="{{tWeek.picURL}}" useImg></img-loader>
 				</div>
 			</ion-slide>
@@ -112,8 +120,8 @@
 			</ion-grid>
 			<ion-grid no-padding>
 				<ion-row>
-					<ion-col tappable (click)="presentProfileModal(i)" col-4 align-self-center *ngFor="let post of mypostlist.slice().reverse(); let i = index">
-						<div class="pastFits">
+					<ion-col  col-4 align-self-center *ngFor="let post of mypostlist.slice().reverse(); let i = index">
+						<div class="pastFits" tappable (click)="presentProfileModal(post._id)">
 							<img-loader src={{post.picURL}} useImg></img-loader>
 						</div>
 					</ion-col>

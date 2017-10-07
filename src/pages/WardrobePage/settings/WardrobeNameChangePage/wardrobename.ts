@@ -22,11 +22,14 @@ import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
 export class ChangeWardrobeNamePage {
     usernameForm: FormGroup;
     loaded:boolean = false;
+	callback: any;
     constructor(public viewCtrl: ViewController,
                 public fb: FormBuilder,
                 public platform: Platform,
                 private storage: Storage,
                 private http: Http,
+                public navCtrl: NavController,
+                public navParams: NavParams,
                 public toastCtrl: ToastController,
                 public fetchDatas: FetchDataProvider,
     ) {
@@ -34,6 +37,8 @@ export class ChangeWardrobeNamePage {
             username: ['', Validators.compose([Validators.maxLength(50),Validators.minLength(2),Validators.required])],
 
         });
+	    this.callback = this.navParams.get('callback');
+
     }
 
     ngOnInit(): void {
@@ -63,7 +68,9 @@ export class ChangeWardrobeNamePage {
 
     public usernameChange() {
       this.fetchDatas.postData('/user/update/wardrobe',{wardrobeName: this.usernameForm.value.username}).then(data=>{
-        this.dismiss();
+		      this.callback("hello").then(() => {
+			      this.navCtrl.pop();
+		      });
       },
         err=>{
           this.showToast("bottom");

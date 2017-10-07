@@ -8,6 +8,7 @@ import {Http, Headers} from "@angular/http";
 import 'rxjs/add/operator/map';
 import {TagPage} from "../../tag/tag";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the WardrobeThisWeekPage page.
@@ -30,24 +31,32 @@ export class WardrobeThisWeekPage implements OnInit {
 	callback: any;
 	renewed:any;
 	index:any;
+	loaded:any;
 
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
 	            public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform,
 	            public modalCtrl: ModalController, public loadingCtrl: LoadingController,
-	            public fetchDatas: FetchDataProvider) {
+	            public fetchDatas: FetchDataProvider, public imageLoader:ImageLoader) {
 
 
 	}
 
 	ngOnInit(): void {
+
 		this.postList = this.navParams.get('thisWeekPost');
 		this.postListIndex = this.navParams.get('thisWeekPostIndex');
 		this.tags = this.postList;
 		this.callback = this.navParams.get("callback");
 		this.content.resize();
+		for(let i = 0; i<this.postList.length; i++){
+			this.imageLoader.preload(this.postList[i].picURL);
+		}
 
 
+	}
+	complete(){
+		this.loaded = true;
 	}
 
 	parsingDate(date) {
@@ -97,8 +106,15 @@ export class WardrobeThisWeekPage implements OnInit {
 	}
 
 	ionViewWillEnter() {
-		this.yOffset = document.getElementById(this.postListIndex).offsetTop;
-		this.content.scrollTo(0, this.yOffset, 0);
+		if(this.renewed === "hello"){
+			let yOffset = document.getElementById(this.index).offsetTop;
+			this.content.scrollTo(0, yOffset, 0);
+		}
+		else{
+			this.yOffset = document.getElementById(this.postListIndex).offsetTop;
+			this.content.scrollTo(0, this.yOffset, 0);
+		}
+
 
 	}
 
@@ -156,7 +172,7 @@ export class WardrobeThisWeekPage implements OnInit {
 	};
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 

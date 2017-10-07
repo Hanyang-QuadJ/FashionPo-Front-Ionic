@@ -15,6 +15,7 @@ import {RankThisWeekPage} from "../RankPage/rank-wardrobe/rank-this-week/rank-th
 import {TagListPage} from "./tag-list/tag-list";
 import {FavoriteUserPage} from "../WardrobePage/favorite-user/favorite-user";
 import {FetchDataProvider} from "../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 
 /**
@@ -53,7 +54,7 @@ export class TagPage {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
 	            private storage: Storage, public fetchDatas: FetchDataProvider, public http: Http, public loadingCtrl: LoadingController, public modalCtrl: ModalController,
-	            public platform: Platform) {
+	            public platform: Platform, public imgLoader:ImageLoader) {
 		this.tagName = this.navParams.get('tagName');
 		this.callback = this.navParams.get('callback');
 		this.index = this.navParams.get('index');
@@ -64,6 +65,9 @@ export class TagPage {
 			this.tagPics = data.sort(function (a, b) {
 				return a.writtenAt < b.writtenAt ? -1 : a.writtenAt > b.writtenAt ? 1 : 0;
 			});
+			for(let i = 0; i<this.tagPics.length;i++){
+				this.imgLoader.preload(this.tagPics[i].picURL);
+			}
 
 			for (let i = 0; i < data.length; i++) {
 				if (data[i].likeCnt >= 50) {
@@ -71,6 +75,9 @@ export class TagPage {
 					this.likeCntArray.push(data[i].likeCnt);
 				}
 				this.tagUser.push(data[i].writtenBy);
+			}
+			for(let i = 0; i<this.selectedLike.length;i++){
+				this.imgLoader.preload(this.selectedLike[i].picURL);
 			}
 			console.log("!!!!!!!!!");
 			console.log(this.tagUser);
@@ -88,6 +95,9 @@ export class TagPage {
 				this.finalSelectedLike = this.selectedLike.sort(function (a, b) {
 					return a.likeCnt < b.likeCnt ? -1 : a.likeCnt > b.likeCnt ? 1 : 0;
 				});
+				for(let i = 0; i<this.finalSelectedLike.length;i++){
+					this.imgLoader.preload(this.finalSelectedLike[i].picURL);
+				}
 
 				for (let i = 0; i < this.selectedLike.length; i++) {
 					this.selectedUserId.push(this.finalSelectedLike[i].writtenBy)
@@ -128,7 +138,7 @@ export class TagPage {
 		this.navCtrl.push(TagListPage,
 			{
 				thisWeekPost: this.finalSelectedLike.slice().reverse(),
-				thisWeekPostIndex: 'fit' + i,
+				thisWeekPostIndex:i,
 				pageCheck: this.tagName,
 				like: 'like',
 				user: this.selectedUser.slice().reverse()
@@ -140,7 +150,7 @@ export class TagPage {
 		this.navCtrl.push(TagListPage,
 			{
 				thisWeekPost: this.tagPics.slice().reverse(),
-				thisWeekPostIndex: 'fit' + i,
+				thisWeekPostIndex:i,
 				pageCheck: this.tagName,
 				user: this.tagUsers.slice().reverse()
 			});

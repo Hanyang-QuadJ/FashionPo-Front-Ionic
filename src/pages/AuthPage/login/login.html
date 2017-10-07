@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-buttons start>
       <button *ngIf="!back" (click)="goBackToWelcome()" ion-button icon-only color="light">
-	      <div class="padding-right">
+	      <div class="padding-right" tappable>
 		      <ion-icon name="ios-arrow-back"></ion-icon>
 	      </div>
       </button>
@@ -24,13 +24,13 @@
       <ion-list>
         <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
           <ion-item>
-            <ion-label class="label" stacked>Email</ion-label>
-            <ion-input type="email" class="text" formControlName="email" value="{{email}}" placeholder="example@fitnyc.edu"></ion-input>
+            <ion-label class="label" floating>Email</ion-label>
+            <ion-input type="email" class="text" formControlName="email" value="{{email}}"></ion-input>
           </ion-item>
           <br>
           <ion-item>
-            <ion-label stacked>Password</ion-label>
-            <ion-input class="text" type="password" formControlName="password" value="{{password}}" placeholder="At least 12 numbers"></ion-input>
+            <ion-label floating>Password</ion-label>
+            <ion-input class="text" type="password" formControlName="password" value="{{password}}"></ion-input>
 
           </ion-item>
           <div class="forgot" style="text-align: end"><span  tappable (click)="goToFind()"><ion-icon item-end name="ios-help-circle-outline"></ion-icon></span></div>

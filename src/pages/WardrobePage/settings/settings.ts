@@ -10,6 +10,8 @@ import {IntroduceChangePage} from "./IntroduceChangePage/introduce";
 import {TermsPage} from "../../terms/terms";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {LicensePage} from "../../license/license";
+import {LinkPage} from "../../link/link";
+import {ImageLoader} from "ionic-image-loader";
 
 
 /**
@@ -26,6 +28,9 @@ import {LicensePage} from "../../license/license";
 export class SettingsPage {
 	user: any = {};
 	showFavorite: Boolean;
+	renewed:any;
+	refreshed:boolean;
+	callback:any;
 
 	constructor(public navCtrl: NavController,
 	            public navParams: NavParams,
@@ -34,14 +39,33 @@ export class SettingsPage {
 	            public modalCtrl: ModalController,
 	            public fetchDatas: FetchDataProvider,
 	            public alertCtrl: AlertController,
+	            public imgLoader:ImageLoader,
 	            private storage: Storage) {
 
 		this.fetchDatas.getData('/user/authed').then(data => {
 			this.user = data.user[0];
+			this.imgLoader.preload(this.user.profile_img);
 			this.showFavorite = this.user.showFavorite;
 			console.log(this.user);
 		})
+		this.callback = this.navParams.get("callback")
 
+	}
+	refreshdismiss(){
+		this.callback("hello").then(() => {
+			this.navCtrl.pop();
+		});
+	}
+	dismiss(){
+		this.navCtrl.pop();
+	}
+	ionViewWillEnter(){
+		if(this.renewed === "hello"){
+			this.refreshed = true;
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+			})
+		}
 	}
 
 	toggleFavorite() {
@@ -84,7 +108,16 @@ export class SettingsPage {
 		this.storage.set('token', null);
 		this.app.getRootNav().setRoot(LoginPage, {check: 'logout'});
 	}
+	myCallbackFunction = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.renewed = _params;
+			resolve();
+		});
+	};
+	presentWebsiteModal(){
+		this.navCtrl.push(LinkPage,{callback:this.myCallbackFunction.bind(this)});
 
+	}
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad SettingsPage');
 		console.log('@@#@#@#@#@');
@@ -96,87 +129,38 @@ export class SettingsPage {
 	}
 
 	presentUsernameModal() {
-		let profileModal = this.modalCtrl.create(UsernamePage, {}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
-
-			this.fetchDatas.getData('/user/authed').then(data => {
-				this.user = data.user[0];
-
-			})
-
-
-		});
-		profileModal.present();
-
+		this.navCtrl.push(UsernamePage,{callback:this.myCallbackFunction.bind(this)});
 	}
 
 	presentUserProfileModal() {
-		let profileModal = this.modalCtrl.create(UserProfileChange, {}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
-
-
-			this.fetchDatas.getData('/user/authed').then(data => {
-				this.user = data.user[0];
-
-			})
-
-
-		});
-		profileModal.present();
-
+		this.navCtrl.push(UserProfileChange, {callback:this.myCallbackFunction.bind(this)});
 	}
 
 	presentPasswordModal() {
-		let profileModal = this.modalCtrl.create(PasswordChangePage, {}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
+		this.navCtrl.push(PasswordChangePage, {callback:this.myCallbackFunction.bind(this)});
 
-
-			this.fetchDatas.getData('/user/authed').then(data => {
-				this.user = data.user[0];
-
-			})
-
-
-		});
-		profileModal.present();
 	}
 
 	presentWardrobeModal() {
-		let profileModal = this.modalCtrl.create(ChangeWardrobeNamePage, {}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
+		this.navCtrl.push(ChangeWardrobeNamePage, {callback:this.myCallbackFunction.bind(this)});
 
-
-			this.fetchDatas.getData('/user/authed').then(data => {
-				this.user = data.user[0];
-
-			})
-
-
-		});
-		profileModal.present();
 	}
 
 	presentTermsModal() {
-		let termsModal = this.modalCtrl.create(TermsPage);
-		termsModal.present();
+		this.navCtrl.push(TermsPage);
+
 	}
 
 	presentLicense() {
-		let license = this.modalCtrl.create(LicensePage);
-		license.present();
+		this.navCtrl.push(LicensePage);
+
 	}
 
 	presentIntroduceModal() {
-		let profileModal = this.modalCtrl.create(IntroduceChangePage, {}, {leaveAnimation: 'back'});
-		profileModal.onDidDismiss(() => {
+		 this.navCtrl.push(IntroduceChangePage, {callback:this.myCallbackFunction.bind(this)});
 
-			this.fetchDatas.getData('/user/authed').then(data => {
-				this.user = data.user[0];
-
-			})
-
-
-		});
-		profileModal.present();
+	}
+	ionViewWillLeave(){
+		this.renewed ="";
 	}
 }

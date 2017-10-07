@@ -9,7 +9,7 @@
 	<ion-toolbar>
 		<ion-buttons start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
@@ -21,7 +21,7 @@
 
 <ion-content>
 	<ion-card [id]="'fit'+0">
-		<img-loader src="{{firstPost.picURL}}" useImg></img-loader>
+		<img-loader src="{{firstPost.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
 			<div>{{firstPost.likeCnt}} Likes</div>
@@ -39,9 +39,10 @@
 		</ion-item>
 	</ion-card>
 
-	<ion-card *ngFor=" let post of rank; let i =index" [id]="'fit'+(i+1)">
+	<ion-card *ngFor=" let post of rank; let i =index">
+		<div [id]="'fit'+(i+1)">
 
-		<img-loader src="{{post.picURL}}" useImg></img-loader>
+		<img-loader src="{{post.picURL}}" useImg fallback="" [fallbackAsPlaceholder]="true"></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
 			<div>{{post.likeCnt}} Likes</div>
@@ -51,11 +52,12 @@
 			<h2 color="dark" tappable (click)="presentWardrobe(i)">{{user[i].wardrobeName}}</h2>
 			<p tappable (click)="presentWardrobe(i)">{{user[i].username}}</p>
 
-			<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i+1)"> {{tag.tag}}</span>
+			<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,(i+1))"> {{tag.tag}}</span>
 		</ion-card-content>
 
 		<ion-item>
 			<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
 		</ion-item>
+		</div>
 	</ion-card>
 </ion-content>

@@ -18,6 +18,8 @@ import {Network} from "@ionic-native/network";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 import {RankNewPage} from "../../rank-new/rank-new";
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ImageLoader} from "ionic-image-loader";
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
 
 /**
@@ -75,6 +77,7 @@ export class HomePage implements OnInit {
 	rankEmpty: boolean;
 	renewed:any;
 	index:any;
+	cachedPost:Array<any>;
 
 	firstButton: boolean;
 
@@ -91,6 +94,7 @@ export class HomePage implements OnInit {
 	            public loadingCtrl: LoadingController,
 	            public viewCtrl: ViewController,
 	            private network: Network,
+	            public imgLoader:ImageLoader,
 	            private iab:InAppBrowser) {
 
 		this.historyRank = this.navParams.get('rankSheet');
@@ -98,10 +102,12 @@ export class HomePage implements OnInit {
 		this.search = "user";
 	}
 	broswer(){
-		this.iab.create('https://www.naver.com');
+		let link = "https://www.naver.com";
+		this.iab.create(link);
 	}
 
 	ngOnInit(): void {
+
 
 		if (this.dismissHistory === 'dismiss') {
 			this.fetchDatas.postData('/user/setHistory', {}).then(data => {
@@ -141,7 +147,11 @@ export class HomePage implements OnInit {
 					for (var i = 1; i < data.posts.length; i++) {
 						this.ranks[i - 1] = data.posts[i];
 					}
+					for(let i = 0; i<this.ranks.length;i++){
+						this.imgLoader.preload(this.ranks[i].picURL)
+					}
 					this.firstPost = data.posts[0];
+					this.imgLoader.preload(this.firstPost.picURL);
 					for (let i = 0; i < data.posts.length; i++) {
 						this.writtenBys.push(data.posts[i].writtenBy);
 					}
@@ -359,6 +369,9 @@ export class HomePage implements OnInit {
 							this.allUsers.push(data.usersList[i]);
 						}
 					}
+					for(let i = 0; i<this.allUsers.length;i++){
+						this.imgLoader.preload(this.allUsers[i].profile_img);
+					}
 				});
 			});
 
@@ -382,6 +395,9 @@ export class HomePage implements OnInit {
 						if (blackUser.indexOf(data.usersList[i]._id) === -1) {
 							this.allUsers.push(data.usersList[i]);
 						}
+					}
+					for(let i = 0; i<this.allUsers.length;i++){
+						this.imgLoader.preload(this.allUsers[i].profile_img);
 					}
 					let val = ev.target.value;
 					// if the value is an empty string don't filter the items
@@ -503,7 +519,7 @@ export class HomePage implements OnInit {
 
 	}
 	presentRank(i){
-		this.navCtrl.push(RankNewPage,{rank:this.ranks,firstPost:this.firstPost,firstUser:this.firstUser,users:this.users,index:'fit'+i,startDate:this.startDate,endDate:this.endDate})
+		this.navCtrl.push(RankNewPage,{rank:this.ranks,firstPost:this.firstPost,firstUser:this.firstUser,users:this.users,index:i,startDate:this.startDate,endDate:this.endDate})
 	}
 
 	myCallbackFunction = (_params) => {

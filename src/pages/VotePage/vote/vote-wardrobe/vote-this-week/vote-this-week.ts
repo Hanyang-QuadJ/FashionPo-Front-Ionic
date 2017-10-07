@@ -5,6 +5,7 @@ import {
 } from 'ionic-angular';
 import {TagPage} from "../../../../tag/tag";
 import {FetchDataProvider} from "../../../../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the FavoriteUserThisWeekPage page.
@@ -21,32 +22,48 @@ import {FetchDataProvider} from "../../../../../providers/fetch-data/fetch-data"
 export class VoteThisWeekPage {
 	@ViewChild(Content) content: Content;
 	thisWeekPost: any;
-	thisWeekPostIndex: "";
+	thisWeekPostIndex: any;
+	testArray:Array<any>=["1","2","3","4","5","6","7","8","9","10"];
 	date: any = "";
 	renewed:any;
 	index:any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public alertCtrl: AlertController, public toastCtrl: ToastController, public fetchData: FetchDataProvider) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public alertCtrl: AlertController, public toastCtrl: ToastController, public fetchData: FetchDataProvider,public imgLoader:ImageLoader) {
+
 		this.thisWeekPost = this.navParams.get('thisWeekPost');
 		this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
-		this.date = this.navParams.get('date')
+		this.date = this.navParams.get('date');
+		for(let i = 0; i<this.thisWeekPost.length; i++){
+			this.imgLoader.preload(this.thisWeekPost[i].picURL)
+		}
 	}
 
-	ionViewDidLoad() {
-		console.log('ionViewDidLoad FavoriteUserThisWeekPage');
-	}
+
 
 	ionViewWillEnter() {
 
+
 		if(this.renewed === "hello"){
+			console.log(this.index);
 			let yOffset = document.getElementById(this.index).offsetTop;
+			console.log(yOffset);
 			this.content.scrollTo(0, yOffset, 0);
 		}
 		else{
 			this.scrollToCard();
+
+
 		}
 
 	}
+	scrollToCard() {
+		let yOffset = document.getElementById(this.thisWeekPostIndex).offsetTop;
+		console.log(this.thisWeekPostIndex);
+		console.log("---------------------");
+		console.log(yOffset);
+		this.content.scrollTo(0, yOffset, 0);
+	}
+
 
 	parsingDate(date) {
 		let month;
@@ -94,10 +111,7 @@ export class VoteThisWeekPage {
 		return month + " " + day + ", " + year;
 	}
 
-	scrollToCard() {
-		let yOffset = document.getElementById(this.thisWeekPostIndex).offsetTop;
-		this.content.scrollTo(0, yOffset, 0);
-	}
+
 
 	public dismiss() {
 		this.navCtrl.pop();
@@ -112,7 +126,7 @@ export class VoteThisWeekPage {
 
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 	showRadio(i) {

@@ -6,110 +6,113 @@
 -->
 <ion-header no-border>
 
-  <ion-toolbar hide-tabs>
-    <ion-title>Outfits of the week</ion-title>
-    <ion-buttons end>
-      <button (click)="Rank()" ion-button icon-only color="primary">
-        <ion-icon name="ios-arrow-forward"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+	<ion-toolbar hide-tabs>
+		<ion-title>Outfits of the week</ion-title>
+		<ion-buttons end>
+			<button (click)="Rank()" ion-button icon-only color="primary">
+				<div tappable style="padding-left:60px">
+					<ion-icon name="ios-arrow-forward"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-grid *ngIf="noOnePosted">
-    <ion-row justify-content-center>
-      <ion-col col-10 text-center>
-        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
-        <br>
-        <p text-center>You could either swipe right to like or left to see the next outfits here.</p>
-        <p text-center>Currently there are no outfits posted in this week.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="noPost || noCard">
-    <ion-row justify-content-center>
-      <ion-col col-10 text-center>
-        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
-        <br>
-        <p text-center>No more outfits are posted in this week.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="endForToday">
-    <ion-row justify-content-center>
-      <ion-col col-10 text-center>
-        <img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
-        <br>
-        <p text-center>No more swipes are left for today.</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+	<ion-grid *ngIf="noOnePosted">
+		<ion-row justify-content-center>
+			<ion-col col-10 text-center>
+				<img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
+				<br>
+				<p text-center>You could either swipe right to like or left to see the next outfits here.</p>
+				<p text-center>Currently there are no outfits posted in this week.</p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-grid *ngIf="noPost || noCard">
+		<ion-row justify-content-center>
+			<ion-col col-10 text-center>
+				<img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
+				<br>
+				<p text-center>No more outfits are posted in this week.</p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-grid *ngIf="endForToday">
+		<ion-row justify-content-center>
+			<ion-col col-10 text-center>
+				<img style="width:35%; margin-top: 35%; height:auto" src="images/rankIcon.png">
+				<br>
+				<p text-center>No more swipes are left for today.</p>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 
 
+	<div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)"
+	     (throwoutleft)="voteUp(false)" (throwoutup)="presentWardrobeModal(posts[0].writtenBy)" id="card-stack">
+		<div *ngFor="let post of posts">
 
-  <div *ngIf="!noCard" swing-stack #myswing1 [stackConfig]="stackConfig" (throwoutright)="voteUp(true)"
-       (throwoutleft)="voteUp(false)" (throwoutup)="presentWardrobeModal(posts[0].writtenBy)" id="card-stack">
-    <div *ngFor="let post of posts">
+			<ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
 
-      <ion-card #mycards1 swing-card style="position:absolute;z-index: -1">
-	      <img *ngIf=" user && post" src="{{ post.picURL }}">
+				<img *ngIf="post" src="{{ post.picURL }}">
 
-        <!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
-        <ion-card-content>
-          <h2 tappable *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">
-            {{user.wardrobeName}}</h2>
+				<!--<img  style="position:absolute; width:auto;height:auto; z-index:-9;/*magic*/" *ngIf="nextPost" src="{{ nextPost.picURL }}">-->
+				<ion-card-content>
+					<h2 tappable *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">
+						{{user.wardrobeName}}</h2>
+					<p class="comment">{{post.comment}}</p>
+					<span tappable class="tag" *ngFor="let tag of post.tags"
+					      (click)="goToTag(tag.tag)">{{tag.tag}}  </span>
+					<p>{{parsingDate(post.writtenAt)}}</p>
 
-          <p class="comment">{{post.comment}}</p>
-          <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag)">{{tag.tag}}  </span>
-          <p>{{parsingDate(post.writtenAt)}}</p>
+				</ion-card-content>
+			</ion-card>
 
-        </ion-card-content>
-      </ion-card>
+			<!--<ion-card *ngIf="noNextCard">-->
+			<!--<ion-card-content>-->
+			<!--<img src="../../../assets/images/nomore.jpg">-->
 
-      <!--<ion-card *ngIf="noNextCard">-->
-      <!--<ion-card-content>-->
-      <!--<img src="../../../assets/images/nomore.jpg">-->
+			<!--</ion-card-content>-->
+			<!--<ion-item>-->
+			<!--<h2 text-center="">No More Cards For Today</h2>-->
+			<!--</ion-item>-->
 
-      <!--</ion-card-content>-->
-      <!--<ion-item>-->
-      <!--<h2 text-center="">No More Cards For Today</h2>-->
-      <!--</ion-item>-->
+			<!--</ion-card>-->
 
-      <!--</ion-card>-->
-
-      <ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
-        <img style="/*magic*/"  *ngIf="user && post" src="{{ nextPost.picURL }}">
-        <ion-card-content>
-          <h2 *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">{{user.wardrobeName}}</h2>
-          <p class="comment">{{post.comment}}</p>
-          <span tappable class="tag" *ngFor="let tag of nextPost.tags"
-                (click)="goToTag(tag.tag)">{{tag.tag}} &nbsp;</span>
-          <p>{{parsingDate(nextPost.writtenAt)}}</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </div>
+			<ion-card *ngIf="!noNextCard" #mycards1 swing-card style="position:absolute ;z-index: -300">
+				<img *ngIf="post" src="{{ nextPost.picURL }}" useImg>
+				<ion-card-content>
+					<h2 *ngIf="user && post" (click)="presentWardrobeModal(posts[0].writtenBy)">
+						{{user.wardrobeName}}</h2>
+					<p class="comment">{{post.comment}}</p>
+					<span tappable class="tag" *ngFor="let tag of nextPost.tags"
+					      (click)="goToTag(tag.tag)">{{tag.tag}} &nbsp;</span>
+					<p>{{parsingDate(nextPost.writtenAt)}}</p>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</div>
 </ion-content>
 
 <ion-footer *ngIf="!noCard" no-border>
-  <ion-row>
-    <ion-col text-center>
-      <button ion-button clear small icon-left color="dark" (click)="voteUp(false)">
-        <ion-icon name="ios-backspace-outline"></ion-icon>
-        <div>SKIP</div>
-      </button>
-    </ion-col>
+	<ion-row>
+		<ion-col text-center>
+			<button ion-button clear small icon-left color="dark" (click)="voteUp(false)">
+				<ion-icon name="ios-backspace-outline"></ion-icon>
+				<div>SKIP</div>
+			</button>
+		</ion-col>
 
-    <ion-col text-center>
-      <button ion-button icon-left clear small (click)="voteUp(true)">
-        <ion-icon name="heart"></ion-icon>
-        <div>LIKE</div>
-      </button>
-    </ion-col>
-  </ion-row>
+		<ion-col text-center>
+			<button ion-button icon-left clear small (click)="voteUp(true)">
+				<ion-icon name="heart"></ion-icon>
+				<div>LIKE</div>
+			</button>
+		</ion-col>
+	</ion-row>
 
 </ion-footer>
 

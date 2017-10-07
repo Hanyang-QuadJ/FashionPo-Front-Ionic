@@ -13,7 +13,9 @@
 		</ion-buttons>
 		<ion-buttons *ngIf="modalCheck" start>
 			<button (click)="dismiss()" ion-button icon-only color="primay">
-				<ion-icon name="ios-arrow-back"></ion-icon>
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
 			</button>
 		</ion-buttons>
 		<ion-title tappable *ngIf="!searchToggled && !modalCheck" (click)="scrollToTop()">
@@ -65,7 +67,6 @@
 
 
 <ion-content>
-	<button ion-button full (click)="broswer()">naver</button>
 	<div *ngIf="searchToggled" [ngSwitch]="search">
 		<div *ngSwitchCase="'user'">
 			<ion-list inset>

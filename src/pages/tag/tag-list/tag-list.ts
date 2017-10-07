@@ -4,6 +4,8 @@ import {FavoriteUserPage} from "../../WardrobePage/favorite-user/favorite-user";
 import {TagPage} from "../../tag/tag";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
+import {VoteWardrobePage} from "../../VotePage/vote/vote-wardrobe/vote-wardrobe";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the TagListPage page.
@@ -34,8 +36,11 @@ export class TagListPage {
 	index: any;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,
-	            public fetchDatas: FetchDataProvider) {
+	            public fetchDatas: FetchDataProvider,public imgLoader:ImageLoader) {
 		this.thisWeekPost = this.navParams.get('thisWeekPost');
+		for(let i = 0; i<this.thisWeekPost.length;i++){
+			this.imgLoader.preload(this.thisWeekPost[i].picURL);
+		}
 		this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
 		this.tagPageCheck = this.navParams.get('pageCheck');
 		this.users = this.navParams.get('user');
@@ -57,7 +62,7 @@ export class TagListPage {
 
 	ionViewWillEnter() {
 		if(this.renewed === "hello"){
-			let yOffset = document.getElementById(this.index).offsetTop;
+			let yOffset = document.getElementById('fit'+this.index).offsetTop;
 			this.content.scrollTo(0, yOffset, 0);
 		}
 		else{
@@ -67,7 +72,7 @@ export class TagListPage {
 	}
 
 	scrollToCard() {
-		let yOffset = document.getElementById(this.thisWeekPostIndex).offsetTop;
+		let yOffset = document.getElementById('fit'+this.thisWeekPostIndex).offsetTop;
 		this.content.scrollTo(0, yOffset, 0);
 	}
 
@@ -78,10 +83,10 @@ export class TagListPage {
 
 	presentWardrobe(i) {
 		if (this.users[i]._id !== this.user._id) {
-			this.navCtrl.push(FavoriteUserPage, {favList: this.users[i]});
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.users[i],callback:this.myCallbackFunction.bind(this),fromSpeed:"speed",index:i});
 		}
 		else {
-			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+			this.navCtrl.push(WardrobePage, {check: "otherPage3",callback:this.myCallbackFunction.bind(this),index:i});
 		}
 		// console.log(this.users[i]._id);
 
@@ -89,7 +94,7 @@ export class TagListPage {
 
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: 'fit'+ i});
+		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: i});
 	}
 
 	myCallbackFunction = (_params, _params2) => {

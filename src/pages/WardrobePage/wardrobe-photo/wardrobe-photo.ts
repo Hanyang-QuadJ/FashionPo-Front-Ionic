@@ -14,6 +14,7 @@ import 'rxjs/add/operator/map';
 import {TagPage} from "../../tag/tag";
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
 import {TabsPage} from "../../tabs/tabs";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the WardrobePhotoPage page.
@@ -37,18 +38,27 @@ export class WardrobePhotoPage implements OnInit {
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
 	            public alertCtrl: AlertController, public storage: Storage, public http: Http, public platform: Platform, public modalCtrl: ModalController,
-	            public fetchDatas: FetchDataProvider) {
+	            public fetchDatas: FetchDataProvider, public imgLoader:ImageLoader) {
 		// console.log(navParams.get('postListIndex'));
 		this.postList = navParams.get('postList');
 		this.postListIndex = navParams.get('postListIndex');
 		this.callback = this.navParams.get("callback");
+		for(let i = 0; i<this.postList.length(); i++){
+			this.imgLoader.preload(this.postList[i].picURL)
+		}
 
 
 
 	}
 
 	ionViewWillEnter() {
-		this.scrollToCard()
+		if(this.renewed === "hello"){
+			let yOffset = document.getElementById(this.index).offsetTop;
+			this.content.scrollTo(0, yOffset, 0);
+		}
+		else{
+			this.scrollToCard()
+		}
 
 	}
 
@@ -163,7 +173,7 @@ export class WardrobePhotoPage implements OnInit {
 
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 

@@ -1,37 +1,40 @@
 page-wardrobe-this-week {
-  h2{
-    margin-bottom: 0px;
-  }
-  h4{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  h5{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  p{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  .toolbar-background {
-    background-color: #ffffff;
+	h2 {
+		margin-bottom: 0px;
+	}
+	h4 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	h5 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	.img-loaded + ion-spinner {
+		display: none;
+	}
+	p {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	.toolbar-background {
+		background-color: #ffffff;
 
-  }
-  .toolbar-title-ios {
-    text-align: center;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #ff5733;
-    pointer-events: auto;
-  }
-  .tag{
-    color:#70A3D6;
-  }
-  .card-content-ios {
-    padding: 1px 16px 12px;
-    font-size: 1.4rem;
-    line-height: 1.4;
-  }
+	}
+	.toolbar-title-ios {
+		text-align: center;
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #ff5733;
+		pointer-events: auto;
+	}
+	.tag {
+		color: #70A3D6;
+	}
+	.card-content-ios {
+		padding: 1px 16px 12px;
+		font-size: 1.4rem;
+		line-height: 1.4;
+	}
 
 }

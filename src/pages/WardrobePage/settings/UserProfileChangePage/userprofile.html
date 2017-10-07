@@ -1,8 +1,8 @@
 <ion-header no-border>
-	<ion-navbar>
+	<ion-toolbar>
 		<ion-buttons start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
@@ -13,7 +13,7 @@
 				Update
 			</button>
 		</ion-buttons>
-	</ion-navbar>
+	</ion-toolbar>
 </ion-header>
 
 
@@ -24,8 +24,12 @@
 	</button>
 
 
+	<ion-card *ngIf="!pictureTaken">
+		<img-loader  src="{{profile_img}}" useImg></img-loader>
+	</ion-card>
+
 	<ion-card>
-		<img id="camera-image" src="{{profile_img}}"/>
+		<img id='image' src=""/>
 	</ion-card>
 
 </ion-content>

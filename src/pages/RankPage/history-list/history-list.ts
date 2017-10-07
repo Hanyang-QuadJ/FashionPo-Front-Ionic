@@ -4,6 +4,7 @@ import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {HomePage} from '../../RankPage/home/home';
 import {FetchDataProvider} from "../../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the HistoryListPage page.
@@ -35,7 +36,7 @@ export class HistoryListPage implements OnInit {
 
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private storage: Storage, public modalCtrl: ModalController,
-	            private http: Http, public platform: Platform, public loadingCtrl: LoadingController,
+	            private http: Http, public platform: Platform, public loadingCtrl: LoadingController,public imgLoader:ImageLoader,
 	            public fetchDatas: FetchDataProvider) {
 		this.getHistoryNew();
 		this.callback = this.navParams.get("callback");
@@ -80,6 +81,9 @@ export class HistoryListPage implements OnInit {
 
 				for (var j = 0; j < this.rankList.length; j++) {
 					this.ranksheet.push(data.ranks[j].rankSheet)
+				}
+				for(let i = 0; i<this.ranksheet.length;i++){
+					this.imgLoader.preload(this.ranksheet[i][0].picURL);
 				}
 				this.ranksheetLength = this.ranksheet.length;
 				// // console.log(this.ranksheet);

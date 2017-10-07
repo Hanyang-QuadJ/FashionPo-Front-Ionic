@@ -5,6 +5,8 @@ import {TagPage} from "../tag/tag";
 import {WardrobePage} from "../WardrobePage/wardrobe/wardrobe";
 import {FetchDataProvider} from "../../providers/fetch-data/fetch-data";
 import {FavoriteUserPage} from "../WardrobePage/favorite-user/favorite-user";
+import {ImageLoader} from "ionic-image-loader";
+
 
 /**
  * Generated class for the RankNewPage page.
@@ -32,7 +34,8 @@ export class RankNewPage {
 	firstPost:any;
 
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public fetchDatas: FetchDataProvider) {
+
+	constructor(public navCtrl: NavController, public navParams: NavParams, public fetchDatas: FetchDataProvider, public imgLoader:ImageLoader) {
 		this.user = this.navParams.get('users');
 		this.firstUser = this.navParams.get('firstUser');
 		this.firstPost = this.navParams.get('firstPost');
@@ -43,13 +46,18 @@ export class RankNewPage {
 		console.log(this.rankIndex);
 		this.fetchDatas.getData('/user/authed').then(data => {
 			this.authed = data.user[0];
-		})
+		});
+		this.imgLoader.preload(this.firstPost.picURL);
+		for(let i = 0; i<this.rank.length;i++){
+			this.imgLoader.preload(this.rank[i].picURL);
+		}
 
 	}
 
 	ionViewWillEnter() {
 		if(this.renewed === "hello"){
-			let yOffset = document.getElementById(this.index).offsetTop;
+
+			let yOffset = document.getElementById('fit'+this.index).offsetTop;
 			this.content.scrollTo(0, yOffset, 0);
 		}
 		else{
@@ -57,7 +65,7 @@ export class RankNewPage {
 		}
 	}
 	scrollToCard() {
-		let yOffset = document.getElementById(this.rankIndex).offsetTop;
+		let yOffset = document.getElementById('fit'+this.rankIndex).offsetTop;
 		this.content.scrollTo(0, yOffset, 0);
 	}
 
@@ -73,12 +81,13 @@ export class RankNewPage {
 	};
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: 'fit'+ i});
+		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: i});
 	}
 
 	presentFirstWardrobe() {
 		if (this.firstPost._id !== this.authed._id) {
-			this.navCtrl.push(FavoriteUserPage, {favList: this.firstUser});
+
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.firstUser, callback:this.myCallbackFunction.bind(this),index:0,fromSpeed:"speed"});
 		}
 		else {
 			this.navCtrl.push(WardrobePage, {check: "otherPage"});
@@ -89,10 +98,11 @@ export class RankNewPage {
 
 	presentWardrobe(i) {
 		if (this.user[i]._id !== this.authed._id) {
-			this.navCtrl.push(FavoriteUserPage, {favList: this.user[i]});
+			console.log("crazy!!");
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.user[i],callback:this.myCallbackFunction.bind(this),index:i+1,fromSpeed:"speed"});
 		}
 		else {
-			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+			this.navCtrl.push(WardrobePage, {check: "otherPage3",callback:this.myCallbackFunction.bind(this),index:i+1,});
 		}
 		// console.log(this.users[i]._id);
 

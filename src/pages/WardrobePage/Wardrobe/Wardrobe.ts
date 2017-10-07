@@ -12,6 +12,8 @@ import {WardrobePhotoPage} from "../wardrobe-photo/wardrobe-photo";
 import {FavoriteUserPage} from "../favorite-user/favorite-user";
 import {LogPage} from "../log/log";
 import {TabsPage} from "../../tabs/tabs";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {ImageLoader} from "ionic-image-loader";
 
 
 // import {TabsPage} from "../tabs/tabs";
@@ -42,13 +44,14 @@ export class WardrobePage {
 	loaded: boolean;
 	loadedd: boolean;
 	weekPast: any;
-	mypostlist: Array<object> = [];
-	thisWeekPost: Array<object> = [];
+	mypostlist: Array<any> = [];
+	thisWeekPost: Array<any> = [];
 	thisWeekPostLength: boolean;
+	callback:any;
+	index:any;
 	@ViewChild(Content) content: Content;
 
 	option: string = "";
-
 	favorites: Array<any> = [];
 
 	postAlert: string = "";
@@ -56,13 +59,16 @@ export class WardrobePage {
 	name: any;
 	renewed: any;
 
+
 	date: Array<string> = [];
 	newTab: any;
 	otherPage: any;
 	otherPage2: any;
+	otherPage3:any;
 
 	isNewPost: Array<boolean>;
 	isNewAdd: boolean = false;
+	link:any;
 
 
 	button_loaded: boolean = false;
@@ -76,12 +82,15 @@ export class WardrobePage {
 	            public fetchDatas: FetchDataProvider,
 	            public modalCtrl: ModalController,
 	            public loadingCtrl: LoadingController,
+	            public iab : InAppBrowser,
+	            public imgLoader:ImageLoader,
 	            public platform: Platform) {
 		this.thisWeekPostLength = false;
 		this.newTab = "fit";
 		this.mypostlist = [];
 		this.thisWeekPost = [];
 		this.isNewPost = [];
+		this.callback = this.navParams.get('callback');
 		this.fetchData();
 		console.log(this.navParams.get("check"));
 		if (this.navParams.get("check") === "otherPage") {
@@ -90,16 +99,32 @@ export class WardrobePage {
 		else if (this.navParams.get("check") === "otherPage2") {
 			this.otherPage2 = true;
 		}
+		else if (this.navParams.get("check") === "otherPage3") {
+			this.otherPage3 = true;
+		}
 
 
+	}
+	dismissRefresh(){
+		this.callback("hello",this.index).then(() => {
+			this.navCtrl.pop();
+		});
 	}
 
 	popToRoot() {
 		this.navCtrl.parent.parent.setRoot(TabsPage);
 	}
+	goToLink(){
+		if(this.link.includes("https://") || this.link.includes("http://")){
+			this.iab.create(this.link);
+		}
+		else{
+			this.iab.create("https://"+this.link);
+		}
+	}
 
 	Settings() {
-		this.navCtrl.push(SettingsPage, {users: this.user}, {});
+		this.navCtrl.push(SettingsPage, {users: this.user,callback:this.myCallbackFunction.bind(this)}, {});
 	}
 
 	test() {
@@ -120,6 +145,7 @@ export class WardrobePage {
 		// console.log(this.thisWeekPost);
 
 		this.fetchDatas.getData('/user/authed').then(data => {
+			this.link = data.user[0].link;
 			this.weekPast = data.user[0].isHistoryNew;
 			if (data.user[0].addNews.length !== 0) {
 				this.isNewAdd = true;
@@ -129,6 +155,7 @@ export class WardrobePage {
 				this.isNewAdd = false;
 			}
 			this.user = data.user[0];
+			this.imgLoader.preload(this.user.profile_img);
 			this.userIntro = data.user[0].introduce;
 			this.button_loaded = true;
 			this.fetchDatas.getData('/rank').then(data => {
@@ -164,6 +191,12 @@ export class WardrobePage {
 					}
 
 				}
+				for(let i = 0; i<this.thisWeekPost.length; i++){
+					this.imgLoader.preload(this.thisWeekPost[i].picURL)
+				}
+				for(let i = 0; i<this.mypostlist.length; i++){
+					this.imgLoader.preload(this.mypostlist[i].picURL)
+				}
 				if (this.thisWeekPost.length === 0) {
 					this.thisWeekPostLength = true;
 				}
@@ -189,6 +222,9 @@ export class WardrobePage {
 				else {
 					this.fetchDatas.postData('/user', {users: data.favorites}).then(data => {
 						this.favorites = data;
+						for(let i = 0; i<this.favorites.length;i++){
+							this.imgLoader.preload(this.favorites[i].profile_img);
+						}
 						this.loadedd = false;
 						this.fetchDatas.getData('/user/authed').then(data => {
 							this.isNewPost = [];
@@ -234,6 +270,9 @@ export class WardrobePage {
 			else {
 				this.fetchDatas.postData('/user', {users: data.favorites}).then(data => {
 					this.favorites = data;
+					for(let i = 0; i<this.favorites.length;i++){
+						this.imgLoader.preload(this.favorites[i].profile_img);
+					}
 					this.loadedd = false;
 					this.fetchDatas.getData('/user/authed').then(data => {
 						this.isNewPost = [];
@@ -308,17 +347,13 @@ export class WardrobePage {
 
 
 	presentThisWeekModal(i) {
+		console.log(i);
 		this.navCtrl.push(WardrobeThisWeekPage, {
 			callback: this.myCallbackFunction.bind(this),
 			thisWeekPost: this.thisWeekPost.slice().reverse(),
 			thisWeekPostIndex: i,
 		}, {});
-		// thisWeekModal.onDidDismiss((renewedData)=>{
-		// 	if(renewedData==="renewed"){
-		// 		this.fetchData();
-		// 	}
-		// });
-		// thisWeekModal.present();
+
 	};
 
 	presentProfileModal(i) {
@@ -357,16 +392,7 @@ export class WardrobePage {
 				callback: this.myCallbackFunction.bind(this),
 				favList: this.favorites[i]
 			});
-			// profileModal.onDidDismiss((renewedData) => {
-			// 	if (renewedData === "Renewed") {
-			// 		// console.log(renewedData);
-			// 		this.fetchData();
-			// 	}
-			// 	else if (renewedData === "notRenewed") {
-			// 		// console.log(renewedData);
-			// 	}
-			// });
-			// profileModal.present();
+
 
 		}
 

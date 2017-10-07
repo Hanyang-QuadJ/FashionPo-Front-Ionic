@@ -58,7 +58,7 @@ export class LoginPage {
 
 
 	ngOnInit(): void {
-		console.log(this.platform)
+		console.log(this.platform);
 		this.back = false;
 		if (this.check === "logout") {
 			this.back = true;

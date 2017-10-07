@@ -3,7 +3,9 @@
 	<ion-toolbar>
 		<ion-buttons start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
-				<ion-icon name="ios-arrow-back"></ion-icon>
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
 			</button>
 		</ion-buttons>
 		<ion-title>{{tagPageCheck}}</ion-title>
@@ -14,9 +16,10 @@
 
 <ion-content>
 
-	<ion-card *ngFor=" let post of thisWeekPost; let i =index" [id]="'fit'+i">
+	<ion-card *ngFor=" let post of thisWeekPost; let i =index">
+		<div [id]="'fit'+i">
 
-		<img-loader src="{{post.picURL}}" useImg></img-loader>
+		<img-loader src="{{post.picURL}}" useImg fallback="{{post.picURL}}" [fallbackAsPlaceholder]="true"></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
 			<div>{{post.likeCnt}} Likes</div>
@@ -32,6 +35,7 @@
 		<ion-item>
 			<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
 		</ion-item>
+		</div>
 	</ion-card>
 
 	<!--<div *ngIf="!like">-->

@@ -27,7 +27,8 @@ page-settings {
     pointer-events: auto;
   }
   .profileImage{
-    border-radius: 5%;
+	  img{
+		  border-radius: 5%;
+	  }
   }
-
 }

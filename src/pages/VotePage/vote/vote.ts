@@ -43,17 +43,21 @@ export class VotePage implements OnInit {
 
 	posts: Array<any>;
 	nextPost: object;
+	first: any;
 	stackConfig: StackConfig;
-	cachedPost: Array<object> = [];
+	cachedPost: Array<any> = [];
 	tabBarElement: any;
 	overlayColor: string = 'transparent'; //Default Color
 	user: any;
-	renewed:any;
+	renewed: any;
 	noCard: boolean = false;
 	noPost: boolean = false;
 	noNextCard: boolean = false;
 	noOnePosted: boolean = false;
 	endForToday: boolean = false;
+	loaded: any;
+
+
 	@ViewChild(Content) content: Content;
 
 	constructor(private http: Http,
@@ -120,6 +124,11 @@ export class VotePage implements OnInit {
 		};
 
 
+	}
+
+	display() {
+
+		console.log("loaded!");
 	}
 
 	addNewposts() {
@@ -262,9 +271,9 @@ export class VotePage implements OnInit {
 			});
 			this.presentLikeToast()
 		} else {
-			this.fetchDatas.postData('/post/dislike', {post_id: this.posts[0]._id}).then(data => {
-				// console.log(data);
-			});
+			// this.fetchDatas.postData('/post/dislike', {post_id: this.posts[0]._id}).then(data => {
+			// 	// console.log(data);
+			// });
 			this.presentSkipToast()
 		}
 		let removedCard = this.posts.pop();
@@ -309,6 +318,7 @@ export class VotePage implements OnInit {
 
 
 	}
+
 	myCallbackFunction = (_params) => {
 		return new Promise((resolve, reject) => {
 			this.renewed = _params;
@@ -318,7 +328,7 @@ export class VotePage implements OnInit {
 
 	goToTag(tagName) {
 		// console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this)});
+		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this)});
 	}
 
 

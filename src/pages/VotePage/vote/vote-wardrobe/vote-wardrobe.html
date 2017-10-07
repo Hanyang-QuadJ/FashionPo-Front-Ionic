@@ -8,9 +8,16 @@
 
 <ion-header no-border>
 	<ion-toolbar>
-		<ion-buttons start>
+		<ion-buttons *ngIf="!back" start>
 			<button (click)="dismiss()" ion-button icon-only color="primary">
-				<div class="padding-right">
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+		<ion-buttons *ngIf="back" start>
+			<button (click)="dismissRefresh()" ion-button icon-only color="primary">
+				<div class="padding-right" tappable>
 					<ion-icon name="ios-arrow-back"></ion-icon>
 				</div>
 			</button>
@@ -35,7 +42,7 @@
 
 			<ion-col col-5 text-center>
 				<div class="profileImage">
-					<img-loader tappable *ngIf="User" class="image" src="{{User.profile_img}}" useImg></img-loader>
+					<img-loader tappable *ngIf="User" class="image" src="{{User.profile_img}}" useImg ></img-loader>
 				</div>
 			</ion-col>
 			<ion-col col-7>
@@ -82,6 +89,8 @@
 					<h5 *ngIf="User" class="userName">{{User.username}}</h5>
 
 					<p *ngIf="User" class="profileText">{{User.introduce}}</p>
+					<p *ngIf="User" tappable class="website" (click)="goToLink()">{{link}}</p>
+
 				</div>
 			</ion-col>
 		</ion-row>
@@ -93,7 +102,9 @@
 	<div *ngIf="!weekCheck">
 		<ion-slides class="image-slider" slidesPerView="3">
 			<ion-slide *ngFor="let tWeek of thisWeekPost.slice().reverse(); let i = index">
-				<img-loader (tap)="presentThisWeekModal(i)" src="{{tWeek.picURL}}" useImg></img-loader>
+				<div (tap)="presentThisWeekModal(tWeek._id)" >
+					<img-loader src="{{tWeek.picURL}}" useImg></img-loader>
+				</div>
 			</ion-slide>
 		</ion-slides>
 	</div>
@@ -120,9 +131,9 @@
 			<ion-grid no-padding>
 				<ion-row wrap no-padding>
 					<ion-col col-4 align-self-center *ngFor="let post of posts.slice().reverse(); let i = index">
-						<button class="btn" (click)="presentFavModal(i)">
+						<button class="btn" (click)="presentFavModal(post._id)">
 							<div class="pastFits">
-								<img-loader class="myFitImage" src={{post.picURL}} useImg></img-loader>
+								<img-loader src={{post.picURL}} useImg></img-loader>
 							</div>
 						</button>
 					</ion-col>

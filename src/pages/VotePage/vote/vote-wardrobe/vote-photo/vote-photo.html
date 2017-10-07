@@ -6,39 +6,45 @@
 -->
 <ion-header no-border>
 
-  <ion-toolbar>
-    <ion-buttons start>
-      <button (click)="dismiss()" ion-button icon-only color="primary">
-	      <div class="padding-right">
-		      <ion-icon name="ios-arrow-back"></ion-icon>
-	      </div>      </button>
-    </ion-buttons>
-    <ion-title>Outfits</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons start>
+			<button (click)="dismiss()" ion-button icon-only color="primary">
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+		<ion-title>Outfits</ion-title>
+	</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-card *ngFor=" let post of postList; let i =index" [id]="'fit'+i">
+	<ion-card *ngFor=" let post of postList; let i =index">
+		<div [id]="post._id">
+			<img-loader src="{{post.picURL}}" useImg fallback="{{post.picURL}}"
+			            [fallbackAsPlaceholder]="true"></img-loader>
 
-	  <img-loader src="{{post.picURL}}" useImg></img-loader>
+			<button ion-button icon-left clear small>
+				<ion-icon name="heart"></ion-icon>
+				<div>{{post.likeCnt}} Likes</div>
+			</button>
 
-    <button ion-button icon-left clear small>
-      <ion-icon name="heart"></ion-icon>
-      <div>{{post.likeCnt}} Likes</div>
-    </button>
+			<ion-card-content>
+				<p>{{post.comment}}</p>
+				<span tappable class="tag" *ngFor="let tag of post.tags"
+				      (click)="goToTag(tag.tag,post._id)"> {{tag.tag}}</span>
+			</ion-card-content>
 
-    <ion-card-content>
-      <p>{{post.comment}}</p>
-      <span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
-    </ion-card-content>
-
-    <ion-item>
-      <ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
-	    <button ion-button item-end clear color="dark"><ion-icon name="ios-more" (click)="showRadio(i)"></ion-icon></button>
-    </ion-item>
-  </ion-card>
+			<ion-item>
+				<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+				<button ion-button item-end clear color="dark">
+					<ion-icon name="ios-more" (click)="showRadio(i)"></ion-icon>
+				</button>
+			</ion-item>
+		</div>
+	</ion-card>
 
 </ion-content>
 

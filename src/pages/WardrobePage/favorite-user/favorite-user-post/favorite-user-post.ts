@@ -10,6 +10,7 @@ import {
 } from 'ionic-angular';
 import {TagPage} from "../../../tag/tag";
 import {FetchDataProvider} from "../../../../providers/fetch-data/fetch-data";
+import {ImageLoader} from "ionic-image-loader";
 
 /**
  * Generated class for the FavoriteUserPostPage page.
@@ -30,11 +31,14 @@ export class FavoriteUserPostPage implements OnInit {
 	renewed:any;
 	index:any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public alertCtrl: AlertController, public toastCtrl: ToastController,
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController, public alertCtrl: AlertController, public toastCtrl: ToastController,public imgLoader:ImageLoader,
 				public fetchData: FetchDataProvider) {
 		this.postList = navParams.get('postList');
 		this.postListIndex = navParams.get('postListIndex');
 		this.date = this.navParams.get('date');
+		for(let i = 0; i<this.postList.length; i++){
+			this.imgLoader.preload(this.postList[i].picURL)
+		}
 	}
 
 	ngOnInit(): void {
@@ -75,7 +79,7 @@ export class FavoriteUserPostPage implements OnInit {
 	};
 	goToTag(tagName, i) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'+i});
+		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:i});
 	}
 
 
