@@ -309,15 +309,19 @@ export class WardrobePage {
 	}
 
 	ionViewWillEnter() {
-		if (this.weekPast === true) {
-			this.fetchData();
-		}
+		console.log("^^^^");
+		console.log(this.weekPast);
+
 
 		if (this.renewed === "hello") {
 			console.log("what");
 			this.fetchData();
 		}
 		this.fetchDatas.getData('/user/authed').then(data => {
+			console.log(data.user[0].isHistoryNew);
+			if(data.user[0].isHistoryNew === true){
+				this.fetchData();
+			}
 			if (data.user[0].addNews.length !== 0) {
 				this.isNewAdd = true;
 				this.addCount = data.user[0].addNews.length;

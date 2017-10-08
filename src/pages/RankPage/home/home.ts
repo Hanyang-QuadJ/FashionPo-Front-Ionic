@@ -101,10 +101,7 @@ export class HomePage implements OnInit {
 		this.dismissHistory = this.navParams.get('dismiss');
 		this.search = "user";
 	}
-	broswer(){
-		let link = "https://www.naver.com";
-		this.iab.create(link);
-	}
+
 
 	ngOnInit(): void {
 
@@ -538,7 +535,7 @@ export class HomePage implements OnInit {
 	}
 
 	Vote() {
-		this.navCtrl.parent.parent.setRoot(VotePage, {}, {animate: true, direction: 'back'});
+		this.navCtrl.parent.parent.setRoot(VotePage, {}, {animate:true,direction:'back'});
 
 	}
 
@@ -567,6 +564,7 @@ export class HomePage implements OnInit {
 	ionViewWillLeave(){
 		this.renewed = "";
 		this.index ="";
+
 	}
 
 
@@ -661,4 +659,6 @@ export class HomePage implements OnInit {
 		}
 		return day + ", " + year;
 	}
+
+
 }

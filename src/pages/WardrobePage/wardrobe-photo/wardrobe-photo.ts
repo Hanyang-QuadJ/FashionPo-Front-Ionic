@@ -43,7 +43,7 @@ export class WardrobePhotoPage implements OnInit {
 		this.postList = navParams.get('postList');
 		this.postListIndex = navParams.get('postListIndex');
 		this.callback = this.navParams.get("callback");
-		for(let i = 0; i<this.postList.length(); i++){
+		for(let i = 0; i<this.postList.length; i++){
 			this.imgLoader.preload(this.postList[i].picURL)
 		}
 

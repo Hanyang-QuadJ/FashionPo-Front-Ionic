@@ -24,8 +24,8 @@ page-register {
 	}
 	.toolbar-title-ios {
 		text-align: center;
-		font-size: 1.4rem;
-		font-weight: 700;
+		font-size: 1.8rem;
+		font-weight: 900;
 		color: #ff5733;
 		pointer-events: auto;
 	}
@@ -65,11 +65,12 @@ page-register {
 	}
 	.infoText {
 		color: #4d4d4d;
-		font-size: 14px;
+		font-weight: 900;
+		font-size: 16px;
 		white-space: pre-line;
 		padding-left: 3%;
 		padding-top: 1%;
-		font-weight: 500;
+
 		padding-bottom: 3%;
 	}
 	.container {
@@ -96,6 +97,7 @@ page-register {
 		font-weight: 900;
 		font-size: 16px;
 		margin-left: 2%;
+		letter-spacing: -1px;
 		color: #4d4d4d;
 	}
 	.information {

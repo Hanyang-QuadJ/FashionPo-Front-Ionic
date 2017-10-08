@@ -57,7 +57,7 @@ export class RankNewPage {
 	ionViewWillEnter() {
 		if(this.renewed === "hello"){
 
-			let yOffset = document.getElementById('fit'+this.index).offsetTop;
+			let yOffset = document.getElementById(this.index).offsetTop;
 			this.content.scrollTo(0, yOffset, 0);
 		}
 		else{
@@ -65,7 +65,7 @@ export class RankNewPage {
 		}
 	}
 	scrollToCard() {
-		let yOffset = document.getElementById('fit'+this.rankIndex).offsetTop;
+		let yOffset = document.getElementById(this.rankIndex).offsetTop;
 		this.content.scrollTo(0, yOffset, 0);
 	}
 

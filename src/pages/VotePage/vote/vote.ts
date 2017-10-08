@@ -16,6 +16,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {VoteWardrobePage} from './vote-wardrobe/vote-wardrobe';
 import {TagPage} from "../../tag/tag";
+import {ImageLoader} from "ionic-image-loader";
 
 import {
 	StackConfig,
@@ -66,6 +67,7 @@ export class VotePage implements OnInit {
 	            public platform: Platform,
 	            public navParams: NavParams,
 	            public fetchDatas: FetchDataProvider,
+	            public imgLoader:ImageLoader,
 	            private app: App,
 	            public loadingCtrl: LoadingController,
 	            public viewCtrl: ViewController,
@@ -75,6 +77,7 @@ export class VotePage implements OnInit {
 	}
 
 	ngOnInit(): void {
+
 		let loading = this.loadingCtrl.create({
 			showBackdrop: true,
 			cssClass: 'loading',
@@ -224,7 +227,7 @@ export class VotePage implements OnInit {
 	}
 
 	Rank() {
-		this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
+		this.navCtrl.setRoot(TabsPage,{},{animate: true, direction: 'forward'});
 	}
 
 	showToast(position: string, message: string) {
@@ -271,9 +274,9 @@ export class VotePage implements OnInit {
 			});
 			this.presentLikeToast()
 		} else {
-			// this.fetchDatas.postData('/post/dislike', {post_id: this.posts[0]._id}).then(data => {
-			// 	// console.log(data);
-			// });
+			this.fetchDatas.postData('/post/dislike', {post_id: this.posts[0]._id}).then(data => {
+				// console.log(data);
+			});
 			this.presentSkipToast()
 		}
 		let removedCard = this.posts.pop();

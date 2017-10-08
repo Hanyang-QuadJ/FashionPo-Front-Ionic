@@ -25,7 +25,7 @@
 	<form [formGroup]="usernameForm" (ngSubmit)="usernameChange()" *ngIf="loaded">
 		<ion-item>
 			<ion-label stacked>Website</ion-label>
-			<ion-input type="text" formControlName="username" value="{{link}}" placeholder="www.fitnyc.edu"></ion-input>
+			<ion-input type="text" formControlName="username" value="{{link}}" placeholder="Website,blog,etc"></ion-input>
 		</ion-item>
 		<div padding>
 			<button class="custom-button" ion-button type="submit"  color="sub" block>Update</button>

@@ -82,9 +82,9 @@ export class HistoryListPage implements OnInit {
 				for (var j = 0; j < this.rankList.length; j++) {
 					this.ranksheet.push(data.ranks[j].rankSheet)
 				}
-				for(let i = 0; i<this.ranksheet.length;i++){
-					this.imgLoader.preload(this.ranksheet[i][0].picURL);
-				}
+				console.log(this.ranksheet);
+
+
 				this.ranksheetLength = this.ranksheet.length;
 				// // console.log(this.ranksheet);
 

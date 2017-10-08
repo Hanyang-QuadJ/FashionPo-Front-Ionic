@@ -46,8 +46,8 @@ vote-wardrobe {
 	}
 	.toolbar-title-ios {
 		text-align: center;
-		font-size: 1.5rem;
-		font-weight: 700;
+		font-size: 1.8rem;
+		font-weight: 900;
 		color: #ff5733;
 		pointer-events: auto;
 	}
@@ -71,10 +71,11 @@ vote-wardrobe {
 	}
 	.infoText {
 		color: #4d4d4d;
-		font-size: 14px;
+		font-size: 16px;
 		padding-left: 3%;
 		padding-top: 1%;
-		font-weight: 500;
+		font-weight: 900;
+		letter-spacing: -1px;
 		padding-bottom: 3%;
 	}
 	.container {

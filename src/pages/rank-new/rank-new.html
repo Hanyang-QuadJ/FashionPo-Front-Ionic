@@ -20,7 +20,7 @@
 
 
 <ion-content>
-	<ion-card [id]="'fit'+0">
+	<ion-card [id]="0">
 		<img-loader src="{{firstPost.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
@@ -31,7 +31,8 @@
 			<h2 color="dark" tappable (click)="presentFirstWardrobe()">{{firstUser.wardrobeName}}</h2>
 			<p tappable (click)="presentFirstWardrobe()">{{firstUser.username}}</p>
 
-			<span tappable class="tag" *ngFor="let tag of firstPost.tags" (click)="goToTag(tag.tag,0)"> {{tag.tag}}</span>
+			<span tappable class="tag" *ngFor="let tag of firstPost.tags"
+			      (click)="goToTag(tag.tag,0)"> {{tag.tag}}</span>
 		</ion-card-content>
 
 		<ion-item>
@@ -40,24 +41,25 @@
 	</ion-card>
 
 	<ion-card *ngFor=" let post of rank; let i =index">
-		<div [id]="'fit'+(i+1)">
+		<div [id]="(i+1)">
 
-		<img-loader src="{{post.picURL}}" useImg fallback="" [fallbackAsPlaceholder]="true"></img-loader>
-		<button ion-button icon-left clear small>
-			<ion-icon name="heart"></ion-icon>
-			<div>{{post.likeCnt}} Likes</div>
-		</button>
+			<img-loader src="{{post.picURL}}" useImg fallback="" [fallbackAsPlaceholder]="true"></img-loader>
+			<button ion-button icon-left clear small>
+				<ion-icon name="heart"></ion-icon>
+				<div>{{post.likeCnt}} Likes</div>
+			</button>
 
-		<ion-card-content>
-			<h2 color="dark" tappable (click)="presentWardrobe(i)">{{user[i].wardrobeName}}</h2>
-			<p tappable (click)="presentWardrobe(i)">{{user[i].username}}</p>
+			<ion-card-content>
+				<h2 color="dark" tappable (click)="presentWardrobe(i)">{{user[i].wardrobeName}}</h2>
+				<p tappable (click)="presentWardrobe(i)">{{user[i].username}}</p>
 
-			<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,(i+1))"> {{tag.tag}}</span>
-		</ion-card-content>
+				<span tappable class="tag" *ngFor="let tag of post.tags"
+				      (click)="goToTag(tag.tag,(i+1))"> {{tag.tag}}</span>
+			</ion-card-content>
 
-		<ion-item>
-			<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
-		</ion-item>
+			<ion-item>
+				<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
+			</ion-item>
 		</div>
 	</ion-card>
 </ion-content>
