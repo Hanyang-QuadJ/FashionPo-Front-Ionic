@@ -20,7 +20,7 @@
 
 
 <ion-content>
-	<ion-card [id]="0">
+	<ion-card [id]="firstPost.picURL">
 		<img-loader src="{{firstPost.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
@@ -28,11 +28,11 @@
 		</button>
 
 		<ion-card-content>
-			<h2 color="dark" tappable (click)="presentFirstWardrobe()">{{firstUser.wardrobeName}}</h2>
-			<p tappable (click)="presentFirstWardrobe()">{{firstUser.username}}</p>
+			<h2 color="dark" tappable (click)="presentFirstWardrobe(firstPost.picURL)">{{firstUser.wardrobeName}}</h2>
+			<p tappable (click)="presentFirstWardrobe(firstPost.picURL)">{{firstUser.username}}</p>
 
 			<span tappable class="tag" *ngFor="let tag of firstPost.tags"
-			      (click)="goToTag(tag.tag,0)"> {{tag.tag}}</span>
+			      (click)="goToTag(tag.tag,firstPost.picURL)"> {{tag.tag}}</span>
 		</ion-card-content>
 
 		<ion-item>
@@ -41,20 +41,19 @@
 	</ion-card>
 
 	<ion-card *ngFor=" let post of rank; let i =index">
-		<div [id]="(i+1)">
-
-			<img-loader src="{{post.picURL}}" useImg fallback="" [fallbackAsPlaceholder]="true"></img-loader>
+		<div [id]="post.picURL">
+			<img-loader src="{{post.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
 			<button ion-button icon-left clear small>
 				<ion-icon name="heart"></ion-icon>
 				<div>{{post.likeCnt}} Likes</div>
 			</button>
 
 			<ion-card-content>
-				<h2 color="dark" tappable (click)="presentWardrobe(i)">{{user[i].wardrobeName}}</h2>
-				<p tappable (click)="presentWardrobe(i)">{{user[i].username}}</p>
+				<h2 color="dark" tappable (click)="presentWardrobe(i,post.picURL)">{{user[i].wardrobeName}}</h2>
+				<p tappable (click)="presentWardrobe(i,post.picURL)">{{user[i].username}}</p>
 
 				<span tappable class="tag" *ngFor="let tag of post.tags"
-				      (click)="goToTag(tag.tag,(i+1))"> {{tag.tag}}</span>
+				      (click)="goToTag(tag.tag,post.picURL)"> {{tag.tag}}</span>
 			</ion-card-content>
 
 			<ion-item>

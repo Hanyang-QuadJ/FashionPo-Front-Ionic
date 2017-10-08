@@ -521,8 +521,6 @@ export class HomePage implements OnInit {
 
 	myCallbackFunction = (_params) => {
 		return new Promise((resolve, reject) => {
-
-
 			resolve();
 		});
 	};

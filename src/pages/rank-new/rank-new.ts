@@ -66,6 +66,7 @@ export class RankNewPage {
 	}
 	scrollToCard() {
 		let yOffset = document.getElementById(this.rankIndex).offsetTop;
+		console.log(yOffset);
 		this.content.scrollTo(0, yOffset, 0);
 	}
 
@@ -84,25 +85,25 @@ export class RankNewPage {
 		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: i});
 	}
 
-	presentFirstWardrobe() {
+	presentFirstWardrobe(i) {
 		if (this.firstPost._id !== this.authed._id) {
 
-			this.navCtrl.push(VoteWardrobePage, {user_id: this.firstUser, callback:this.myCallbackFunction.bind(this),index:0,fromSpeed:"speed"});
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.firstUser, callback:this.myCallbackFunction.bind(this),index:i,fromSpeed:"speed"});
 		}
 		else {
-			this.navCtrl.push(WardrobePage, {check: "otherPage"});
+			this.navCtrl.push(WardrobePage, {check: "otherPage",callback:this.myCallbackFunction.bind(this),index:i});
 		}
 		// console.log(this.users[i]._id);
 
 	}
 
-	presentWardrobe(i) {
+	presentWardrobe(i,id) {
 		if (this.user[i]._id !== this.authed._id) {
 			console.log("crazy!!");
-			this.navCtrl.push(VoteWardrobePage, {user_id: this.user[i],callback:this.myCallbackFunction.bind(this),index:i+1,fromSpeed:"speed"});
+			this.navCtrl.push(VoteWardrobePage, {user_id: this.user[i],callback:this.myCallbackFunction.bind(this),index:id,fromSpeed:"speed"});
 		}
 		else {
-			this.navCtrl.push(WardrobePage, {check: "otherPage3",callback:this.myCallbackFunction.bind(this),index:i+1,});
+			this.navCtrl.push(WardrobePage, {check: "otherPage3",callback:this.myCallbackFunction.bind(this),index:id,});
 		}
 		// console.log(this.users[i]._id);
 
@@ -249,5 +250,6 @@ export class RankNewPage {
 	ionViewWillLeave(){
 		this.index="";
 	}
+
 
 }
