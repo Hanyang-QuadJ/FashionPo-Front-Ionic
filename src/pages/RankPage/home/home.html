@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header no-border>
 	<ion-toolbar hideBackButton="true">
 		<ion-buttons start>
@@ -115,7 +116,7 @@
 		</div>
 
 		<ion-card *ngIf="!rankEmpty">
-			<img-loader *ngIf="users[0]" tappable (click)="presentRank(firstPost.picURL)" src={{firstPost.picURL}}
+			<img-loader *ngIf="users[0]" fallback="images/none.png" [fallbackAsPlaceholder]="true" tappable (click)="presentRank(firstPost.picURL)" src={{firstPost.picURL}}
 			            useImg></img-loader>
 			<ion-card-content no-padding>
 				<ion-grid no-padding>
@@ -151,7 +152,7 @@
 					<ion-col col-4 no-padding align-self-center>
 						<div (click)="presentRank(rank.picURL)" tappable>
 							<img-loader  src={{rank.picURL}}
-							            useImg tappable></img-loader>
+							            useImg tappable fallback="images/none.png" [fallbackAsPlaceholder]="true"></img-loader>
 						</div>
 					</ion-col>
 					<ion-col *ngIf="users[i]" col-5 align-self-center>

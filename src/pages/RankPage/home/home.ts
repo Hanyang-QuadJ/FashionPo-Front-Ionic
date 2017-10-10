@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NavController, NavParams, Platform, App, Content, LoadingController} from 'ionic-angular';
+import {NavController, NavParams, Platform, App, Content, LoadingController,IonicPage} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -28,7 +28,7 @@ import {errorHandler} from "@angular/platform-browser/src/browser";
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
+@IonicPage()
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html',
@@ -104,6 +104,24 @@ export class HomePage implements OnInit {
 
 
 	ngOnInit(): void {
+		this.fetchDatas.getData('/post/random').then(data => {
+			this.cachedPost = data.message;
+			for(let i = 0; i<this.cachedPost.length; i++){
+				this.imgLoader.preload(this.cachedPost[i].picURL);
+			}
+
+		}, err => {
+			if (err.status === 405) {
+
+			}
+			else if (err.status === 400) {
+
+			}
+			else if (err.status === 404) {
+
+			}
+
+		});
 
 
 		if (this.dismissHistory === 'dismiss') {

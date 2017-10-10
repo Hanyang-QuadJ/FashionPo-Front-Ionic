@@ -48,9 +48,9 @@ export class RankNewPage {
 			this.authed = data.user[0];
 		});
 		this.imgLoader.preload(this.firstPost.picURL);
-		for(let i = 0; i<this.rank.length;i++){
-			this.imgLoader.preload(this.rank[i].picURL);
-		}
+		// for(let i = 0; i<this.rank.length;i++){
+		// 	this.imgLoader.preload(this.rank[i].picURL);
+		// }
 
 	}
 

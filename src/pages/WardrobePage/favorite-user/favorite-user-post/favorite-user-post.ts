@@ -36,9 +36,7 @@ export class FavoriteUserPostPage implements OnInit {
 		this.postList = navParams.get('postList');
 		this.postListIndex = navParams.get('postListIndex');
 		this.date = this.navParams.get('date');
-		for(let i = 0; i<this.postList.length; i++){
-			this.imgLoader.preload(this.postList[i].picURL)
-		}
+
 	}
 
 	ngOnInit(): void {

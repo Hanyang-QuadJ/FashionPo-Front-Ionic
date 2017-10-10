@@ -26,8 +26,8 @@ export class HistoryListPage implements OnInit {
 	endDay: Array<any> = [];
 	month: Array<any> = [];
 	endMonth: Array<any> = [];
-	rankList: Array<object> = [];
-	ranksheet: Array<object> = [];
+	rankList: Array<any> = [];
+	ranksheet: Array<any> = [];
 	testArray: Array<any> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 	ranksheetLength: any;
 	isRank: boolean;
@@ -74,14 +74,16 @@ export class HistoryListPage implements OnInit {
 				// // console.log(data.ranks);
 
 				this.rankList = data.ranks;
+				for (let i = 0; i < this.rankList.length; i++) {
+					if(this.rankList[i].rankSheet ===undefined || this.rankList[i].rankSheet.length === 0 || this.rankList[i].rankSheet===[]){
 
-				for (var i = 0; i < this.rankList.length; i++) {
-					this.date.push(data.ranks[i].createdAt)
+					}
+					else{
+						this.date.push(data.ranks[i].createdAt);
+						this.ranksheet.push(data.ranks[i].rankSheet);
+					}
 				}
 
-				for (var j = 0; j < this.rankList.length; j++) {
-					this.ranksheet.push(data.ranks[j].rankSheet)
-				}
 				console.log(this.ranksheet);
 
 
@@ -545,6 +547,7 @@ export class HistoryListPage implements OnInit {
 	}
 
 	goToPage(i) {
+		console.log(i);
 		this.navCtrl.push(HomePage, {
 			rankSheet: this.ranksheet.slice().reverse()[i],
 			rankDate: this.dateFinal.slice().reverse()[i]

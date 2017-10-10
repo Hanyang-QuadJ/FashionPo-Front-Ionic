@@ -37,9 +37,7 @@ export class FavoriteUserThisWeekPage {
 		console.log("*****");
 		console.log(this.postListIndex);
 		this.date = this.navParams.get('date');
-		for(let i = 0; i<this.postList.length; i++){
-			this.imgLoader.preload(this.postList[i].picURL)
-		}
+
 	}
 
 	ionViewDidLoad() {

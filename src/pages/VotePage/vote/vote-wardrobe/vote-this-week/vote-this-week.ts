@@ -33,9 +33,7 @@ export class VoteThisWeekPage {
 		this.thisWeekPost = this.navParams.get('thisWeekPost');
 		this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
 		this.date = this.navParams.get('date');
-		for(let i = 0; i<this.thisWeekPost.length; i++){
-			this.imgLoader.preload(this.thisWeekPost[i].picURL)
-		}
+
 	}
 
 

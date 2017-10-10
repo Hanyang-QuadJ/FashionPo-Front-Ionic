@@ -49,9 +49,7 @@ export class WardrobeThisWeekPage implements OnInit {
 		this.tags = this.postList;
 		this.callback = this.navParams.get("callback");
 		this.content.resize();
-		for(let i = 0; i<this.postList.length; i++){
-			this.imageLoader.preload(this.postList[i].picURL);
-		}
+
 
 
 	}

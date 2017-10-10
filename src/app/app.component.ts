@@ -14,6 +14,7 @@ import {IntroPage} from "../pages/intro/intro";
 import {Storage} from "@ionic/storage";
 import {TagPage} from "../pages/tag/tag";
 import {TabsPage} from "../pages/tabs/tabs";
+import {ImageLoaderConfig} from "ionic-image-loader";
 
 
 @Component({

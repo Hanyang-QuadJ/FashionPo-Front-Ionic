@@ -38,9 +38,7 @@ export class TagListPage {
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,
 	            public fetchDatas: FetchDataProvider,public imgLoader:ImageLoader) {
 		this.thisWeekPost = this.navParams.get('thisWeekPost');
-		for(let i = 0; i<this.thisWeekPost.length;i++){
-			this.imgLoader.preload(this.thisWeekPost[i].picURL);
-		}
+
 		this.thisWeekPostIndex = this.navParams.get('thisWeekPostIndex');
 		this.tagPageCheck = this.navParams.get('pageCheck');
 		this.users = this.navParams.get('user');

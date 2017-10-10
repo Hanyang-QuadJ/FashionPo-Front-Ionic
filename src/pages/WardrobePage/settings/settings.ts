@@ -44,10 +44,9 @@ export class SettingsPage {
 
 		this.fetchDatas.getData('/user/authed').then(data => {
 			this.user = data.user[0];
-			this.imgLoader.preload(this.user.profile_img);
 			this.showFavorite = this.user.showFavorite;
 			console.log(this.user);
-		})
+		});
 		this.callback = this.navParams.get("callback")
 
 	}

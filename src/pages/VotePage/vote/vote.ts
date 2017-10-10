@@ -87,12 +87,14 @@ export class VotePage implements OnInit {
 		loading.present();
 
 
+
 		this.fetchDatas.getData('/post/random').then(data => {
 			this.cachedPost = data.message;
 			this.posts = [];
 			this.nextPost = this.cachedPost.pop();
 			this.addNewposts();
 			loading.dismiss();
+
 		}, err => {
 			if (err.status === 405) {
 				// console.log(err);
