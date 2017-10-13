@@ -165,7 +165,7 @@ export class FavoriteUserPage implements OnInit {
 	}
 
 	public dismiss() {
-		this.viewCtrl.dismiss();
+		this.navCtrl.pop();
 	}
 
 	presentFavModal(i) {

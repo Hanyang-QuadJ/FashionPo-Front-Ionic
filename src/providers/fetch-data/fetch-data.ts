@@ -59,10 +59,10 @@ export class FetchDataProvider {
 		return new Promise<any>((resolve, reject) => {
 			this.storage.get('token').then((val) => {
 				let APIUrl = type;
-				// if (this.platform.is('ios') == true){
-				//   APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
-				//   // // console.log('yes');
-				// }
+				if (this.platform.is('ios') == true){
+				  APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api'+type;
+				  // // console.log('yes');
+				}
 				let headers = new Headers();
 				headers.append('Content-Type', 'application/json');
 				headers.append('x-access-token', val);
@@ -98,10 +98,10 @@ export class FetchDataProvider {
 		return new Promise<any>((resolve, reject) => {
 			this.storage.get('token').then((val) => {
 				let APIUrl = type;
-				// if (this.platform.is('ios') == true) {
-				// 	APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
-				// 	// // console.log('yes');
-				// }
+				if (this.platform.is('ios') == true) {
+					APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
+					// // console.log('yes');
+				}
 				let body = content;
 				let headers = new Headers();
 				headers.append('Content-Type', 'application/json');
@@ -126,10 +126,10 @@ export class FetchDataProvider {
 		return new Promise<any>((resolve, reject) => {
 			this.storage.get('token').then((val) => {
 				let APIUrl = type;
-				// if (this.platform.is('ios') == true) {
-				// 	APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
-				// 	// // console.log('yes');
-				// }
+				if (this.platform.is('ios') == true) {
+					APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api' + type;
+					// // console.log('yes');
+				}
 				let headers = new Headers();
 				headers.append('Content-Type', 'application/json');
 				headers.append('x-access-token', val);

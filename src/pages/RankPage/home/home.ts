@@ -19,9 +19,7 @@ import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 import {RankNewPage} from "../../rank-new/rank-new";
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ImageLoader} from "ionic-image-loader";
-import {errorHandler} from "@angular/platform-browser/src/browser";
-import {OverlayPage} from "../../overlay/overlay";
-
+import {FavoriteUserPage} from "../../WardrobePage/favorite-user/favorite-user";
 
 
 /**
@@ -54,6 +52,7 @@ export class HomePage implements OnInit {
 	date: any;
 	order: string = 'tagCnt';
 	writtenBys: Array<any> = [];
+	showSpinner:boolean = false;
 	@ViewChild(Content) content: Content;
 
 	private toastInstance: Toast;
@@ -289,7 +288,10 @@ export class HomePage implements OnInit {
 
 
 	ionViewWillEnter() {
-
+		if (this.renewed === "hello") {
+			console.log("what");
+			this.getFavorites();
+		}
 		this.content.resize();
 		this.getHistoryNew();
 		this.checkNewPost();
@@ -449,15 +451,17 @@ export class HomePage implements OnInit {
 	}
 
 	getItems(ev) {
-		this.allUsers = [];
 		let val = ev.target.value;
 		if (val && val.trim() != '') {
 			this.searching = true;
+			this.showSpinner = true;
+
 			this.fetchDatas.getData('/user/authed').then(data => {
 				this.user = data.user[0];
 				this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
 					let blackUser: any = data.blackList;
 					this.fetchDatas.getData('/user/all').then(data => {
+						this.allUsers = [];
 						for (let i = 0; i < data.usersList.length; i++) {
 							if (blackUser.indexOf(data.usersList[i]._id) === -1) {
 								this.allUsers.push(data.usersList[i]);
@@ -466,6 +470,7 @@ export class HomePage implements OnInit {
 						this.allUsers = this.allUsers.filter((item) => {
 							return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
 						});
+						this.showSpinner = false;
 					});
 
 				});
@@ -485,6 +490,30 @@ export class HomePage implements OnInit {
 
 			}
 		})
+
+	}
+	presentFavModal(i) {
+		// console.log(this.isNewPost[i]);
+		if (this.isNewPost[i] === true) {
+
+			let dismiss = 'dismiss';
+			this.navCtrl.push(FavoriteUserPage, {
+				callback: this.myCallbackFunction.bind(this),
+				favList: this.favorites[i],
+				dismiss: dismiss,
+			});
+
+
+		}
+		else if (this.isNewPost[i] === false) {
+			this.navCtrl.push(FavoriteUserPage, {
+				callback: this.myCallbackFunction.bind(this),
+				favList: this.favorites[i]
+			});
+
+
+		}
+
 
 	}
 
@@ -583,6 +612,7 @@ export class HomePage implements OnInit {
 
 	myCallbackFunction = (_params) => {
 		return new Promise((resolve, reject) => {
+			this.renewed = _params;
 			resolve();
 		});
 	};
