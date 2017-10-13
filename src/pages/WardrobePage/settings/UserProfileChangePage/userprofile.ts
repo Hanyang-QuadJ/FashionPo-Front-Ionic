@@ -88,6 +88,16 @@ export class UserProfileChange {
 		});
 		actionSheet.present();
 	}
+	showToast(position: string) {
+		let toast = this.toastCtrl.create({
+			message: 'Please update your profile image',
+			duration: 2000,
+			position: position,
+			cssClass: 'general',
+		});
+
+		toast.present(toast);
+	}
 
 
 
@@ -113,23 +123,31 @@ export class UserProfileChange {
 	}
 
 	update() {
-		this.fetchDatas.getData('/user/authed').then(data => {
-			let loading = this.loadingCtrl.create({
-				showBackdrop: true, spinner: 'crescent',
-			});
-			loading.present();
-			this.email = data.user[0].email;
-			this.fetchDatas.postData('/user/update/profile', {
-				base_64: this.base64Image,
-				email: this.email
-			}).then(data => {
-				loading.dismiss();
-				this.callback("hello").then(() => {
-					this.navCtrl.pop();
+		if(this.base64Image==="" || this.base64Image===undefined){
+			this.showToast("bottom");
+
+		}
+		else{
+			this.fetchDatas.getData('/user/authed').then(data => {
+				let loading = this.loadingCtrl.create({
+					showBackdrop: true, spinner: 'crescent',
 				});
-			}, err => {
-				console.log(err)
-			})
-		});
+				loading.present();
+				this.email = data.user[0].email;
+				this.fetchDatas.postData('/user/update/profile', {
+					base_64: this.base64Image,
+					email: this.email
+				}).then(data => {
+					loading.dismiss();
+					this.callback("hello").then(() => {
+						this.navCtrl.pop();
+					});
+				}, err => {
+					console.log(err)
+				})
+			});
+
+		}
+
 	}
 }

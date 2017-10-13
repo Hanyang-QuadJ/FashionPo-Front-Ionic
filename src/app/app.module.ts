@@ -75,6 +75,8 @@ import {RankNewPage} from "../pages/rank-new/rank-new";
 import {TagInputPage} from "../pages/tag-input/tag-input";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {LinkPage} from "../pages/link/link";
+import {OverlayPage} from "../pages/overlay/overlay";
+
 
 
 // import { Camera } from '@ionic-native/camera';
@@ -130,6 +132,7 @@ import {LinkPage} from "../pages/link/link";
 		RankNewPage,
 		TagInputPage,
 		LinkPage,
+		OverlayPage,
 
 	],
 	imports: [
@@ -190,6 +193,7 @@ import {LinkPage} from "../pages/link/link";
 		RankNewPage,
 		TagInputPage,
 		LinkPage,
+		OverlayPage,
 
 	],
 	providers: [
@@ -204,6 +208,7 @@ import {LinkPage} from "../pages/link/link";
 		InAppBrowser,
 		{provide: ErrorHandler, useClass: IonicErrorHandler},
 		FetchDataProvider,
+
 
 
 	]

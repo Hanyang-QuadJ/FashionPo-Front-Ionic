@@ -4,12 +4,25 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<div class="my-overlay" *ngIf="intro" [hidden]="overlayHidden">
+	<div>
+		<h4 class="clickText">
+			<ion-icon name="arrow-round-up"></ion-icon>
+			Click here to swipe!
+		</h4>
+	</div>
+	<div class="padding text-center">
+		<button text-center class="wow" ion-button round full (click)="hideOverlay()">Got it!</button>
 
+	</div>
+</div>
 <ion-header no-border>
 	<ion-toolbar hideBackButton="true">
 		<ion-buttons start>
 			<button (click)="Vote()" *ngIf="!toggled && !modalCheck" ion-button icon-only color="primay">
-				<ion-icon name="md-heart-outline"></ion-icon>
+				<ion-icon name="md-heart-outline">
+					<ion-badge *ngIf="newVote" id="notifications-badge" color="danger">N</ion-badge>
+				</ion-icon>
 			</button>
 		</ion-buttons>
 		<ion-buttons *ngIf="modalCheck" start>
@@ -35,8 +48,8 @@
 		</ion-title>
 
 
-		<ion-searchbar no-border *ngIf="searchToggled" animated="true" value="abgasdfasd"
-		               (ionInput)="getItems($event)"></ion-searchbar>
+		<ion-searchbar no-border *ngIf="searchToggled"
+		               (ionInput)="getItems($event)" [(ngModel)]="isSearch"></ion-searchbar>
 		<ion-buttons *ngIf="!modalCheck" end>
 			<button *ngIf="!searchToggled" (click)="toggleSearch()" ion-button icon-only color="primary">
 				<ion-icon name="ios-search"></ion-icon>
@@ -68,9 +81,20 @@
 
 
 <ion-content>
+
 	<div *ngIf="searchToggled" [ngSwitch]="search">
 		<div *ngSwitchCase="'user'">
-			<ion-list inset>
+			<ion-list inset *ngIf="!searching">
+				<button (click)="presentFavModal(i)" *ngFor="let favorite of favorites; let i = index;" ion-item>
+					<ion-avatar item-start>
+						<img-loader src="{{favorite.profile_img}}" useImg></img-loader>
+					</ion-avatar>
+					<h4>{{favorite.wardrobeName}}</h4>
+					<p>{{favorite.username}}</p>
+					<ion-badge *ngIf="isNewPost[i]" color="sub" item-end>N</ion-badge>
+				</button>
+			</ion-list>
+			<ion-list inset *ngIf="searching">
 				<button (click)="presentSearchModal(i)" *ngFor="let item of allUsers; let i = index" ion-item>
 					<ion-avatar item-start>
 						<img-loader src="{{item.profile_img}}" useImg></img-loader>
@@ -115,8 +139,10 @@
 			</ion-grid>
 		</div>
 
+
 		<ion-card *ngIf="!rankEmpty">
-			<img-loader *ngIf="users[0]" fallback="images/none.png" [fallbackAsPlaceholder]="true" tappable (click)="presentRank(firstPost.picURL)" src={{firstPost.picURL}}
+			<img-loader *ngIf="users[0]" fallback="images/none.png" [fallbackAsPlaceholder]="true" tappable
+			            (click)="presentRank(firstPost.picURL)" src={{firstPost.picURL}}
 			            useImg></img-loader>
 			<ion-card-content no-padding>
 				<ion-grid no-padding>
@@ -151,8 +177,9 @@
 					</ion-col>
 					<ion-col col-4 no-padding align-self-center>
 						<div (click)="presentRank(rank.picURL)" tappable>
-							<img-loader  src={{rank.picURL}}
-							            useImg tappable fallback="images/none.png" [fallbackAsPlaceholder]="true"></img-loader>
+							<img-loader src={{rank.picURL}}
+							            useImg tappable fallback="images/none.png"
+							            [fallbackAsPlaceholder]="true"></img-loader>
 						</div>
 					</ion-col>
 					<ion-col *ngIf="users[i]" col-5 align-self-center>

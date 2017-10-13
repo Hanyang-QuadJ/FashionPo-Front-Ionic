@@ -237,9 +237,7 @@ export class WardrobePage {
 							}
 							else {
 								let user: Array<any> = data.user[0].news;
-								// console.log("Check!");
-								// console.log(this.favorites);
-								// console.log(user);
+
 								for (let i = 0; i < this.favorites.length; i++) {
 									// console.log(user.indexOf(this.favorites[i]._id));
 									if (user.indexOf(this.favorites[i]._id) === -1) {

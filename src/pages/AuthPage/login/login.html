@@ -1,55 +1,56 @@
-
 <ion-header no-border>
-  <ion-toolbar>
-    <ion-buttons start>
-      <button *ngIf="!back" (click)="goBackToWelcome()" ion-button icon-only color="light">
-	      <div class="padding-right" tappable>
-		      <ion-icon name="ios-arrow-back"></ion-icon>
-	      </div>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-buttons start>
+			<button *ngIf="!back" (click)="goBackToWelcome()" ion-button icon-only color="light">
+				<div class="padding-right" tappable>
+					<ion-icon name="ios-arrow-back"></ion-icon>
+				</div>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <div class="space"></div>
-        <img class="logo" src="images/logo_white.png">
-        <div class="space2"></div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+	<ion-grid>
+		<ion-row>
+			<ion-col text-center>
+				<div class="space"></div>
+				<img class="logo" src="images/logo_white.png">
+				<div class="space2"></div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 
-      <ion-list>
-        <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
-          <ion-item>
-            <ion-label class="label" floating>Email</ion-label>
-            <ion-input type="email" class="text" formControlName="email" value="{{email}}"></ion-input>
-          </ion-item>
-          <br>
-          <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input class="text" type="password" formControlName="password" value="{{password}}"></ion-input>
+	<ion-list>
+		<form [formGroup]="loginForm" (ngSubmit)="userLogin()">
+			<ion-item>
+				<ion-label class="label" floating>Email</ion-label>
+				<ion-input type="email" class="text" formControlName="email" value="{{email}}"></ion-input>
+			</ion-item>
+			<br>
+			<ion-item>
+				<ion-label floating>Password</ion-label>
+				<ion-input class="text" type="password" formControlName="password" value="{{password}}"></ion-input>
 
-          </ion-item>
-          <div class="forgot" style="text-align: end"><span  tappable (click)="goToFind()"><ion-icon item-end name="ios-help-circle-outline"></ion-icon></span></div>
+			</ion-item>
+			<div class="forgot" style="text-align: end"><span tappable (click)="goToFind()"><ion-icon item-end
+			                                                                                          name="ios-help-circle-outline"></ion-icon></span>
+			</div>
 
 
-          <div class="padding">
-            <button ion-button round type="submit" [disabled]="!loginForm.valid" color="light" block><span class="buttonText">Sign In</span></button>
-          </div>
+			<div class="padding">
+				<button ion-button round type="submit" [disabled]="!loginForm.valid" color="light" block><span
+						class="buttonText">Sign In</span></button>
+			</div>
 
-        </form>
-        <div class="padding2" *ngIf="!back">
-          <button (click)="goToSignup()"ion-button round outline color="light" block><span>Sign Up</span></button>
-        </div>
+		</form>
+		<div class="padding2" *ngIf="!back">
+			<button (click)="goToSignup()" ion-button round outline color="light" block><span>Sign Up</span></button>
+		</div>
 
-        <!--<button  ion-button (click)="goToSignup()"  color="light" clear>Sign Up</button>-->
-        <!--<button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>-->
+		<!--<button  ion-button (click)="goToSignup()"  color="light" clear>Sign Up</button>-->
+		<!--<button  ion-button (click)="goToFind()"  color="danger" clear>Find Password</button>-->
 
-      </ion-list>
-
+	</ion-list>
 
 
 </ion-content>

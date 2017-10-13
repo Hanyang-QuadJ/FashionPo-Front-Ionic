@@ -27,8 +27,7 @@
 
 		<ion-card-content>
 			<h2 color="dark" tappable (click)="presentWardrobe(i)">{{users[i].wardrobeName}}</h2>
-			<p tappable (click)="presentWardrobe(i)">{{users[i].username}}</p>
-
+			<p>{{post.comment}}</p>
 			<span tappable class="tag" *ngFor="let tag of post.tags" (click)="goToTag(tag.tag,i)"> {{tag.tag}}</span>
 		</ion-card-content>
 

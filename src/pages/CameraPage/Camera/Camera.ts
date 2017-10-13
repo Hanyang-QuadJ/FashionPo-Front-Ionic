@@ -32,6 +32,7 @@ export class CameraPage implements OnInit {
 	tags: any = [];
 	allTags: any;
 	comment: any;
+	prime:any;
 	uploadCheck: boolean = false;
 
 	public tagsInput: any;
@@ -58,6 +59,28 @@ export class CameraPage implements OnInit {
 		if (this.navParams.get('fromWardrobe') === "check") {
 			this.backButton = true;
 		}
+
+	}
+	findprime(){
+		let testArray:Array<any> = [2];
+		let primeArray:Array<any> = [];
+
+		for(let i = 3; i<this.prime;i++){
+			testArray.push(i)
+		}
+		for(let i = 1; i<testArray.length; i++){
+			for(let j = 1; j<testArray[i];j++){
+				if(testArray[i]%j !== 0 ){
+					if(i-j===1){
+						primeArray.push(testArray[i]);
+					}
+				}
+				else{
+					break;
+				}
+			}
+		}
+		console.log(primeArray);
 
 	}
 

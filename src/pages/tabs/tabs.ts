@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {StatusBar} from "@ionic-native/status-bar";
-import {Content, ModalController,NavController} from 'ionic-angular';
+import {Content, ModalController,NavController,NavParams} from 'ionic-angular';
 
 
 // import { AboutPage } from '../about/about';
@@ -21,6 +21,7 @@ export class TabsPage {
 	tags: any = [];
 	allTags: any;
 	comment: String;
+	intro:any;
 	uploadCheck: boolean = false;
 
 	public tagsInput: any;
@@ -29,8 +30,10 @@ export class TabsPage {
 	tab3Root = WardrobePage;
 	pictureTaken: boolean = false;
 
-	constructor(public statusBar: StatusBar, public modal: ModalController, private camera: Camera, public navCtrl:NavController) {
+	constructor(public statusBar: StatusBar,public navParams:NavParams, public modal: ModalController, private camera: Camera, public navCtrl:NavController) {
 		this.statusBar.styleDefault();
+		this.intro = this.navParams.get('intro');
+		console.log(this.intro);
 	}
 
 }

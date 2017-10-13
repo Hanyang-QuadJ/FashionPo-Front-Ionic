@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions,} from '@angular/http';
 import {Storage} from '@ionic/storage';
 import {Platform, App} from 'ionic-angular';
 import {LoginPage} from "../../pages/AuthPage/login/login";
-
+import {ImageLoader} from "ionic-image-loader";
 
 
 import 'rxjs/add/operator/map';
@@ -19,13 +19,40 @@ import {Observable} from "rxjs/Observable";
 export class FetchDataProvider {
 	token: any;
 
+
 	constructor(public http: Http,
 	            public storage: Storage,
 	            public platform: Platform,
-	            public app: App,) {
+	            public imgLoader:ImageLoader,
+	            public app: App) {
+
+		this.getData('/post/random').then(data => {
+			if (data.message === [] || data.message.length === 0 || data.message === undefined) {
+
+			}
+			else {
+				for(let i = 0; i<data.message.length; i++){
+					this.imgLoader.preload(data.message[i].picURL)
+				}
+			}
+
+		}, err => {
+			if (err.status === 405) {
+
+			}
+			else if (err.status === 400) {
+
+			}
+			else if (err.status === 404) {
+
+			}
+
+		});
 		// console.log('Hello FetchDataProvider Provider');
 
 	}
+
+
 
 
 	public getData(type) {

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NavController, NavParams, Platform, App, Content, LoadingController,IonicPage} from 'ionic-angular';
+import {NavController, NavParams, Platform, App, Content, LoadingController, IonicPage} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -17,9 +17,11 @@ import {IntroPage} from "../../intro/intro";
 import {Network} from "@ionic-native/network";
 import {WardrobePage} from "../../WardrobePage/wardrobe/wardrobe";
 import {RankNewPage} from "../../rank-new/rank-new";
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ImageLoader} from "ionic-image-loader";
+import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {ImageLoader} from "ionic-image-loader";
 import {errorHandler} from "@angular/platform-browser/src/browser";
+import {OverlayPage} from "../../overlay/overlay";
+
 
 
 /**
@@ -42,14 +44,14 @@ export class HomePage implements OnInit {
 	rankDate: any = "";
 	allUsers: any;
 	allTags: any;
-
+	newVote: any;
+	searching:any;
 	ranks: Array<any> = [];
 	oriRank: Array<any> = [];
 	users: Array<any> = [];
 	buttons: Array<any> = [];
 	picURL: string = "";
 	date: any;
-
 	order: string = 'tagCnt';
 	writtenBys: Array<any> = [];
 	@ViewChild(Content) content: Content;
@@ -66,20 +68,26 @@ export class HomePage implements OnInit {
 	firstCheck: boolean;
 	startDate: any;
 	endDate: any;
+	isSearch:any;
 	historyNew: boolean;
 	dismissHistory: any;
-
 	firstPost: any;
 	firstUser: any;
 	search: any;
+	favorites:any;
+	isNewPost:any;
+	loadedd:any;
 	try: boolean = false;
 	nameCheck: Array<any> = [];
 	rankEmpty: boolean;
-	renewed:any;
-	index:any;
-	cachedPost:Array<any>;
-
+	renewed: any;
+	index: any;
+	cachedPost: Array<any>;
 	firstButton: boolean;
+	overlayHidden: boolean = false;
+	intro: boolean = false;
+
+
 
 
 	constructor(public navCtrl: NavController,
@@ -94,34 +102,31 @@ export class HomePage implements OnInit {
 	            public loadingCtrl: LoadingController,
 	            public viewCtrl: ViewController,
 	            private network: Network,
-	            public imgLoader:ImageLoader,
-	            private iab:InAppBrowser) {
+	            public imgLoader: ImageLoader,
+	            private iab: InAppBrowser) {
 
 		this.historyRank = this.navParams.get('rankSheet');
 		this.dismissHistory = this.navParams.get('dismiss');
 		this.search = "user";
+
+
+	}
+
+	public hideOverlay() {
+		this.overlayHidden = true;
+		this.fetchDatas.getData('/user/tutorial').then(data => {
+			// console.log(data)
+		});
 	}
 
 
 	ngOnInit(): void {
-		this.fetchDatas.getData('/post/random').then(data => {
-			this.cachedPost = data.message;
-			for(let i = 0; i<this.cachedPost.length; i++){
-				this.imgLoader.preload(this.cachedPost[i].picURL);
-			}
+		this.initializeItems();
+		this.getFavorites();
+		if (this.navParams.data === "intro") {
+			this.intro = true;
+		}
 
-		}, err => {
-			if (err.status === 405) {
-
-			}
-			else if (err.status === 400) {
-
-			}
-			else if (err.status === 404) {
-
-			}
-
-		});
 
 
 		if (this.dismissHistory === 'dismiss') {
@@ -129,7 +134,6 @@ export class HomePage implements OnInit {
 				// console.log(data);
 			});
 		}
-		this.initializeItems();
 		this.startDate = moment().tz("America/New_York").startOf('week').format();
 		this.endDate = moment().tz("America/New_York").endOf('week').format();
 		this.getHistoryNew();
@@ -162,7 +166,7 @@ export class HomePage implements OnInit {
 					for (var i = 1; i < data.posts.length; i++) {
 						this.ranks[i - 1] = data.posts[i];
 					}
-					for(let i = 0; i<this.ranks.length;i++){
+					for (let i = 0; i < this.ranks.length; i++) {
 						this.imgLoader.preload(this.ranks[i].picURL)
 					}
 					this.firstPost = data.posts[0];
@@ -243,7 +247,9 @@ export class HomePage implements OnInit {
 		}
 
 
-
+	}
+	onSearchInput(){
+		this.searching = true;
 	}
 
 	public getHistoryNew() {
@@ -257,14 +263,42 @@ export class HomePage implements OnInit {
 			}
 		});
 	}
+	checkNewPost(){
+		this.fetchDatas.getData('/post/random').then(data => {
+			if (data.message === [] || data.message.length === 0 || data.message === undefined) {
+				this.newVote = false;
+			}
+			else {
+				this.newVote = true;
+			}
+
+
+		}, err => {
+			if (err.status === 405) {
+
+			}
+			else if (err.status === 400) {
+
+			}
+			else if (err.status === 404) {
+
+			}
+
+		});
+	}
 
 
 	ionViewWillEnter() {
+
 		this.content.resize();
 		this.getHistoryNew();
+		this.checkNewPost();
 		// console.log('Rank Data Check');
 
 	}
+	ionViewDidLoad(){
+
+	};
 
 	//Refresher
 	doRefresh(refresher) {
@@ -274,12 +308,35 @@ export class HomePage implements OnInit {
 		this.ranks = [];
 		this.oriRank = [];
 		this.writtenBys = [];
+		this.newVote = false;
 
 		this.pushPage = VotePage;
 		this.toggled = false;
 		this.allUsers = [];
 		this.searchToggled = false;
 		this.initializeItems();
+		this.checkNewPost();
+		this.fetchDatas.getData('/post/random').then(data => {
+			if (data.message === [] || data.message.length === 0 || data.message === undefined) {
+				this.newVote = false;
+			}
+			else {
+				this.newVote = true;
+			}
+
+
+		}, err => {
+			if (err.status === 405) {
+
+			}
+			else if (err.status === 400) {
+
+			}
+			else if (err.status === 404) {
+
+			}
+
+		});
 		this.fetchDatas.getData('/rank').then(data => {
 			if (data.posts === undefined || data.posts.length === 0) {
 				this.rankEmpty = true;
@@ -376,71 +433,49 @@ export class HomePage implements OnInit {
 			this.user = data.user[0];
 			this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
 				let blackUser: any = data.blackList;
-				console.log("haha");
-				console.log(blackUser);
 				this.fetchDatas.getData('/user/all').then(data => {
 					for (let i = 0; i < data.usersList.length; i++) {
 						if (blackUser.indexOf(data.usersList[i]._id) === -1) {
 							this.allUsers.push(data.usersList[i]);
 						}
 					}
-					for(let i = 0; i<this.allUsers.length;i++){
+					for (let i = 0; i < this.allUsers.length; i++) {
 						this.imgLoader.preload(this.allUsers[i].profile_img);
 					}
 				});
 			});
-
 		});
-
 
 	}
 
 	getItems(ev) {
-
-		this.fetchDatas.getData('/user/authed').then(data => {
-			this.user = data.user[0];
-			this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
-				let blackUser: any = data.blackList;
-				console.log("haha");
-				console.log(blackUser);
-				this.fetchDatas.getData('/user/all').then(data => {
-
-					this.allUsers = [];
-					for (let i = 0; i < data.usersList.length; i++) {
-						if (blackUser.indexOf(data.usersList[i]._id) === -1) {
-							this.allUsers.push(data.usersList[i]);
+		this.allUsers = [];
+		let val = ev.target.value;
+		if (val && val.trim() != '') {
+			this.searching = true;
+			this.fetchDatas.getData('/user/authed').then(data => {
+				this.user = data.user[0];
+				this.fetchDatas.getData('/user/blacklist/' + this.user._id).then(data => {
+					let blackUser: any = data.blackList;
+					this.fetchDatas.getData('/user/all').then(data => {
+						for (let i = 0; i < data.usersList.length; i++) {
+							if (blackUser.indexOf(data.usersList[i]._id) === -1) {
+								this.allUsers.push(data.usersList[i]);
+							}
 						}
-					}
-					for(let i = 0; i<this.allUsers.length;i++){
-						this.imgLoader.preload(this.allUsers[i].profile_img);
-					}
-					let val = ev.target.value;
-					// if the value is an empty string don't filter the items
-					if (val && val.trim() != '') {
-
 						this.allUsers = this.allUsers.filter((item) => {
 							return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
 						});
+					});
 
-					}
 				});
 			});
 
-		});
-		// this.fetchDatas.getData('/user/all').then(data => {
-		// 	this.allUsers = data.usersList;
-		// 	let val = ev.target.value;
-		// 	// if the value is an empty string don't filter the items
-		// 	if (val && val.trim() != '') {
-		// 		this.allUsers = this.allUsers.filter((item) => {
-		// 			return (item.wardrobeName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
-		// 		});
-		//
-		//
-		// 	}
-		// });
 
-
+		}
+		else{
+			this.searching = false;
+		}
 		this.fetchDatas.getData('/search/searchTag/' + ev.target.value).then(data => {
 			this.allTags = data.message.sort(function (a, b) {
 				return a.tagCnt > b.tagCnt ? -1 : a.tagCnt < b.tagCnt ? 1 : 0;
@@ -478,7 +513,7 @@ export class HomePage implements OnInit {
 	//PresentModals
 	presentHistoryModal() {
 		if (this.historyNew === true) {
-			this.navCtrl.push(HistoryListPage, {callback:this.myCallbackFunction.bind(this)});
+			this.navCtrl.push(HistoryListPage, {callback: this.myCallbackFunction.bind(this)});
 
 		}
 		else {
@@ -533,8 +568,17 @@ export class HomePage implements OnInit {
 		}
 
 	}
-	presentRank(i){
-		this.navCtrl.push(RankNewPage,{rank:this.ranks,firstPost:this.firstPost,firstUser:this.firstUser,users:this.users,index:i,startDate:this.startDate,endDate:this.endDate})
+
+	presentRank(i) {
+		this.navCtrl.push(RankNewPage, {
+			rank: this.ranks,
+			firstPost: this.firstPost,
+			firstUser: this.firstUser,
+			users: this.users,
+			index: i,
+			startDate: this.startDate,
+			endDate: this.endDate
+		})
 	}
 
 	myCallbackFunction = (_params) => {
@@ -544,14 +588,13 @@ export class HomePage implements OnInit {
 	};
 
 
-
 	goToTag(tagName) {
 		console.log(tagName);
-		this.navCtrl.push(TagPage, {tagName: tagName,callback:this.myCallbackFunction.bind(this),index:'fit'});
+		this.navCtrl.push(TagPage, {tagName: tagName, callback: this.myCallbackFunction.bind(this), index: 'fit'});
 	}
 
 	Vote() {
-		this.navCtrl.parent.parent.setRoot(VotePage, {}, {animate:true,direction:'back'});
+		this.navCtrl.parent.parent.setRoot(VotePage, {}, {animate: true, direction: 'back'});
 
 	}
 
@@ -577,9 +620,9 @@ export class HomePage implements OnInit {
 		// this.navCtrl.push(IntroPage);
 	}
 
-	ionViewWillLeave(){
+	ionViewWillLeave() {
 		this.renewed = "";
-		this.index ="";
+		this.index = "";
 
 	}
 
@@ -674,6 +717,50 @@ export class HomePage implements OnInit {
 			month = 'Dec'
 		}
 		return day + ", " + year;
+	}
+	getFavorites(){
+		this.fetchDatas.getData('/user/favorite').then(data => {
+			if (data.favorites === undefined || data.favorites.length === 0) {
+				this.favorites = [];
+				this.loadedd = true;
+
+			}
+			else {
+				this.fetchDatas.postData('/user', {users: data.favorites}).then(data => {
+					this.favorites = data;
+					for(let i = 0; i<this.favorites.length;i++){
+						this.imgLoader.preload(this.favorites[i].profile_img);
+					}
+					this.loadedd = false;
+					this.fetchDatas.getData('/user/authed').then(data => {
+						this.isNewPost = [];
+						if (data.user[0].news === [] || data.user[0].news.length === 0) {
+
+							for (let i = 0; i < this.favorites.length; i++) {
+								this.isNewPost.push(false);
+							}
+
+						}
+						else {
+							let user: Array<any> = data.user[0].news;
+
+							for (let i = 0; i < this.favorites.length; i++) {
+								// console.log(user.indexOf(this.favorites[i]._id));
+								if (user.indexOf(this.favorites[i]._id) === -1) {
+									this.isNewPost.push(false)
+								}
+								else if (user.indexOf(this.favorites[i]._id) > -1) {
+									this.isNewPost.push(true)
+								}
+							}
+
+							// console.log(this.isNewPost);
+						}
+
+					});
+				})
+			}
+		});
 	}
 
 

@@ -8,6 +8,7 @@ import {FavoriteUserPage} from "../WardrobePage/favorite-user/favorite-user";
 import {ImageLoader} from "ionic-image-loader";
 
 
+
 /**
  * Generated class for the RankNewPage page.
  *
@@ -96,6 +97,7 @@ export class RankNewPage {
 		// console.log(this.users[i]._id);
 
 	}
+
 
 	presentWardrobe(i,id) {
 		if (this.user[i]._id !== this.authed._id) {
@@ -247,6 +249,7 @@ export class RankNewPage {
 		}
 		return month + " " + day
 	}
+
 	ionViewWillLeave(){
 		this.index="";
 	}

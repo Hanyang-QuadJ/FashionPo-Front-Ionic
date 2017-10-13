@@ -21,7 +21,7 @@
 
 <ion-content>
 	<ion-card [id]="firstPost.picURL">
-		<img-loader src="{{firstPost.picURL}}" fallback="" [fallbackAsPlaceholder]="true" useImg></img-loader>
+		<img-loader src="{{firstPost.picURL}}" fallback="images/none.png" [fallbackAsPlaceholder]="true" useImg imageViewer></img-loader>
 		<button ion-button icon-left clear small>
 			<ion-icon name="heart"></ion-icon>
 			<div>{{firstPost.likeCnt}} Likes</div>
@@ -29,7 +29,9 @@
 
 		<ion-card-content>
 			<h2 color="dark" tappable (click)="presentFirstWardrobe(firstPost.picURL)">{{firstUser.wardrobeName}}</h2>
-			<p tappable (click)="presentFirstWardrobe(firstPost.picURL)">{{firstUser.username}}</p>
+			<p>{{firstPost.comment}}</p>
+
+
 
 			<span tappable class="tag" *ngFor="let tag of firstPost.tags"
 			      (click)="goToTag(tag.tag,firstPost.picURL)"> {{tag.tag}}</span>
@@ -50,7 +52,7 @@
 
 			<ion-card-content>
 				<h2 color="dark" tappable (click)="presentWardrobe(i,post.picURL)">{{user[i].wardrobeName}}</h2>
-				<p tappable (click)="presentWardrobe(i,post.picURL)">{{user[i].username}}</p>
+				<p>{{post.comment}}</p>
 
 				<span tappable class="tag" *ngFor="let tag of post.tags"
 				      (click)="goToTag(tag.tag,post.picURL)"> {{tag.tag}}</span>
@@ -60,5 +62,6 @@
 				<ion-note><p>{{parsingDate(post.writtenAt)}}</p></ion-note>
 			</ion-item>
 		</div>
+
 	</ion-card>
 </ion-content>
