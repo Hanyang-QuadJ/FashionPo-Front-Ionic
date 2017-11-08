@@ -76,6 +76,7 @@ import {TagInputPage} from "../pages/tag-input/tag-input";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {LinkPage} from "../pages/link/link";
 import {OverlayPage} from "../pages/overlay/overlay";
+import { Push, PushObject} from '@ionic-native/push';
 
 
 
@@ -208,6 +209,7 @@ import {OverlayPage} from "../pages/overlay/overlay";
 		InAppBrowser,
 		{provide: ErrorHandler, useClass: IonicErrorHandler},
 		FetchDataProvider,
+		Push
 
 
 

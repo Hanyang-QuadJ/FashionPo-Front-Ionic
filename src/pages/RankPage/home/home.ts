@@ -20,6 +20,7 @@ import {RankNewPage} from "../../rank-new/rank-new";
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 import {ImageLoader} from "ionic-image-loader";
 import {FavoriteUserPage} from "../../WardrobePage/favorite-user/favorite-user";
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 
 /**
@@ -102,6 +103,7 @@ export class HomePage implements OnInit {
 	            public viewCtrl: ViewController,
 	            private network: Network,
 	            public imgLoader: ImageLoader,
+	            private push: Push,
 	            private iab: InAppBrowser) {
 
 		this.historyRank = this.navParams.get('rankSheet');
@@ -125,6 +127,37 @@ export class HomePage implements OnInit {
 		if (this.navParams.data === "intro") {
 			this.intro = true;
 		}
+		this.push.hasPermission()
+			.then((res: any) => {
+
+				if (res.isEnabled) {
+					console.log('We have permission to send push notifications');
+				} else {
+					console.log('We do not have permission to send push notifications');
+				}
+
+			});
+
+		const options: PushOptions = {
+			android: {},
+			ios: {
+				alert: 'true',
+				badge: true,
+				sound: 'false'
+			},
+			windows: {},
+			browser: {
+				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+			}
+		};
+
+		const pushObject: PushObject = this.push.init(options);
+
+		pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+
+		pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+
+		pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
 
 
 
@@ -294,6 +327,7 @@ export class HomePage implements OnInit {
 		}
 		this.content.resize();
 		this.getHistoryNew();
+		this.getFavorites();
 		this.checkNewPost();
 		// console.log('Rank Data Check');
 
@@ -317,6 +351,7 @@ export class HomePage implements OnInit {
 		this.allUsers = [];
 		this.searchToggled = false;
 		this.initializeItems();
+		this.getFavorites();
 		this.checkNewPost();
 		this.fetchDatas.getData('/post/random').then(data => {
 			if (data.message === [] || data.message.length === 0 || data.message === undefined) {

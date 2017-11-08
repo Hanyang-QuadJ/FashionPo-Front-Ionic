@@ -14,72 +14,68 @@ import {Storage} from '@ionic/storage';
  */
 
 @Component({
-    selector: 'find',
-    templateUrl: 'find.html',
+	selector: 'find',
+	templateUrl: 'find.html',
 })
 
 export class FindPasswordPage {
-    usernameForm: FormGroup;
-    loaded: boolean = false;
+	usernameForm: FormGroup;
+	loaded: boolean = false;
 
-    constructor(public viewCtrl: ViewController,
-                public fb: FormBuilder,
-                public platform: Platform,
-                private storage: Storage,
-                private http: Http,
-                public toastCtrl: ToastController,) {
-        this.usernameForm = this.fb.group({
-            username: ['', Validators.compose([Validators.required])],
+	constructor(public viewCtrl: ViewController,
+	            public fb: FormBuilder,
+	            public platform: Platform,
+	            private storage: Storage,
+	            private http: Http,
+	            public toastCtrl: ToastController,) {
+		this.usernameForm = this.fb.group({
+			username: ['', Validators.compose([Validators.required])],
 
-        });
-    }
+		});
+	}
 
-    ngOnInit(): void {
+	ngOnInit(): void {
 
-    }
+	}
 
-    public dismiss() {
-        this.viewCtrl.dismiss()
-    }
+	public dismiss() {
+		this.viewCtrl.dismiss()
+	}
 
-    showToast(position: string,err: any) {
-        let toast = this.toastCtrl.create({
-            message: err,
-            duration: 2000,
-            position: position
-        });
+	showToast(position: string, err: any) {
+		let toast = this.toastCtrl.create({
+			message: err,
+			duration: 2000,
+			position: position
+		});
 
-        toast.present(toast);
-    }
+		toast.present(toast);
+	}
 
-    public usernameChange() {
+	public usernameChange() {
 
-        var APIUrl = '/auth';
+		let APIUrl = '/auth';
 
+		// if (this.platform.is('ios') == true) {
+		// 	APIUrl = 'http://fashionpo-loadbalancer-785809256.us-east-1.elb.amazonaws.com/api/auth';
+		// }
 
-        // if (this.platform.is('ios') == true){
-        //     APIUrl = 'http://54.162.160.91/api/auth';
-        //     // console.log('yes');
-        // }
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		let body = {
+			email: this.usernameForm.value.username,
+		};
+		this.http.post(APIUrl + '/findpw', JSON.stringify(body), {headers: headers})
+			.map(res => res.json())
+			.subscribe(
+				data => {
+					this.dismiss();
+				},
+				err => {
+					console.log(err);
+				});
 
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let body = {
-            email: this.usernameForm.value.username,
-        }
-        console.log(this.usernameForm.value.username);
-        this.http.post(APIUrl + '/findpw', JSON.stringify(body), {headers: headers})
-            .map(res => res.json())
-            .subscribe(
-                data => {
-                    this.dismiss();
-                },
-                err => {
-                    console.log(err);
-                    this.showToast("bottom",err);
-                });
-
-    }
+	}
 
 
 }
